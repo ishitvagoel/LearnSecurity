@@ -7,7 +7,7 @@
 
 A page of STRIDE letters is not this page. A reviewable model names **assets**, **flows**, **trust boundaries**, **threat ids**, **owners**, and **what would prove each row wrong**.
 
-This week: note body and id, share grant, session cookie, a local `assemble_threat_model` practice. No real Threat Dragon cloud. No production ticket tracker.
+Note body and id, share grant, session cookie, a local `assemble_threat_model` practice. No real Threat Dragon cloud. No production ticket tracker.
 
 ## Picture: data flow with one hostile hop
 
@@ -64,7 +64,7 @@ Each always-name id (`cross-tenant-read`, `hostile-browser`, `stolen-worker`) ne
 
 ## Practice
 
-Open `model.py` in `labs/3.2/3.2-lab`.
+Label `model.py` in `labs/3.2/3.2-lab`.
 
 ## Use it somewhere new
 

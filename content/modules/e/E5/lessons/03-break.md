@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `tenant_for(session, body)`. The failure is already in the function: it prefers `body["tenant"]` when that key is present. A body-chosen company is **a failed rule**, not an attack on a public product.
+The practice is not a website you attack. `tenant_for(session, body)` is a tiny Python helper. The failure is already in the function: it prefers `body["tenant"]` when that key is present. A body-chosen company is **a failed rule**, not an attack on a public product.
 
 > The JSON body is not the tenant. `tenant_for({"tenant": "A"}, {"tenant": "B"})` must return `"A"`. If it returns `"B"`, body tenant overrides session.
 
@@ -32,7 +32,7 @@ Isolation of the object and the company. An earlier topic already said the objec
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/rls.py`. It returns the body company when present. Tests:
+`vulnerable/rls.py` returns the body company when present. Tests:
 
 - `test_body_cannot_switch_tenant`
 - `test_matching_body_may_keep_session_tenant` — A/A may pass on both

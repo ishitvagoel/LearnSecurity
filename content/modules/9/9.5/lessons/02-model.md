@@ -7,7 +7,7 @@
 
 "We delivered a PDF" is not this lesson. A drawing someone else can test names **the rule, what must not happen, the retest command, and variants**.
 
-This week on the notes app: local `close_finding(f)`. No live clinics.
+`close_finding(f)` is local. No live clinics.
 
 > For close, the rule is deny when `retest` is missing. A passing retest of the same isolation check may close. Evidence that the deny is false: `close_finding({"retest": None})` returns true.
 
@@ -61,7 +61,7 @@ A missing retest field is how a PDF on a shelf becomes "Done." Write the hole.
 
 ## Practice
 
-Open `pentest.py` in `labs/9.5/9.5-lab`.
+Label `pentest.py` in `labs/9.5/9.5-lab`.
 
 ## Use it somewhere new
 

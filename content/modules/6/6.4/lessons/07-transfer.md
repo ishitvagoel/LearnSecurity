@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-You get a **clinic scan upload** whose original filename is kept. On the notes app, `resolve` must not return a path outside `/tmp/sc-lab`.
+You get a **clinic scan upload** whose original filename is kept. `resolve` must not return a path outside `/tmp/sc-lab`.
 
-**Prompt:** Clinic scan upload whose original filename is kept. Also name XML entity expansion, pickle, and YAML load as other parsers (same earlier data-vs-grammar shape).
+Clinic scan upload whose original filename is kept. Also name XML entity expansion, pickle, and YAML load as other parsers (same earlier data-vs-grammar shape).
 
 **Product sketch:** EHR-lite “attach imaging” that joins the filename onto a public folder.
 

@@ -7,7 +7,7 @@
 
 “We store UUID names” is not this page. A reviewable model names **the folder, the canonicalize step, and which parsers are out of this practice**.
 
-This week: a local `resolve(name)` practice under `/tmp/sc-lab`. No live host reads.
+`resolve(name)` is a local practice under `/tmp/sc-lab`. No live host reads.
 
 ## Picture: the object is the canonical path
 
@@ -54,7 +54,7 @@ A random stored name is extra. It is not a substitute for the prefix check on an
 
 ## Practice
 
-Open `path.py` in `labs/6.4/6.4-lab`.
+Label `path.py` in `labs/6.4/6.4-lab`.
 
 ## Use it somewhere new
 

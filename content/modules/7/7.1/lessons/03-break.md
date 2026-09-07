@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `apply(user, body)`. The failure is already in the function: `user.update(body)` copies every key, so `is_admin` becomes true. Extra keys writing `is_admin` is **a failed rule**, not an attack on a public API.
+The practice is not a website you attack. `apply(user, body)` is a tiny Python helper. The failure is already in the function: `user.update(body)` copies every key, so `is_admin` becomes true. Extra keys writing `is_admin` is **a failed rule**, not an attack on a public API.
 
 > After `apply(user, {"is_admin": true})`, `is_admin` must still be false. Extra keys are not writable fields.
 

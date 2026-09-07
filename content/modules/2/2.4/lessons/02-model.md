@@ -7,7 +7,7 @@
 
 A sequence diagram that says “owner clicks Share” is not this page. A state machine names **which events** may fire twice and **what the share table must still contain**.
 
-This week: a local `share_note` practice. No payment processor, no live queue, no NTP lab.
+`share_note` is a local practice. No payment processor, no live queue, no NTP lab.
 
 ## Picture: pending, shared, and retry
 
@@ -54,7 +54,7 @@ Do not use “timestamp rounded to the second” as the key. Skew and two client
 
 ## Practice
 
-Open `share.py` in `labs/2.4/2.4-state-time`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
+Label `share.py` in `labs/2.4/2.4-state-time`. Label missing-key behavior as leftover (the lab still shares once if the key is omitted).
 
 ## Use it somewhere new
 

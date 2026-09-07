@@ -7,7 +7,7 @@
 
 You get a **clinic offboard**. A badge system and a browser session sit next to each other.
 
-On the notes app, after `delete_user("alice")`, `session_valid("alice")` is false. When a clinician leaves, leftover must die in the same delete.
+After `delete_user("alice")`, `session_valid("alice")` is false. When a clinician leaves, leftover must die in the same delete.
 
 ## Picture: badge off is not session off
 

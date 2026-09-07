@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-You get a **clinic guardian list**, an **invite token**, or an **export quota**. On the notes app, eight `add_share` calls leave count ≤ 5.
+You get a **clinic guardian list**, an **invite token**, or an **export quota**. Eight `add_share` calls leave count ≤ 5.
 
-**Prompt:** Clinic: max 3 guardians per child. Optionally map invite tokens and export quotas as *different objects, same shape*.
+Clinic: max 3 guardians per child. Optionally map invite tokens and export quotas as *different objects, same shape*.
 
 **Product sketch:** EHR-lite guardian list on a booking card.
 

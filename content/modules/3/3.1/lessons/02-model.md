@@ -7,7 +7,7 @@
 
 A list that says “PII, secrets, notes” is a pile of words. A list someone else can test names **fields**, **protection levels**, and **places** with allow or deny.
 
-This week: note body, note id, tenant id, and a **local log line**. No live log product. No production backup vendor. Fake data only.
+Note body, note id, tenant id, and a **local log line**. No live log product. No production backup vendor. Fake data only.
 
 > For field *F* at place *S*, the rule is allow or deny. Evidence *E* would show the deny is false — here, the body substring in the log line.
 
@@ -72,7 +72,7 @@ A maturity score and a scanner color do not belong in this list.
 
 ## Practice
 
-Open `classify.py` in `labs/3.1/3.1-lab`. Your artifact is a versioned list (even a table in your notes) with field, level, place, allow or deny, and what would show the deny is false. No real people's data.
+Label `classify.py` in `labs/3.1/3.1-lab`. Your artifact is a versioned list (even a table in your notes) with field, level, place, allow or deny, and what would show the deny is false. No real people's data.
 
 ## Use it somewhere new
 

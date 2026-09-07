@@ -7,7 +7,7 @@
 
 “We have row-level rules” is not this page. A map someone else can test names **session binding, body fields, where the database session variable comes from, cache/search/lake keys, and impersonation**.
 
-This week: local `tenant_for(session, body)`. No public company. The notes app binds company from the session. The JSON body is not the tenant.
+`tenant_for(session, body)` is local. No public company. The notes app binds company from the session. The JSON body is not the tenant.
 
 ## Picture: one binding, many copies
 
@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-Open `rls.py` in `labs/E5/e5-lab`.
+Label `rls.py` in `labs/E5/e5-lab`.
 
 ## Use it somewhere new
 

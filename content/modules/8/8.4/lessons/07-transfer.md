@@ -7,7 +7,7 @@
 
 You get a clinic debug build against prod FHIR. Also name an APK inventory list (10.2).
 
-On the notes app, `api_allowed("debug", "ok")` must be false.
+`api_allowed("debug", "ok")` must be false.
 
 **Product sketch:** an EHR-lite “debug flavor uses the same application id and API key so testers can hit real data,” plus R8 on release.
 

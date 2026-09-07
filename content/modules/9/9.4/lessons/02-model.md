@@ -7,7 +7,7 @@
 
 “We turned on code scanning” is not this lesson. A drawing someone else can test names **finding id, severity, mapped requirement, and owner**.
 
-This week on the notes app: local `ship_ok(findings, mappings)`. No live tenants.
+`ship_ok(findings, mappings)` is local. No live tenants.
 
 > For a HIGH finding at `ship_ok`, the rule is deny unless that id is on the map. Evidence that the deny is false: `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` returns true.
 
@@ -60,7 +60,7 @@ A missing HIGH×map row is how an unowned finding ships on Friday. Write the hol
 
 ## Practice
 
-Open `sast.py` in `labs/9.4/9.4-lab`.
+Label `sast.py` in `labs/9.4/9.4-lab`.
 
 ## Use it somewhere new
 

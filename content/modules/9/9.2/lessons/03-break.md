@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `review_ok(diff)`. It does not merge anything. The failure is already in the function: it returns true for every string. That is a **failed rule**, not live eval.
+The practice is not a website you attack. `review_ok(diff)` is a tiny Python helper. It does not merge anything. The failure is already in the function: it returns true for every string. That is a **failed rule**, not live eval.
 
 > Eval on user input must not be approved. `review_ok("x = eval(user)")` must be false.
 
@@ -32,7 +32,7 @@ You need to avoid `eval` and similar dynamic execution. Module 6.1 already said 
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/review.py`. It returns true for every string. Tests:
+`vulnerable/review.py` returns true for every string. Tests:
 
 - `test_eval_on_user_input_is_rejected`
 - `test_honest_diff_without_eval_may_pass` — `int(user)` may pass on both

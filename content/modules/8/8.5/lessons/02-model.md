@@ -7,7 +7,7 @@
 
 “We filled in the store’s privacy form” is not this lesson. A drawing someone else can test names **what may leave the device, to whom, and which field is forbidden**.
 
-This week on the notes app: local `crash_report(note_body)`. No live vendors.
+`crash_report(note_body)` is local. No live vendors.
 
 > For the note body at `crash_report`, the rule is deny. A stack identifier may send. Evidence that the deny is false: `'secret'` in `str(crash_report("secret"))`.
 
@@ -61,7 +61,7 @@ A missing body×crash row is how the body shows up as “debug extras.” Write 
 
 ## Practice
 
-Open `crash.py` in `labs/8.5/8.5-lab`.
+Label `crash.py` in `labs/8.5/8.5-lab`.
 
 ## Use it somewhere new
 

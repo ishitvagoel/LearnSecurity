@@ -7,7 +7,7 @@
 
 You get a **clinic export-to-CSV filename** chosen by a clerk.
 
-On the notes app, `argv_for_list` must not start `sh -c`. Pass the name as one argv element. For a clinic, the spawn helper returns a list whose program is not `sh`, and the filename is one element.
+`argv_for_list` must not start `sh -c`. Pass the name as one argv element. For a clinic, the spawn helper returns a list whose program is not `sh`, and the filename is one element.
 
 Also name Jinja, SQL (5.5), and mail headers as the same shape, without running those systems.
 

@@ -22,11 +22,11 @@ flowchart TD
 
 The repaired files require membership in `{"search_notes"}`. Production still needs that allow-list to be the *right* tools — `search_notes` that returns raw HTML is a lying encoding leftover. A coding assistant in CI that can `pip install` is the same allow-list grain on a different object. Cryptographically bound human approvals are extra, advanced work: a human click is not this check.
 
-Use an allow-list before a tool runs. This week's check looks at `exec_sql`.
+Use an allow-list before a tool runs — `exec_sql`.
 
 ## What the repaired files must show
 
-Open `fixed/tools.py`. Do not treat the snippet as a production agent product.
+Do not treat `fixed/tools.py` as a production agent product.
 
 | After the fix | Must be true |
 |---|---|

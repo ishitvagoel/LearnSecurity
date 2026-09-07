@@ -22,11 +22,11 @@ flowchart TD
 
 The lab’s repaired files return `"worker-sc"` only on an exact service match. Production still needs a least-privileged database role for that principal (3.3): a correctly named worker that is still god-mode can read every company. After the worker is `worker-sc`, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is advanced work, not this check. Broker access lists wait for 10.3.
 
-Use that individual service account. This week's check looks at leftover Alice.
+Use that individual service account — leftover Alice.
 
 ## What the repaired files must show
 
-Open `fixed/worker.py`. Do not treat the snippet as a production broker.
+Do not treat `fixed/worker.py` as a production broker.
 
 | After the fix | Must be true |
 |---|---|

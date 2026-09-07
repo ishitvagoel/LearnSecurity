@@ -33,7 +33,7 @@ An awareness list that names “path walk” is not the failing check.
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/path.py`. It joins the name onto `/tmp/sc-lab` and returns the string. Checks:
+`vulnerable/path.py` joins the name onto `/tmp/sc-lab` and returns the string. Checks:
 
 - `test_dotdot_does_not_escape_root` — `ValueError` **or** resolved path still under the folder
 - `test_honest_relative_stays_under_root`

@@ -7,7 +7,7 @@
 
 “We delete the user” is not this lesson. A map someone else can test names **every copy of the body** and **who may keep an exception**.
 
-This week: local `NOTES` / `ANALYTICS` / `SEARCH`. User `alice`. No live warehouse.
+`NOTES` / `ANALYTICS` / `SEARCH` is local. User `alice`. No live warehouse.
 
 > After `delete_account("alice")`, `body_retained("alice")` must be None and `search_retained("alice")` must be None. If a copy is missing from the map, leftover retention appears.
 
@@ -65,7 +65,7 @@ A missing “deleted alice × analytics body × deny” row is how the warehouse
 
 ## Practice
 
-Open `lifecycle.py` in `labs/5.1/5.1-lab`. Your artifact is a versioned list (even a table in your notes) with copy, allow or deny, and what would show the deny is false. Fake data only.
+Label `lifecycle.py` in `labs/5.1/5.1-lab`. Your artifact is a versioned list (even a table in your notes) with copy, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

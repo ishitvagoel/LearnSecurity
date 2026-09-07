@@ -23,7 +23,7 @@ flowchart TD
 
 Session A plus body B is still A. If the change never binds the session, that body-wins path is still open. A row-level screenshot does not replace that check.
 
-Cache keys without company are leftover. Silent impersonation is a later topic. Do not skip `test_body_cannot_switch_tenant`. Do not claim a course gate. Do not probe a live company to prove the finding.
+Cache keys without company are leftover. Silent impersonation is a later topic. Do not claim a course gate. Do not probe a live company to prove the finding.
 
 ## Problems to find (name them yourself)
 

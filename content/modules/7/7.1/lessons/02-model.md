@@ -7,7 +7,7 @@
 
 “We published OpenAPI” is not this lesson. A map someone else can test names **the action, the writable keys, and every protocol that binds a document**.
 
-This week on the notes app: local `apply(user, body)` with `ALLOWED = {display_name}`. No live APIs.
+`apply(user, body)` with `ALLOWED = {display_name}` is local. No live APIs.
 
 ## Picture: three binders, one contract
 
@@ -56,7 +56,7 @@ A spec that does not match running code is leftover-endpoint awareness, not the 
 
 ## Practice
 
-Open `patch.py` in `labs/7.1/7.1-lab`. Label the binder even in the repaired tree — the fix is the writable set, not pretending an OpenAPI file became the drop.
+Label `patch.py` in `labs/7.1/7.1-lab`. Label the binder even in the repaired tree — the fix is the writable set, not pretending an OpenAPI file became the drop.
 
 ## Use it somewhere new
 

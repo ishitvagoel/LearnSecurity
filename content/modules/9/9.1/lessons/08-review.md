@@ -23,7 +23,7 @@ flowchart TD
 
 Status-only still is not coverage. If the change never checks `req` **and** `asserts_isolation`, that false-assurance path is still open. A checklist PDF without that check is still the same problem.
 
-HTTP-200 tests that lie about isolation are 9.3. Exceptions without expiry are E6. Do not skip `test_status_only_row_is_not_coverage`. Do not claim the verification gate.
+HTTP-200 tests that lie about isolation are 9.3. Exceptions without expiry are E6. Do not claim the verification gate.
 
 ## Problems to find (name them yourself)
 

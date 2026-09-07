@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-You get a **clinic FHIR resource server**. On the notes app, `accept_token` is false for `aud=other-api`. The same rule has to hold on a clinic FHIR resource server.
+You get a **clinic FHIR resource server**. `accept_token` is false for `aud=other-api`. The same rule has to hold on a clinic FHIR resource server.
 
-**Prompt:** Clinic: wrong-audience FHIR token. Also name native redirect (claimed HTTPS, not a custom scheme) vs browser vs backend-for-frontend storage.
+Clinic: wrong-audience FHIR token. Also name native redirect (claimed HTTPS, not a custom scheme) vs browser vs backend-for-frontend storage.
 
 **Product sketch:** EHR-lite that accepts SMART-on-FHIR-shaped access tokens.
 

@@ -7,7 +7,7 @@
 
 You get a clinic Android client that sends `hipaaMode=true`. Also name feature flags in the app file and `premium=true`.
 
-On the notes app, `allow_export({"integrity": "ok"}, "fail")` must be false.
+`allow_export({"integrity": "ok"}, "fail")` must be false.
 
 **Product sketch:** an EHR-lite Compose switch “HIPAA mode” that the API trusts as a boolean.
 

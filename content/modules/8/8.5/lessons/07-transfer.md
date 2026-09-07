@@ -7,7 +7,7 @@
 
 You get a **clinic crash**. A fake patient name sits in the last chart.
 
-On the notes app, `crash_report("secret")` must not contain `secret`. For a clinic, field × place, allow or deny. The store’s privacy form is still disclosure, not redaction.
+`crash_report("secret")` must not contain `secret`. For a clinic, field × place, allow or deny. The store’s privacy form is still disclosure, not redaction.
 
 **Product sketch:** an EHR-lite “debug crash includes the last chart so support can reproduce,” plus a completed store privacy form.
 

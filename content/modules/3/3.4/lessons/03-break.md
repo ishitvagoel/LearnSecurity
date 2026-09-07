@@ -34,7 +34,7 @@ A React `max={5}` is a usability hint, not that implementation.
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/share_limit.py`. `add_share` always increments and returns `_n`. Checks:
+In `vulnerable/share_limit.py`, `add_share` always increments and returns `_n`. Checks:
 
 - `test_share_cap_is_enforced` — eight calls leave `last <= 5`
 - `test_five_shares_are_allowed` — honest path still reaches 5

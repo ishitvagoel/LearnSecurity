@@ -7,9 +7,9 @@
 
 You get a **clinic sketch** with appointments, charts, and a company per clinic.
 
-On the notes app, `can_read("bob", "n2")` is false. For a clinic, a grant is keyed by person, company, and **this** object.
+`can_read("bob", "n2")` is false. For a clinic, a grant is keyed by person, company, and **this** object.
 
-**Prompt:** Clinic: grant on appointment A ≠ chart B.
+Clinic: grant on appointment A ≠ chart B.
 
 ## Picture: two object classes, two grant tables
 

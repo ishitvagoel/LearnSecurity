@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `delete_user` and `session_valid`. The failure is already in the functions: delete marks the profile and leaves the session. That leftover is a **failed rule**, not a cleanup nit.
+The practice is not a website you attack. `delete_user` is a tiny Python helper and `session_valid`. The failure is already in the functions: delete marks the profile and leaves the session. That leftover is a **failed rule**, not a cleanup nit.
 
 > After `delete_user("alice")`, `session_valid("alice")` must be false. If it is still true, a leftover session still works.
 
@@ -34,7 +34,7 @@ All active sessions have to be killed when an account is disabled or deleted. `D
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/lifecycle.py`. `delete_user` only adds the user to `DELETED`. `session_valid` still returns `SESSIONS.get(user)`. Tests:
+In `vulnerable/lifecycle.py`, `delete_user` only adds the user to `DELETED`. `session_valid` still returns `SESSIONS.get(user)`. Tests:
 
 - `test_active_session_is_valid` — honest path before delete
 - `test_deleted_user_session_is_dead` — `session_valid` false after delete

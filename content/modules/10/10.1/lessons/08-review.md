@@ -23,7 +23,7 @@ flowchart TD
 
 An empty change still has to be denied. If the change never checks a truthy `threat_model`, that always-merge path is still open. A training screenshot does not replace that check.
 
-Stale TM-12 is 3.2. Governance evidence is 10.4. Do not skip `test_merge_requires_threat_model_id`. Do not claim Gate 10. Do not change a live org to prove the finding.
+Stale TM-12 is 3.2. Governance evidence is 10.4. Do not claim Gate 10. Do not change a live org to prove the finding.
 
 ## Problems to find (name them yourself)
 

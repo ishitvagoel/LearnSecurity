@@ -23,7 +23,7 @@ flowchart TD
 
 B after revoke is still None. If the change never checks owner-or-grant, that always-read leftover is still open. A scanner screenshot does not replace that check.
 
-Cache invalidation is a phone leftover. Worker leftover session is a delayed-job leftover. Do not skip `test_revoked_share_cannot_read`. This page does not mark you as finished. Do not hit a live tenant to prove the finding.
+Cache invalidation is a phone leftover. Worker leftover session is a delayed-job leftover. This page does not mark you as finished. Do not hit a live tenant to prove the finding.
 
 ## Problems to find (name them yourself)
 

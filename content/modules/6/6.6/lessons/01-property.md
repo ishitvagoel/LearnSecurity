@@ -51,7 +51,7 @@ A used flag without locking still races. This practice’s check is a sequential
 
 ## What the framework does vs what you still have to check
 
-A unique constraint helps only if `accept` actually inserts or updates that row. FastAPI does not consume tokens for you. If the database errors and you still mint a membership, you failed open. What this practice is supposed to show: `accept('t1')` is true once. Practice files are in `labs/6.6/6.6-lab`. Fake tokens only. No live mail.
+A unique constraint helps only if `accept` actually inserts or updates that row. FastAPI does not consume tokens for you. If the database errors and you still mint a membership, you failed open. What this practice is supposed to show: `accept('t1')` is true once — files in `labs/6.6/6.6-lab`. Fake tokens only. No live mail.
 
 ## What the tool cannot do
 

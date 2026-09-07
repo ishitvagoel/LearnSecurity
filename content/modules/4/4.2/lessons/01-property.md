@@ -55,7 +55,7 @@ OTP is a second factor. It is still typed into the phishing page. Prompt bombing
 
 FastAPI does not know the RP ID. A Next.js password field will happily POST to evil.example. The login still has to work with a keyboard, a name a screen reader can use, and errors that are not color-only. A mouse-only WebAuthn button pushes people onto the password leftover — that is a security leftover, not polish.
 
-The app’s promise is the boolean helper, not a live authenticator. Practice files are in `labs/4.2/4.2-lab`. It is not a live phishing site.
+The app’s promise is the boolean helper, not a live authenticator — files in `labs/4.2/4.2-lab`. It is not a live phishing site.
 
 ## What the tool cannot do
 

@@ -74,7 +74,7 @@ Someone treated the body as debug context. That is the cause. The person who lat
 
 Regex redaction after the fact misses encodings — a later topic. Error traces, slow-query logs, and full-packet dumps bypass the logger. FastAPI does not know Confidential.
 
-What this practice is supposed to show: `log_event` line does not contain `tenant-A-secret-body` and does contain a redaction marker. Practice files are in `labs/3.1/3.1-lab`. Fake data only. No real people's data. No production log drain.
+What this practice is supposed to show: `log_event` line does not contain `tenant-A-secret-body` and does contain a redaction marker — files in `labs/3.1/3.1-lab`. Fake data only. No real people's data. No production log drain.
 
 ## What the tool cannot do
 

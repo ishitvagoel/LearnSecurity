@@ -7,7 +7,7 @@
 
 “The phone is sandboxed” is not this lesson. A map someone else can test names **which cell the server still owns**.
 
-This week on the notes app: local `allow_export(client_claims, server_attest)`. Android and Kotlin first. No live phones.
+`allow_export(client_claims, server_attest)` is local. Android and Kotlin first. No live phones.
 
 ## Picture: every 1.1 rule has an owner
 
@@ -55,7 +55,7 @@ A missing or failed attest **denies**. A passed attest still needs the 1.2 grant
 
 ## Practice
 
-Open `client.py` in `labs/8.1/8.1-lab`. Label even in the repaired tree: the server attest decides; the client boolean is not what you trust.
+Label `client.py` in `labs/8.1/8.1-lab`. Label even in the repaired tree: the server attest decides; the client boolean is not what you trust.
 
 ## Use it somewhere new
 

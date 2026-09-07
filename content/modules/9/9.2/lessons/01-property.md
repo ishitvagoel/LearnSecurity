@@ -53,7 +53,7 @@ flowchart LR
 
 GitHub’s “approve” button is not this rule. Formatters do not see eval as a grant of Python. Later review bots (9.4) are a help, not the whole check.
 
-What this practice is supposed to show: **this** review helper, `review_ok("x = eval(user)")` is false. Practice files are in `labs/9.2/9.2-lab`. Fake diffs only. Local only.
+What this practice is supposed to show: **this** review helper, `review_ok("x = eval(user)")` is false — files in `labs/9.2/9.2-lab`. Fake diffs only. Local only.
 
 ## What the tool cannot do
 

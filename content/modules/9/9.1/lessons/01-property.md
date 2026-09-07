@@ -51,7 +51,7 @@ flowchart LR
 
 A green CI job is not AUTHZ-1. Copied-wholesale checklists are inventory, not a tailored matrix. Exceptions need an expiry date (E6) or they are silent uncovered rows.
 
-What this practice is supposed to show: a status-only row is not covered. Practice files are in `labs/9.1/9.1-lab`. Fake requirement ids only. No live checklist portals.
+What this practice is supposed to show: a status-only row is not covered — files in `labs/9.1/9.1-lab`. Fake requirement ids only. No live checklist portals.
 
 ## What the tool cannot do
 

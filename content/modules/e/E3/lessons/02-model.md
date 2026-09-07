@@ -7,7 +7,7 @@
 
 A slide that says “we use Stripe idempotency” is not this page. A map someone else can test names **the key, the SEEN set, the webhook path, and that no card number is present**.
 
-This week on the notes app: a local `capture(key)` practice. Fake amounts only. No live processor.
+`capture(key)` is a local practice. Fake amounts only. No live processor.
 
 ## Picture: one key, one row
 
@@ -52,7 +52,7 @@ If both arrows append, the map already predicts `test_duplicate_capture_does_not
 
 ## Practice
 
-Open `pay.py` in `labs/E3/e3-lab`.
+Label `pay.py` in `labs/E3/e3-lab`.
 
 ## Use it somewhere new
 

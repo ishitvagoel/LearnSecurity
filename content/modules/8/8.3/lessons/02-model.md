@@ -7,7 +7,7 @@
 
 “App Links are verified” is not this lesson. A map someone else can test names **each exported entry and which query keys it may honor**.
 
-This week on the notes app: local `open_link` / `current_user`. No live apps.
+`open_link` / `current_user` is local. No live apps.
 
 ## Picture: locate versus impersonate
 
@@ -52,7 +52,7 @@ If App Links are verified and `open_link` still copies `as`, the map has a hole.
 
 ## Practice
 
-Open `link.py` in `labs/8.3/8.3-lab`. Label the extras even in the repaired tree — the fix is ignore identity keys, not pretending a verified host became the session.
+Label `link.py` in `labs/8.3/8.3-lab`. Label the extras even in the repaired tree — the fix is ignore identity keys, not pretending a verified host became the session.
 
 ## Use it somewhere new
 

@@ -50,7 +50,7 @@ flowchart LR
 
 Required reviewers on GitHub are not a threat model. A stale threat-model id is an age problem for 3.2 — still better than none, still not a rubber stamp forever.
 
-What this practice is supposed to show: an empty change is deny. Practice files are in `labs/10.1/10.1-lab`. Fake pull-request dicts only. No live GitHub orgs.
+What this practice is supposed to show: an empty change is deny — files in `labs/10.1/10.1-lab`. Fake pull-request dicts only. No live GitHub orgs.
 
 ## What the tool cannot do
 

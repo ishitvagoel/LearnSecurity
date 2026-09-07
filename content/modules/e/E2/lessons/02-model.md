@@ -7,7 +7,7 @@
 
 “We set a content-security policy” is not this lesson. A map someone else can test names **the enforcing header vs Report-Only, encoding (6.2), and whether the edge can strip it**.
 
-This week on the notes app: local `isolation_enforced(headers)`. No live pages.
+`isolation_enforced(headers)` is local. No live pages.
 
 ## Picture: three layers
 
@@ -51,7 +51,7 @@ flowchart LR
 
 ## Practice
 
-Open `csp.py` in `labs/E2/e2-lab`. Label Report-Only as a signal even in the repaired files — the fix is the enforcing header name, not pretending a report became a block.
+Label `csp.py` in `labs/E2/e2-lab`. Report-Only as a signal even in the repaired files — the fix is the enforcing header name, not pretending a report became a block.
 
 ## Use it somewhere new
 

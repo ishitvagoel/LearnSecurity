@@ -7,7 +7,7 @@
 
 You get a **clinic pentest PDF on a shelf**.
 
-On the notes app, `close_finding({"retest": None})` must be false. For a clinic, missing retest denied, passing retest may close. A PDF on a shelf is still a report, not a retest.
+`close_finding({"retest": None})` must be false. For a clinic, missing retest denied, passing retest may close. A PDF on a shelf is still a report, not a retest.
 
 **Product sketch:** an EHR-lite "the assessor delivered a 40-page PDF with severity 9.8 so we closed isolation," plus "the known-exploited list says we must scan the hospital portal."
 

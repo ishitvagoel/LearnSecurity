@@ -7,7 +7,7 @@
 
 “We use AES” is not this lesson. A map someone else can test names **the rule**, **the field**, **the algorithm family**, and **what it is not for**.
 
-This week: local `protect` / `looks_encrypted`. Plaintext stand-in `secret`. No live key service.
+`protect` / `looks_encrypted` is local. Plaintext stand-in `secret`. No live key service.
 
 > `protect("secret")` must not round-trip as Base64. If the table mixes rows, the wrong tool lands on the wrong field.
 
@@ -57,7 +57,7 @@ A missing “storage reader × Base64 field × deny” row is how encoding gets 
 
 ## Practice
 
-Open `crypto.py` in `labs/5.2/5.2-lab`. Your artifact is a versioned list (even a table in your notes) with field, tool, allow or deny, and what would show the deny is false. Fake data only.
+Label `crypto.py` in `labs/5.2/5.2-lab`. Your artifact is a versioned list (even a table in your notes) with field, tool, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

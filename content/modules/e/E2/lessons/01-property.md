@@ -49,7 +49,7 @@ flowchart LR
 
 Some templates ship Report-Only. A CDN can strip the enforcing header (2.2).
 
-What this practice is supposed to show: on **these** practice headers, Report-Only alone is not isolation. Practice files are in `labs/E2/e2-lab`. It is local only. It is not a live page and not a public site.
+What this practice is supposed to show: on **these** practice headers, Report-Only alone is not isolation — files in `labs/E2/e2-lab`. It is local only. It is not a live page and not a public site.
 
 ## What the tool cannot do
 

@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `argv_for_list` and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. That is a **failed rule**, not a live command.
+The practice is not a website you attack. `argv_for_list` is a tiny Python helper and `uses_shell`. It does not start a process. The failure is already in the function: it glues the name into a shell string. That is a **failed rule**, not a live command.
 
 > The export name is an argv element, not shell grammar. `argv_for_list` must not start `sh -c`.
 
@@ -33,7 +33,7 @@ OS calls have to pass arguments as parameters. A scanner name for this family is
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/argv.py`. It concatenates the name into a `sh -c` string. Tests:
+`vulnerable/argv.py` concatenates the name into a `sh -c` string. Tests:
 
 - `test_does_not_invoke_shell`
 - `test_argv_is_program_then_name`

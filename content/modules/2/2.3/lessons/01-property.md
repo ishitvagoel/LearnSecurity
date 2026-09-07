@@ -61,7 +61,7 @@ A session value handed to the script reader fails because **the designers treate
 
 “Next.js cookies are httpOnly by default” is not true for every cookie you set by hand, for a second analytics cookie, or for a WebView bridge. FastAPI `Response.set_cookie` will emit whatever flags you pass.
 
-What this practice is supposed to show: `sc_session` object in the practice is unread by `js_read_session` when `httponly` is true. Practice files are in `labs/2.3/2.3-browser-policy`. It is not a live browser exploit page.
+What this practice is supposed to show: `sc_session` object in the practice is unread by `js_read_session` when `httponly` is true — files in `labs/2.3/2.3-browser-policy`. It is not a live browser exploit page.
 
 ## What the tool cannot do
 

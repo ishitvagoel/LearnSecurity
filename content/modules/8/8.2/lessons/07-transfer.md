@@ -7,7 +7,7 @@
 
 You get a clinic offline chart cache. Also name iOS Keychain vs Android Keystore and desktop Electron.
 
-On the notes app, after `save_note("secret")`, `plaintext_on_disk()` must be false.
+After `save_note("secret")`, `plaintext_on_disk()` must be false.
 
 **Product sketch:** an EHR-lite “available offline” that writes the chart as `charts.json` in internal storage, plus a fingerprint prompt to open the app.
 

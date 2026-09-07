@@ -7,7 +7,7 @@
 
 You get a clinic that **accepts a lab-result webhook**.
 
-On the notes app, `accept("", "body", "lab-secret")` must be false. HMAC over the raw body. For a clinic, the handler must not treat a POST that hit the path as proof the lab sent it.
+`accept("", "body", "lab-secret")` must be false. HMAC over the raw body. For a clinic, the handler must not treat a POST that hit the path as proof the lab sent it.
 
 Also name signed redirects and outbound webhook SSRF (6.5) as the same authenticity family, without running those systems.
 

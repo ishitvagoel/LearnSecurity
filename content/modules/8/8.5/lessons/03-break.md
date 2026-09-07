@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `crash_report` that returns a dict. The failure is already in the function: it copies the note body into the report. That JSON is a **failed rule**, not a debug nit.
+The practice is not a website you attack. `crash_report` is a tiny Python helper that returns a dict. The failure is already in the function: it copies the note body into the report. That JSON is a **failed rule**, not a debug nit.
 
 > A confidential note body must not appear in this crash report. If `crash_report("secret")` includes `secret`, telemetry has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/8.5/8.5-lab`. The practice is an in-process `crash_report(note_body)`. The body is the synthetic string `secret`. No live crash consoles, no public store, no public apps. Do not send the JSON anywhere.
+Stay inside `labs/8.5/8.5-lab` — in-process `crash_report(note_body)`. The body is the synthetic string `secret`. No live crash consoles, no public store, no public apps. Do not send the JSON anywhere.
 
 Do not paste a real note body into a crash SDK “to see what happens.” Do not paste this exercise onto a public crash project, employer dashboard, or live clinic.
 
@@ -34,7 +34,7 @@ The log lesson (3.1) already refused bodies in logs. This check is **the mobile 
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/crash.py`. It returns a dict with `'note': note_body`. Tests:
+`vulnerable/crash.py` returns a dict with `'note': note_body`. Tests:
 
 - `test_crash_report_omits_note_body`
 - `test_honest_crash_still_includes_stack` — a stack identifier may remain

@@ -7,7 +7,7 @@
 
 “I approved the screenshot” is not this lesson. A map someone else can test names **data flow**, **who is allowed**, **the interpreter**, **state**, and **configuration**.
 
-The notes app this week: local `review_ok(diff)`. No live GitHub.
+`review_ok(diff)` is local. No live GitHub.
 
 > `eval` on a user string must not be approved. An honest helper that uses `int(user)` may pass.
 
@@ -59,7 +59,7 @@ A missing “eval(user) × merge × deny” row is how “the screen still looks
 
 ## Practice
 
-Open `review.py` in `labs/9.2/9.2-lab`. Fake diffs only.
+Label `review.py` in `labs/9.2/9.2-lab`. Fake diffs only.
 
 ## Use it somewhere new
 

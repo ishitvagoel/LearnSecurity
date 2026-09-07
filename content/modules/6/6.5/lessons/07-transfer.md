@@ -7,7 +7,7 @@
 
 You get a clinic form that **fetches a lab-result PDF from a URL**.
 
-On the notes app, `allowed` must be false for a link-local metadata URL. Parse, then allow-list host and scheme. For a clinic, the importer must not treat the posted URL as permission to dial.
+`allowed` must be false for a link-local metadata URL. Parse, then allow-list host and scheme. For a clinic, the importer must not treat the posted URL as permission to dial.
 
 Also name webhook delivery (7.3) as the same egress deputy, without running those systems.
 

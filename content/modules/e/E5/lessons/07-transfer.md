@@ -7,9 +7,9 @@
 
 You get a **clinic sketch** with group practices and an `org_id` in JSON.
 
-On the notes app, `tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `"A"`. The JSON body is not the tenant. For a clinic, bind tenant from the session; body tenant overrides session must stay false.
+`tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `"A"`. The JSON body is not the tenant. For a clinic, bind tenant from the session; body tenant overrides session must stay false.
 
-**Prompt:** Clinic group practice switching `org_id` in JSON. Also name a relationship-graph tuple vs this binding.
+Clinic group practice switching `org_id` in JSON. Also name a relationship-graph tuple vs this binding.
 
 **Product sketch:** clinic-lite “PostgreSQL row-level rules are on so companies are done,” plus “we mapped a famous-bugs list so isolation is done.”
 

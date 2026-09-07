@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-You get a **health-record append-only audit**, plus a **simulated copay**. On the notes app, two `capture("k1")` must leave count 1. A processor sticker must not mean the ledger is once.
+You get a **health-record append-only audit**, plus a **simulated copay**. Two `capture("k1")` must leave count 1. A processor sticker must not mean the ledger is once.
 
-**Prompt:** Health record append-only audit. Also name a simulated copay.
+Health record append-only audit. Also name a simulated copay.
 
 **Product sketch:** EHR-lite “the processor said retries are fine,” plus “we filed a questionnaire so high-assurance is done.”
 

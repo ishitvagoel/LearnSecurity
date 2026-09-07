@@ -7,7 +7,7 @@
 
 “We use Postgres row-level security” is not this page. A reviewable architecture names **roles**, **lanes**, **what each may SELECT**, and **the rejected alternative** (one superuser in `DATABASE_URL`).
 
-This week: notes rows keyed by company; a local `can_select` stand-in. No live cluster, no production replica.
+Notes rows keyed by company; a local `can_select` stand-in. No live cluster, no production replica.
 
 ## Picture: topology is not isolation
 
@@ -62,7 +62,7 @@ Rejected: one `postgres` URL for migrate and serve. Chosen: runtime `app` with a
 
 ## Practice
 
-Open `roles.py` in `labs/3.3/3.3-lab`.
+Label `roles.py` in `labs/3.3/3.3-lab`.
 
 ## Use it somewhere new
 

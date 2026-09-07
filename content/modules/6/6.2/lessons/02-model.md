@@ -7,7 +7,7 @@
 
 “We turned on a content-security policy” is not this lesson. A map someone else can test names **the sink, the context, and what encoding applies**.
 
-This week on the notes app: local `render(body)` wrapping a `<p>` text node. No live page. No real browser.
+`render(body)` wrapping a `<p>` text node is local. No live page. No real browser.
 
 ## Picture: one sink, one context in this practice
 
@@ -54,7 +54,7 @@ Framework defaults help only at the constructors you actually use.
 
 ## Practice
 
-Draw text vs attribute vs JavaScript vs URL. Open `html.py` in `labs/6.2/6.2-lab`. Label the sink as HTML text even in the repaired tree — the fix is encoding at that sink, not pretending a header became encoding.
+Draw text vs attribute vs JavaScript vs URL. Label `html.py` in `labs/6.2/6.2-lab`. Label the sink as HTML text even in the repaired tree — the fix is encoding at that sink, not pretending a header became encoding.
 
 ## Use it somewhere new
 

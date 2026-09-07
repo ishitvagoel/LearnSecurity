@@ -7,7 +7,7 @@
 
 You get a **clinic that treats “HIPAA training complete” as enough to merge**.
 
-On the notes app, `merge_ok({})` must be false. For a clinic, empty change is deny; a threat-model id may merge. A training checkbox is still a belief, not a threat model.
+`merge_ok({})` must be false. For a clinic, empty change is deny; a threat-model id may merge. A training checkbox is still a belief, not a threat model.
 
 **Product sketch:** an EHR-lite “CODEOWNERS plus annual HIPAA training so we merge identity changes,” plus a maturity score on a slide.
 

@@ -33,7 +33,7 @@ HTTP does not make POST happen once. HTTP 201 twice is still two rows. An awaren
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/share.py`. `share_note` appends `note_id` to `_SHARES` on every call. The parameter `idempotency_key` is accepted and discarded. Checks:
+In `vulnerable/share.py`, `share_note` appends `note_id` to `_SHARES` on every call. The parameter `idempotency_key` is accepted and discarded. Checks:
 
 - `test_single_share` — one call still creates one share (honest happy path)
 - `test_retry_does_not_duplicate_side_effect` — two calls with `k1` must leave `share_count() == 1`

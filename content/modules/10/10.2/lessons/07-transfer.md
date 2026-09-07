@@ -7,7 +7,7 @@
 
 You get a **clinic that runs npm install in a prod pod**. A fake “always get latest” install sits next to an SBOM.
 
-On the notes app, `install_ok("aaa", "bbb")` must be false. For a clinic, mismatch is deny; a matching pair may install. An SBOM is still inventory, not verify.
+`install_ok("aaa", "bbb")` must be false. For a clinic, mismatch is deny; a matching pair may install. An SBOM is still inventory, not verify.
 
 **Product sketch:** an EHR-lite “prod pod runs npm install so we always get latest,” plus “we attach a CycloneDX SBOM and a provenance badge.”
 

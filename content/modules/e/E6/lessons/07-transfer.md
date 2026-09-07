@@ -7,7 +7,7 @@
 
 You get a **clinic that files a “HIPAA exception.”**
 
-On the notes app, `accept_exception({"owner": "", "review_by": None})` must be false. For a clinic, empty owner denied, complete record may accept. “Legal said we accept it” is still a spoken yes, not a register row.
+`accept_exception({"owner": "", "review_by": None})` must be false. For a clinic, empty owner denied, complete record may accept. “Legal said we accept it” is still a spoken yes, not a register row.
 
 **Product sketch:** an EHR-lite “legal said we accept it,” plus “our maturity score is 2.5 so exceptions are done.”
 

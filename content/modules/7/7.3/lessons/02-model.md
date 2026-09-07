@@ -7,7 +7,7 @@
 
 “TLS terminates at the edge” is not this lesson. A map someone else can test names **raw body**, **MAC**, **secret**, and **what happens on a missing sig**.
 
-This week on the notes app: local `accept(sig, body, secret)` with disposable `lab-secret`. No live providers.
+`accept(sig, body, secret)` with disposable `lab-secret` is local. No live providers.
 
 > HMAC over the raw body bytes. Compare with `compare_digest`. An empty signature must deny. Parsed JSON is a second document.
 
@@ -59,7 +59,7 @@ A missing “unsigned POST × accept × deny” row is how a path-trusted callba
 
 ## Practice
 
-Open `hook.py` in `labs/7.3/7.3-lab`. Local only. Do not POST a live webhook.
+Label `hook.py` in `labs/7.3/7.3-lab`. Local only. Do not POST a live webhook.
 
 ## Use it somewhere new
 

@@ -7,7 +7,7 @@
 
 “We have a risk meeting” is not this lesson. A drawing someone else can test names **owner, review_by, wcag_checked, expiry, and who may accept**.
 
-This week on the notes app: local `accept_exception(exc)`. No live disclosure inbox.
+`accept_exception(exc)` is local. No live disclosure inbox.
 
 > For accept, the rule is deny when owner is empty, deny when `review_by` is missing, and deny when `wcag_checked` is missing. A dated owner plus an accessibility flag may accept. Evidence that the deny is false: `accept_exception({"owner": "", "review_by": None})` returns true.
 
@@ -63,7 +63,7 @@ A missing owner is how a spoken yes becomes “accepted.” Write the hole.
 
 ## Practice
 
-Open `risk.py` in `labs/E6/e6-lab`.
+Label `risk.py` in `labs/E6/e6-lab`.
 
 ## Use it somewhere new
 

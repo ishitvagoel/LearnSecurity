@@ -7,7 +7,7 @@
 
 “We use OAuth” is not this page. A reviewable model names **authorization server, client, resource server, audience, and which secrets bind the transaction**.
 
-This week: local `accept_token`. Expected audience `securecollab-api` (the notes app’s API name in this practice). No live authorization server.
+`accept_token` is local. Expected audience `securecollab-api` (the notes app’s API name in this practice). No live authorization server.
 
 ## Picture: code flow vs this practice’s one check
 
@@ -66,7 +66,7 @@ An earlier topic already refused “JWT means secure.” Here the same format ca
 
 ## Practice
 
-Open `jwt_aud.py` in `labs/4.5/4.5-lab`.
+Label `jwt_aud.py` in `labs/4.5/4.5-lab`.
 
 ## Use it somewhere new
 

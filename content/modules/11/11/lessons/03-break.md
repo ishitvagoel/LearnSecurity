@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `revoke` that does nothing and a `read` that always returns the body. The failure is already in the functions: revoke never drops the grant, and read never asks. That no-op revoke is a **failed rule**, not a paperwork nit.
+The practice is not a website you attack. `revoke` is a tiny Python helper that does nothing and a `read` that always returns the body. The failure is already in the functions: revoke never drops the grant, and read never asks. That no-op revoke is a **failed rule**, not a paperwork nit.
 
 > After `revoke("n1", "B")`, `read("n1", "B")` must be None. If it still returns the body, a revoked share still reads the note.
 
@@ -33,7 +33,7 @@ Earlier weeks already said check every access. Time, revoke, leftover worker ses
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/capstone.py`. It ignores `revoke` and returns the body. Tests:
+`vulnerable/capstone.py` ignores `revoke` and returns the body. Tests:
 
 - `test_revoked_share_cannot_read`
 - `test_owner_may_still_read_after_revoke` — A may pass on both

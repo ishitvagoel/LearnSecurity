@@ -8,7 +8,7 @@
 
 In this course, `target_is_authorized("https://example.com/")` is false. The same rule has to hold for a workplace paste.
 
-**Prompt:** A contractor asked to “quickly test our customer’s WordPress.” Also name a company staging URL.
+A contractor asked to “quickly test our customer’s WordPress.” Also name a company staging URL.
 
 **Product sketch:** “It has a login page so it’s a lab,” plus “the guide has an authorization chapter so we can hit it.”
 

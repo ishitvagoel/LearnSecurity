@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-You get a **clinic last slot**, a **payment capture**, or an **invite token**. On the notes app, two `share_note` calls with `k1` leave one share.
+You get a **clinic last slot**, a **payment capture**, or an **invite token**. Two `share_note` calls with `k1` leave one share.
 
-**Prompt:** Payment capture and invite tokens are the same shape.
+Payment capture and invite tokens are the same shape.
 
 **Product sketch:** Clinic: two POSTs book the last slot.
 

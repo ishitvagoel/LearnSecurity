@@ -24,11 +24,11 @@ The repaired files require those three fields. Production still needs someone to
 
 Expire on `review_by`. Re-accept with fields or fix the hole. Do not silently extend.
 
-A design-review guide is vocabulary. This week's check looks at incomplete exceptions.
+A design-review guide is vocabulary — incomplete exceptions.
 
 ## What the repaired files must show
 
-Open `fixed/risk.py`. Do not treat the snippet as a production register product.
+Do not treat `fixed/risk.py` as a production register product.
 
 | After the fix | Must be true |
 |---|---|

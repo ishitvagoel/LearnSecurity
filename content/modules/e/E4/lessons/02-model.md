@@ -7,7 +7,7 @@
 
 “We wrote it in Python” is not this page. A reviewable model names **bufsize, declared_len, len(src), who may set each, and the copy site**.
 
-This week on the notes app: local `copy_into(bufsize, src, declared_len)`. No native overflow walkthrough.
+`copy_into(bufsize, src, declared_len)` is local. No native overflow walkthrough.
 
 ## Picture: three numbers, one destination
 
@@ -64,7 +64,7 @@ A header length is data. Treat it like any other field the requester sent.
 
 ## Practice
 
-Open `copy.py` in `labs/E4/e4-lab`.
+Label `copy.py` in `labs/E4/e4-lab`.
 
 ## Use it somewhere new
 

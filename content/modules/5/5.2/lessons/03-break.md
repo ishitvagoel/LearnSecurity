@@ -33,7 +33,7 @@ Use approved authenticated encryption, not encoding. Argon2 is for **passwords**
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/crypto.py`. `protect` Base64-encodes the string. Tests:
+In `vulnerable/crypto.py`, `protect` Base64-encodes the string. Tests:
 
 - `test_protect_is_not_mere_encoding`
 - `test_protect_does_not_return_plaintext`

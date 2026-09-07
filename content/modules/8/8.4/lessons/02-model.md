@@ -7,7 +7,7 @@
 
 “R8 is on” is not this lesson. A map someone else can test names **build type, client id, and which API it may call**.
 
-This week on the notes app: local `api_allowed(build_type, attest)`. No live stores.
+`api_allowed(build_type, attest)` is local. No live stores.
 
 ## Picture: server owns the channel
 
@@ -53,7 +53,7 @@ That leftover is 5.3 — secrets in the artifact. Minify does not solve it.
 
 ## Practice
 
-Open `build.py` in `labs/8.4/8.4-lab`. Label the always-true helper even in the repaired tree — the fix is release plus attest, not pretending minify became a grant.
+Label `build.py` in `labs/8.4/8.4-lab`. Label the always-true helper even in the repaired tree — the fix is release plus attest, not pretending minify became a grant.
 
 ## Use it somewhere new
 

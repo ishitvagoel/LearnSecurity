@@ -7,7 +7,7 @@
 
 You get a **clinic report template** where designers can put expressions.
 
-On the notes app, `review_ok("x = eval(user)")` must be false. For a clinic, eval on user input is not approved; honest `int(user)` may pass.
+`review_ok("x = eval(user)")` must be false. For a clinic, eval on user input is not approved; honest `int(user)` may pass.
 
 Also name Terraform `local-exec` and GitHub Actions yaml as the same interpreter family, without running those systems.
 

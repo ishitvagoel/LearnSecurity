@@ -7,7 +7,7 @@
 
 You get a **clinic record delete**. A patient row and an appointment card sit next to each other.
 
-On the notes app, after `delete_account("alice")`, `body_retained("alice")` is None. For a clinic, every copy of the notes must die in the same delete.
+After `delete_account("alice")`, `body_retained("alice")` is None. For a clinic, every copy of the notes must die in the same delete.
 
 ## Picture: the card is another copy
 

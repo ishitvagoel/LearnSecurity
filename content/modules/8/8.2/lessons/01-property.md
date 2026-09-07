@@ -53,7 +53,7 @@ A prompt that shows the list is not wrapping the cache key. A compromised OS can
 
 EncryptedSharedPreferences is not automatic for every file. Room defaults to plaintext SQLite. iOS Data Protection classes are a later mirror — still not “the file is gone.”
 
-What this practice is supposed to show: a save leaves `plaintext_on_disk()` false. Practice files are in `labs/8.2/8.2-lab`. It is local only. It is not a live phone.
+What this practice is supposed to show: a save leaves `plaintext_on_disk()` false — files in `labs/8.2/8.2-lab`. It is local only. It is not a live phone.
 
 ## What the tool cannot do
 

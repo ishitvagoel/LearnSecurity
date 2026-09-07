@@ -7,9 +7,9 @@
 
 You get a **clinic SSN column**. The label on the column says encrypted. The bytes are Base64.
 
-On the notes app, `protect("secret")` must not round-trip as Base64. For a clinic, encoding is not secrecy.
+`protect("secret")` must not round-trip as Base64. For a clinic, encoding is not secrecy.
 
-**Prompt:** Clinic: SSN column labeled “encrypted” that is Base64. Also name password hashing vs field encryption vs backup encryption.
+Clinic: SSN column labeled “encrypted” that is Base64. Also name password hashing vs field encryption vs backup encryption.
 
 **Product sketch:** a small clinic record with an `ssn_encrypted` column.
 

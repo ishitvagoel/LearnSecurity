@@ -7,7 +7,7 @@
 
 You get a **clinic HIPAA “done” column**. A fake isolation row sits in a checklist.
 
-On the notes app, `covered("AUTHZ-1", [status-only])` must be false. For a clinic, status-only is not coverage; an isolation assert may count. A pasted checklist is still inventory, not a tailored matrix.
+`covered("AUTHZ-1", [status-only])` must be false. For a clinic, status-only is not coverage; an isolation assert may count. A pasted checklist is still inventory, not a tailored matrix.
 
 **Product sketch:** an EHR-lite “we imported the HIPAA checklist and marked isolation done,” plus a green CI.
 

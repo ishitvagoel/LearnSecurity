@@ -7,7 +7,7 @@
 
 You get a **clinic bulk-export** of patients.
 
-On the notes app, `allow(4)` must be false in the lab window. Export has a resource account, not an unbounded loop. For a clinic, the fourth bulk-export is denied, the first three may be allowed.
+`allow(4)` must be false in the lab window. Export has a resource account, not an unbounded loop. For a clinic, the fourth bulk-export is denied, the first three may be allowed.
 
 Also name notification fan-out and search complexity as the same budget family (7.1), without running those systems.
 

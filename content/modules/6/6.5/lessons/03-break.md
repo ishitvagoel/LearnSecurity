@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allowed`. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. A link-local metadata URL counting as an allowed peer is a **failed rule**, not a live fetch of cloud identity.
+The practice is not a website you attack. `allowed` is a tiny Python helper. It does not open a network. The failure is already in the function: it treats any `http` or `https` scheme as fine. A link-local metadata URL counting as an allowed peer is a **failed rule**, not a live fetch of cloud identity.
 
 > A link-local metadata URL is not an allowed peer. `allowed` must be false for that named string. This practice checks the predicate only. It does not fetch.
 
@@ -33,7 +33,7 @@ Use an allow-list of protocols, hosts, paths, and ports before calling another s
 
 ## What to look at: the cause, not a fetch
 
-Open `vulnerable/ssrf.py`. It returns true for any `http`/`https` scheme. Tests:
+`vulnerable/ssrf.py` returns true for any `http`/`https` scheme. Tests:
 
 - `test_link_local_metadata_is_denied`
 - `test_loopback_is_denied`

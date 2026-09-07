@@ -7,7 +7,7 @@
 
 “We have CODEOWNERS” is not this lesson. A drawing someone else can test names **the surfaces that trigger a threat model: identity, stored data, mobile, queues, and authorization**.
 
-This week on the notes app: local `merge_ok(pr)`. No live orgs.
+`merge_ok(pr)` is local. No live orgs.
 
 > For an empty change, merge is deny. A change that names `threat_model` as `TM-12` may merge. Evidence that the deny is false: `merge_ok({})` returns true.
 
@@ -60,7 +60,7 @@ A missing threat-model cell is how a required-reviewer list becomes false assura
 
 ## Practice
 
-Open `sdl.py` in `labs/10.1/10.1-lab`.
+Label `sdl.py` in `labs/10.1/10.1-lab`.
 
 ## Use it somewhere new
 

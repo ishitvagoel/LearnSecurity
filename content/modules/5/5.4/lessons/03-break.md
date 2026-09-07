@@ -33,7 +33,7 @@ TLS has to be on the public HTTP service with no cleartext fallback. A client he
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/channel.py`. It returns true if the header is `https` **or** the socket is `https`. Checks:
+`vulnerable/channel.py` returns true if the header is `https` **or** the socket is `https`. Checks:
 
 - `test_client_forwarded_proto_is_not_tls`
 - `test_plain_http_is_not_https`

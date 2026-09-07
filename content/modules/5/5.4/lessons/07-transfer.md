@@ -7,7 +7,7 @@
 
 You get a **clinic page** whose API client uses `https://` while the API socket is `http`. A dashboard that “forces HTTPS” sits next to that socket.
 
-On the notes app, `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is false. For a clinic, a client header is not TLS.
+`channel_is_https({"X-Forwarded-Proto": "https"}, "http")` is false. For a clinic, a client header is not TLS.
 
 ## Picture: the URL bar is not the socket
 

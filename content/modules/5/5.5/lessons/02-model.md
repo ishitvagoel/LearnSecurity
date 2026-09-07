@@ -7,7 +7,7 @@
 
 “We use an ORM” is not this lesson. A map someone else can test names **what is SQL text**, **what is a bound parameter**, and **which role runs it**.
 
-This week: local `fetch_sql(tenant, note_id)` and `is_bound`. No live PostgreSQL.
+`fetch_sql(tenant, note_id)` and `is_bound` is local. No live PostgreSQL.
 
 > Bind tenant and note id as parameters. The parser must receive a fixed program. Company and id travel beside it.
 
@@ -59,7 +59,7 @@ A missing “hostile note id × SQL grammar × deny” row is how concatenated S
 
 ## Practice
 
-Open `query.py` in `labs/5.5/5.5-lab`. Fake data only.
+Label `query.py` in `labs/5.5/5.5-lab`. Fake data only.
 
 ## Use it somewhere new
 

@@ -23,7 +23,7 @@ flowchart TD
 
 Report-Only is not enforcement. If the change never uses the enforcing header name, that always-on leftover is still open. A dashboard screenshot does not replace that check.
 
-Encoding is 6.2. CDN strip is 2.2. Do not skip `test_report_only_is_not_enforcement`. Do not claim check-in 7. Do not load a live page to prove the finding.
+Encoding is 6.2. CDN strip is 2.2. Do not claim check-in 7. Do not load a live page to prove the finding.
 
 ## Problems to find (name them yourself)
 

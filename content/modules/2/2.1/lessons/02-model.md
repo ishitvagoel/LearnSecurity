@@ -7,7 +7,7 @@
 
 A boxes-and-arrows “client → API → database” sketch is not this lesson. A parser map names **which reader** produces the company used for the who-is-allowed check and **which reader** produces the company written to storage.
 
-This week: companies, memberships, notes, and a **local JSON ingest practice**. No GraphQL product, no live proxy, no PostgreSQL `jsonb` claim, no Unicode attack corpus.
+Companies, memberships, notes, and a **local JSON ingest practice**. No GraphQL product, no live proxy, no PostgreSQL `jsonb` claim, no Unicode attack corpus.
 
 ## Picture: one parse result, many consumers
 
@@ -72,7 +72,7 @@ Do not add public JSON bombs or live Unicode weaponization. Those are out of sco
 
 ## Practice
 
-Draw the map so someone else could name the checks without opening the answer-key folder. Open `parse_note.py` in `labs/2.1/2.1-parser-boundaries`. Label the first-key scan and `json.loads` as two readers even in the repaired tree — the fix is agreement-or-refuse, not pretending the scan became JSON.
+Draw the map so someone else could name the checks without opening the answer-key folder. Label `parse_note.py` in `labs/2.1/2.1-parser-boundaries`. Label the first-key scan and `json.loads` as two readers even in the repaired tree — the fix is agreement-or-refuse, not pretending the scan became JSON.
 
 ## Use it somewhere new
 

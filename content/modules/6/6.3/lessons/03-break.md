@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allow_share`. The failure is already in the function: it treats a leftover session cookie as consent to share. That is a **failed rule**, not an attack on another site.
+The practice is not a website you attack. `allow_share` is a tiny Python helper. The failure is already in the function: it treats a leftover session cookie as consent to share. That is a **failed rule**, not an attack on another site.
 
 > Leftover cookies are not consent to share. If `allow_share` from a foreign origin with `token=None` is true, leftover cookie authority has replaced site-bound intent.
 
@@ -31,7 +31,7 @@ SameSite set for purpose is a helper, not complete. Anti-forgery tokens (or extr
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/csrf.py`. It returns `session_cookie` and ignores origin and token. Tests:
+`vulnerable/csrf.py` returns `session_cookie` and ignores origin and token. Tests:
 
 - `test_foreign_origin_post_is_denied`
 - `test_same_origin_without_token_is_denied`

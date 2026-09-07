@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a store listing you unpack. It is a tiny Python `api_allowed(build_type, attest)`. The failure is already in the function: it returns true for every pair, so a debug build with `attest=ok` is allowed to call prod export. That is a **failed rule**, not an attack on a public APK.
+The practice is not a store listing you unpack. `api_allowed(build_type, attest)` is a tiny Python helper. The failure is already in the function: it returns true for every pair, so a debug build with `attest=ok` is allowed to call prod export. That is a **failed rule**, not an attack on a public APK.
 
 > `api_allowed("debug", "ok")` must be false. A debug build must not call production export.
 

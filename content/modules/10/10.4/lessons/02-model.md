@@ -7,7 +7,7 @@
 
 “We set `NODE_ENV=production`” is not this lesson. A drawing someone else can test names **env, debug, who can edit compose, the admin bind address, whether a migration fails open, and rollback**.
 
-This week on the notes app: local `boot_ok(env, debug)`. No live production hosts.
+`boot_ok(env, debug)` is local. No live production hosts.
 
 > For boot, the rule is deny when `env` is `"prod"` and `debug` is true. Production without debug may boot. Evidence that the deny is false: `boot_ok("prod", True)` returns true.
 
@@ -61,7 +61,7 @@ A missing prod-plus-debug deny is how a compose slogan becomes false assurance. 
 
 ## Practice
 
-Open `cfg.py` in `labs/10.4/10.4-lab`.
+Label `cfg.py` in `labs/10.4/10.4-lab`.
 
 ## Use it somewhere new
 

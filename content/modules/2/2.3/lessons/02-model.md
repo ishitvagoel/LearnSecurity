@@ -7,7 +7,7 @@
 
 A poster of “we use CSP, cookies, and CORS” is not this page. A browser policy table names **which reader** may see `sc_session` and **which controls are not this week’s check**.
 
-This week: a local cookie-jar model. No real DOM exploit page, no third-party iframe product, no live CORS test against someone else’s site.
+A local cookie-jar model. No real DOM exploit page, no third-party iframe product, no live CORS test against someone else’s site.
 
 ## Picture: the jar sends; script must not read
 
@@ -59,7 +59,7 @@ A missing analytics row is how a second cookie quietly becomes a session. Write 
 
 ## Practice
 
-Open `cookies.py` in `labs/2.3/2.3-browser-policy`.
+Label `cookies.py` in `labs/2.3/2.3-browser-policy`.
 
 ## Use it somewhere new
 

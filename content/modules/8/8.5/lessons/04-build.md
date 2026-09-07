@@ -27,7 +27,7 @@ The log lesson (3.1) already said: log by protection level. This check covers `c
 
 ## What the repaired files must show
 
-Open `fixed/crash.py`. Do not treat the snippet as a production crash SDK.
+Do not treat `fixed/crash.py` as a production crash SDK.
 
 | After the fix | Must be true |
 |---|---|

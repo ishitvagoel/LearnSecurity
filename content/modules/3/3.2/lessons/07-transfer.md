@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-You get **clinic SMS reminders** — a new channel that HTTP scans of the notes app will not enumerate. On the notes app, a green scan still lists `cross-tenant-read`.
+You get **clinic SMS reminders** — a new channel that HTTP scans of the notes app will not enumerate. A green scan still lists `cross-tenant-read`.
 
-**Prompt:** Clinic SMS reminders — a new channel that HTTP scans will not enumerate.
+Clinic SMS reminders — a new channel that HTTP scans will not enumerate.
 
 **Product sketch:** An EHR-lite booking card that texts “your appointment” to a phone number.
 

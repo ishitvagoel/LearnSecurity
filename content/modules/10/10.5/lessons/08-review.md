@@ -23,7 +23,7 @@ flowchart TD
 
 A recovery todo still has to be denied. If the change never checks the conjunction, that always-close leftover is still open. A SIEM screenshot does not replace that check.
 
-Note bodies in logs are the second what must not happen. Support-tool god-mode is leftover from earlier cluster lessons. Do not skip `test_cannot_close_without_recovery`. This page does not mark you as finished. Do not query a live SIEM to prove the finding.
+Note bodies in logs are the second what must not happen. Support-tool god-mode is leftover from earlier cluster lessons. This page does not mark you as finished. Do not query a live SIEM to prove the finding.
 
 ## Problems to find (name them yourself)
 

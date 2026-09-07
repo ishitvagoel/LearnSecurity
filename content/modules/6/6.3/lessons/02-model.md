@@ -7,7 +7,7 @@
 
 “SameSite is on” is not this page. A map someone else can test names **who may POST share, with which cookie, origin, and token**.
 
-This week: local `allow_share(origin, expected, token, session_cookie)`. No live browsers.
+`allow_share(origin, expected, token, session_cookie)` is local. No live browsers.
 
 ## Picture: three inputs, one decision
 
@@ -55,7 +55,7 @@ This lab is the leftover-cookie helper. Do not treat a Bearer-only API as “CSR
 
 ## Practice
 
-Open `csrf.py` in `labs/6.3/6.3-lab`.
+Label `csrf.py` in `labs/6.3/6.3-lab`.
 
 ## Use it somewhere new
 

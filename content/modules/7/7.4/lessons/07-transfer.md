@@ -7,7 +7,7 @@
 
 You get a **clinic batch-export worker**.
 
-On the notes app, `exporter({"user_session": "alice", "service": None})` must be `None`. A leftover user session is not worker identity. For a clinic, leftover session denied, named worker allowed.
+`exporter({"user_session": "alice", "service": None})` must be `None`. A leftover user session is not worker identity. For a clinic, leftover session denied, named worker allowed.
 
 Also name outbox pattern and event schemas as the same identity family, without running those brokers here.
 

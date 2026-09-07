@@ -23,7 +23,7 @@ flowchart TD
 
 200-only is not a security test. If the change never names what must not happen, that happy-path leftover is still open. A coverage screenshot does not replace that check.
 
-Fuzz with no named bad result is leftover 9.5. Field grain is 7.2. Do not skip `test_http_200_only_is_not_a_security_test`. Do not claim a later gate. Do not treat coverage percent as the isolation check.
+Fuzz with no named bad result is leftover 9.5. Field grain is 7.2. Do not claim a later gate. Do not treat coverage percent as the isolation check.
 
 ## Problems to find (name them yourself)
 

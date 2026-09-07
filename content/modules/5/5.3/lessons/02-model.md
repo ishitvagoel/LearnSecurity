@@ -7,7 +7,7 @@
 
 “We have a vault” is not this page. A reviewable model names **each secret, where it lives, who owns rotation, and what happens to the old value**.
 
-This week: local `auth(presented, current)`. Disposable `sk-lab-hardcoded`. No live vault.
+`auth(presented, current)` is local. Disposable `sk-lab-hardcoded`. No live vault.
 
 ## Picture: inventory row
 
@@ -54,7 +54,7 @@ flowchart LR
 
 ## Practice
 
-Open `secrets.py` in `labs/5.3/5.3-lab`.
+Label `secrets.py` in `labs/5.3/5.3-lab`.
 
 ## Use it somewhere new
 

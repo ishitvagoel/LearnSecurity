@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `resolve(role, field)`. The failure is already in the function: it returns true for every pair. A member resolving `secret_internal` is **a failed rule**, not a dump of an internal token.
+The practice is not a website you attack. `resolve(role, field)` is a tiny Python helper. The failure is already in the function: it returns true for every pair. A member resolving `secret_internal` is **a failed rule**, not a dump of an internal token.
 
 > `resolve("member", "secret_internal")` must be false. If it is true, the serializer dumped without a field table.
 
 ## Where you may practice
 
-Stay inside `labs/7.2/7.2-lab`. The practice is an in-process `resolve(role, field)`. Fake roles (`member`, `service`) and field names (`display_name`, `secret_internal`). `secret_internal` is a lab label, not a production token. It does not open FastAPI or GraphQL. Do not query a public GraphQL host, an employer API, or a live clinic.
+Stay inside `labs/7.2/7.2-lab` — in-process `resolve(role, field)`. Fake roles (`member`, `service`) and field names (`display_name`, `secret_internal`). `secret_internal` is a lab label, not a production token. It does not open FastAPI or GraphQL. Do not query a public GraphQL host, an employer API, or a live clinic.
 
 Do not paste this exercise onto a public site, employer board, or live clinic portal.
 

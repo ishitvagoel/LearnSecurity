@@ -28,7 +28,7 @@ Cached sensitive data has to stay isolated. This check covers path-only keys.
 
 ## What the repaired files must show
 
-Read `fixed/cache.py` in the repaired files against this checklist. Do not treat the snippet as a production CDN.
+Do not treat `fixed/cache.py` as a production CDN.
 
 | After the fix | Must be true |
 |---|---|

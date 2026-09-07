@@ -56,7 +56,7 @@ A UUID locates the row. It is not a capability for every column. Hiding the key 
 
 ORM dump helpers are convenience, not field permission. GraphQL will resolve any field the schema exposes. FastAPI `response_model` helps only if it is the actual response, not an optional overlay.
 
-What this practice is supposed to show: `resolve`, member × `secret_internal` is false. Practice files are in `labs/7.2/7.2-lab`. It is local. No live GraphQL.
+What this practice is supposed to show: `resolve`, member × `secret_internal` is false — files in `labs/7.2/7.2-lab`. It is local. No live GraphQL.
 
 ## What the tool cannot do
 

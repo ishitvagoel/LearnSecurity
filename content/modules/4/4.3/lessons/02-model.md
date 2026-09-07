@@ -7,7 +7,7 @@
 
 “We use HttpOnly” is not this page. A reviewable map names **query / cookie / header**, **who sees each**, and **deny on query**.
 
-This week: local `session_from_request(query, cookie, header)`. Fake token `secret`. No live CDN.
+`session_from_request(query, cookie, header)` is local. Fake token `secret`. No live CDN.
 
 ## Picture: who can read the channel
 
@@ -54,7 +54,7 @@ How you sign the token is a later lesson. Which channel carries it is this page.
 
 ## Practice
 
-Open `token.py` in `labs/4.3/4.3-lab`.
+Label `token.py` in `labs/4.3/4.3-lab`.
 
 ## Use it somewhere new
 

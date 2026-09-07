@@ -60,7 +60,7 @@ Someone killed the profile row and left the session. That is the cause. The pers
 
 ## What the framework does vs what you still have to check
 
-SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days still verifies unless you check a per-user not-before. What this practice is supposed to show: after `delete_user("alice")`, `session_valid("alice")` is False. Practice files are in `labs/4.1/4.1-lab`. Fake data only. No live identity provider.
+SessionMiddleware does not know HR offboarding. A token with `exp` in 30 days still verifies unless you check a per-user not-before. What this practice is supposed to show: after `delete_user("alice")`, `session_valid("alice")` is False — files in `labs/4.1/4.1-lab`. Fake data only. No live identity provider.
 
 ## What the tool cannot do
 

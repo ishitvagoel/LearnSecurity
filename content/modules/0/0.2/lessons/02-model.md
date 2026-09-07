@@ -8,7 +8,7 @@
 
 “They’re advanced” is not this lesson. A reviewable picture names **tooling-bridge ids, required 1.2/1.3/1.4, and check-in 1 evidence**.
 
-This week on the notes app: local `quiz_score_grants_phase1_skip(score)`. No vendor LMS.
+`quiz_score_grants_phase1_skip(score)` is local. No vendor LMS.
 
 ## Picture: two skip classes
 
@@ -53,7 +53,7 @@ flowchart LR
 
 ## Practice
 
-Open `diagnostic.py` in `labs/0.2/0.2-bridge`.
+Label `diagnostic.py` in `labs/0.2/0.2-bridge`.
 
 ## Use it somewhere new
 

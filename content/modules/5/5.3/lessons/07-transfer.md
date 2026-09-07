@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-You get a **clinic lab API key in a gist**. On the notes app, `auth("sk-lab-hardcoded", current="rotated-now")` is false.
+You get a **clinic lab API key in a gist**. `auth("sk-lab-hardcoded", current="rotated-now")` is false.
 
-**Prompt:** Clinic lab API key in a gist. Also sketch envelope wrapping (data key vs wrapping key) on compromise.
+Clinic lab API key in a gist. Also sketch envelope wrapping (data key vs wrapping key) on compromise.
 
 **Product sketch:** EHR-lite with a backend integration key.
 

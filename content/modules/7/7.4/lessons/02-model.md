@@ -7,7 +7,7 @@
 
 “Jobs run internally” is not this lesson. A map someone else can test names **who authenticates the worker** and **what the job is allowed to carry**.
 
-This week: local `exporter(job)` with principal `worker-sc`. No live brokers.
+`exporter(job)` with principal `worker-sc` is local. No live brokers.
 
 > The person who clicked Export is a *parameter* (which export). It is not the worker’s login. Leftover Alice with no service is denied. The named worker may run.
 
@@ -59,7 +59,7 @@ A missing “Alice session × deny” row is how a leftover login becomes the wo
 
 ## Practice
 
-Open `worker.py` in `labs/7.4/7.4-lab`. Fake job dicts only.
+Label `worker.py` in `labs/7.4/7.4-lab`. Fake job dicts only.
 
 ## Use it somewhere new
 

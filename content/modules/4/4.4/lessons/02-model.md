@@ -7,7 +7,7 @@
 
 “We check authorization” is not this page. A table someone else can test names **people, companies, notes, actions, and every path** that can release a body.
 
-This week: local `GRANTS` / `NOTES` / `USERS`. People `alice`, `bob`, `carol`, `eve`. No live identity product.
+`GRANTS` / `NOTES` / `USERS` is local. People `alice`, `bob`, `carol`, `eve`. No live identity product.
 
 ## Picture: four shapes, one cell
 
@@ -61,7 +61,7 @@ If a path is missing from the table, leftover permission appears there even if G
 
 ## Practice
 
-Open `grant.py` in `labs/4.4/4.4-lab`.
+Label `grant.py` in `labs/4.4/4.4-lab`.
 
 ## Use it somewhere new
 

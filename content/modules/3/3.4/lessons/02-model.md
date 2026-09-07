@@ -7,7 +7,7 @@
 
 “We have a share limit” is not this page. A reviewable model names **states 0–5**, **the 6th transition**, **who may override**, and **which paths skip the cap**.
 
-This week: one note, `add_share` counter, cap 5. No live GraphQL, no production filter.
+One note, `add_share` counter, cap 5. No live GraphQL, no production filter.
 
 ## Picture: five allowed, sixth is a different rule
 
@@ -63,7 +63,7 @@ Write the cap down. Implement it on every write. Do not substitute a later rate 
 
 ## Practice
 
-Open `share_limit.py` in `labs/3.4/3.4-lab`.
+Label `share_limit.py` in `labs/3.4/3.4-lab`.
 
 ## Use it somewhere new
 

@@ -9,7 +9,7 @@ A list that says “MFA,” “WAF,” and “users should be careful” is a to
 
 > For rule *I*, person *A* with ability *C* and motive *N* can cause harm *H* unless control *K* holds. Leftover *R* remains, owned by *O*, looked at again on trigger *T*. Evidence *E* would show *K* is false.
 
-This week: companies, memberships, notes, and a **local recovery-confirm practice**. No live login provider, no files, no support-impersonation product, no real users.
+Companies, memberships, notes, and a **local recovery-confirm practice**. No live login provider, no files, no support-impersonation product, no real users.
 
 ## Picture: anatomy of a row
 
@@ -81,7 +81,7 @@ Maturity scores, scanner yellow, and “256-bit” do not belong in the leftover
 
 ## Practice
 
-Open `recovery.py` in `labs/1.4/1.4-risk-register`. Your artifact is a versioned list (even a table in your notes) with rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
+Label `recovery.py` in `labs/1.4/1.4-risk-register`. Your artifact is a versioned list (even a table in your notes) with rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
 
 ## Use it somewhere new
 

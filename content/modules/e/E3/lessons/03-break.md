@@ -32,7 +32,7 @@ Topics 2.4 and 6.6 already said consume-once; this rule is **money-like grain**.
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/pay.py`. `capture` appends on every call. Checks:
+In `vulnerable/pay.py`, `capture` appends on every call. Checks:
 
 - `test_duplicate_capture_does_not_double_charge`
 - `test_first_capture_may_charge` — first `k1` may pass on both

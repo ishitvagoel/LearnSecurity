@@ -23,7 +23,7 @@ flowchart TD
 
 Length still has to be ≤ bufsize. If the change never uses the three-way min, that oversize path is still open. A language sticker without that check is still the same problem.
 
-Helpers that call C are leftover. Integer wrap is leftover. Do not skip `test_copy_does_not_exceed_buffer`. Do not claim a course gate. Do not compile a native overflow to prove the finding.
+Helpers that call C are leftover. Integer wrap is leftover. Do not claim a course gate. Do not compile a native overflow to prove the finding.
 
 Checking every path here means every copy site, including ones that look “safe” because the rest of the app is Kotlin.
 

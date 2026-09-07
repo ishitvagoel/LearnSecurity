@@ -7,7 +7,7 @@
 
 You get a clinic deep link `as=doctor`. Also name OAuth redirect to the app (4.5).
 
-On the notes app, after `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`.
+After `open_link({"as": "admin"})`, `current_user()` must still be `"alice"`.
 
 **Product sketch:** an EHR-lite claimed HTTPS app link `open?as=doctor` “for kiosk demos,” plus App Links verified.
 

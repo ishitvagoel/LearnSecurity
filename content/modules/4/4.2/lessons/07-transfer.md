@@ -7,7 +7,7 @@
 
 You get a **clinic staff SSO** portal. Optionally: a second ceremony before chart export. A password or OTP typed at a lookalike identity provider is still a shared secret. WebAuthn that ignores origin is still theater.
 
-On the notes app, `phishing_resistant("password", evil, real)` is false. The same rule has to hold on the clinic portal.
+`phishing_resistant("password", evil, real)` is false. The same rule has to hold on the clinic portal.
 
 ## Picture: MFA to the wrong identity provider is still phishing
 

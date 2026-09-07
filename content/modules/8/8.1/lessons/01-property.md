@@ -54,7 +54,7 @@ The store listing and code signing prove *which package id was installed*, not *
 
 Android sandbox defaults are not 1.2. Jetpack libraries do not authorize export. FastAPI will accept `integrity=ok` if you bind it.
 
-What this practice is supposed to show: `allow_export`, client ok plus attest fail is false. Practice files are in `labs/8.1/8.1-lab`. It is local only. It is not a live phone, Play Console, or public app store listing.
+What this practice is supposed to show: `allow_export`, client ok plus attest fail is false — files in `labs/8.1/8.1-lab`. It is local only. It is not a live phone, Play Console, or public app store listing.
 
 ## What the tool cannot do
 

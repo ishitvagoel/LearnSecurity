@@ -54,7 +54,7 @@ SQL, shell, templates, and mail headers fail the same way: untrusted data become
 
 Python `subprocess` is easy to misuse (`shell=True`, or a string instead of a list). FastAPI does not mediate OS calls. Next.js `child_process.exec` is a shell.
 
-What this practice is supposed to show: `argv_for_list` is a list whose program is not `sh`. Practice files are in `labs/6.1/6.1-lab`. Fake names only. No live OS command.
+What this practice is supposed to show: `argv_for_list` is a list whose program is not `sh` — files in `labs/6.1/6.1-lab`. Fake names only. No live OS command.
 
 ## What the tool cannot do
 

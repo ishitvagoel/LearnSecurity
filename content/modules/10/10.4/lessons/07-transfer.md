@@ -7,7 +7,7 @@
 
 You get a **clinic Django `DEBUG=True`**.
 
-On the notes app, `boot_ok("prod", True)` must be false. For a clinic, prod plus debug denied, prod without debug may boot. Setting `NODE_ENV` without comparing `env` to `debug` still leaves `boot_ok("prod", True)` true.
+`boot_ok("prod", True)` must be false. For a clinic, prod plus debug denied, prod without debug may boot. Setting `NODE_ENV` without comparing `env` to `debug` still leaves `boot_ok("prod", True)` true.
 
 **Product sketch:** an EHR-lite “we left DEBUG on for five minutes so support can see traces,” plus “`NODE_ENV` is production and we canary 10%.”
 

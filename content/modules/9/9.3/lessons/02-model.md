@@ -7,7 +7,7 @@
 
 “We ticked a testing-guide row” is not this lesson. A drawing someone else can test names **what must not happen, who is acting, and which object**.
 
-This week on the notes app: local `is_security_test(t)`. No live scanners.
+`is_security_test(t)` is local. No live scanners.
 
 > For a row with only `status_asserted`, the rule is deny. A named `forbidden_outcome` may count. Evidence that the deny is false: `is_security_test({"status_asserted": True})` is true.
 
@@ -60,7 +60,7 @@ A missing bad-case × isolation row is how 200-only occupies the security slot. 
 
 ## Practice
 
-Open `stest.py` in `labs/9.3/9.3-lab`.
+Label `stest.py` in `labs/9.3/9.3-lab`.
 
 ## Use it somewhere new
 

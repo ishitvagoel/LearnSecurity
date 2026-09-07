@@ -7,7 +7,7 @@
 
 You get a **clinic patient nickname** field drawn on a shared board. Also name markdown-to-HTML as a second parser (2.1).
 
-On the notes app, `render` encodes `<` as `&lt;` in HTML text.
+`render` encodes `<` as `&lt;` in HTML text.
 
 **Product sketch:** an EHR-lite “preferred name” that concatenates into an HTML badge.
 

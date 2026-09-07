@@ -23,7 +23,7 @@ flowchart TD
 
 An empty owner still has to be denied. If the change never checks the schema, that always-accept leftover is still open. A maturity screenshot does not replace that check.
 
-Unread register is leftover. Tech-debt rename is leftover. Do not skip `test_exception_needs_owner_review_and_wcag`. This page does not mark you as finished. Do not contact a live disclosure inbox to prove the finding.
+Unread register is leftover. Tech-debt rename is leftover. This page does not mark you as finished. Do not contact a live disclosure inbox to prove the finding.
 
 ## Problems to find (name them yourself)
 

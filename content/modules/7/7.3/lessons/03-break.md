@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `accept`. It does not open a network. The failure is already in the function: it returns true for every triple. An unsigned body counting as authentic is a **failed rule**, not a live POST to a live provider.
+The practice is not a website you attack. `accept` is a tiny Python helper. It does not open a network. The failure is already in the function: it returns true for every triple. An unsigned body counting as authentic is a **failed rule**, not a live POST to a live provider.
 
 > An unsigned webhook body is not authentic. `accept("", "body", "lab-secret")` must be false. This practice checks the predicate only. It does not POST a live webhook.
 
@@ -32,7 +32,7 @@ Use a standard-library MAC. Module 5.4 already said TLS proves a hop; this rule 
 
 ## What to look at: the cause, not a live POST
 
-Open `vulnerable/hook.py`. It returns true for every triple. Tests:
+`vulnerable/hook.py` returns true for every triple. Tests:
 
 - `test_missing_signature_is_rejected`
 - `test_wrong_signature_is_rejected`

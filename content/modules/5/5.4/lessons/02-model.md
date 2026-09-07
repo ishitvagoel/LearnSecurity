@@ -7,7 +7,7 @@
 
 “We enabled HTTPS” is not this lesson. A map someone else can test names **each hop and who is allowed to assert the scheme**.
 
-This week: local `channel_is_https(headers, server_scheme)`. No live load balancer.
+`channel_is_https(headers, server_scheme)` is local. No live load balancer.
 
 > `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false. If a hop is missing from the map, a client header can still count as TLS.
 
@@ -57,7 +57,7 @@ A missing “header https × socket http × deny” row is how the client header
 
 ## Practice
 
-Open `channel.py` in `labs/5.4/5.4-lab`. Your artifact is a versioned list (even a table in your notes) with hop, who may assert proto, allow or deny, and what would show the deny is false. Fake data only.
+Label `channel.py` in `labs/5.4/5.4-lab`. Your artifact is a versioned list (even a table in your notes) with hop, who may assert proto, allow or deny, and what would show the deny is false. Fake data only.
 
 ## Use it somewhere new
 

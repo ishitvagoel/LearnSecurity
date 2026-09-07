@@ -5,9 +5,9 @@
 
 ## Use it somewhere new
 
-You get a **serverless function with a shared `admin` connection string**, or a **clinic billing replica** that should see invoice rows, not chart text. On the notes app, `can_select("app", "tB", "tA") is False`.
+You get a **serverless function with a shared `admin` connection string**, or a **clinic billing replica** that should see invoice rows, not chart text. `can_select("app", "tB", "tA") is False`.
 
-**Prompt:** Serverless function with a shared `admin` connection string.
+Serverless function with a shared `admin` connection string.
 
 **Product sketch:** Clinic billing replica that should see invoice rows, not chart text.
 

@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `merge_ok(pr)` that returns true or false. The failure is already in the function: every dict is allowed to merge. That is a **failed rule**, not a missing GitHub setting.
+The practice is not a website you attack. `merge_ok(pr)` is a tiny Python helper that returns true or false. The failure is already in the function: every dict is allowed to merge. That is a **failed rule**, not a missing GitHub setting.
 
 > An empty change must not merge. If `merge_ok({})` is true, the process evidence you show before merge has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/10.1/10.1-lab`. The practice is an in-process `merge_ok(pr)`. The change is a synthetic dict. No live GitHub orgs, no employer repos, no clinic systems. Do not send the dict anywhere.
+Stay inside `labs/10.1/10.1-lab` — in-process `merge_ok(pr)`. The change is a synthetic dict. No live GitHub orgs, no employer repos, no clinic systems. Do not send the dict anywhere.
 
 Do not turn off branch protection on a real org “to see what happens.” Do not paste this exercise onto a public GitHub org, employer repo, or live clinic.
 
@@ -32,7 +32,7 @@ The threat-modeling lessons (3.2) already said how to write the model. This chec
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/sdl.py`. It returns true for every dict. Tests:
+`vulnerable/sdl.py` returns true for every dict. Tests:
 
 - `test_merge_requires_threat_model_id`
 - `test_pr_with_threat_model_may_merge` — `{"threat_model": "TM-12"}` may pass on both

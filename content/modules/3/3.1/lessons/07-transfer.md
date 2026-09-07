@@ -7,7 +7,7 @@
 
 You get a **clinic booking card**. Chart text and appointment time sit on the same card.
 
-On the notes app, `log_event("note_read", "tenant-A-secret-body")` must not contain the body. For a booking card, field × place, allow or deny.
+`log_event("note_read", "tenant-A-secret-body")` must not contain the body. For a booking card, field × place, allow or deny.
 
 ## Picture: time is not the chart
 

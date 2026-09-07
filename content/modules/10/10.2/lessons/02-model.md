@@ -7,7 +7,7 @@
 
 “We generate CycloneDX” is not this lesson. A drawing someone else can test names **the expected digest, the got digest, who can edit the lockfile, and that a fork pull request stays untrusted**.
 
-This week on the notes app: local `install_ok(expected, got)`. No live registries.
+`install_ok(expected, got)` is local. No live registries.
 
 > For a mismatch, `aaa` vs `bbb` is deny. A matching pair may install. Evidence that the deny is false: `install_ok("aaa", "bbb")` returns true.
 
@@ -60,7 +60,7 @@ A missing hash-compare cell is how a package name becomes false assurance. Write
 
 ## Practice
 
-Open `lock.py` in `labs/10.2/10.2-lab`.
+Label `lock.py` in `labs/10.2/10.2-lab`.
 
 ## Use it somewhere new
 

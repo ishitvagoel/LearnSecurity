@@ -29,7 +29,7 @@ Sensitive data must not be sent to an untrusted second party. This week's check 
 
 ## What the repaired files must show
 
-Open `fixed/lifecycle.py`. Do not treat the snippet as a production warehouse.
+Do not treat `fixed/lifecycle.py` as a production warehouse.
 
 | After the fix | Must be true |
 |---|---|

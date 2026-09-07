@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `log_event` that returns a string. The failure is already in the function: it pastes the note body into the line. That line is a **failed rule**, not a debug nit.
+The practice is not a website you attack. `log_event` is a tiny Python helper that returns a string. The failure is already in the function: it pastes the note body into the line. That line is a **failed rule**, not a debug nit.
 
 > A confidential note body must not appear in this log line. If `log_event("note_read", "tenant-A-secret-body")` includes `tenant-A-secret-body`, logging has failed as a security control.
 
@@ -32,7 +32,7 @@ You do not need a production drain. The substring in the returned line *is* the 
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/classify.py`. `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
+In `vulnerable/classify.py`, `log_event` returns `f"{event}: {note_body}"`. The test asserts the body substring is absent **and** a redaction marker (`redacted` or `confidential`) is present.
 
 You do not need a new body string.
 

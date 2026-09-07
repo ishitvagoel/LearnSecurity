@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `fetch_sql` and `is_bound`. It does not open PostgreSQL. The failure is already in the function: it glues company and note id into the SQL text. That is a **failed rule**, not a dump of another company.
+The practice is not a website you attack. `fetch_sql` is a tiny Python helper and `is_bound`. It does not open PostgreSQL. The failure is already in the function: it glues company and note id into the SQL text. That is a **failed rule**, not a dump of another company.
 
 > Tenant and note id are bound parameters, not SQL grammar. `fetch_sql` must return a bound pair, not a concatenated string.
 
@@ -34,7 +34,7 @@ Use parameterized queries. A scanner name for this family is a weakness label, n
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/query.py`. It interpolates `tenant` and `note_id` into the SQL text. Tests:
+`vulnerable/query.py` interpolates `tenant` and `note_id` into the SQL text. Tests:
 
 - `test_query_is_bound_not_concatenated`
 - `test_honest_note_id_is_still_bound`

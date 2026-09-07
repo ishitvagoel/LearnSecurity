@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `covered(req_id, tests)` that returns true or false. The failure is already in the function: any matching requirement id counts as coverage. That is a **failed rule**, not a missing spreadsheet cell.
+The practice is not a website you attack. `covered(req_id, tests)` is a tiny Python helper that returns true or false. The failure is already in the function: any matching requirement id counts as coverage. That is a **failed rule**, not a missing spreadsheet cell.
 
 > A status-only AUTHZ-1 row must not count as coverage. If `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` is true, the proof you show before a release has failed as a security control.
 
 ## Where you may practice
 
-Stay inside `labs/9.1/9.1-lab`. The practice is an in-process `covered(req_id, tests)`. The requirement id is the synthetic string `AUTHZ-1`. No live checklist portals, no governance products, no clinic systems. Do not send the spreadsheet anywhere.
+Stay inside `labs/9.1/9.1-lab` — in-process `covered(req_id, tests)`. The requirement id is the synthetic string `AUTHZ-1`. No live checklist portals, no governance products, no clinic systems. Do not send the spreadsheet anywhere.
 
 Do not paste a real requirements matrix into a public tracker “to see what happens.” Do not paste this exercise onto a public checklist portal, employer dashboard, or live clinic.
 
@@ -32,7 +32,7 @@ The isolation lessons (1.2 / 4.4) already refused company B reading company A. T
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/trace.py`. It returns true if any test dict has `req == req_id`. Tests:
+`vulnerable/trace.py` returns true if any test dict has `req == req_id`. Tests:
 
 - `test_status_only_row_is_not_coverage`
 - `test_isolation_assert_may_count_as_coverage` — an honest isolation flag may pass on both

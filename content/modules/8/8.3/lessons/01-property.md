@@ -52,7 +52,7 @@ On older API levels `exported` defaults were surprising. Treat export as explici
 
 `exported=true` defaults on old Android. Custom schemes are first-come, first-served. WebView `addJavascriptInterface` is a new IPC. None of those defaults is this week’s session.
 
-What this practice is supposed to show: `open_link`, `as=admin` does not become the user. Practice files are in `labs/8.3/8.3-lab`. It is local only. It is not a live app.
+What this practice is supposed to show: `open_link`, `as=admin` does not become the user — files in `labs/8.3/8.3-lab`. It is local only. It is not a live app.
 
 ## What the tool cannot do
 

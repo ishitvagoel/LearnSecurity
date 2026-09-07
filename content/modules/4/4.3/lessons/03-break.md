@@ -36,7 +36,7 @@ Secrets belong in the body or headers, not in the URL. HTTPS is a hop tool, not 
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/token.py`. It returns `query.get("access_token")` first. Checks:
+`vulnerable/token.py` returns `query.get("access_token")` first. Checks:
 
 - `test_query_string_token_is_rejected` — query-only yields `None`
 - `test_cookie_session_still_works` — `sc_session` still works on the repaired files

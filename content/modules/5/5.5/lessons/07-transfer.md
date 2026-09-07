@@ -7,7 +7,7 @@
 
 You get a **clinic search box** that builds a patient lookup.
 
-On the notes app, `fetch_sql` returns a bound pair, not a concatenated string. Bind tenant and note id as parameters. For a clinic, the lookup helper returns bound values, not glued query text.
+`fetch_sql` returns a bound pair, not a concatenated string. Bind tenant and note id as parameters. For a clinic, the lookup helper returns bound values, not glued query text.
 
 Also name NoSQL operators and GraphQL arguments as the same shape (7.1), without running those systems.
 

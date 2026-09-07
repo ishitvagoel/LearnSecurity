@@ -7,7 +7,7 @@
 
 You get a **clinic page test**. `test_get_patient_200` asserts the owner’s GET returns 200.
 
-On the notes app, `is_security_test({"status_asserted": True})` must be false. For a clinic, 200-only is not a security test; a named what must not happen may count. A testing-guide checkbox is still a list, not a test shape.
+`is_security_test({"status_asserted": True})` must be false. For a clinic, 200-only is not a security test; a named what must not happen may count. A testing-guide checkbox is still a list, not a test shape.
 
 **Product sketch:** an EHR-lite “we have 94% coverage and GET /patient/1 returns 200,” plus a testing-guide checklist ticked.
 

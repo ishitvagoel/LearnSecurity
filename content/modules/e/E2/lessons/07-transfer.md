@@ -7,7 +7,7 @@
 
 You get a **clinic** that ships Report-Only and calls it a “HIPAA header.” Also name Trusted Types and COOP/COEP.
 
-On the notes app, Report-Only must not make `isolation_enforced` true.
+Report-Only must not make `isolation_enforced` true.
 
 **Product sketch:** an EHR-lite “we ship Content-Security-Policy-Report-Only so scripts are blocked,” plus “the reporting dashboard is green.”
 

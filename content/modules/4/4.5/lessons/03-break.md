@@ -34,7 +34,7 @@ A library saying the signature is fine is a tool observation, not that sentence.
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/jwt_aud.py`. `accept_token` returns true when `sub` is in the dict. Checks:
+In `vulnerable/jwt_aud.py`, `accept_token` returns true when `sub` is in the dict. Checks:
 
 - `test_wrong_audience_is_rejected`
 - `test_missing_audience_is_rejected`

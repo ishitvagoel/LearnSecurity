@@ -37,7 +37,7 @@ An earlier topic already said path length is checking every path for *which file
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/copy.py`. It returns more than `bufsize` bytes. Checks:
+`vulnerable/copy.py` returns more than `bufsize` bytes. Checks:
 
 - `test_copy_does_not_exceed_buffer`
 - `test_short_copy_may_fit` — short honest copy may pass on both

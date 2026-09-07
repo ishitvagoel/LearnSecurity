@@ -5,13 +5,13 @@
 
 ## Try it
 
-The practice is not a website you attack. It is a tiny Python `allow`. It does not open a live export API. The failure is already in the function: it says yes for every `n`. That is a **failed rule**, not an attack on a public host.
+The practice is not a website you attack. `allow` is a tiny Python helper. It does not open a live export API. The failure is already in the function: it says yes for every `n`. That is a **failed rule**, not an attack on a public host.
 
 > Export has a resource account, not an unbounded loop. `allow(4)` must be false in the lab window. `allow(3)` may be true.
 
 ## Where you may practice
 
-Stay inside `labs/6.7/6.7-lab`. The practice is an in-process `allow`. Fake call counts. It does not talk to the network.
+Stay inside `labs/6.7/6.7-lab` — in-process `allow`. Fake call counts. It does not talk to the network.
 
 Do not load-test a public host. Do not probe an employer export API. Do not probe a classmate preview. Do not paste a live export “to see what happens.”
 
@@ -32,7 +32,7 @@ There has to be a stop against scripts that burn quota. Module 3.4 already cappe
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/limit.py`. It returns true for every `n`. Tests:
+`vulnerable/limit.py` returns true for every `n`. Tests:
 
 - `test_fourth_export_is_denied`
 - `test_third_export_is_allowed`

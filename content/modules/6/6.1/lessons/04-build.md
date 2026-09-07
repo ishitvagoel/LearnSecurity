@@ -23,11 +23,11 @@ flowchart TD
 
 The lab’s repaired files return `["ls", "--", name]`. Production still has to call `subprocess.run` with that list and `shell=False`. A denylist of punctuation fails the 2.1 encoding lesson. Path traversal of the name is 6.4, a different check. Formula characters in the file *contents* are advanced leftover, not argv.
 
-Pass arguments as parameters. This week's check looks at `argv_for_list`.
+Pass arguments as parameters — `argv_for_list`.
 
 ## What the repaired files must show
 
-Open `fixed/argv.py`. Do not treat the snippet as a production process launcher.
+Do not treat `fixed/argv.py` as a production process launcher.
 
 | After the fix | Must be true |
 |---|---|

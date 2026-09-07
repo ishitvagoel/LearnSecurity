@@ -7,9 +7,9 @@
 
 You get a **clinic sketch** with a patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`. Also name bulk update and search highlighting that leaks snippets.
 
-On the notes app, `resolve("member", "secret_internal")` must be false.
+`resolve("member", "secret_internal")` must be false.
 
-**Prompt:** Clinic member cannot resolve SSN. Also name bulk update and search highlighting leaking snippets.
+Clinic member cannot resolve SSN. Also name bulk update and search highlighting leaking snippets.
 
 **Product sketch:** EHR-lite patient page that omits the SSN column in the table, plus GraphQL `Patient { ssn }`.
 

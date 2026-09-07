@@ -60,7 +60,7 @@ Someone deleted the notes row and left the other copies. That is the cause. The 
 
 ## What the framework does vs what you still have to check
 
-A database DELETE is not warehouse DELETE. The web app does not erase object-store analytics. What this practice is supposed to show: after `delete_account("alice")`, `body_retained("alice")` is None and `search_retained("alice")` is None. Practice files are in `labs/5.1/5.1-lab`. Fake data only. No live warehouse.
+A database DELETE is not warehouse DELETE. The web app does not erase object-store analytics. What this practice is supposed to show: after `delete_account("alice")`, `body_retained("alice")` is None and `search_retained("alice")` is None — files in `labs/5.1/5.1-lab`. Fake data only. No live warehouse.
 
 ## What the tool cannot do
 

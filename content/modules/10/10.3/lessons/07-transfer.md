@@ -7,7 +7,7 @@
 
 You get a **clinic app ServiceAccount that is cluster-admin**.
 
-On the notes app, `pod_ok("cluster-admin")` must be false. For a clinic, cluster-admin denied, app may run. A private namespace is still a name, not isolation.
+`pod_ok("cluster-admin")` must be false. For a clinic, cluster-admin denied, app may run. A private namespace is still a name, not isolation.
 
 **Product sketch:** an EHR-lite "the API namespace is private so ClusterRole is fine," plus "we attached a network policy and a CIS Kubernetes scan."
 

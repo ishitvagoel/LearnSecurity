@@ -34,7 +34,7 @@ A private-network diagram is a topology observation, not that second check.
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/roles.py`. `can_select` returns `True` for every role and company. `runtime_connection_role` is `postgres`. Checks:
+In `vulnerable/roles.py`, `can_select` returns `True` for every role and company. `runtime_connection_role` is `postgres`. Checks:
 
 - `test_app_role_cannot_read_other_tenant` — `can_select("app", "tB", "tA") is False`
 - `test_migrator_cannot_select_notes_at_runtime`

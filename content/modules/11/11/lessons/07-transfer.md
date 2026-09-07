@@ -7,7 +7,7 @@
 
 You get a **clinic that revokes a guardian**.
 
-On the notes app, after `revoke("n1", "B")`, `read("n1", "B")` must be None. For a clinic, B after revoke still has to be denied. A still reads. B before revoke still reads. HTTP 200 on DELETE is still an event, not the next-read check.
+After `revoke("n1", "B")`, `read("n1", "B")` must be None. For a clinic, B after revoke still has to be denied. A still reads. B before revoke still reads. HTTP 200 on DELETE is still an event, not the next-read check.
 
 **Product sketch:** an EHR-lite “we hit DELETE /guardians/12 so the next chart read is fine,” plus “the capstone scanner is green so the assurance stamp is done.”
 

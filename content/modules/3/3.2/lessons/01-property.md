@@ -62,7 +62,7 @@ NIST’s data-centric modeling note is still a **draft**. It says: pick the data
 
 A “no High findings” ticket is not a threat model. Framework defaults such as HttpOnly cookies and parameterized queries are real later rows. They do not enumerate cross-tenant read.
 
-What this practice is supposed to show: the list still returns `cross-tenant-read` when the scanner is green. Practice files are in `labs/3.2/3.2-lab`. No live targets. No production scanner tenant.
+What this practice is supposed to show: the list still returns `cross-tenant-read` when the scanner is green — files in `labs/3.2/3.2-lab`. No live targets. No production scanner tenant.
 
 ## What the tool cannot do
 

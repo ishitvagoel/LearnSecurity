@@ -7,7 +7,7 @@
 
 “We use EncryptedSharedPreferences” is not this lesson. A map someone else can test names **each store and whether it can hold a body**.
 
-This week on the notes app: local `save_note` / `plaintext_on_disk`. No live phones.
+`save_note` / `plaintext_on_disk` is local. No live phones.
 
 ## Picture: many sinks, one body
 
@@ -55,7 +55,7 @@ flowchart LR
 
 ## Practice
 
-Open `disk.py` in `labs/8.2/8.2-lab`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
+Label `disk.py` in `labs/8.2/8.2-lab`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
 
 ## Use it somewhere new
 

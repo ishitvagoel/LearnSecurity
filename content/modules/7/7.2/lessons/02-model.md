@@ -7,7 +7,7 @@
 
 “Object authz is on” is not this page. A table someone else can test names **role, field, and every serializer**.
 
-This week on the notes app: local `resolve(role, field)`. No live GraphQL.
+`resolve(role, field)` is local. No live GraphQL.
 
 ## Picture: three grains
 
@@ -54,7 +54,7 @@ Identifiers find a row. They do not authorize fields. Obscure identifiers are no
 
 ## Practice
 
-Open `field.py` in `labs/7.2/7.2-lab`.
+Label `field.py` in `labs/7.2/7.2-lab`.
 
 ## Use it somewhere new
 

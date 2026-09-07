@@ -52,7 +52,7 @@ Play App Signing protects *store* signing. It does not stop a debug application 
 
 Gradle `debug` / `release` types are not a server check. R8 does not authorize. Play Console “app signing” is not “secrets stay out of the binary.” FastAPI will accept `attest=ok` from a debug client if you bind it.
 
-What this practice is supposed to show: debug plus ok is false. Practice files are in `labs/8.4/8.4-lab`. It is local only. It is not a live store.
+What this practice is supposed to show: debug plus ok is false — files in `labs/8.4/8.4-lab`. It is local only. It is not a live store.
 
 ## What the tool cannot do
 

@@ -23,7 +23,7 @@ flowchart TD
 
 A digest mismatch still has to be denied. If the change never checks digest equality, that always-install leftover is still open. An SBOM screenshot without that check is still the same problem.
 
-Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. Do not skip `test_hash_mismatch_refuses_install`. Do not claim the ship gate. Do not fetch a live package to prove the finding.
+Unpinned Actions are a sibling grain. Secrets in fork pull requests are 5.3. Do not claim the ship gate. Do not fetch a live package to prove the finding.
 
 ## Problems to find (name them yourself)
 

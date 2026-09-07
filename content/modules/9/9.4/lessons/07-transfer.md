@@ -7,7 +7,7 @@
 
 You get a **clinic dashboard**. Fifty HIGH findings sit unmapped.
 
-On the notes app, `ship_ok([HIGH], {})` must be false. For a clinic, finding × map, allow or deny. A noisy dashboard is still noise, not a map.
+`ship_ok([HIGH], {})` must be false. For a clinic, finding × map, allow or deny. A noisy dashboard is still noise, not a map.
 
 **Product sketch:** an EHR-lite “code scanning is on and the dashboard is noisy so we ship Fridays,” plus a maturity score on a slide.
 

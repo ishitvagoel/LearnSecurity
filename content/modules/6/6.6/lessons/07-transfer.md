@@ -7,7 +7,7 @@
 
 You get a **clinic invite-guardian token**. An “add guardian” mail link always returns 200.
 
-On the notes app, second `accept('t1')` must be false. For a clinic, consume-once, first true, second false.
+Second `accept('t1')` must be false. For a clinic, consume-once, first true, second false.
 
 Also name password reset, 2.4 share retry, and later jobs (7.4) as the same family with different “once” meanings.
 

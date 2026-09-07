@@ -11,7 +11,7 @@ The practice is not a website you attack. It is a tiny Python model of drawing a
 
 ## Where you may practice
 
-Stay inside `labs/6.2/6.2-lab`. The practice is an in-process `render`. Fake titles only. It does not open a browser. Do not load a live page, an employer board, or a classmate preview as this exercise.
+Stay inside `labs/6.2/6.2-lab` — in-process `render`. Fake titles only. It does not open a browser. Do not load a live page, an employer board, or a classmate preview as this exercise.
 
 Do not paste this exercise onto a public site, employer board, or live clinic portal.
 

@@ -55,7 +55,7 @@ flowchart LR
 
 ## Practice
 
-Open `scope.py` in `labs/0.1/0.1-orientation`.
+Label `scope.py` in `labs/0.1/0.1-orientation`.
 
 ## Use it somewhere new
 

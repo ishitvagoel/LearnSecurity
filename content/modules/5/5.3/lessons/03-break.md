@@ -33,7 +33,7 @@ A secrets-manager sticker is a tool observation, not that sentence.
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/secrets.py`. `auth` keeps `DEFAULT = "sk-lab-hardcoded"` as an or-clause and allows when `current` is missing. Checks:
+In `vulnerable/secrets.py`, `auth` keeps `DEFAULT = "sk-lab-hardcoded"` as an or-clause and allows when `current` is missing. Checks:
 
 - `test_hardcoded_default_does_not_auth`
 - `test_missing_current_denies`

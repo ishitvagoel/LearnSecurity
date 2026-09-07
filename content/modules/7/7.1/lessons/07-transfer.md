@@ -7,7 +7,7 @@
 
 You get a clinic PATCH patient `{is_staff:true}`. Also name GraphQL mutation arguments and gRPC unknown fields.
 
-On the notes app, after `apply(user, {"is_admin": true})`, `is_admin` must still be false.
+After `apply(user, {"is_admin": true})`, `is_admin` must still be false.
 
 **Product sketch:** an EHR-lite “Edit profile” form with no staff checkbox in the SPA, plus a generated OpenAPI file.
 

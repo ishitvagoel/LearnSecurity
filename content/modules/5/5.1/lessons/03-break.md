@@ -5,7 +5,7 @@
 
 ## Try it
 
-The practice is not a warehouse you attack. It is a tiny Python `delete_account` plus `body_retained` / `search_retained`. The failure is already in the functions: delete pops the notes map and leaves analytics. That leftover is a **failed rule**, not a cleanup nit.
+The practice is not a warehouse you attack. `delete_account` is a tiny Python helper plus `body_retained` / `search_retained`. The failure is already in the functions: delete pops the notes map and leaves analytics. That leftover is a **failed rule**, not a cleanup nit.
 
 > After `delete_account("alice")`, `body_retained("alice")` must be None. If it still returns `"secret"`, analytics still holds the note.
 
@@ -34,7 +34,7 @@ Documented retention has to be actually carried out. Encrypting a warehouse you 
 
 ## What to look at: the cause, not a hunt
 
-Open `vulnerable/lifecycle.py`. `delete_account` only pops `NOTES`. Tests:
+In `vulnerable/lifecycle.py`, `delete_account` only pops `NOTES`. Tests:
 
 - `test_deleted_account_leaves_no_analytics_body`
 - `test_deleted_account_leaves_no_search_copy`

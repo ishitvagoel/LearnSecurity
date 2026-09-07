@@ -22,7 +22,7 @@ flowchart TD
 
 The lab’s repaired files compare `aud` (string or list membership) to `expected_aud`. PKCE, `state`, `nonce`, JWKS, `iss`, and DPoP are named leftovers — they are not proven by this practice. Browser-app and native-app RFCs name client-shape holes; this check is the resource-server `aud` check only.
 
-Tokens have to be intended for that service. This week's check looks at `securecollab-api`.
+Tokens have to be intended for that service — `securecollab-api`.
 
 ## What the repaired files must show
 

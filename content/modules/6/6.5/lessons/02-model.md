@@ -7,7 +7,7 @@
 
 “We only allow HTTPS” is not this lesson. A map someone else can test names **scheme**, **host**, and **destinations that must deny**.
 
-This week on the notes app: local `allowed(url)`. No live fetches.
+`allowed(url)` is local. No live fetches.
 
 > Parse the URL. Require https. Require the hostname in a small allow-list. Link-local metadata and loopback must deny.
 
@@ -59,7 +59,7 @@ A missing “link-local metadata × fetch × deny” row is how a scheme-only ch
 
 ## Practice
 
-Open `ssrf.py` in `labs/6.5/6.5-lab`. Fake URLs only. Do not fetch.
+Label `ssrf.py` in `labs/6.5/6.5-lab`. Fake URLs only. Do not fetch.
 
 ## Use it somewhere new
 

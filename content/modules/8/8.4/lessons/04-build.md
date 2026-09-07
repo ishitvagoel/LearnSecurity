@@ -24,7 +24,7 @@ flowchart TD
 
 The repaired files require both gates. Production still needs separate client ids and no prod URLs in debug manifests. Play App Signing protects *store* signing; it does not stop a debug application id from using a leaked prod API key. Embedded API identifiers will be recovered — assume that. Root detection is bypassable (8.1).
 
-Use a trusted service layer, and keep secrets out of artifacts. This week's check looks at `api_allowed("debug", "ok")`.
+Use a trusted service layer, and keep secrets out of artifacts — `api_allowed("debug", "ok")`.
 
 ## What the repaired files must show
 
