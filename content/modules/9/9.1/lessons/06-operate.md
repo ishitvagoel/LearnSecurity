@@ -48,7 +48,7 @@ HTTP-200 tests, unnamed extra rows, and expired exceptions still look Done witho
 
 ## Can people still use it
 
-A human exception path must say what is still uncovered and when it expires. Do not hide the gap behind “see PDF.” If operators see an unmapped-requirement badge, do not encode it as color only.
+A human exception path must say what is still uncovered and when it expires. An unmapped-requirement badge still has to be words, not a PDF shrug. If operators see an unmapped-requirement badge, do not encode it as color only.
 
 ## Practice
 

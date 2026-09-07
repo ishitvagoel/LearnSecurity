@@ -48,7 +48,7 @@ Marking HIPAA isolation done without an isolation assert is not the proof. What 
 
 ## Can people still use it
 
-A human exception path must say what is still uncovered and when it expires. Do not hide the gap behind “see PDF.”
+A human exception path must say what is still uncovered and when it expires. Reviewer notes that say “see PDF” have not named the gap.
 
 ## What this page is not doing
 

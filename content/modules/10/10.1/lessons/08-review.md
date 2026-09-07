@@ -51,7 +51,7 @@ Annual HIPAA training without a merge check does not prove the culture. What sti
 
 ## Can people still use it
 
-A human exception path must say which surface still needs a threat-model id and when the exception expires. Do not hide the gap behind “see CODEOWNERS.”
+A human exception path must say which surface still needs a threat-model id and when the exception expires. A CODEOWNERS ping is not the exception text.
 
 ## What this page is not doing
 

@@ -56,7 +56,7 @@ If you are unsure whether a test asserts isolation, it does not count. Attaching
 
 ## Can people still use it
 
-A human exception path must say what is still uncovered and when it expires. Do not hide the gap behind “see PDF.”
+A human exception path must say what is still uncovered and when it expires. A scan attachment is not the uncovered-row text.
 
 ## Practice
 

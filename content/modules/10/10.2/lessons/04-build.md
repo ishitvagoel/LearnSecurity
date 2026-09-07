@@ -33,7 +33,7 @@ Do not treat `fixed/lock.py` as a production installer.
 | aaa vs bbb | install false |
 | aaa vs aaa | install true |
 
-In doubt, if the hashes do not match, do not install. An SBOM listing the name does not mean it may install.
+If the hashes do not match, do not install. An SBOM listing the name does not mean it may install.
 
 ## What this is not
 

@@ -7,7 +7,7 @@
 
 `share_note` with the same idempotency key must not increase `share_count`. In short, the store actually remembers the first outcome — not a log comment, not disable-on-submit, not “FastAPI will remember,” not a unique constraint on `note_id` that also blocks a legitimate new key.
 
-For share: if `k1` is already recorded, return the first share and do not append. Missing key still shares once in this lab (simplicity); production should **require** keys for high-impact shares (leftover). In doubt, if the key store cannot be reached, **do not** insert a share “just this once.”
+For share: if `k1` is already recorded, return the first share and do not append. Missing key still shares once in this lab (simplicity); production should **require** keys for high-impact shares (leftover). If the key store cannot be reached, **do not** insert a share “just this once.”
 
 ## Picture: a seen key returns
 

@@ -61,7 +61,7 @@ A status-only row is not covered — files in `labs/9.1/9.1-lab`. Fake requireme
 
 ## Can people still use it
 
-A human exception path must say what is still uncovered and when the exception expires. Do not hide the gap behind “see PDF.” Do not encode “uncovered” as color only.
+A human exception path must say what is still uncovered and when the exception expires. Pointing at a PDF is not that sentence. Do not encode “uncovered” as color only.
 
 ## Practice
 

@@ -33,7 +33,7 @@ Do not treat `fixed/stest.py` as a production scanner.
 | `{status_asserted: True}` | not a security test |
 | `{forbidden_outcome: True, status_asserted: True}` | may be a security test |
 
-In doubt, if you are unsure whether a row names what must not happen, it is **not** a security test. High coverage does not put it in the security slot.
+If you are unsure whether a row names what must not happen, it is **not** a security test. High coverage does not put it in the security slot.
 
 ## What this is not
 

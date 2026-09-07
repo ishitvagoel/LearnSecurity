@@ -36,7 +36,7 @@ Do not treat `fixed/lifecycle.py` as a production warehouse.
 | After delete | `body_retained` and `search_retained` are None |
 | Before delete | analytics body still present (honest product) |
 
-In doubt, if you cannot reach a listed copy, the answer is “delete is not complete.” A dashboard that still showed “account deleted” does not finish delete.
+If you cannot reach a listed copy, the answer is “delete is not complete.” A dashboard that still showed “account deleted” does not finish delete.
 
 ## What this is not
 

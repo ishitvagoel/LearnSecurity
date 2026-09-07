@@ -60,7 +60,7 @@ An empty change is deny — files in `labs/10.1/10.1-lab`. Fake pull-request dic
 
 ## Can people still use it
 
-The merge screen has to say which surface still needs a threat-model id, in words, not only a red X. Do not hide the gap behind a poster.
+The merge screen has to say which surface still needs a threat-model id, in words, not only a red X. A poster is not the missing-id sentence.
 
 ## Practice
 

@@ -55,7 +55,7 @@ When you are unsure whether a threat-model id is present, the change does not me
 
 ## Can people still use it
 
-The merge screen has to say *missing threat-model id*, in words, not only a red X. Do not hide the gap behind “see CODEOWNERS.”
+The merge screen has to say *missing threat-model id*, in words, not only a red X. CODEOWNERS being on is not the missing-id sentence.
 
 ## Practice
 

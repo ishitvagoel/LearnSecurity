@@ -32,7 +32,7 @@ That secure store has to be implemented — `'secret'` on disk.
 | save `'secret'` | `plaintext_on_disk` false |
 | save `'other'` | `plaintext_on_disk` false |
 
-In doubt, if wrap fails, **do not store the body**. Do not keep a text-file cache because “the folder is private.”
+If wrap fails, **do not store the body**. Do not keep a text-file cache because “the folder is private.”
 
 ## What this is not
 
