@@ -41,7 +41,7 @@ Also reject: fetching example.com; keys in lessons; claiming the first check-in;
 
 ## Use it somewhere new
 
-Adding the guide and a proxy without a host allow-list skips the check. What would still keep `example.com` out of scope after someone adds a proxy?
+Adding the guide and a proxy without a host allow-list skips the check. A proxy is not a host allow-list — write the `example.com` deny.
 
 ## What this page is not doing
 

@@ -43,7 +43,7 @@ Also reject: treating the client as what you trust; an awareness-list name as th
 
 ## Use it somewhere new
 
-Payment capture, invite token, or clinic last slot. Handling the awareness list without a replay test still doubles the side effect. What still has to be remembered so a second grant cannot land?
+Payment capture, invite token, or clinic last slot. Handling the awareness list without a replay test still doubles the side effect. Handling the awareness list is not a replay test — write the first-outcome remember.
 
 ## Can people still use it
 

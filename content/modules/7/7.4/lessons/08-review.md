@@ -44,7 +44,7 @@ Also reject: live broker attacks; closing findings without re-running `test_user
 
 ## Use it somewhere new
 
-VLAN plus zero-trust labels, without a leftover-session deny, still inherit the request context. What still has to drop Alice’s session so a worker path cannot inherit it?
+VLAN plus zero-trust labels, without a leftover-session deny, still inherit the request context. A VLAN label is not a leftover-session deny — write the session drop on the worker.
 
 ## What this page is not doing
 

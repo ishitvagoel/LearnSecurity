@@ -45,7 +45,7 @@ Also reject: live registry attacks; installing without re-running `test_hash_mis
 
 ## Use it somewhere new
 
-CycloneDX and Dependabot without a digest check do not finish the install gate. What still has to compare so a hash mismatch cannot install?
+CycloneDX and Dependabot without a digest check do not finish the install gate. An SBOM is not a digest check — write the hash-mismatch refuse.
 
 ## Can people still use it
 

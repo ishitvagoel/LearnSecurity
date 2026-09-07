@@ -44,7 +44,7 @@ Also reject: live disclosure; shipping without re-running `test_exception_needs_
 
 ## Use it somewhere new
 
-A HIPAA slide and a maturity score, without owner / review / accessibility, do not fill the register. What would still keep an empty-owner exception from being accepted?
+A HIPAA slide and a maturity score, without owner / review / accessibility, do not fill the register. A HIPAA slide is not owner/review/accessibility — write the empty-owner reject.
 
 ## Can people still use it
 

@@ -44,7 +44,7 @@ Also reject: live third-party CSRF; closing findings without re-running `test_fo
 
 ## Use it somewhere new
 
-SameSite=Lax without an origin-and-token test still leaves leftover cookies. What would still stop a foreign origin from posting after SameSite=Lax?
+SameSite=Lax without an origin-and-token test still leaves leftover cookies. SameSite=Lax is not origin-and-token — write the foreign-origin deny.
 
 ## What this page is not doing
 

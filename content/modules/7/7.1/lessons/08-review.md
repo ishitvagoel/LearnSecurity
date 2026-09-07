@@ -44,7 +44,7 @@ Also reject: public API attacks; closing findings without re-running `test_is_ad
 
 ## Use it somewhere new
 
-Documenting the PATCH in OpenAPI without an `is_staff` deny still writes the extra key. What would still keep `is_staff` false after an OpenAPI PATCH doc?
+Documenting the PATCH in OpenAPI without an `is_staff` deny still writes the extra key. An OpenAPI PATCH doc is not an `is_staff` deny — write that deny.
 
 ## What this page is not doing
 

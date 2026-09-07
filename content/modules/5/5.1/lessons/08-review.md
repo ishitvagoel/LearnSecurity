@@ -42,7 +42,7 @@ Also reject: trusting the client; closing findings without re-running `test_dele
 
 ## Use it somewhere new
 
-Deleting the patient without walking appointment-card notes still leaves leftover copies. What would still keep `body_retained` None after the patient row is gone?
+Deleting the patient without walking appointment-card notes still leaves leftover copies. Deleting the patient row is not walking leftover notes — write the `body_retained` check.
 
 ## Can people still use it
 

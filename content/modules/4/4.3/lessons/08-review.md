@@ -42,7 +42,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Use it somewhere new
 
-A convenience token in the query string still puts the session in the URL. What would still keep a query-only token from becoming a session?
+A convenience token in the query string still puts the session in the URL. A query-string token is not a session — write the query-only deny.
 
 ## What this page is not doing
 

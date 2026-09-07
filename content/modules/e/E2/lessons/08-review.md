@@ -44,7 +44,7 @@ Also reject: a live script hunt; shipping without re-running `test_report_only_i
 
 ## Use it somewhere new
 
-Report-Only plus a dashboard, without an enforcing header, does not isolate. What would still keep Report-Only from counting as enforcement?
+Report-Only plus a dashboard, without an enforcing header, does not isolate. A green dashboard is not an enforcing header — write the Report-Only deny.
 
 ## What this page is not doing
 

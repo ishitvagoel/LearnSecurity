@@ -42,7 +42,7 @@ Also reject: live fetches; closing findings without re-running `test_link_local_
 
 ## Use it somewhere new
 
-HTTPS-only on the importer, without a host allow-list, is still a scheme-only URL check. What would still deny link-local after the importer is HTTPS-only?
+HTTPS-only on the importer, without a host allow-list, is still a scheme-only URL check. HTTPS-only is not a host allow-list — write the link-local deny.
 
 ## What this page is not doing
 

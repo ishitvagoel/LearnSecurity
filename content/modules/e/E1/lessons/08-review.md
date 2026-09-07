@@ -44,7 +44,7 @@ Also reject: live model attacks; shipping without re-running `test_exec_sql_tool
 
 ## Use it somewhere new
 
-A system prompt and a famous-bugs mapping, without an allow-list, do not gate the tool. What would still keep `exec_sql` from running after a “safe” system prompt?
+A system prompt and a famous-bugs mapping, without an allow-list, do not gate the tool. A safe prompt is not an allow-list — write the `exec_sql` deny.
 
 ## Can people still use it
 

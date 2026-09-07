@@ -44,7 +44,7 @@ Also reject: live product probes; shipping without re-running `test_body_cannot_
 
 ## Use it somewhere new
 
-Row-level rules and a famous-bugs map, without session binding, still let the body choose the company. What would still keep body B from becoming the company if row-level rules are on?
+Row-level rules and a famous-bugs map, without session binding, still let the body choose the company. Row-level rules are not session binding — write the body-B deny.
 
 ## What this page is not doing
 

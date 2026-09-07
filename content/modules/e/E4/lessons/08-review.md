@@ -46,7 +46,7 @@ Also reject: native exploit walkthroughs; shipping without re-running `test_copy
 
 ## Use it somewhere new
 
-A Kotlin rewrite and an awareness-list mapping, without a destination bound, do not finish the copy gate. What still has to bound the copy so length cannot exceed bufsize?
+A Kotlin rewrite and an awareness-list mapping, without a destination bound, do not finish the copy gate. A Kotlin rewrite is not a destination bound — write the bufsize bound.
 
 ## What this page is not doing
 

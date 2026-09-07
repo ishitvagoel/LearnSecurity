@@ -44,7 +44,7 @@ Also reject: live processors; shipping without re-running `test_duplicate_captur
 
 ## Use it somewhere new
 
-A payment company and a questionnaire PDF, without a duplicate-key deny, do not finish the ledger review. What still has to be seen so two `k1` captures cannot charge twice?
+A payment company and a questionnaire PDF, without a duplicate-key deny, do not finish the ledger review. A questionnaire PDF is not a duplicate-key deny — write the second-capture deny.
 
 ## What this page is not doing
 

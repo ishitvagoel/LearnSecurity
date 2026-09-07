@@ -44,7 +44,7 @@ Also reject: live tenants; closing findings without re-running `test_unmapped_hi
 
 ## Use it somewhere new
 
-Code scanning without a mapping check does not own the HIGH at ship. What would still block an unmapped HIGH after code scanning is on?
+Code scanning without a mapping check does not own the HIGH at ship. Code scanning is not a mapping check — write the unmapped-HIGH block.
 
 ## Can people still use it
 

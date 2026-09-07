@@ -44,7 +44,7 @@ Also reject: public load tests; closing findings without re-running `test_fourth
 
 ## Use it somewhere new
 
-An edge rate limit without a per-person fourth-export test still leaves allow unbounded. What still has to deny so `allow(4)` is false after an edge rate limit?
+An edge rate limit without a per-person fourth-export test still leaves allow unbounded. An edge rate limit is not a per-person cap — write the fourth-export deny.
 
 ## What this page is not doing
 

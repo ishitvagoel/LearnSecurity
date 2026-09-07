@@ -42,7 +42,7 @@ Also reject: live SQL attacks; closing findings without re-running `test_query_i
 
 ## Use it somewhere new
 
-Switching to SQLAlchemy without a bound-tuple test still concatenates SQL. What still has to be false so `fetch_sql` is not a concatenated `str`?
+Switching to SQLAlchemy without a bound-tuple test still concatenates SQL. SQLAlchemy is not a bound-tuple test — write the concatenated-`str` deny.
 
 ## What this page is not doing
 

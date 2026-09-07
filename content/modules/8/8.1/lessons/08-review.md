@@ -44,7 +44,7 @@ Also reject: live device farms; personal-phone cookbooks; closing findings witho
 
 ## Use it somewhere new
 
-Enabling Play Integrity without a failing-attest deny still lets the client claim export. What still has to deny so client `ok` plus attest fail cannot export?
+Enabling Play Integrity without a failing-attest deny still lets the client claim export. Play Integrity is not a failing-attest deny — write the export refuse.
 
 ## What this page is not doing
 

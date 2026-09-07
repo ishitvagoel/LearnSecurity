@@ -40,7 +40,7 @@ Also reject: trusting the client; concatenating readers; Report-Only as enforcem
 
 ## Use it somewhere new
 
-GraphQL and REST both ingest the same note — two grammars. Validating JSON on only one path still leaves a two-meaning ingest. What would still make duplicate keys one meaning on both grammars?
+GraphQL and REST both ingest the same note — two grammars. Validating JSON on only one path still leaves a two-meaning ingest. On both grammars, duplicate keys still need one meaning — write that check.
 
 ## What this page is not doing
 

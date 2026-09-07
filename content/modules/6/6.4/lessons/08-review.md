@@ -44,7 +44,7 @@ Also reject: host-file trophies; treating the client as what you trust; an aware
 
 ## Use it somewhere new
 
-Randomized filenames without a prefix test still let `..` walk out of the root. What still has to hold so `../outside` cannot leave the imaging root?
+Randomized filenames without a prefix test still let `..` walk out of the root. Randomized filenames are not a prefix test — write the path-prefix hold.
 
 ## What this page is not doing
 

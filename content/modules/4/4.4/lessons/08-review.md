@@ -44,7 +44,7 @@ Also reject: trusting the client; closing findings without re-running `test_gran
 
 ## Use it somewhere new
 
-Checking “is a clinician” without keying the chart still leaves leftover permission. What still has to key the object so Bob cannot read n2 with an n1 grant?
+Checking “is a clinician” without keying the chart still leaves leftover permission. “Is a clinician” is not an object grant — write the n1-is-not-n2 check.
 
 ## What this page is not doing
 

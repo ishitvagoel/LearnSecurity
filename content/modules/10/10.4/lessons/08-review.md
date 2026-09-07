@@ -44,7 +44,7 @@ Also reject: live production attacks; booting without re-running `test_prod_debu
 
 ## Use it somewhere new
 
-`NODE_ENV` plus a canary, without a prod-plus-debug deny, do not finish the boot gate. What still has to refuse boot so prod plus debug cannot start?
+`NODE_ENV` plus a canary, without a prod-plus-debug deny, do not finish the boot gate. `NODE_ENV` is not a prod-plus-debug deny — write the boot refuse.
 
 ## Can people still use it
 

@@ -44,7 +44,7 @@ Also reject: live device imaging; closing findings without re-running `test_cach
 
 ## Use it somewhere new
 
-An internal folder plus a fingerprint lock, without a plaintext-on-disk check, still leaves the chart on disk. What still has to wrap the file so `'secret'` is not plaintext on disk?
+An internal folder plus a fingerprint lock, without a plaintext-on-disk check, still leaves the chart on disk. A fingerprint lock is not a wrap — write the plaintext-on-disk check.
 
 ## What this page is not doing
 

@@ -44,7 +44,7 @@ Also reject: live incident attacks; closing without re-running both deny tests; 
 
 ## Use it somewhere new
 
-Paging and a known-exploited feed, without a recovery-done check, do not close the incident. What would still keep a recovery-todo incident from closing?
+Paging and a known-exploited feed, without a recovery-done check, do not close the incident. A paging ack is not recovery-done — write the close block.
 
 ## Can people still use it
 

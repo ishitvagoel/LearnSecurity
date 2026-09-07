@@ -44,7 +44,7 @@ Also reject: attack-recipe payloads in the change description; closing findings 
 
 ## Use it somewhere new
 
-A content-security policy without an encode check still leaves `<` as markup. What still has to encode `<` even if a content-security policy is set?
+A content-security policy without an encode check still leaves `<` as markup. A content-security policy is not an encode check — write the `<` encode.
 
 ## What this page is not doing
 

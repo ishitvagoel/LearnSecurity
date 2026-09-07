@@ -44,7 +44,7 @@ Also reject: live targets; closing findings without re-running `test_http_200_on
 
 ## Use it somewhere new
 
-Adding `test_get_patient_200` as the security test still treats HTTP 200 as security. What still has to be named so HTTP 200 alone is not a security test?
+Adding `test_get_patient_200` as the security test still treats HTTP 200 as security. `test_get_patient_200` is not a named bad result — write that name.
 
 ## Can people still use it
 

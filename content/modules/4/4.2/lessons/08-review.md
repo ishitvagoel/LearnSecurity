@@ -42,7 +42,7 @@ Also reject: trusting the client; closing findings without re-running `test_pass
 
 ## Use it somewhere new
 
-Adding MFA without an origin-fail check still counts a password at a lookalike as resistant. What would still keep a password at a lookalike site from counting as resistant?
+Adding MFA without an origin-fail check still counts a password at a lookalike as resistant. Adding MFA is not an origin-fail check — write the lookalike-password deny.
 
 ## What this page is not doing
 

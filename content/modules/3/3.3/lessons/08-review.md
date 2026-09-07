@@ -42,7 +42,7 @@ Also reject: treating the client as what you trust; closing findings without re-
 
 ## Use it somewhere new
 
-A managed database without a same-company check still lets `tB` read `tA`. What would still stop `tB` from reading `tA` on a managed database?
+A managed database without a same-company check still lets `tB` read `tA`. A managed database is not a same-company check — write the `tB`-read-`tA` deny.
 
 ## What this page is not doing
 

@@ -44,7 +44,7 @@ Also reject: live vendor payloads; closing findings without re-running `test_cra
 
 ## Use it somewhere new
 
-A crash product and a filled store form, without a body-omit test, do not say where the field can land. What would still keep `'secret'` out of the crash report after the store form is filled?
+A crash product and a filled store form, without a body-omit test, do not say where the field can land. A filled store form is not a body-omit test — write the secret-omit check.
 
 ## Can people still use it
 

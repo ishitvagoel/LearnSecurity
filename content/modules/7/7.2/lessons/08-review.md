@@ -44,7 +44,7 @@ Also reject: public GraphQL attacks; closing findings without re-running `test_m
 
 ## Use it somewhere new
 
-Hiding SSN in the table without a member×field deny still skips mediation. What still has to deny so a member cannot resolve SSN?
+Hiding SSN in the table without a member×field deny still skips mediation. Hiding SSN in the table is not field mediation — write the member×SSN deny.
 
 ## What this page is not doing
 

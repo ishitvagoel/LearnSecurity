@@ -42,7 +42,7 @@ Also reject: live TLS attacks; closing findings without re-running `test_client_
 
 ## Use it somewhere new
 
-“Enabled HTTPS” by trusting Forwarded-Proto does not bind the channel. What would still keep `X-Forwarded-Proto` from counting as TLS?
+“Enabled HTTPS” by trusting Forwarded-Proto does not bind the channel. Trusting Forwarded-Proto is not binding TLS — write the header deny.
 
 ## Can people still use it
 

@@ -44,7 +44,7 @@ Also reject: live store reverse engineering; closing findings without re-running
 
 ## Use it somewhere new
 
-R8 and Play App Signing without a debug-to-prod deny still leave the debug channel open. What would still keep a debug build from calling prod even if R8 is on?
+R8 and Play App Signing without a debug-to-prod deny still leave the debug channel open. R8 is not a debug-to-prod deny — write that deny.
 
 ## What this page is not doing
 

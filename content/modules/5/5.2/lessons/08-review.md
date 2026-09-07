@@ -42,7 +42,7 @@ Also reject: rolling a cipher; closing findings without re-running `test_protect
 
 ## Use it somewhere new
 
-Renaming a column to `ssn_encrypted` without a reversibility test still leaves Base64. What still has to fail so Base64 cannot round-trip the SSN?
+Renaming a column to `ssn_encrypted` without a reversibility test still leaves Base64. Renaming the column is not a reversibility test — write the Base64 fail.
 
 ## What this page is not doing
 

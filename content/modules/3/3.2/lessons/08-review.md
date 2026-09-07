@@ -42,7 +42,7 @@ Also reject: treating the client as what you trust; an awareness list cited as a
 
 ## Use it somewhere new
 
-A HIPAA sticker on SMS without seeding `sms-content-leak` still ships an empty model. What still has to be on the model so `cross-tenant-read` survives a green scan?
+A HIPAA sticker on SMS without seeding `sms-content-leak` still ships an empty model. A HIPAA sticker on SMS is not a seeded threat — write the `sms-content-leak` row.
 
 ## What this page is not doing
 

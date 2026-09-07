@@ -44,7 +44,7 @@ Also reject: live provider attacks; closing findings without re-running `test_mi
 
 ## Use it somewhere new
 
-TLS and a vendor allow-list, without a missing-sig test, still trust the path. What would still reject a missing signature after TLS and a vendor allow-list?
+TLS and a vendor allow-list, without a missing-sig test, still trust the path. TLS does not replace a missing-sig deny — write that deny.
 
 ## What this page is not doing
 

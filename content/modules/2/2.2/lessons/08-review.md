@@ -42,7 +42,7 @@ Also reject: client `X-Tenant` as key input; `Vary: Cookie` as forever; Report-O
 
 ## Use it somewhere new
 
-Authenticated RSS or export CSV via CDN. HTTPS on only the browser hop does not check every cache path. What still has to be in the cache key so B cannot read A’s body over HTTPS?
+Authenticated RSS or export CSV via CDN. HTTPS on only the browser hop does not check every cache path. HTTPS on the browser hop is not the cache key — write the bound-patient key.
 
 ## What this page is not doing
 

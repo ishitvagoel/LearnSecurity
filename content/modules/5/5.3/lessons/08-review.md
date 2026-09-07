@@ -42,7 +42,7 @@ Also reject: real production keys in practice files; closing findings without re
 
 ## Use it somewhere new
 
-Moving the key to Vault without killing the default still leaves the old secret live. What still has to be dead so `sk-lab-hardcoded` cannot authenticate after a Vault move?
+Moving the key to Vault without killing the default still leaves the old secret live. Moving the key to Vault is not killing the default — write the old-secret dead check.
 
 ## What this page is not doing
 
