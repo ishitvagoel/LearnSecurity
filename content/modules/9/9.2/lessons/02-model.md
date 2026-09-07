@@ -59,7 +59,7 @@ A missing “eval(user) × merge × deny” row is how “the screen still looks
 
 ## Practice
 
-The file to label is `review.py` under `labs/9.2/9.2-lab`. Fake diffs only.
+Read `review.py` under `labs/9.2/9.2-lab`. Fake diffs only.
 
 ## Use it somewhere new
 

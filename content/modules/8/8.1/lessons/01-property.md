@@ -9,7 +9,7 @@ The notes app has an Android phone client, written in Kotlin. The Android app fi
 
 > `allow_export({"integrity": "ok"}, "fail")` must be false. `allow_export({"integrity": "ok"}, "play_integrity_pass")` may be true.
 
-What must not happen: **a client `integrity=ok` claim authorizes export**. That is authorization decided on the attacker's CPU.
+A client **`integrity=ok`** bit is enough to grant export. That is authorization decided on the attacker's CPU.
 
 How the app talks to the OS and other apps is a platform topic, not this rule. A platform-integrity check **raises cost**; it does not become 1.2. Play Integrity is a vendor **signal** the server may consult — not a grant. A famous-bugs nickname for “insecure client” is awareness after the cause, not a grant.
 

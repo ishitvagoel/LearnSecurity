@@ -9,7 +9,7 @@ The notes app lets an owner share a note. Sharing changes who may later read tha
 
 > For a share of note `n1`, two requests that carry the same idempotency key must produce **one** share. Timeouts and retries are part of whether the share list stays honest, not only a smoother click. If the key store is missing or unknown, deny this high-impact action: do not insert a second share because the store was slow.
 
-What must not happen is a **second grant**: `share_note("n1", idempotency_key="k1")` twice must not leave `share_count() == 2`. That extra row is someone else on the note who nobody meant to add.
+A retry must not mint a **second grant**: `share_note("n1", idempotency_key="k1")` twice must not leave `share_count() == 2`. That extra row is someone else on the note who nobody meant to add.
 
 A famous-bugs list may call this “something went wrong.” That is a family name, not the share-count rule. Clinics also want a last slot not booked twice, and a business step that either finishes or rolls back. This practice checks share-count under retry, not a payment network.
 

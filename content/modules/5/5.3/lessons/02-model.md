@@ -54,7 +54,7 @@ flowchart LR
 
 ## Practice
 
-The file to label is `secrets.py` under `labs/5.3/5.3-lab`.
+Look at `secrets.py` under `labs/5.3/5.3-lab`.
 
 ## Use it somewhere new
 

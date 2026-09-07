@@ -15,7 +15,7 @@ Stay inside `labs/8.4/8.4-lab`. Fake build-type strings (`debug`, `release`) fee
 
 Do not paste this exercise onto a public host, employer clinic, or live store APK.
 
-What must not happen: **a debug build is allowed to call production export**. `api_allowed("debug", "ok")` returns true.
+`api_allowed("debug", "ok")` returning true is **a debug build calling production export**.
 
 Picture a leaked debug APK or student flavor — a clinic debug flavor that reuses the prod application id and API key so testers can “hit real data.” `api_allowed` is supposed to be a **server channel check** next to 8.1 attest — not R8, Play App Signing, root detection, or `minifyEnabled`.
 

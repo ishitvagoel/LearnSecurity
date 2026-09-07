@@ -9,7 +9,7 @@ The notes app shares note `n1` from person A with person B, then A revokes. **Pe
 
 > After `revoke("n1", "B")`, `read("n1", "B")` must be `None`. `read("n1", "A")` may still return the body. `read("n1", "B")` before revoke may return the body.
 
-So what must not happen: **a revoked share still reads the note**. That is the “check every access” idea from earlier weeks, stitched with time, revoke, delayed workers, and a phone cache.
+After revoke, B must not still **read the note**. That is the “check every access” idea from earlier weeks, stitched with time, revoke, delayed workers, and a phone cache.
 
 There has to be a permission check on every access, not a share event that is forgotten. Access rights changing inside an already-open session without signing in again is extra, advanced work — named so you do not confuse “we stored a revoke row” with “the next read is denied.”
 
@@ -36,7 +36,7 @@ flowchart LR
   Scan --> NotPack[not the pack]
 ```
 
-**A tool, not the rule:** pytest coverage, a capstone scanner, “we finished the last phase.”
+pytest coverage, a capstone scanner, and “we finished the last phase” do not revoke B’s grant.
 
 ## People who can still read after revoke
 

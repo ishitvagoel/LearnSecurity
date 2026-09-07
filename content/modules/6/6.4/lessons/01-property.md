@@ -9,7 +9,7 @@ The notes app stores an upload under a lab folder. The **filename is data**. Aft
 
 > `resolve` must not return a path outside `/tmp/sc-lab`. A `../` name is data that tried to become a different object. This practice checks the prefix and raises; it does not read host files.
 
-What must not happen is **a resolved path that leaves the lab folder**. That is a who-is-allowed failure of *which object*, plus whether the host store stays honest.
+A **resolved path must stay in the lab folder**. That is a who-is-allowed failure of *which object*, plus whether the host store stays honest.
 
 A famous-bugs list may call this a “path walk.” The rule here is still the resolved prefix. Internally generated names, a hard check on user filenames, not running uploads as server code, and matching extension to content do not prove the object stayed under `/tmp/sc-lab`. Zip entries that walk out are a later leftover. Starlette `UploadFile.filename` is not the prefix check.
 

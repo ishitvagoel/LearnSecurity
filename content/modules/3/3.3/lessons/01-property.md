@@ -11,7 +11,7 @@ Architecture is a **second** check: the role the app uses at request time must n
 
 > For a notes table, the runtime `app` role bound as company `tB` must not `SELECT` a row whose `note_tenant` is `tA`. SQLAlchemy, a private network, or “we use microservices” does not enforce this. A later row-level rule in the database is a later layer, not a comment that ships.
 
-What must not happen is a **shared app role that reads tA as tB**: `can_select("app", "tB", "tA") is True`. Who-is-allowed failed, and the database did not catch it. That is a secrecy failure.
+Stop a **shared app role that reads tA as tB**: `can_select("app", "tB", "tA") is True`. Who-is-allowed failed, and the database did not catch it. That is a secrecy failure.
 
 There has to be a second check so work never hits another company’s rows, and that check belongs on a trusted server, not in the Next.js client. Extra isolation around dangerous work is an advanced row, not this check. A manufacturer-ownership pledge does not configure `GRANT`.
 

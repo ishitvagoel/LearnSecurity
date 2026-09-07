@@ -9,7 +9,7 @@ The notes app may add an optional note summarizer that can call tools. **Authori
 
 > `run_tool("exec_sql", {})` must be `None`. `run_tool("search_notes", {})` may run.
 
-So what must not happen: **the agent runs `exec_sql` because the model asked**. That is the interpreter lesson plus the mediation lesson, with the model as the confused deputy.
+Do not let **the agent run `exec_sql` because the model asked**. That is the interpreter lesson plus the mediation lesson, with the model as the confused deputy.
 
 Access-control decisions belong in application logic or a policy engine, **never by the model**. An allow-list before a tool runs. Cryptographically bound human approvals are extra, advanced work, not this check. A famous-bugs list for language models names "too much agency" as a regression label after the cause, not the syllabus. Guidance documents on AI risk are not what this local check looks at.
 
@@ -35,7 +35,7 @@ flowchart LR
   Prompt --> NotTcb[not mediation]
 ```
 
-**A tool, not the rule:** library defaults, "we have retrieval," a famous-bugs dashboard.
+Library defaults, "we have retrieval," and a famous-bugs dashboard do not deny `exec_sql`.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

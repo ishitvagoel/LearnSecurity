@@ -15,7 +15,7 @@ Stay inside `labs/8.1/8.1-lab`. Fake claim dicts (`integrity`, `play_integrity_p
 
 Do not paste this exercise onto a live phone, a hospital device, or a public Android package.
 
-What must not happen: **client `integrity=ok` authorizes export**. `allow_export({"integrity": "ok"}, "fail")` returns true.
+`allow_export({"integrity": "ok"}, "fail")` returning true is **client `integrity=ok` authorizing export**.
 
 Picture a modified client or a stolen boolean — a hex-edited Compose switch, a clinic `hipaaMode=true` JSON field, or a patched app file that always reports `integrity=ok`. `allow_export` is supposed to be a **server-side who-is-allowed check** that may consult a *server-verified* attestation result — not Play Integrity checked only in the app, shrinking the app, the store listing, or the Android user-id sandbox.
 

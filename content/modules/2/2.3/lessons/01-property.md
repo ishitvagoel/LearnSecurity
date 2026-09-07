@@ -11,7 +11,7 @@ The notes app’s session cookie `sc_session` is the login token. If page script
 
 > For a notes-app session cookie marked HttpOnly, script in the origin cannot read the session value. The browser cookie jar is trusted to honor the flag. The app must actually set it. Missing HttpOnly on a session token is a secrecy failure against script. TLS (`Secure`) is a different rule against the network.
 
-So what must not happen: **script reads the session**. In the practice files, `js_read_session` must not return the dummy value `synthetic-session` for a cookie whose `httponly` flag is true.
+**Script reads the session** if `js_read_session` returns `synthetic-session` for a cookie whose `httponly` flag is true.
 
 Cookie rules ask for HttpOnly on tokens that scripts are not meant to see, and `Secure` on cookies that should not travel in the clear. The check is script-readability, not the whole cookie catalog. A newer cookie RFC is still a **draft** if you cite it. Cookie behavior in the HTML living standard is the living document.
 
@@ -27,7 +27,7 @@ flowchart TD
   Script --> XSS["Injected script later"]
 ```
 
-**A tool, not the rule:** Next.js `cookies()` defaults, “HttpOnly is on in staging for one cookie,” Content Security Policy Level 3, Trusted Types, SameSite, or `__Host-` prefixes. Prefixes and SameSite are real later rows. They are not this check.
+Next.js `cookies()` defaults, “HttpOnly is on in staging for one cookie,” Content Security Policy Level 3, Trusted Types, SameSite, and `__Host-` prefixes are not this cookie-jar check. Prefixes and SameSite are real later rows. They are not this check.
 
 ## Picture: origin, site, and the jar
 

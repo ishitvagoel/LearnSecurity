@@ -9,7 +9,7 @@ The notes app still has a shared cache on the path: a CDN, a reverse proxy, or a
 
 > For `GET /notes/n1` in the notes app, a cache hit may return a note body only when the key includes the **company the app already bound you to** — not a client `Host`, `X-Tenant`, or `X-Forwarded-*` field. Company B must not receive company A’s body for the same path. Missing or unknown company meaning is a miss (or a deny), not a shared entry. TLS 1.3 on one hop proves that hop. It is not the cache-key rule.
 
-So what must not happen: **company B reads company A’s note from a shared cache**. The key was only the URL. Company A filled the slot. Company B’s later GET receives `tenant-A-note`. That is a secrecy failure caused by a **shared store**, not by a missing login.
+Shared cache, URL-only key: **company B reads company A’s note**. Company A filled the slot. Company B’s later GET receives `tenant-A-note`. That is a secrecy failure caused by a **shared store**, not by a missing login.
 
 HTTP rules say what may be cached and how `Vary` picks a representation. TLS 1.3 says how one hop proves itself. After the edge ends TLS, later hops and stores see HTTP the way you configured them. Neither rule puts the company into your key.
 

@@ -9,7 +9,7 @@ The notes app's API pods run on a lab cluster (or a serverless analogue). **Auth
 
 > `pod_ok("cluster-admin")` must be false. `pod_ok("app")` may be true.
 
-So what must not happen: **an app pod granted cluster-admin**. That is least privilege at cluster grain — the same idea as a shared database god-role: one app bug becomes cluster takeover.
+Do not grant **an app pod cluster-admin**. That is least privilege at cluster grain — the same idea as a shared database god-role: one app bug becomes cluster takeover.
 
 Backend pieces should authenticate with their own service accounts, not a shared god role. Those accounts should be least-privileged. Use an outbound allow-list — the hop to instance metadata is how node credentials leak into the pod. Documented connection and retry toward the cluster API is extra, advanced work, not this check. A container-stack guide names five layers (image, registry, orchestrator, container, host). It does not make a managed cluster "secure by default." A restricted pod profile hardens the *pod spec*. It does not replace who may call the API.
 
@@ -35,7 +35,7 @@ flowchart LR
   Pss --> NotRbac[not authorization]
 ```
 
-**A tool, not the rule:** managed-cluster defaults, Helm, "we use Kubernetes," a network policy, a CIS benchmark score.
+Managed-cluster defaults, Helm, "we use Kubernetes," a network policy, and a CIS benchmark score do not deny cluster-admin.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

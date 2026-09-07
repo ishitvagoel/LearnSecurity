@@ -15,7 +15,7 @@ Stay inside `labs/8.2/8.2-lab`. Fake body `'secret'` is stored through `save_not
 
 Do not paste this exercise onto a public device, employer clinic, or live EHR tablet.
 
-What must not happen: **a note body cached as plaintext on disk**. After `save_note("secret")`, `plaintext_on_disk()` is true.
+After `save_note("secret")`, `plaintext_on_disk()` true is **a note body cached as plaintext on disk**.
 
 Picture a stolen USB backup or a phone whose cache is unlocked — a clinic “available offline” write of `charts.json`, a Room SQLite dump, or a cloud backup of internal storage. `save_note` is supposed to leave **ciphertext (or a stand-in) on disk**, not the body — not `MODE_PRIVATE`, a fingerprint prompt, or EncryptedSharedPreferences on a *different* file.
 

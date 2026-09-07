@@ -11,7 +11,7 @@ A HIGH finding that is not mapped to a row on the coverage map is **unowned**. U
 
 > `ship_ok([{"id": "F1", "sev": "HIGH"}], {})` must be false.
 
-What must not happen: **an unmapped HIGH is allowed to ship**. That is integrity of the release decision. An unknown HIGH lands in production because nobody owned it.
+An unmapped HIGH can still be in the ship set. That is integrity of the release decision. An unknown HIGH lands in production because nobody owned it.
 
 You need to update components on a documented clock — that is an SCA *signal*, not the map. Dependency confusion is an **advanced leftover**: mapping “the scanner found nothing” is not coverage. A maturity score measures whether you *triage*. It is not `ship_ok`. A vendor’s default setup is not your policy.
 
@@ -33,7 +33,7 @@ flowchart LR
   Authz[cross-tenant read] --> Reality[isolation still required]
 ```
 
-**A tool, not the rule:** a vendor’s default code scanning, a default Semgrep ruleset, Dependabot, or a maturity score on a slide.
+A vendor’s default code scanning, a default Semgrep ruleset, Dependabot, and a maturity score on a slide do not block an unmapped HIGH.
 
 ## Who can make an unmapped HIGH ship
 

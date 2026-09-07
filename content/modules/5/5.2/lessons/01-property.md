@@ -9,7 +9,7 @@ The notes app stores a stand-in for a note body. Secrecy against someone who can
 
 > `protect("secret")` must not round-trip as Base64 of the plaintext. `looks_encrypted` is a teaching flag, not AES-GCM. The lab prefix `aesgcm:` is a **stand-in**, not a cipher you should ship.
 
-What must not happen: **`protect()` reversible as Base64 to `secret`**. Anyone who can read the stored field gets the body. That is a secrecy failure of the stored note. Encoding is not confidentiality.
+`protect()` must not be **reversible as Base64 to `secret`**. Anyone who can read the stored field gets the body. That is a secrecy failure of the stored note. Encoding is not confidentiality.
 
 Use a real, reviewed encryption library, not encoding dressed up as encryption. Authenticated encryption (AES-GCM class), not ECB and not Base64. Password stretching (Argon2) is for passwords, not note bodies. Unique nonces and a post-quantum plan are advanced work, not this check. Keys still wait for a later lesson.
 

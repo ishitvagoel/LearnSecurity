@@ -15,7 +15,7 @@ Stay inside `labs/5.5/5.5-lab`. Fake company `tA` and note ids feed `fetch_sql` 
 
 Do not probe a live database. Do not probe an employer replica. Do not probe a classmate preview. Do not paste a live query “to see what happens.”
 
-What must not happen: a query built by concatenating untrusted strings into SQL. `fetch_sql` returns a `str` instead of a bound `(sql, params)` pair.
+`fetch_sql` returning a `str` instead of a bound `(sql, params)` pair is concatenated SQL.
 
 Picture a member who can supply `note_id` (or company) text that the SQL parser would treat as extra grammar — a clinic search box, an ORDER BY column name, or a GraphQL argument later in 7.1. `fetch_sql` binds those fields as **data** — not SQLAlchemy `text()` with an f-string, a quote denylist, or “row-level security is on in production”.
 

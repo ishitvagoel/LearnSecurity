@@ -11,7 +11,7 @@ If the report includes the body, you have shipped the note to a crash vendor. Th
 
 > `crash_report("secret")` must not contain `secret`. A stack identifier may stay. The form you fill in the store does not enforce this.
 
-So what must not happen: **crash JSON contains the note body**. That is secrecy of bodies in telemetry. The vendor has a copy. If their bucket is open, other people might too.
+Keep the **note body out of crash JSON**. That is secrecy of bodies in telemetry. The vendor has a copy. If their bucket is open, other people might too.
 
 Privacy lists ask you to collect less (do not put the body in the report) and to say what you *do* collect. Filling the store form does not delete the field. Unlinkability and “the user can delete their account” do not make an unredacted dump safe.
 
@@ -36,7 +36,7 @@ flowchart LR
   Tracker --> VendorB[processor B]
 ```
 
-**A tool, not the rule:** a crash product set to “automatic,” a checkbox on the store listing, or “we use HTTPS to the vendor.”
+A crash product set to “automatic,” a store-listing checkbox, and “we use HTTPS to the vendor” do not omit the note body.
 
 ## People who can read a crash report
 

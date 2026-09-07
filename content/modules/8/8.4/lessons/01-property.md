@@ -9,7 +9,7 @@ The notes app ships a debug APK for developers and a release APK for members. Pr
 
 > `api_allowed("debug", "ok")` must be false. `api_allowed("release", "ok")` may be true.
 
-What must not happen: **a debug build is allowed to call production export**. That is integrity of the release channel — debug loggers, extra menus, leftover keys (5.3) pointed at prod data.
+The debug client can still call production export. That is integrity of the release channel — debug loggers, extra menus, leftover keys (5.3) pointed at prod data.
 
 Root detection, minify, and anti-tamper **raise an attacker’s cost**. They do not make the APK honest (8.1). Testing profiles that emphasize resilience are **profiles in a testing guide**, not a current “R level” of a mobile-app list.
 

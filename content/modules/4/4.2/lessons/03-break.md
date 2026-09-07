@@ -15,7 +15,7 @@ Stay inside `labs/4.2/4.2-lab/`. No other hosts. Synthetic origins `https://evil
 
 Do not load a lookalike login page, a public phishing kit, an employer SSO, or a classmate preview as this exercise.
 
-What must not happen: **password (or wrong-origin WebAuthn) counted as phishing-resistant**. `phishing_resistant("password", EVIL, REAL)` returns true.
+`phishing_resistant("password", EVIL, REAL)` returning true is a **password (or wrong-origin WebAuthn) counted as phishing-resistant**.
 
 Picture a lookalike origin that can collect a typed secret — OTP typed at evil.example, or a WebAuthn assertion asked for the wrong RP ID. The helper treats shared secrets as **not** resistant, and fails WebAuthn when origin ≠ expected. A passkey vendor dashboard, `autocomplete=webauthn`, and “we turned on MFA” are not in that set.
 

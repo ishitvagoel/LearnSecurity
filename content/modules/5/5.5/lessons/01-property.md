@@ -9,7 +9,7 @@ The notes app must fetch a note by **company and note id as data**. The SQL engi
 
 > `fetch_sql` must return a bound pair (`sql`, `params`), not a glued string. Who-is-allowed from 1.2 is still required. It is not the same as isolating the interpreter.
 
-What must not happen is **a query built by concatenating untrusted strings into SQL**. That is a secrecy and integrity failure of rows: the parser can read other companies or change rows even when the handler meant “one note.”
+Do not build **a query by concatenating untrusted strings into SQL**. That is a secrecy and integrity failure of rows: the parser can read other companies or change rows even when the handler meant “one note.”
 
 Use parameterized queries — SQL, and later the same shape for other query languages. They still want cross-company controls. A least-privilege account to the database. Logging every who-is-allowed decision, and never the sensitive data, is **advanced** work, not this check. A later row-level rule in PostgreSQL is a platform extra, not the bound query. SQLAlchemy `text()` with an f-string is still concatenation.
 

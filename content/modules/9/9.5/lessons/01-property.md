@@ -9,7 +9,7 @@ The notes app may get an authorized check of isolation: bob must not read alice'
 
 > `close_finding({"retest": None})` must be false. `close_finding({"retest": "pass"})` may be true.
 
-So what must not happen: **a finding closed without a retest**. That is honesty of the fix loop — the hole can still be there.
+Do not **close a finding without a retest**. That is honesty of the fix loop — the hole can still be there.
 
 A testing-guide list names *what* an authorized web check may try. It does not close tickets. A severity score tells you how to rank work. A 9.8 does not make the close decision for you. A known-exploited list says whether someone has seen the bug used in the wild. That is useful context for an internal-only bug. It is not permission to scan a public clinic.
 
@@ -35,7 +35,7 @@ flowchart LR
   Retest[same-rule pass] --> Decision[close]
 ```
 
-**A tool, not the rule:** a ticket marked Done, a vendor logo on a pentest PDF, a 9.8 severity, a known-exploited listing.
+A ticket marked Done, a vendor logo on a pentest PDF, a 9.8 severity, and a known-exploited listing do not prove a retest.
 
 ## People who can close without a retest
 

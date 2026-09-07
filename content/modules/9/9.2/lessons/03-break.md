@@ -15,7 +15,7 @@ Stay inside `labs/9.2/9.2-lab`. `review_ok(diff)` sees the fake diff string `x =
 
 Do not write a working exploit. Do not run eval on untrusted input outside this practice. Do not probe a live GitHub org. Do not paste eval payloads “to see what happens.”
 
-What must not happen: eval on user input approved in review. `review_ok("x = eval(user)")` returns true.
+`review_ok("x = eval(user)")` returning true is eval approved in review.
 
 Picture a helper that looks visually fine — a clinic “designers can put expressions in the discharge template,” Terraform `local-exec`, or a GitHub Actions `run:` that interpolates untrusted input. `review_ok` asks the **interpreter question** (6.1 at review time) — not Formatter continuous integration, a scanner “looks good,” or “the screen still looks fine”.
 

@@ -55,7 +55,7 @@ A missing or failed attest **denies**. A passed attest still needs the 1.2 grant
 
 ## Practice
 
-The file to label is `client.py` under `labs/8.1/8.1-lab`. After repair, the server attest still decides; the client boolean is still not what you trust.
+The sketch is `client.py` under `labs/8.1/8.1-lab`. After repair, the server attest still decides; the client boolean is still not what you trust.
 
 ## Use it somewhere new
 

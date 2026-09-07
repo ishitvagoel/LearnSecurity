@@ -9,7 +9,7 @@ The notes app logs a browser user in at `https://app.securecollab.test`. A passw
 
 > `phishing_resistant("password", "https://evil.example", "https://app.securecollab.test")` must be false. `phishing_resistant("webauthn", "https://evil.example", "https://app.securecollab.test")` must be false. Passwords to the *real* origin are still phishable — do not advertise them as resistant. An HTML `autocomplete=webauthn` hint is not the ceremony.
 
-What must not happen is a **password (or wrong-origin WebAuthn) counted as phishing-resistant**. That is a login bound to the *wrong* site, then a session that acts as the victim.
+Refuse a **password (or wrong-origin WebAuthn) counted as phishing-resistant**. That is a login bound to the *wrong* site, then a session that acts as the victim.
 
 Authenticator guidance still treats passwords and OTP as phishable. “We turned on 2FA” is not the phishing-resistant check. WebAuthn Level 3 is still a Candidate Recommendation, not a finished Rec. A later, stricter bar wants a hardware, user-intent, phishing-resistant factor. Treat that as later, not as this check.
 

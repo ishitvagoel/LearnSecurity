@@ -9,7 +9,7 @@ The notes app may cache notes so you can read them offline. That cache lives on 
 
 > After `save_note("secret")`, `plaintext_on_disk()` must be false.
 
-What must not happen: **a note body cached as plaintext on disk**. A stolen USB backup, or a phone whose cache is unlocked, yields the bodies.
+Plaintext note body on disk is the cache miss. A stolen USB backup, or a phone whose cache is unlocked, yields the bodies.
 
 Sensitive data stored in a way that is actually secret, not just “in the app folder.” They also want extra copies stopped — screenshots, clipboard, notifications, backups. Keys belong in the platform store (Android Keystore, later iOS Keychain), not next to the file. A fingerprint prompt is **local** unlock. It is not the server second factor from 4.2.
 

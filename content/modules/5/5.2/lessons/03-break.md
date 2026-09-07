@@ -15,7 +15,7 @@ Stay inside `labs/5.2/5.2-lab`. Restore the broken and repaired folders when you
 
 Do not decode a live column. Do not decode an employer backup. Do not decode a classmate dump. Do not “just try Base64” on someone else's file.
 
-What must not happen: `protect()` is reversible as Base64 to `secret`.
+`protect()` reversible as Base64 to `secret` is the encoding miss.
 
 Picture an honest storage reader — a database admin, a stolen disk, a backup tape — who can read the column — a clinic SSN column named `ssn_encrypted` that is still encoding. `protect` is not reversible as encoding — not HTTPS, volume encryption, a column rename, or “we use AES” in a README.
 

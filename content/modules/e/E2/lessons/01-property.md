@@ -9,7 +9,7 @@ The notes app may send a content-security policy on its Next.js responses. **Iso
 
 > `isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` must be false. An enforcing `Content-Security-Policy` header may make it true.
 
-What must not happen is **Report-Only treated as isolation**. A script still runs. The dashboard looks green.
+**Report-Only is not isolation**. A script still runs. The dashboard looks green.
 
 A content-security policy as a **layer** after encoding (6.2). Reporting from that policy is extra, later, and advanced — reporting is the Report-Only kind of signal, not enforcement. The current content-security spec and Trusted Types are still **draft**.
 

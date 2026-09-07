@@ -8,7 +8,7 @@
 
 `labs/0.1/0.1-orientation` only. The practice files check a function called `target_is_authorized`. They do not open a network connection. The string `https://example.com/` is a **test literal**. Do **not** send HTTP to example.com, a customer site, a classmate preview, a recruiter staging URL, or a cloud Juice Shop you do not own.
 
-What must not happen: treating a host that is not on the list as allowed. `target_is_authorized("https://example.com/")` returns true.
+`target_is_authorized("https://example.com/")` returning true is the off-list host counted as allowed.
 
 Picture a tired learner with a proxy who can paste any URL — “it has a login page,” “robots.txt allowed it,” or “the guide has a chapter on authorization.” The helper compares the hostname to a written list. A proxy, a scanner, a job title, and “it connected” are not that list.
 

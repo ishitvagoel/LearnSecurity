@@ -9,7 +9,7 @@ The notes app lets a member change their profile. The JSON document is **data**.
 
 > After `apply(user, {"is_admin": true})`, `is_admin` must still be false. An honest `display_name` may change.
 
-What must not happen: **a client change sets `is_admin`**. That is authorization of properties, not “missing login.”
+Client JSON that writes `is_admin` is the hole. That is authorization of properties, not “missing login.”
 
 Allowed fields have to be limited per action. Turning GraphQL schema listing off in production (unless the API is meant for other parties) is an **inventory** problem. GraphQL query cost is a **different rule** (6.7), not extra change arguments. Unused HTTP methods are leftover, later, and **advanced**. A famous-bugs nickname for extra fields or leftover endpoints is awareness after the cause, not the allow-list. An OpenAPI file is inventory, not the body filter.
 

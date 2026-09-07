@@ -15,7 +15,7 @@ Stay inside `labs/3.3/3.3-lab`. Fake company ids `tA` / `tB`. Restore the broken
 
 Do not run `SELECT` against a live cluster, an employer replica, or a public demo database. Do not point this exercise at a classmate’s FastAPI or a production notes app.
 
-What must not happen: the app database role can read another company’s rows. `can_select("app", "tB", "tA") is True`.
+`can_select("app", "tB", "tA") is True` means the app database role can read another company’s rows.
 
 Picture a forgotten `WHERE`, later injection into SQL, or a stolen app password that can call `can_select` as company `tB` — an all-powerful `DATABASE_URL`. The runtime role is a **second** check after who-is-allowed — not SQLAlchemy, a private network, or “we use microservices”.
 

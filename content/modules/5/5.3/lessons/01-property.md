@@ -9,7 +9,7 @@ The notes app uses an application API key. That key is not a user password, and 
 
 > `auth("sk-lab-hardcoded", current="rotated-now")` must be false. Missing `current` must deny. An inventory plus a rotation check is leftover-path coverage over time — like an old session that still works after logout.
 
-What must not happen is **the old hardcoded default still authenticates after rotation**. The service credential is treated as current even though you meant to kill it. Then who-is-allowed runs as whoever holds the clone.
+After rotation, **the old hardcoded default must not still authenticate**. The service credential is treated as current even though you meant to kill it. Then who-is-allowed runs as whoever holds the clone.
 
 Secrets have to be created and stored outside source and build artifacts. There should be no default credentials. There has to be a key lifecycle. Timed rotation and a hardware box for crypto are advanced extras, not this check. A Python settings library reading `.env` is not the secret-store check. Planning for post-quantum crypto is agility planning, not a lab quantum attack.
 

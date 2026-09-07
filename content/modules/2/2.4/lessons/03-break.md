@@ -15,7 +15,7 @@ Stay inside `labs/2.4/2.4-state-time`. Restore the broken and repaired folders f
 
 Do not load-test third-party APIs. Do not run clock tricks against NTP. Do not point this exercise at a live clinic booking page, a classmate’s FastAPI, or an employer checkout.
 
-What must not happen: a retry creates a second share. Two `share_note("n1", idempotency_key="k1")` calls leave `share_count() == 2`.
+Two `share_note("n1", idempotency_key="k1")` calls leaving `share_count() == 2` is the retry minting a second share.
 
 Picture a **retrying client** that can call `share_note` twice with the same key — a 504, a double-click, a load balancer that retries POST, or a later worker that delivers at least once — not The handler treats `k1` as “this attempt already landed.” FastAPI, Next.js `fetch` retries, HTTP retry logic, or “the user will not click twice”.
 

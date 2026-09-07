@@ -13,7 +13,7 @@ The practice is not a website you attack. `tenant_for(session, body)` prefers `b
 
 Stay inside `labs/E5/e5-lab`. Fake companies A and B go through `tenant_for(session, body)`. It does not open a network. Do not send `org_id` to a live product, a clinic company, or a classmate preview.
 
-What must not happen: the JSON body switches the bound company. `tenant_for({"tenant": "A"}, {"tenant": "B"})` returns `"B"`.
+`tenant_for({"tenant": "A"}, {"tenant": "B"})` returning `"B"` is the body switch.
 
 Picture a member of A who can write a JSON (or GraphQL) field — “row-level rules are on so companies are done,” a relationship-graph dashboard treated as who-is-allowed, or a famous-bugs mapping treated as this rule. `tenant_for` is supposed to bind the company from the session — not FastAPI body parsing, a Host header, or a row-level session variable set from JSON.
 

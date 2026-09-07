@@ -9,7 +9,7 @@ The notes app still takes in a JSON note that names a company. Login can be righ
 
 > For a notes-app ingest, the same request bytes yield one parse result used for both the who-is-allowed check and the stored row. If two readers would assign different company identifiers to those bytes, ingest refuses. Missing, duplicate, or unknown company meaning is a no. The client encoder, a reverse proxy that re-encodes Unicode, and PostgreSQL `jsonb` are not the agreed reader.
 
-So what must not happen: **ACL tenant ≠ stored tenant**. That is a secrecy failure caused by *disagreement*, not by a missing login.
+**ACL tenant ≠ stored tenant** is a secrecy failure caused by *disagreement*, not by a missing login.
 
 The JSON spec says names in an object **should** be unique. It does not say they must be. CPython `json.loads` keeps the last duplicate. A scan that looks for the first `"tenant"` field keeps the first. Neither bug is “JSON is insecure.” The bug is treating two meanings of one byte sequence as if they were one object.
 

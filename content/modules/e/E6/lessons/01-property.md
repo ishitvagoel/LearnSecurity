@@ -9,7 +9,7 @@ The notes app’s leadership may accept leftover risk. **Accountability of lefto
 
 > `accept_exception({"owner": "", "review_by": None})` must be false. A complete record may be accepted.
 
-What must not happen: **an incomplete exception accepted**. Unowned holes last forever. Inaccessible recovery (people cannot finish the reset path) is quietly kept.
+Incomplete exception rows still count as accepted. Unowned holes last forever. Inaccessible recovery (people cannot finish the reset path) is quietly kept.
 
 A process-maturity score measures whether a practice exists somewhere. It is not a row in the register. Industry “govern” labels name outcomes. They do not write the exception. A design-review guide is vocabulary for “think while you design.” It is not `accept_exception`. An unverified “secure by design” pledge page talks about manufacturer ownership. It does not write the exception and it is not an assurance stamp. Extra advanced work — document the dangerous function — is a reason to *require* a record. It does not fill the register. A later draft of the design-review guide stays a **draft**.
 
@@ -33,7 +33,7 @@ flowchart LR
   Score --> NotRow[not accept_exception]
 ```
 
-**A tool, not the rule:** a ticket type named “risk” with optional dates; a “secure by design” pledge; a one-year roadmap slide.
+A ticket type named “risk” with optional dates, a “secure by design” pledge, and a one-year roadmap slide do not fill owner and review date.
 
 ## Who can treat a spoken yes as a row
 

@@ -9,7 +9,7 @@ The notes app treats a material change — identity, stored data, mobile, or a q
 
 > `merge_ok({})` must be false. `merge_ok({"threat_model": "TM-12"})` may be true.
 
-What must not happen: **merge without a threat-model identifier**. That is honesty of the process evidence you show before the change lands. If the merge is green while the identifier is missing, those surfaces ship with no 3.2 model.
+Merge with no threat-model identifier is the process miss. That is honesty of the process evidence you show before the change lands. If the merge is green while the identifier is missing, those surfaces ship with no 3.2 model.
 
 A design-review guide is vocabulary for “think about security while you design.” It is not `merge_ok`. A process-maturity score measures whether a practice exists somewhere in the company. An unverified “secure by design” page talks about manufacturer ownership. It does not stamp the pull request. An extra advanced row — for example “document the dangerous function” — is a reason to *require* a threat model. It is not the merge check itself. A later draft of the design-review guide stays a **draft**.
 
@@ -32,7 +32,7 @@ flowchart LR
   Owners --> NotTm["not 3.2"]
 ```
 
-**A tool, not the rule:** CODEOWNERS, a maturity score, a training checkbox, or a “secure by design” pledge.
+CODEOWNERS, a maturity score, a training checkbox, and a “secure by design” pledge do not require a threat-model id.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

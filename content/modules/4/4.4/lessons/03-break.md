@@ -13,7 +13,7 @@ The practice is not a website you attack. `can_read` treats “Bob has a share s
 
 Stay inside `labs/4.4/4.4-lab`. Notes `n1` / `n2` / `n3` and companies `acme` / `clinic` are fake inputs to `can_read`. It does not open FastAPI or PostgreSQL. Do not guess ids against a live company, an employer API, or a classmate preview.
 
-What must not happen: a grant on n1 authorizes n2, plus owner/admin costumes that cross companies or skip the object key. `can_read("bob", "n2")` is true.
+`can_read("bob", "n2")` true is an n1 grant authorizing n2, plus owner/admin costumes that cross companies or skip the object key.
 
 Picture a member with a real grant on `n1` who can swap `note_id`, or someone guessing ids — Alice (acme owner) reading clinic `n3`, or Eve (`admin` in clinic) reading acme `n1`. `can_read` is supposed to key `(person, company, note_id)` — not `Depends(get_user)`, Casbin, or id length.
 

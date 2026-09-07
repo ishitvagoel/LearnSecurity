@@ -9,7 +9,7 @@ The notes app must know whether the **server socket** negotiated TLS. A browser 
 
 > `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` must be false. `channel_is_https({}, "https")` may be true. A trusted proxy is a **bound peer**, not a header name. This practice has no trusted proxy.
 
-What must not happen is **a client-supplied Forwarded-Proto counted as TLS**. Cookies marked Secure and HSTS fire while the user stays on cleartext. That is an authenticity failure of the transport.
+A **client-supplied Forwarded-Proto** is not TLS. Cookies marked Secure and HSTS fire while the user stays on cleartext. That is an authenticity failure of the transport.
 
 TLS has to be on the public HTTP service with no cleartext fallback. A current TLS version (TLS 1.3 is the current handshake). Clients still have to check certificates — that is a different rule. OCSP stapling and encrypted client hello are advanced extras, not this check. A server flag that trusts proxy headers is not the hop-proof check.
 

@@ -15,7 +15,7 @@ Stay inside `labs/9.3/9.3-lab`. Synthetic test descriptors. No live apps, no fuz
 
 Do not paste this exercise onto a public host, employer clinic, or live patient system. You do not need HTTP. You must not fuzz a public host.
 
-What must not happen: **HTTP 200-only test counted as a security test**. `is_security_test({"status_asserted": True})` returns true.
+`is_security_test({"status_asserted": True})` returning true is an **HTTP 200-only test counted as a security test**.
 
 Picture a happy-path suite treated as assurance — clinic `test_get_patient_200`, line coverage at 94%, or a testing-guide checkbox ticked without a named what must not happen. `is_security_test` is supposed to require a **named what must not happen** — not Coverage percentage, testing-guide membership, or a fuzzer with no named bad result.
 

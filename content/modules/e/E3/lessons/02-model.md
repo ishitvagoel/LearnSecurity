@@ -52,7 +52,7 @@ If both arrows append, the map already predicts `test_duplicate_capture_does_not
 
 ## Practice
 
-The file to label is `pay.py` under `labs/E3/e3-lab`.
+The ledger helper is `pay.py` under `labs/E3/e3-lab`.
 
 ## Use it somewhere new
 

@@ -11,7 +11,7 @@ A leftover session cookie is still her. A leftover refresh token is still her. A
 
 > After `delete_user("alice")`, `session_valid("alice")` must be false. Lifecycle is every leftover that can still act as that person, not a login screen. Single sign-on, the web session library, and “we disabled the password” do not by themselves kill the cookie.
 
-So what must not happen: **a deleted user’s leftover session still works**. `delete_user` marks the profile deleted, but `SESSIONS["alice"]` stays true. The notes are still readable after the person is gone.
+**A deleted user’s leftover session still works** when `delete_user` marks the profile deleted but `SESSIONS["alice"]` stays true. The notes are still readable after the person is gone.
 
 All active sessions have to be killed when an account is disabled or deleted. They also want further use of that session refused — kill the server-side state. Self-contained tokens need a denylist or a per-user not-before. Revoking a stolen login factor is advanced work, not this check. Identity guidance separates identifiers, authenticators, and session. The check is session-after-delete, not proofing who someone is.
 

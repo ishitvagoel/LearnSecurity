@@ -9,7 +9,7 @@ The notes app can export after the web request is already over. Export still has
 
 > `exporter({"user_session": "alice", "service": None})` must be `None`. `exporter({"service": "worker-sc"})` may be `"worker-sc"`.
 
-What must not happen is **a leftover user session accepted as worker identity**. That is who the worker is allowed to be. It is also leftover Alice still exporting after delete-and-revoke (4.1).
+Overnight jobs still acting as leftover Alice is the identity mix-up. That is who the worker is allowed to be. It is also leftover Alice still exporting after delete-and-revoke (4.1).
 
 Backend jobs should log in as their own short-lived service accounts, not leftover people. Those accounts should be small. After the worker is the worker, it may still need Alice’s grant (4.4) to choose *which* notes. That later check is **advanced** work. Do not collapse “the worker must not *be* Alice” with “the worker must still *check* Alice’s grant.”
 

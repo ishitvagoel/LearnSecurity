@@ -9,7 +9,7 @@ The notes app may get an incident ticket with a `recovery` field and a `logs` bl
 
 > `close_incident({"recovery": "todo", "logs": "ok"})` must be false. `close_incident({"recovery": "done", "logs": "note_body leaked"})` must be false. Honest recovery plus safe logs may close.
 
-So what must not happen: **an incident closed without recovery evidence**, and **a note body in the logs**. Detect without recover is theater. Logs with bodies are leftover copies at the observability sink — the same family as earlier lessons on note bodies, extra copies, and crash dumps.
+Close needs **recovery evidence**, and logs must not hold **a note body**. Detect without recover is theater. Logs with bodies are leftover copies at the observability sink — the same family as earlier lessons on note bodies, extra copies, and crash dumps.
 
 A logging list names *what* you keep. It does not prove restore ran. Logs should match how sensitive the data is — note bodies are not “forensics.” Ship logs to a separate system so a breach of the app does not erase the evidence. Logging every authorization decision without the sensitive data is extra, advanced work, not this check.
 
@@ -38,7 +38,7 @@ flowchart LR
   Note --> NotForensics[not allowed in logs]
 ```
 
-**A tool, not the rule:** a paging ack, a SIEM dashboard, time-to-detect, “we have backups,” a known-exploited listing.
+A paging ack, a SIEM dashboard, time-to-detect, “we have backups,” and a known-exploited listing do not prove restore ran.
 
 ## People who can close without recovery
 

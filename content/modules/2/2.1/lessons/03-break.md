@@ -17,7 +17,7 @@ Restore the broken and repaired folders from git when you are done. Fake data on
 
 Do not paste this exercise onto a public API, employer ingest, or live clinic portal.
 
-What must not happen: **ACL tenant disagrees with stored tenant**.
+Watch **ACL tenant disagree with stored tenant**.
 
 ## Picture: lock in the cause before the check
 

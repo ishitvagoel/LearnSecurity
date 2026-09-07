@@ -9,7 +9,7 @@ The notes app will later accept access tokens at its API. An access token is a c
 
 > `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` must be false. Missing `aud` must be false. Expected `aud` may be true. PKCE, `state`, `nonce`, JWKS, `iss`, and DPoP are named leftovers — they are not proven by this practice. OAuth 2.1 is still a draft.
 
-What must not happen is **a JWT with the wrong audience accepted as a notes-app session**. The token is treated as a login even though it was minted for someone else. Then who-is-allowed runs as whoever `sub` names.
+Reject **a JWT with the wrong audience accepted as a notes-app session**. The token is treated as a login even though it was minted for someone else. Then who-is-allowed runs as whoever `sub` names.
 
 The API has to accept only tokens meant for that service. Keep tokens only in components that need them (in a backend-for-frontend, the browser does not hold the access token). The code flow still needs PKCE or `state`. Sender-constrained tokens (DPoP / mutual TLS) are an advanced extra, not this check. RFC 9700 is the OAuth 2.0 security practice. RFC 10017 is the browser-app practice. RFC 8252 is native apps. Do not present OAuth 2.1 as final.
 

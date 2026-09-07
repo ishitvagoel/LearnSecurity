@@ -9,7 +9,7 @@ The notes app stores notes per company. Bob has a share on note `n1` in company 
 
 > After seed, `can_read("bob", "n2")` must be false. `can_read("alice", "n3")` must be false even though Alice owns notes. `can_read("eve", "n1")` must be false even though Eve’s role is `admin`. A hard-to-guess id is not a grant. Roles, attributes, relationship graphs, and capability tokens are shapes for writing the table. The rule is still the rule: this person, this action, this note, this company.
 
-What must not happen is **a grant on n1 authorizes n2**, plus the sibling **owner or admin costume that walks into another company**. That is a secrecy failure because who-is-allowed never ran on the requested object.
+A **grant on n1 must not authorize n2**, and an **owner or admin costume must not walk into another company**. That is a secrecy failure because who-is-allowed never ran on the requested object.
 
 Function permissions and data-item permissions have to be checked on a trusted server, not in the Next.js client. They also want work never to hit another company’s rows. Extra rows about applying grant changes immediately, and carrying the original person through a worker, are advanced — not this check. Famous “broken object / property / function” lists are a later awareness check after this table exists. They are not the syllabus.
 

@@ -15,7 +15,7 @@ Stay inside `labs/7.3/7.3-lab`. Disposable `lab-secret` and a synthetic `body` g
 
 Do not POST to Stripe. Do not POST to GitHub. Do not POST to a clinic webhook. Do not POST to public hosts. Do not paste a live callback URL “to see what happens.”
 
-What must not happen: an unsigned webhook body is accepted. `accept` returns true for an empty signature.
+`accept` true for an empty signature is an unsigned webhook body accepted.
 
 Picture anyone who can POST the callback URL with an empty or wrong signature — a forged billing event, an “export-ready” callback, or a clinic lab-result post. `accept` is **message authenticity over raw bytes** — not TLS to the path, a vendor address-range allow-list, or a vendor SDK name.
 

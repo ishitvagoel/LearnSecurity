@@ -15,7 +15,7 @@ Stay inside `labs/4.5/4.5-lab`. Restore the broken and repaired folders when you
 
 Do not replay a production access token, an employer OpenID tenant, or a classmate Auth0 app.
 
-What must not happen: a JWT with the wrong audience accepted as a notes-app session. `accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` is true.
+`accept_token({"sub": "alice", "aud": "other-api"}, "securecollab-api")` true is a wrong-audience JWT treated as a notes-app session.
 
 Picture a **bearer minted for another API** (confused deputy), or a stolen token whose `sub` looks familiar. The **resource server compares `aud` to itself** before who-is-allowed — not Authlib “verify signature,” Auth0, or “we turned on OpenID Connect”.
 

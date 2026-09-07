@@ -15,7 +15,7 @@ Stay inside `labs/3.4/3.4-lab`. Restore the broken and repaired folders when you
 
 Do not load-test a public host, an employer share endpoint, or a live clinic booking page.
 
-What must not happen: share grants exceed the product cap of 5. Looping `add_share()` eight times yields `last > 5`.
+Looping `add_share()` eight times yielding `last > 5` is the share cap already exceeded.
 
 Picture a **scripted client** that can call `add_share` in a loop — a disabled `max=5` select, an import path, or eight rapid POSTs. The **write path** denies the sixth grant — not HTML, nginx `limit_req`, or a filter named after an awareness list.
 

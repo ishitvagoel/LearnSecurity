@@ -9,7 +9,7 @@ The notes app already treats a share as a grant. Sharing a note is a **change th
 
 > `allow_share` from a foreign origin without a matching CSRF token must be false. Leftover cookies are not consent.
 
-What must not happen is **a cross-site POST that changes a share, authorized by cookie alone**. That is an integrity failure of share grants: an unwanted share, with the browser acting as a helper that sent the leftover cookie.
+Cookie-only **cross-site POST** already changes the share. That is an integrity failure of share grants: an unwanted share, with the browser acting as a helper that sent the leftover cookie.
 
 Use an anti-forgery token, or an extra header that a simple cross-site form cannot set, when a CORS preflight is not the defense. Changes should use unsafe methods (not GET), or a strict fetch-metadata check. SameSite still has to match the cookie’s purpose — a helper, not the whole rule. Extra rows about authenticated embeds and CORP are **advanced**, not this check.
 

@@ -9,7 +9,7 @@ The notes app may accept provider callbacks (billing, export-ready, invite used)
 
 > `accept("", "body", "lab-secret")` must be false. A matching HMAC over the same raw body may be true.
 
-What must not happen is **an unsigned webhook body accepted**. That is authenticity and integrity of the inbound integration.
+An **unsigned webhook body** must stay rejected. That is authenticity and integrity of the inbound integration.
 
 Use a standard-library MAC, not a homemade hash. Replay and freshness are leftovers, not this empty-sig check. Per-message digital signatures beyond HMAC are **advanced** work, not this check. A famous-bugs nickname for unsafe consumption of APIs is awareness after the cause. HMAC here is a teaching stand-in, not “we are Stripe.”
 

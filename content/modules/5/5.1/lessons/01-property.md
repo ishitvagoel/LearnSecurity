@@ -11,7 +11,7 @@ Encrypting a warehouse you still keep is not deletion. A privacy-policy PDF is n
 
 > After `delete_account("alice")`, `body_retained("alice")` must be None and `search_retained("alice")` must be None. Deletion is every copy of the body, not a notes-table DELETE. Clearing the notes row, and “we anonymized the user id,” do not by themselves remove the body.
 
-So what must not happen: **analytics (or search) still holds the note body after account deletion**. The body was already confidential. After the person leaves, keeping the field is leftover privacy too. Encryption without erasure still retains.
+After delete, **analytics (or search) still holding the note body** is the leftover copy. The body was already confidential. After the person leaves, keeping the field is leftover privacy too. Encryption without erasure still retains.
 
 You need to name sensitive data, write down how long you keep it, not hand the body to a second party you do not control, and actually carry those rules out. A scheduled warehouse job that maybe runs later is advanced work, not this check. A published privacy framework names identify, govern, control, and communicate. A newer draft of that framework is still a draft. A threat-method name does not walk the copies. The local maps do. Phone privacy profiles come later. A country privacy-law name is awareness, not this check. A database DELETE is not the retention check.
 

@@ -15,7 +15,7 @@ Stay inside `labs/5.3/5.3-lab`. Restore the broken and repaired folders when you
 
 Do not search public GitHub, an employer gist, or a classmate repo as this exercise.
 
-What must not happen: the old hardcoded default still authenticates after rotation. `auth("sk-lab-hardcoded", current="rotated-now")` returns true.
+`auth("sk-lab-hardcoded", current="rotated-now")` returning true is the leftover default after rotation.
 
 Picture a **reader of the cloned repo**, an old container image, or a gist copy of `DEFAULT` — a clinic lab API key that was “rotated in the wiki” while the default or-clause stayed. `auth` accepts only the current secret and denies when current is missing — not A vault brand, `.gitignore`, or “we rotated” in a ticket.
 

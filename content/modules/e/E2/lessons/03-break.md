@@ -15,7 +15,7 @@ Stay inside `labs/E2/e2-lab`. Fake header dicts only go through `isolation_enfor
 
 Do not paste this exercise onto a public site, employer CDN, or live clinic portal.
 
-What must not happen: **Report-Only treated as isolation**. `isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` returns true.
+`isolation_enforced({"Content-Security-Policy-Report-Only": "default-src 'none'"})` returning true is **Report-Only treated as isolation**.
 
 Picture a script that would only be logged — “we ship Report-Only so scripts are blocked,” a Helmet default treated as encoding (6.2), or a green reporting dashboard treated as isolation. `isolation_enforced` is supposed to require the **enforcing** header name — not Next.js header helpers, a CDN, or FastAPI.
 

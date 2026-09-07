@@ -15,7 +15,7 @@ Stay inside `labs/6.5/6.5-lab`. Fake URLs are the inputs to `allowed`. **Do not 
 
 Do not probe cloud metadata. Do not probe public hosts. Do not probe an employer PDF importer. Do not paste a live URL “to see what happens.”
 
-What must not happen: a server-side fetch to link-local metadata is allowed. `allowed` returns true for a link-local metadata URL.
+`allowed` true for a link-local metadata URL is the server-side fetch.
 
 Picture a member who can supply a preview URL (untrusted structure, 2.1) — a clinic “fetch PDF from URL” field or a webhook target (7.3). `allowed` parses scheme **and** host against a small allow-list — not “Starts with https,” a denylist of one IP, or `requests.get`.
 

@@ -9,7 +9,7 @@ The notes app stores notes per company. A signed-in session already names which 
 
 > `tenant_for({"tenant": "A"}, {"tenant": "B"})` must be `A`. Matching A/A may keep A.
 
-What must not happen is **the JSON body switches the bound company**. At product scale that is a read or write into another company through every copy — search, cache, and analytics included.
+The bound company is taken from the JSON body. At product scale that is a read or write into another company through every copy — search, cache, and analytics included.
 
 Isolation of the object and the company. They also want unused or writable fields not to become policy. Extra rows about applying grant changes immediately are advanced — not this check. Famous “broken object” lists are a later awareness check after this binding exists. They are not the syllabus. PostgreSQL row-level rules and a relationship-graph product are **layers**, not the session tenant.
 

@@ -15,7 +15,7 @@ Stay inside `labs/5.4/5.4-lab`. Restore the broken and repaired folders when you
 
 Do not probe a public host. Do not probe an employer load balancer. Do not probe a classmate preview.
 
-What must not happen: client-supplied `X-Forwarded-Proto: https` on an `http` socket counts as TLS. `channel_is_https({"X-Forwarded-Proto": "https"}, "http")` returns true.
+`channel_is_https({"X-Forwarded-Proto": "https"}, "http")` returning true is a client header counted as TLS.
 
 Picture a **cleartext client who can set `X-Forwarded-Proto`** — a clinic page whose API client uses `https://` while the API socket is `http`, or a dashboard “Force HTTPS” toggle that trusts the header. `channel_is_https` binds the **server socket**, not a client claim — not A server flag that trusts proxy headers, a CDN product name, or HSTS preload.
 

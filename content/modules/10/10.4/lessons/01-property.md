@@ -9,7 +9,7 @@ The notes app’s FastAPI and Next.js compose file has an `env` name and a `debu
 
 > `boot_ok("prod", True)` must be false. `boot_ok("prod", False)` may be true.
 
-What must not happen: **a production process boots with debug enabled**. That leaks stack traces, interactive debuggers, extra headers, and sometimes secrets. The secrets lesson already said keep secrets out of traces.
+Production must not **boot with debug enabled**. That leaks stack traces, interactive debuggers, extra headers, and sometimes secrets. The secrets lesson already said keep secrets out of traces.
 
 A checklist that wants debug modes off in production is vocabulary, not this function. Docs and monitoring pages should stay off unless you meant to expose them. Extra detail about leaking backend version numbers is extra, advanced work, not this check. A manufacturer-defaults program page we have not verified is not the lab’s answer key. A famous-bugs list is a label you apply *after* you find the fail-open cause. It is not this rule.
 
@@ -33,7 +33,7 @@ flowchart LR
   Boot --> NotFlag[debug is one cell]
 ```
 
-**A tool, not the rule:** compose `NODE_ENV`, a canary, an IaC file that exists, a benchmark score.
+Compose `NODE_ENV`, a canary, an IaC file that exists, and a benchmark score do not block prod-plus-debug.
 
 ## Who can turn debug on in production
 

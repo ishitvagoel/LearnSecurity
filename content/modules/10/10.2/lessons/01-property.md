@@ -9,7 +9,7 @@ The notes app’s CI installs Python and JavaScript libraries from a lockfile. *
 
 > `install_ok("aaa", "bbb")` must be false. `install_ok("aaa", "aaa")` may be true.
 
-What must not happen: **a dependency installed when the digest does not match the lockfile**. That is integrity of the artifact you will run — someone else’s code inside the trusted computing base.
+Install with a digest mismatch is the lockfile miss. That is integrity of the artifact you will run — someone else’s code inside the trusted computing base.
 
 An SBOM is inventory — *what* you think you have. Provenance says *how* the artifact was built. Neither one is `install_ok`. A lookalike package on a public index wins when you install by name. Generating the SBOM file is still not the hash check.
 
@@ -32,7 +32,7 @@ flowchart LR
   Sbom --> NotHash[not install_ok]
 ```
 
-**A tool, not the rule:** npm audit, Dependabot, a provenance badge, or “we have an SBOM.”
+npm audit, Dependabot, a provenance badge, and “we have an SBOM” do not compare digests.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

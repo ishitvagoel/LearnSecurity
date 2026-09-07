@@ -15,7 +15,7 @@ Stay inside `labs/E4/e4-lab`. Fake bytes: `abcdefgh`. Restore the broken and rep
 
 Do not compile a C overflow. Do not spray a heap. Do not fuzz a third-party binary, an employer codec, or anyone else’s unpacker.
 
-What must not happen: copy into a 4-byte lab buffer returns more than 4 bytes. `len(copy_into(4, b"abcdefgh", 4)) > 4`.
+`len(copy_into(4, b"abcdefgh", 4)) > 4` is the overrun.
 
 Picture a hostile header `declared_len` — “the app is mostly Kotlin so copies are safe,” a sanitizer in CI treated as the rule, or an awareness-list mapping treated as this rule. `copy_into` bounds the copy by **destination size** — not Python slicing, a company language roadmap, or FastAPI.
 

@@ -15,7 +15,7 @@ Stay inside `labs/6.7/6.7-lab`. Fake call counts. It does not talk to the networ
 
 Do not load-test a public host. Do not probe an employer export API. Do not probe a classmate preview. Do not paste a live export “to see what happens.”
 
-What must not happen: unbounded exports (fourth allowed in the lab window). `allow(4)` returns true.
+`allow(4)` true is the unbounded fourth export in the lab window.
 
 Picture a scripted session that calls export more than three times — a clinic “Export all” button, notification fan-out, or GraphQL aliases later in 7.1. `allow` is a **per-person resource account** on the export action — not A disabled button in the browser, an IP bucket, a CAPTCHA, or autoscaling.
 

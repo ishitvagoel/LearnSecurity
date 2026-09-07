@@ -9,7 +9,7 @@ The notes app unpacks files and copies bytes into a destination. **Integrity of 
 
 > `copy_into(4, b"abcdefgh", 4)` must return a destination whose length is at most 4. A short honest copy may fit.
 
-What must not happen is **a copy that exceeds the destination**. This elective is a Python length stand-in. It is not a C exploit course.
+The copy is longer than the destination buffer. This elective is a Python length stand-in. It is not a C exploit course.
 
 Manufacturer guidance that tells a company to prefer memory-safe languages is not the lab check. Unstructured data handled so it does not become an unexpected overwrite. Native unpackers and leftover C codecs are leftover risk, later and harder — not this check. Do not invent a “memory safety” chapter id as the rule.
 

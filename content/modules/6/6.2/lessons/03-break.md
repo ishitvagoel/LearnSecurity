@@ -15,7 +15,7 @@ Stay inside `labs/6.2/6.2-lab`. Fake titles only. It does not open a browser. Do
 
 Do not paste this exercise onto a public page, employer CMS, or live clinic portal.
 
-What must not happen: **unencoded markup reaches the HTML interpreter**. `render` leaves `<` as a tag delimiter, so the extra-tag marker `"<img"` remains in the output.
+`render` leaving `<` as a tag delimiter is **unencoded markup in the HTML interpreter** — the extra-tag marker `"<img"` remains in the output.
 
 Picture a member (or a stored title) who can supply a string containing `<` — a clinic nickname on a shared board, or markdown left raw (2.1). `render` is supposed to encode for the **HTML text** context. A content-security header in report-only mode, cleaning after `innerHTML`, and React JSX defaults are not in what you trust for this rule.
 

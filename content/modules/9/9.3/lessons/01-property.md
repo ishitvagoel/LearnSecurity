@@ -9,7 +9,7 @@ The notes app has a who-is-allowed check: a member of company B must not read a 
 
 > `is_security_test({"status_asserted": True})` must be false. A row that names `forbidden_outcome` may count.
 
-So what must not happen: **HTTP 200-only test counted as a security test**. That is honesty of the test suite — lesson 9.1 can mark the isolation row “covered” with a test that never isolates.
+Do not count an **HTTP 200-only test as a security test**. That is honesty of the test suite — lesson 9.1 can mark the isolation row “covered” with a test that never isolates.
 
 Checklists tell you *what* to consider (who is allowed, sessions, storage). They do not make `assert r.status_code == 200` a security test. If you add a race-condition test, it still needs a named what must not happen (“the race must not grant”), not “the fuzzer ran.”
 
@@ -31,7 +31,7 @@ flowchart LR
   Cross[cross-company GET] --> Reality[never asserted]
 ```
 
-**A tool, not the rule:** line coverage, a testing-guide checkbox, lint, a fuzzer with no named bad result.
+Line coverage, a testing-guide checkbox, lint, and a fuzzer with no named bad result do not make a 200-only row a security test.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

@@ -13,7 +13,7 @@ The practice is not a website you attack. `allow_share` treats a leftover sessio
 
 Stay inside `labs/6.3/6.3-lab`. Origins `https://evil.example` and `https://app.securecollab.test` are fake inputs to `allow_share`. It does not open a browser. Do not visit a lookalike page, an employer share endpoint, or a classmate preview as this exercise.
 
-What must not happen: a cross-site POST that changes a share, authorized by cookie alone. `allow_share("https://evil.example", expected, token=None)` returns true.
+`allow_share("https://evil.example", expected, token=None)` returning true is a cookie-only share POST.
 
 Picture a foreign origin that can cause the victim browser to POST while the session cookie is leftover — a clinic “share with partner” button the person did not click on this site. `allow_share` is supposed to require cookie **and** origin match **and** a matching CSRF token — not SameSite=Lax, CORS, or “the user is logged in”.
 

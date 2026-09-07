@@ -81,7 +81,7 @@ Maturity scores, scanner yellow, and “256-bit” do not belong in the leftover
 
 ## Practice
 
-The file to label is `recovery.py` under `labs/1.4/1.4-risk-register`. Write down rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
+Open `recovery.py` under `labs/1.4/1.4-risk-register`. Write down rule, person, harm, control, leftover, owner, trigger, and evidence. No real people’s data.
 
 ## Use it somewhere new
 

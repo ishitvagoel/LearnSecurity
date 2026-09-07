@@ -15,7 +15,7 @@ Stay inside `labs/6.4/6.4-lab`. Fake names under the lab folder `/tmp/sc-lab`. T
 
 Do not open a live upload folder. Do not walk a public filesystem. Do not point this exercise at an employer imaging store, a classmate preview, or anyone else’s disk.
 
-What must not happen: a resolved path leaves the lab folder. `resolve("../outside")` joins onto `/tmp/sc-lab` and, after canonicalize, is no longer that folder or a child of it.
+`resolve("../outside")` leaving `/tmp/sc-lab` after canonicalize is the escaped path.
 
 Picture a member who can supply an upload **filename** (data) — a clinic scan name, a zip member path (leftover, later and harder), or `UploadFile.filename` from Starlette. `resolve` joins, canonicalizes, and denies unless the object is still `/tmp/sc-lab` or a child — not A denylist of `..`, a UUID filename sticker, or `Content-Type`.
 

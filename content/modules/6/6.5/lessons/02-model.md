@@ -59,7 +59,7 @@ A missing “link-local metadata × fetch × deny” row is how a scheme-only ch
 
 ## Practice
 
-The file to label is `ssrf.py` under `labs/6.5/6.5-lab`. Fake URLs only. Do not fetch.
+Draw on `ssrf.py` under `labs/6.5/6.5-lab`. Fake URLs only. Do not fetch.
 
 ## Use it somewhere new
 

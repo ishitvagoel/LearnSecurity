@@ -15,7 +15,7 @@ Stay inside `labs/7.4/7.4-lab`. Fake job dicts (`alice`, `worker-sc`). It does n
 
 Do not attach to a public broker. Do not probe an employer queue. Do not probe a classmate preview. Do not paste a live cookie “to see what happens.”
 
-What must not happen: a user session accepted as worker identity. `exporter({"user_session": "alice", "service": None})` returns `"alice"`.
+`exporter({"user_session": "alice", "service": None})` returning `"alice"` is leftover user identity on the worker.
 
 Picture a leftover cookie stuffed into a job, or inherited request context — a clinic “Export overnight” that copies the clinician cookie into the task so “the job knows who asked.” `exporter` authenticates as a **named service principal** — not A private network, an “internal” queue, or a zero-trust dashboard.
 

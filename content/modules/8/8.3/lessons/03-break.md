@@ -15,7 +15,7 @@ Stay inside `labs/8.3/8.3-lab`. Fake query dicts (`as`, `note`) land in `open_li
 
 Do not paste this exercise onto a public app, employer clinic, or live EHR.
 
-What must not happen: **`as=admin` switches the session**. After `open_link({"as": "admin"})`, `current_user()` is `"admin"`.
+After `open_link({"as": "admin"})`, `current_user()` `"admin"` is the **`as=` switch**.
 
 Picture another app on the tablet sending extras, or a crafted link — a clinic kiosk demo `as=doctor`, an exported Activity, or a WebView that forwards query identity. `open_link` is supposed to treat extras as **data** (2.1 / 7.1); the session stays server-issued (4.3) — not Verified App Links, `https`, or `exported=false` without a test.
 

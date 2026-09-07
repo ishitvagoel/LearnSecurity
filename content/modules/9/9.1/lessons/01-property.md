@@ -11,7 +11,7 @@ Coverage is a check over tests. The row must name a test that **asserts isolatio
 
 > `covered("AUTHZ-1", [{"req": "AUTHZ-1", "asserts_isolation": False}])` must be false.
 
-What must not happen: **a status-only row counted as AUTHZ-1 coverage**. That is honesty of the proof you show before a release. If the checkbox is green while the isolation test is missing, company-B holes ship with a green sticker.
+AUTHZ-1 can be marked covered by a status-only row. That is honesty of the proof you show before a release. If the checkbox is green while the isolation test is missing, company-B holes ship with a green sticker.
 
 A pasted industry checklist is inventory. It is not a tailored matrix. The usual web/API checklist is a backbone you still have to map. An extra advanced row — for example “permission changes apply immediately, including serializers” — still needs a test if you raise it. A development-practice guide that says “test the running code against the requirements” is vocabulary, not a finished check-in. A later draft of that guide stays a **draft**.
 
@@ -33,7 +33,7 @@ flowchart LR
   Paste --> False[false assurance]
 ```
 
-**A tool, not the rule:** the PDF, a tracker “done” column, a pytest-cov percentage, or a practice-guide attestation.
+The PDF, a tracker “done” column, a pytest-cov percentage, and a practice-guide attestation do not put an isolation assert on AUTHZ-1.
 
 ## Why it happens, what it costs, how you stop it, how you notice, how you recover
 

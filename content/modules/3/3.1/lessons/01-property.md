@@ -13,7 +13,7 @@ A log line for `note_read` is a lower-trust store than the note table. Operators
 
 A sink is a place the field can land: the note table, a log line, an error dump.
 
-So what must not happen: **the confidential body in a lower-trust store**. `log_event("note_read", "tenant-A-secret-body")` must not include `tenant-A-secret-body`. That is a secrecy and privacy failure of the body.
+`log_event("note_read", "tenant-A-secret-body")` must not include `tenant-A-secret-body` — **the confidential body in a lower-trust store**. That is a secrecy and privacy failure of the body.
 
 Industry lists ask you to name sensitive data and to say how each level is logged. They do not redact this logger.
 

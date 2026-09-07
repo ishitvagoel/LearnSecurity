@@ -15,7 +15,7 @@ Stay inside `labs/7.2/7.2-lab`. Fake roles (`member`, `service`) and field names
 
 Do not paste this exercise onto a public GraphQL host, employer EHR, or live clinic API.
 
-What must not happen: **a member resolves `secret_internal`**. `resolve("member", "secret_internal")` returns true.
+`resolve("member", "secret_internal")` returning true is **a member resolving `secret_internal`**.
 
 Picture a member session selecting extra fields — a clinic GraphQL `Patient { ssn }`, a REST `?fields=` dump, or a CSV exporter that serializes every ORM column. `resolve` is supposed to be a **role × field table** at the trusted layer — not A SPA that omits the column, a UUID in the URL, or GraphQL `@hide` the client can skip.
 

@@ -9,7 +9,7 @@ The notes app already carries a session from the last lesson. That session must 
 
 > `session_from_request({"access_token": "secret"}, {}, None)` must return `None`. A session may come from the cookie `sc_session` or from an Authorization header. Uvicorn access logs will store query strings. A JWT sitting in localStorage is a different leak: scripts can read it.
 
-What must not happen is a **session started from a query-string token**. The session secret is no longer secret. Anyone who can see the URL can then act as that person.
+Ban a **session started from a query-string token**. The session secret is no longer secret. Anyone who can see the URL can then act as that person.
 
 Secrets belong in the body or headers, not in the URL. Use a referrer policy so path and query do not leak to other sites. Session cookies that scripts cannot read still need HttpOnly. Putting an OAuth token in the URL the old implicit-grant way is obsolete. Copying that pattern is not those checklists.
 

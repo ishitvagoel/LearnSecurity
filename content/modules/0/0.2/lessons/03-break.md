@@ -8,7 +8,7 @@
 
 `labs/0.2/0.2-bridge` only. The practice files check a function called `quiz_score_grants_phase1_skip`. Scores are fake. Do **not** attack a school LMS, vendor quiz, production HR onboarding, or a public cert portal as the exercise. Do not treat a badge screenshot as this practice.
 
-What must not happen: using a quiz score as permission to skip 1.2 or check-in 1. `quiz_score_grants_phase1_skip(100)` returns true.
+`quiz_score_grants_phase1_skip(100)` returning true is a quiz score used as a 1.2 skip.
 
 Picture a hurried learner or hiring manager who can supply a high score — “they’re a senior hire,” “job-title competency,” or “the LMS dashboard is green.” The skip function refuses part-1 rule skips. An LMS percentage, a vendor cert, and a job-title mapping are not that trust.
 
