@@ -50,7 +50,7 @@ Two classes on one card is the point.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/3.1/3.1-lab`. Do not fetch a clinic, dump a production drain, or use real patient identifiers.
+Redact the clinic log the way you redact the note. Keep the answer keys closed. The only running system you may break is `labs/3.1/3.1-lab`. Do not fetch a clinic, dump a production drain, or use real patient identifiers.
 
 ## What this page is not doing
 

@@ -59,7 +59,7 @@ Also name ransomware restore vs note-level integrity.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/10.5/10.5-lab` is the only running system you may break. Do not query a live SIEM.
+Prove restore ran before you close the incident. Keep the answer keys closed. `labs/10.5/10.5-lab` is the only running system you may break. Do not query a live SIEM.
 
 ## What this page is not doing
 

@@ -44,7 +44,7 @@ A private subnet does not compare `tB` to `tA`. The replica is a second lane: in
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/3.3/3.3-lab` is the only running system you may break. Do not deploy a function or open a replica.
+Split migrate from serve on the GRANT line. Keep the answer keys closed. `labs/3.3/3.3-lab` is the only running system you may break. Do not deploy a function or open a replica.
 
 ## What this page is not doing
 

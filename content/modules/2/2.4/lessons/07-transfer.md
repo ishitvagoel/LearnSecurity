@@ -44,7 +44,7 @@ Locking so a limited quantity cannot be booked twice. That is the clinic transfe
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/2.4/2.4-state-time` is the only running system you may break. A worker retry of a share that was **taken back** is an acceptable extra sentence pointing at a later topic. Do not fetch a clinic, a payment sandbox you do not own, or a public invite API.
+Lock the last slot the way you lock a share. Keep the answer keys closed. `labs/2.4/2.4-state-time` is the only running system you may break. A worker retry of a share that was **taken back** is an acceptable extra sentence pointing at a later topic. Do not fetch a clinic, a payment sandbox you do not own, or a public invite API.
 
 ## What this page is not doing
 

@@ -58,7 +58,7 @@ Use fake labels. Do not use real patient findings.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/9.4/9.4-lab` is the only running system you may break. Do not scan a public host.
+Map every HIGH before you ship. Keep the answer keys closed. `labs/9.4/9.4-lab` is the only running system you may break. Do not scan a public host.
 
 ## What this page is not doing
 

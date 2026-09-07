@@ -59,7 +59,7 @@ Use fake labels. Do not use real patient names. Also name the E6 exception path.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/10.1/10.1-lab` is the only running system you may break. Do not change a live org.
+Put a threat-model id on the identity change. Keep the answer keys closed. `labs/10.1/10.1-lab` is the only running system you may break. Do not change a live org.
 
 ## What this page is not doing
 

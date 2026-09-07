@@ -734,8 +734,10 @@ const PROSE_PHRASES: [RegExp, string][] = [
     /may pass on both implementations; that does not excuse the /g,
     "may pass on both sides; you still have to deny the ",
   ],
-  [/One page\. No answer keys\. /g, "Write one page. Leave the answer keys closed. "],
-  [/One page\. No keys\. /g, "Write one page. Leave the keys closed. "],
+  [/One page\. No answer keys\. /g, "Keep the answer keys closed. "],
+  [/One page\. No keys\. /g, "Keep the answer keys closed. "],
+  [/Write one page\. Leave the answer keys closed\. /g, "Keep the answer keys closed. "],
+  [/Write one page\. Leave the keys closed\. /g, "Keep the answer keys closed. "],
   [/Why it happens vs what it costs stays split here too: the /g, "The "],
   [
     /Why it happens, what it costs, how you stop it, how you notice, how you recover stays split here too: the /g,

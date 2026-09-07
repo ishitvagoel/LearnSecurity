@@ -57,7 +57,7 @@ Use synthetic lab names. Do not instruct attacks on real hospital or vendor endp
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/7.3/7.3-lab`. Do not POST a public host.
+Reject the callback that is missing a MAC. Keep the answer keys closed. The only running system you may break is `labs/7.3/7.3-lab`. Do not POST a public host.
 
 ## What this page is not doing
 

@@ -55,7 +55,7 @@ A diagram of grammars is a later architecture bar. It does not make duplicate ke
 
 ## Practice
 
-Write one page. Leave the keys closed. The practice `labs/2.1/2.1-parser-boundaries` stays the only running system you may break. Multipart filename encoding (two readers on the same bytes) is an acceptable alternate sketch pointing at a later upload topic — still local, still fake data.
+Show two readers on the same bytes. Keep the answer keys closed. The practice `labs/2.1/2.1-parser-boundaries` stays the only running system you may break. Multipart filename encoding (two readers on the same bytes) is an acceptable alternate sketch pointing at a later upload topic — still local, still fake data.
 
 ## What this page is not doing
 

@@ -58,7 +58,7 @@ Also name known-exploited list vs internal-only.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/9.5/9.5-lab` is the only running system you may break. Do not pentest a public host.
+Retest the same bad URL before you close. Keep the answer keys closed. `labs/9.5/9.5-lab` is the only running system you may break. Do not pentest a public host.
 
 ## What this page is not doing
 

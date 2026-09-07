@@ -51,7 +51,7 @@ flowchart LR
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/8.3/8.3-lab` is the only running system you may break. Do not send Intents at a public host.
+Ignore `as=` on the incoming link. Keep the answer keys closed. `labs/8.3/8.3-lab` is the only running system you may break. Do not send Intents at a public host.
 
 ## What this page is not doing
 

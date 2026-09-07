@@ -51,7 +51,7 @@ If offboard only hits the badge, the chart cookie still reads. Identity guidance
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/4.1/4.1-lab`. Do not disable a real badge or replay a chart cookie.
+Kill the chart cookie when the badge is gone. Keep the answer keys closed. The only running system you may break is `labs/4.1/4.1-lab`. Do not disable a real badge or replay a chart cookie.
 
 ## What this page is not doing
 

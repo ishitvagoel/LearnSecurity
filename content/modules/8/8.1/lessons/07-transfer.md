@@ -51,7 +51,7 @@ A client claim plus a failing attest still has to be false. A server-pass may st
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/8.1/8.1-lab` is the only running system you may break. Do not instrument a public device.
+Ignore the client `premium` boolean on export. Keep the answer keys closed. `labs/8.1/8.1-lab` is the only running system you may break. Do not instrument a public device.
 
 ## What this page is not doing
 

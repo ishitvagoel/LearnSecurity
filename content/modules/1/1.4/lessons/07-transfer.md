@@ -54,7 +54,7 @@ A bank “fixes” mouse-only by offering support that will read the one-time co
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/1.4/1.4-risk-register`.
+Bind the recovery confirm on one page. Keep the answer keys closed. The only running system you may break is `labs/1.4/1.4-risk-register`.
 
 ## What this page is not doing
 

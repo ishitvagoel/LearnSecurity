@@ -56,7 +56,7 @@ Use fake labels. Do not use real patient names.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/8.5/8.5-lab` is the only running system you may break. Do not call a public vendor.
+Omit the note from the crash report. Keep the answer keys closed. `labs/8.5/8.5-lab` is the only running system you may break. Do not call a public vendor.
 
 ## What this page is not doing
 

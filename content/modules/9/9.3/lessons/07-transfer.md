@@ -56,7 +56,7 @@ Use fake labels. Do not use real patient names.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/9.3/9.3-lab` is the only running system you may break. Do not fuzz a public host.
+Name the bad result, not a 200-only suite. Keep the answer keys closed. `labs/9.3/9.3-lab` is the only running system you may break. Do not fuzz a public host.
 
 ## What this page is not doing
 

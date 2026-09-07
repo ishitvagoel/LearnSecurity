@@ -47,7 +47,7 @@ User filenames still need a hard check. That is the clinic transfer. Neither sen
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/6.4/6.4-lab` is the only running system you may break. Do not open host files outside the lab folder. Do not fetch a live imaging folder, a classmate preview, or a public upload API.
+Keep `..` under the upload folder. Keep the answer keys closed. `labs/6.4/6.4-lab` is the only running system you may break. Do not open host files outside the lab folder. Do not fetch a live imaging folder, a classmate preview, or a public upload API.
 
 ## What this page is not doing
 

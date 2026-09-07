@@ -53,7 +53,7 @@ Use fake labels. Do not use real patient charts.
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/8.2/8.2-lab` is the only running system you may break. Do not image a public or personal device.
+Keep the cached note off the disk in plaintext. Keep the answer keys closed. `labs/8.2/8.2-lab` is the only running system you may break. Do not image a public or personal device.
 
 ## What this page is not doing
 

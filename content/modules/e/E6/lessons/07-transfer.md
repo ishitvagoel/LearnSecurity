@@ -59,7 +59,7 @@ Also name a procurement questionnaire vs this record.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/E6/e6-lab` is the only running system you may break. Do not contact a live disclosure inbox.
+Fill owner and `review_by` before you accept the exception. Keep the answer keys closed. `labs/E6/e6-lab` is the only running system you may break. Do not contact a live disclosure inbox.
 
 ## What this page is not doing
 

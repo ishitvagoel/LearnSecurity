@@ -56,7 +56,7 @@ Use fake labels. Do not use real clinic secrets. Also name GitHub Actions `actio
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/10.2/10.2-lab` is the only running system you may break. Do not fetch a live package.
+Compare digests; do not install by name. Keep the answer keys closed. `labs/10.2/10.2-lab` is the only running system you may break. Do not fetch a live package.
 
 ## What this page is not doing
 

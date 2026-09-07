@@ -58,7 +58,7 @@ Also name the full notes-app slice (API + worker + phone cache).
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/11/11-lab` is the only running system you may break. Do not hit a live tenant.
+Prove B cannot read after the share is gone. Keep the answer keys closed. `labs/11/11-lab` is the only running system you may break. Do not hit a live tenant.
 
 ## What this page is not doing
 

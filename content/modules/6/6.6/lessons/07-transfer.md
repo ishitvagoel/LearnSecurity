@@ -52,7 +52,7 @@ If the mail link always returns 200 and never writes used, the hole is open. A m
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/6.6/6.6-lab`. Do not click a live invite.
+Consume the invite so the second accept is false. Keep the answer keys closed. The only running system you may break is `labs/6.6/6.6-lab`. Do not click a live invite.
 
 ## What this page is not doing
 

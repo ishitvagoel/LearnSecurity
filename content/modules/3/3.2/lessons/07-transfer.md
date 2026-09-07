@@ -44,7 +44,7 @@ Question two now includes content leak and number-swap even if every HTTP scanne
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/3.2/3.2-lab` is the only running system you may break. You may also name webhook threats as a second optional paragraph — still no live targets.
+Put SMS reminders on the threat map. Keep the answer keys closed. `labs/3.2/3.2-lab` is the only running system you may break. You may also name webhook threats as a second optional paragraph — still no live targets.
 
 ## What this page is not doing
 

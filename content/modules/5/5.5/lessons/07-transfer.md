@@ -53,7 +53,7 @@ The lookup helper returns `(sql, params)` (or an ORM bound construct), not a con
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/5.5/5.5-lab`. Do not probe a live database.
+Bind the report query the way you bound `fetch_sql`. Keep the answer keys closed. The only running system you may break is `labs/5.5/5.5-lab`. Do not probe a live database.
 
 ## What this page is not doing
 

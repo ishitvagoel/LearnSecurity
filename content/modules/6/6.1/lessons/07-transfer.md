@@ -53,7 +53,7 @@ The spawn helper returns a list whose program is not `sh`, and the name is one e
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/6.1/6.1-lab`. Do not execute argv or run a live worker.
+Keep the export helper as argv, not `sh -c`. Keep the answer keys closed. The only running system you may break is `labs/6.1/6.1-lab`. Do not execute argv or run a live worker.
 
 ## What this page is not doing
 

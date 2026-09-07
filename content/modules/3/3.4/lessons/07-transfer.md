@@ -44,7 +44,7 @@ Awareness-list names may appear in a regression checklist after the machine exis
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/3.4/3.4-lab` is the only running system you may break. Do not load-test a clinic or an invite API.
+Cap guardians at three, same shape as five shares. Keep the answer keys closed. `labs/3.4/3.4-lab` is the only running system you may break. Do not load-test a clinic or an invite API.
 
 ## What this page is not doing
 

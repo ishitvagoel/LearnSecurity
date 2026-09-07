@@ -44,7 +44,7 @@ Checking every path still means the native copy itself is bounded. A language st
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/E4/e4-lab` is the only running system you may break. Do not compile a native overflow.
+Cap the copy at `min(bufsize, declared_len, len(src))`. Keep the answer keys closed. `labs/E4/e4-lab` is the only running system you may break. Do not compile a native overflow.
 
 ## What this page is not doing
 

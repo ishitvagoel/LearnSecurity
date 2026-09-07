@@ -53,7 +53,7 @@ Link-local and loopback still have to be false; only the named lab (or clinic) h
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/6.5/6.5-lab`. Do not fetch.
+Deny the link-local preview fetch. Keep the answer keys closed. The only running system you may break is `labs/6.5/6.5-lab`. Do not fetch.
 
 ## What this page is not doing
 

@@ -51,7 +51,7 @@ flowchart LR
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/7.1/7.1-lab` is the only running system you may break. Do not probe a public host.
+Drop `is_staff` from the patient PATCH. Keep the answer keys closed. `labs/7.1/7.1-lab` is the only running system you may break. Do not probe a public host.
 
 ## What this page is not doing
 

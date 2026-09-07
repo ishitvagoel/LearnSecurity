@@ -52,7 +52,7 @@ A reverse proxy that sets `X-Forwarded-Proto` is an acceptable extra sentence: t
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/2.2/2.2-request-path`.
+Key the cache by path and company. Keep the answer keys closed. The only running system you may break is `labs/2.2/2.2-request-path`.
 
 ## What this page is not doing
 

@@ -54,7 +54,7 @@ Naming Okta, “we use SSO,” or a step-up checkbox on the real portal is not t
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/4.2/4.2-lab` is the only running system you may break. Do not visit a lookalike identity provider or export from a live EHR.
+Make a password at a lookalike fail. Keep the answer keys closed. `labs/4.2/4.2-lab` is the only running system you may break. Do not visit a lookalike identity provider or export from a live EHR.
 
 ## What this page is not doing
 

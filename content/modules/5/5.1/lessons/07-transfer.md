@@ -53,7 +53,7 @@ After patient delete, appointment-card notes and the analytics export still have
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/5.1/5.1-lab`. Do not query a live warehouse or paste a chart into a ticket.
+Walk every leftover copy of the appointment card. Keep the answer keys closed. The only running system you may break is `labs/5.1/5.1-lab`. Do not query a live warehouse or paste a chart into a ticket.
 
 ## What this page is not doing
 

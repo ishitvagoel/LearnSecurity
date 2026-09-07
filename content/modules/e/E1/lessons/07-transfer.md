@@ -58,7 +58,7 @@ Also name a coding assistant in CI.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/E1/e1-lab` is the only running system you may break. Do not call a live model.
+Keep `exec_sql` off the always-run list. Keep the answer keys closed. `labs/E1/e1-lab` is the only running system you may break. Do not call a live model.
 
 ## What this page is not doing
 

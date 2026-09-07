@@ -55,7 +55,7 @@ A small clinic app with an “Export all” button that is disabled in the brows
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/6.7/6.7-lab`. Do not load-test a public host.
+Deny the fourth export in the window. Keep the answer keys closed. The only running system you may break is `labs/6.7/6.7-lab`. Do not load-test a public host.
 
 ## What this page is not doing
 

@@ -55,7 +55,7 @@ Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrap
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/5.2/5.2-lab`. Do not decode a live column.
+Treat a Base64 SSN column as not encrypted. Keep the answer keys closed. The only running system you may break is `labs/5.2/5.2-lab`. Do not decode a live column.
 
 ## What this page is not doing
 

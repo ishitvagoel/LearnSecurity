@@ -52,7 +52,7 @@ Header https plus socket http still has to be false. Enabling a CDN “HTTPS onl
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/5.4/5.4-lab`. Do not probe a live host or paste cookies into a ticket.
+Prove the socket, not the `https://` in the page. Keep the answer keys closed. The only running system you may break is `labs/5.4/5.4-lab`. Do not probe a live host or paste cookies into a ticket.
 
 ## What this page is not doing
 

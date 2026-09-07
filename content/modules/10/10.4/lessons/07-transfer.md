@@ -58,7 +58,7 @@ Also name a feature flag that turns off authorization.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/10.4/10.4-lab` is the only running system you may break. Do not boot a live host.
+Refuse the boot that still has debug on. Keep the answer keys closed. `labs/10.4/10.4-lab` is the only running system you may break. Do not boot a live host.
 
 ## What this page is not doing
 

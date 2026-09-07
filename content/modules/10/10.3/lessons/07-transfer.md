@@ -58,7 +58,7 @@ Also name serverless IAM `*`.
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/10.3/10.3-lab` is the only running system you may break. Do not apply manifests to a live cluster.
+Deny the pod that is cluster-admin. Keep the answer keys closed. `labs/10.3/10.3-lab` is the only running system you may break. Do not apply manifests to a live cluster.
 
 ## What this page is not doing
 

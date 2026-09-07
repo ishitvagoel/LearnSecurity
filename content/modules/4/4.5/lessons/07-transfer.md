@@ -41,7 +41,7 @@ TLS on the hop does not name the audience. Authlib signature-ok does not compare
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/4.5/4.5-lab` is the only running system you may break. Do not replay a live FHIR token or register a malicious custom scheme against a real app.
+Reject a FHIR token minted for another hospital. Keep the answer keys closed. `labs/4.5/4.5-lab` is the only running system you may break. Do not replay a live FHIR token or register a malicious custom scheme against a real app.
 
 ## Can people still use it
 

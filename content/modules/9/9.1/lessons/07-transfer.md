@@ -56,7 +56,7 @@ Use fake labels. Do not use real patient names. Also name the mobile storage row
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/9.1/9.1-lab` is the only running system you may break. Do not scrape a public checklist.
+Attach an isolation test to the HIPAA done column. Keep the answer keys closed. `labs/9.1/9.1-lab` is the only running system you may break. Do not scrape a public checklist.
 
 ## What this page is not doing
 

@@ -51,7 +51,7 @@ The nickname is the title in the badge. If the nickname is concatenated into an 
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/6.2/6.2-lab` is the only running system you may break. Do not load a live board or paste attack recipes.
+Encode `<` in the title before you talk about CSP. Keep the answer keys closed. `labs/6.2/6.2-lab` is the only running system you may break. Do not load a live board or paste attack recipes.
 
 ## What this page is not doing
 

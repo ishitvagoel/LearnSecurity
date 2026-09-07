@@ -51,7 +51,7 @@ Report-Only still has to be denied. Enforcing CSP may still count. Adding Report
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/E2/e2-lab` is the only running system you may break. Do not load a live page.
+Turn Report-Only into enforcement, not a HIPAA sticker. Keep the answer keys closed. `labs/E2/e2-lab` is the only running system you may break. Do not load a live page.
 
 ## What this page is not doing
 

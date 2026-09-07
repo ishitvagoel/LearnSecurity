@@ -43,7 +43,7 @@ The leaked string still has to be false after rotate, and a missing current stil
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/5.3/5.3-lab` is the only running system you may break. Do not fetch a live gist or paste a key into a ticket.
+Kill the gist that still holds `DEFAULT`. Keep the answer keys closed. `labs/5.3/5.3-lab` is the only running system you may break. Do not fetch a live gist or paste a key into a ticket.
 
 ## Can people still use it
 

@@ -51,7 +51,7 @@ Debug plus ok still has to be false. Release plus ok may still be true. Turning 
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/8.4/8.4-lab` is the only running system you may break. Do not unpack a public APK.
+Keep the debug build off the prod export. Keep the answer keys closed. `labs/8.4/8.4-lab` is the only running system you may break. Do not unpack a public APK.
 
 ## What this page is not doing
 

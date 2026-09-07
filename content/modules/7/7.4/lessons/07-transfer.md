@@ -55,7 +55,7 @@ A small clinic app with “Export overnight” that copies the clinician cookie 
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/7.4/7.4-lab`. Do not attach to a public broker.
+Run the export as the worker, not Alice’s cookie. Keep the answer keys closed. The only running system you may break is `labs/7.4/7.4-lab`. Do not attach to a public broker.
 
 ## What this page is not doing
 

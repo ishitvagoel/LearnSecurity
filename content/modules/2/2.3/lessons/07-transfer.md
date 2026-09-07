@@ -58,7 +58,7 @@ The same session is copied into a WebView that exposes cookies to injected JS.
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/2.3/2.3-browser-policy` is the only running system you may break.
+Treat the portal cookie like `sc_session`. Keep the answer keys closed. `labs/2.3/2.3-browser-policy` is the only running system you may break.
 
 ## What this page is not doing
 

@@ -55,7 +55,7 @@ Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Format
 
 ## Practice
 
-Write one page. Leave the answer keys closed. The only running system you may break is `labs/9.2/9.2-lab`. Do not run eval on untrusted input.
+Reject `eval` on the user string in review. Keep the answer keys closed. The only running system you may break is `labs/9.2/9.2-lab`. Do not run eval on untrusted input.
 
 ## What this page is not doing
 

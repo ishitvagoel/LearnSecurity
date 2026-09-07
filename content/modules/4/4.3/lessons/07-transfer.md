@@ -43,7 +43,7 @@ Query `access_token` (or `?token=` on the appointment SMS) yields `None`, while 
 
 ## Practice
 
-Write one page. Leave the keys closed. `labs/4.3/4.3-lab` is the only running system you may break. Do not click a live appointment SMS or dump mail logs.
+Keep the appointment token out of the URL. Keep the answer keys closed. `labs/4.3/4.3-lab` is the only running system you may break. Do not click a live appointment SMS or dump mail logs.
 
 ## What this page is not doing
 

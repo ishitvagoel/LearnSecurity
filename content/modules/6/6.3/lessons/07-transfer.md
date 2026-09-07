@@ -44,7 +44,7 @@ A foreign origin without a token still has to be false, and same origin without 
 
 ## Practice
 
-Write one page. Leave the answer keys closed. `labs/6.3/6.3-lab` is the only running system you may break. Do not visit a live foreign origin.
+Bind origin and token on the share POST. Keep the answer keys closed. `labs/6.3/6.3-lab` is the only running system you may break. Do not visit a live foreign origin.
 
 ## What this page is not doing
 
