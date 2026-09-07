@@ -9,7 +9,7 @@ A green dashboard does not map HIGH findings. Muting a scanner finding does not 
 
 The structural change is: `ship_ok` **is false unless every HIGH `id` is a key in `mappings`**. Missing map is deny. Structural means that join — not “the dashboard is green,” not a vendor default setup, not a maturity score.
 
-The smallest fix for the notes app’s ship gate is: HIGH plus empty map → deny. LOW and INFO without a map may still ship in this lab — name that leftover. Do not fail open because the scanner job ran. Do not accept “dashboard is green” as a mapping.
+Restore the notes app’s ship gate with this: HIGH plus empty map → deny. LOW and INFO without a map may still ship in this lab — name that leftover. Do not allow just because the scanner job ran. Do not accept “dashboard is green” as a mapping.
 
 ## Picture: HIGH gate
 

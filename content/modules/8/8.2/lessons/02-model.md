@@ -55,7 +55,7 @@ flowchart LR
 
 ## Practice
 
-Open `disk.py` under `labs/8.2/8.2-lab`. Label the store even in the repaired tree — the fix is the ciphertext stand-in, not pretending a private folder became encryption.
+Open `disk.py` under `labs/8.2/8.2-lab`. After repair, the store is still there: the restore is the ciphertext stand-in, not a private folder as encryption.
 
 ## Use it somewhere new
 

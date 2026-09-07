@@ -72,7 +72,7 @@ Do not add public JSON bombs or live Unicode weaponization. Those are out of sco
 
 ## Practice
 
-Open `parse_note.py` under `labs/2.1/2.1-parser-boundaries`. Label the first-key scan and `json.loads` as two readers even in the repaired tree — the fix is agreement-or-refuse, not pretending the scan became JSON.
+Open `parse_note.py` under `labs/2.1/2.1-parser-boundaries`. After repair, the first-key scan and `json.loads` are still two readers. The restore is agreement-or-refuse, not the scan as JSON.
 
 ## Use it somewhere new
 

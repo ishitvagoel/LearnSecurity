@@ -9,7 +9,7 @@ Verified App Links do not ignore `as=admin`. An https scheme does not ignore it.
 
 The structural change is: `open_link` **does not copy identity keys onto `current_user`**. Locators such as `note=` may be honored later; this practice ignores extras entirely as the smallest fix. Ignore identity parameters on links.
 
-The smallest fix for the notes app’s App Links is: `as=admin` keeps alice. Fail-safe: unknown keys do not switch users. Do not fail open because the Activity was exported “for sharing.”
+Restore the notes app’s App Links with this: `as=admin` keeps alice. Fail-safe: unknown keys do not switch users. Do not count it as a pass because the Activity was exported “for sharing.”
 
 ## Picture: extras never become the principal
 

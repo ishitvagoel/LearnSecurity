@@ -9,7 +9,7 @@ Last week’s test names are not a “what must not happen” assert. Hiding a c
 
 The structural change is: `is_security_test` **requires `forbidden_outcome`**. HTTP 200 alone is a product test. Structural means that flag — not line coverage, not testing-guide membership, not “status asserted and we listed a guide id.”
 
-The smallest fix for the notes app’s isolation suite is: 200-only → not a security test. Fail-safe: missing flag is false. Do not fail open because coverage is 94%. Do not accept a fuzzer with no named bad result as the flag.
+The check in the notes app’s isolation suite: 200-only → not a security test. Fail-safe: missing flag is false. Do not open the door because coverage is 94%. Do not accept a fuzzer with no named bad result as the flag.
 
 ## Picture: shape gate
 

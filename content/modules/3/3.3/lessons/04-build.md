@@ -7,7 +7,7 @@
 
 `can_select("app", "tB", "tA")` must be false. Structural means the runtime role’s check (lab) or a later row-level rule actually compares company — not a denylist of ids, not “trust the handler,” not a comment “row-level security later,” not a private network, not a microservice box on a slide.
 
-The smallest fix for notes is: only role `app` may SELECT at runtime, and only when the caller’s company equals `note_tenant`. Fail closed: unknown role denies. Own company still allows. Runtime connection is `app`, not `postgres` or `migrator`.
+The check in notes: only role `app` may SELECT at runtime, and only when the caller’s company equals `note_tenant`. Fail closed: unknown role denies. Own company still allows. Runtime connection is `app`, not `postgres` or `migrator`.
 
 ## Picture: deny unless same company
 

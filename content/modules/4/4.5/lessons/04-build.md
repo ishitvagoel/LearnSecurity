@@ -7,7 +7,7 @@
 
 `accept_token` must compare `aud` to `expected_aud`. Missing `aud` is deny. A list may contain the expected name; it must not succeed because `sub` exists. Structural means the audience is mediated — not “we use JWTs,” not Authlib defaults, not HTTPS, not “OpenID Connect is on.”
 
-The smallest fix for token acceptance is: empty expected audience, missing claim, or mismatch is **deny**. Then who-is-allowed on the note. ID-token `aud` equals `client_id` is a different check.
+The check in token acceptance: empty expected audience, missing claim, or mismatch is **deny**. Then who-is-allowed on the note. ID-token `aud` equals `client_id` is a different check.
 
 ## Picture: name match, then who-is-allowed
 

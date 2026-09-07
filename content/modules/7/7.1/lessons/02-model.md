@@ -56,7 +56,7 @@ A spec that does not match running code is leftover-endpoint awareness, not the 
 
 ## Practice
 
-Look at `patch.py` under `labs/7.1/7.1-lab`. Label the binder even in the repaired tree — the fix is the writable set, not pretending an OpenAPI file became the drop.
+Look at `patch.py` under `labs/7.1/7.1-lab`. After repair, the binder is still there: the writable set, not an OpenAPI file as the drop.
 
 ## Use it somewhere new
 

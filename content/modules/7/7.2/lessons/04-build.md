@@ -9,7 +9,7 @@ Hiding the column in the SPA does not hide `secret_internal` on the resolver. Gr
 
 The structural change is: the trusted layer **checks role × field**. `resolve` must deny `secret_internal` unless `role == "service"`. Structural means that predicate — not a hidden SPA column.
 
-The smallest fix for the notes app’s note JSON is: deny member × `secret_internal`. Fail closed: unknown roles deny the internal field. Do not fail open because the serializer cache still holds yesterday’s dump.
+Repair the notes app’s note JSON: deny member × `secret_internal`. Fail closed: unknown roles deny the internal field. Do not skip the deny because the serializer cache still holds yesterday’s dump.
 
 ## Picture: field deny unless listed
 

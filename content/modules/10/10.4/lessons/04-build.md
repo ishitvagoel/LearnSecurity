@@ -9,7 +9,7 @@ A `NODE_ENV` string does not turn debug off. A canary percentage is a traffic sp
 
 The structural change is: `boot_ok` **returns false when `env == "prod"` and `debug` is true**. Fail-safe: production with debug denies. `NODE_ENV` may sit next to a match; it does not replace it. Structural means that both-at-once check — not a canary, not an IaC file that exists, not “support asked for five minutes.”
 
-The smallest fix for the notes app’s FastAPI + Next.js compose is: prod + True → do not boot. Do not fail open because support asked for five minutes. Do not register debug routes after a denied boot.
+Put this in the notes app’s FastAPI + Next.js compose: prod + True → do not boot. Do not open the door because support asked for five minutes. Do not register debug routes after a denied boot.
 
 ## Picture: prod and debug together
 

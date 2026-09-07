@@ -54,7 +54,7 @@ Framework defaults help only at the constructors you actually use.
 
 ## Practice
 
-Draw text vs attribute vs JavaScript vs URL. Mark `html.py` under `labs/6.2/6.2-lab`. Label the sink as HTML text even in the repaired tree — the fix is encoding at that sink, not pretending a header became encoding.
+Draw text vs attribute vs JavaScript vs URL. Mark `html.py` under `labs/6.2/6.2-lab`. Encoding belongs at that sink after repair. A header is not encoding.
 
 ## Use it somewhere new
 

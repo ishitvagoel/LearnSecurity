@@ -11,7 +11,7 @@ The structural change is: the stored bytes are **not the body**. `save_note` mus
 
 The lab uses an `aead:` prefix plus length as a **stand-in** for Keystore-wrapped authenticated encryption — not a real cipher (5.2). Structural means that wrap.
 
-The smallest fix for the notes app’s offline cache is: `plaintext_on_disk()` false after save. Fail-safe: if wrap fails, **do not** fall back to plaintext. Do not fail open because Keystore was locked.
+The check in the notes app’s offline cache: `plaintext_on_disk()` false after save. Fail-safe: if wrap fails, **do not** fall back to plaintext. Do not skip the deny because Keystore was locked.
 
 ## Picture: wrap then write
 

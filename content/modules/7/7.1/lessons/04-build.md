@@ -9,7 +9,7 @@ An OpenAPI comment does not stop `is_admin` in the body. A frontend form that om
 
 The structural change is: the server **copies named fields**. `apply` must copy `display_name` when present and must not copy `is_admin`. Copy only the allowed display name.
 
-The smallest fix for the notes app’s profile PATCH is: `ALLOWED = {"display_name"}`. Fail-safe: unknown keys are skipped (or rejected). Do not fail open because a nested model was allowed to keep extras.
+Restore the notes app’s profile PATCH with this: `ALLOWED = {"display_name"}`. Fail-safe: unknown keys are skipped (or rejected). Do not allow just because a nested model was allowed to keep extras.
 
 ## Picture: extras never reach the row
 

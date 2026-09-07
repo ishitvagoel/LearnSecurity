@@ -5,7 +5,7 @@
 
 ## Could someone else name the checks?
 
-A list that says “PII, secrets, notes” is a pile of words. A list someone else can test names **fields**, **protection levels**, and **places** with allow or deny.
+A list that says “PII, secrets, notes” is a pile of words. Name **fields**, **protection levels**, and **places** with allow or deny.
 
 Note body, note id, tenant id, and a **local log line**. No live log product. No production backup vendor. Fake data only.
 

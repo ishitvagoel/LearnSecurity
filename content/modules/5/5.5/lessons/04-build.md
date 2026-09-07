@@ -9,7 +9,7 @@ A denylist of quotes does not make SQL a tuple. “The ORM will handle it” sti
 
 Structural means the parser never sees those fields as grammar. Bind tenant and note id as parameters. `fetch_sql` must return `(sql, params)` with `%s` placeholders and a two-tuple of values.
 
-The smallest fix for note fetch is: program beside data. Fail closed: if you cannot bind, **do not query**. Do not fail open because the id “looks like a UUID.”
+Put this in note fetch: program beside data. Fail closed: if you cannot bind, **do not query**. Do not allow just because the id “looks like a UUID.”
 
 ## Picture: program beside data
 

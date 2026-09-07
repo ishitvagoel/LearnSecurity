@@ -9,7 +9,7 @@ A disabled export button does not cap the fourth export. An IP bucket at the edg
 
 Structural means the server counts. `allow(n)` must be `n <= 3`. That check lives on the export action — the write path — not in the browser.
 
-The smallest fix for export is: deny at four. Fail closed: if the count is unknown, **deny**. Do not fail open because the counter store was unreachable.
+The check in export: deny at four. Fail closed: if the count is unknown, **deny**. Do not open the door because the counter store was unreachable.
 
 ## Picture: deny at four
 

@@ -9,7 +9,7 @@ A column rename does not encrypt the body. HTTPS is a hop. Volume encryption is 
 
 The structural change is: the stored value is **not reversible as encoding**. Structural means a keyed transform the storage reader cannot invert — not a prettier name.
 
-The smallest fix for a body stand-in is: `protect` returns a value that does not round-trip as Base64, and `looks_encrypted` asserts a teaching flag. The lab prefix `aesgcm:` is a **teaching flag** that `looks_encrypted` can assert — not a cipher to copy into FastAPI. Fail closed: if the encryption library or the key is missing, **do not store plaintext** (refuse the write).
+Repair a body stand-in: `protect` returns a value that does not round-trip as Base64, and `looks_encrypted` asserts a teaching flag. The lab prefix `aesgcm:` is a **teaching flag** that `looks_encrypted` can assert — not a cipher to copy into FastAPI. Fail closed: if the encryption library or the key is missing, **do not store plaintext** (refuse the write).
 
 ## Picture: stand-in now, real keys later
 

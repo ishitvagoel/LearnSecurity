@@ -7,7 +7,7 @@
 
 `resolve` must join, canonicalize, and deny unless the result is the folder or a child of `/tmp/sc-lab`. Structural means that prefix check — not a denylist of `..`, not a UUID filename sticker, not trusting `Content-Type`.
 
-The smallest fix for uploads is: deny if not under the folder. Fail closed: if canonicalize is uncertain, **deny**. Do not fail open because the name “looks like notes/a.txt.”
+For uploads: deny if not under the folder. Fail closed: if canonicalize is uncertain, **deny**. Do not allow just because the name “looks like notes/a.txt.”
 
 ## Picture: deny if not under the folder
 

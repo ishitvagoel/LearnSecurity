@@ -51,7 +51,7 @@ flowchart LR
 
 ## Practice
 
-Mark `csp.py` under `labs/E2/e2-lab`. Report-Only as a signal even in the repaired files — the fix is the enforcing header name, not pretending a report became a block.
+Mark `csp.py` under `labs/E2/e2-lab`. After repair, Report-Only is still only a signal. The restore is the enforcing header name, not a report as a block.
 
 ## Use it somewhere new
 
