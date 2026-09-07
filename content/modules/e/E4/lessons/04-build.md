@@ -21,7 +21,7 @@ flowchart TD
 
 Don't take “we use Python” as membership in the min. Integer wrap of size fields still has to be handled — a wrapped `n` is a lying min. Leftover C codecs (JNI, protobuf extensions) are sibling copies. Native unpackers and leftover C codecs stay leftover risk, later and harder — not this check.
 
-A production unpacker should **fail closed** on header/source mismatch rather than silently truncate without an error the caller can handle. This lab returns a short copy as the smallest trustworthy bound.
+A production unpacker should **deny** on header/source mismatch rather than silently truncate without an error the caller can handle. This lab returns a short copy as the smallest trustworthy bound.
 
 Unstructured data must not become an overwrite path — destination length.
 
@@ -34,7 +34,7 @@ Unstructured data must not become an overwrite path — destination length.
 
 ## What this is not
 
-A language rewrite. A sanitizer. An awareness-list dashboard. A course gate. Proof that a native unpacker is bounded. A company language roadmap marked complete.
+A language rewrite. A sanitizer. An awareness-list dashboard. This page as finished. Proof that a native unpacker is bounded. A company language roadmap marked complete.
 
 ## What can still go wrong
 

@@ -9,7 +9,7 @@ A list of last week’s bad strings does not bind the schema. Turning off the sc
 
 What has to change: the object **actually has one company meaning** before the who-is-allowed check runs. Refuse duplicate keys, or compare `acl_tenant == stored_tenant` and deny on mismatch.
 
-## Picture: fail closed on disagreement
+## Picture: deny when the copies disagree
 
 ```mermaid
 flowchart TD

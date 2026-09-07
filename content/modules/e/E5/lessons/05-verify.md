@@ -21,7 +21,7 @@ flowchart LR
 |---|---|
 | Wrong input / abuse | session A, body B → A; broken files must fail |
 | Normal | session A, body A → A (may pass on both) |
-| Not claimed | relationship graph; famous-bugs dashboard; course gate; search/cache keys |
+| Not claimed | relationship graph; famous-bugs dashboard; this page as a check-in; search/cache keys |
 
 `test_body_cannot_switch_tenant` is there so body-wins `tenant_for` still fails.
 
@@ -38,7 +38,7 @@ Do not let a query that stays in the same company hide the leftover. Deny a body
 - Impersonation is audited (later topic)
 - Grant changes are immediate (advanced)
 - GraphQL aliases are gone (extra writable fields)
-- A course gate is complete
+- This page as a finished check-in
 
 ## Practice
 

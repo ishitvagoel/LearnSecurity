@@ -23,7 +23,7 @@ flowchart TD
 
 Session A plus body B is still A. If the change never binds the session, that body-wins path is still open. A row-level screenshot does not replace that check.
 
-Cache keys without company are leftover. Silent impersonation is a later topic. Do not claim a course gate. Do not probe a live company to prove the finding.
+Cache keys without company are leftover. Silent impersonation is a later topic. This page does not finish a check-in. Do not probe a live company to prove the finding.
 
 ## Problems to find (name them yourself)
 
@@ -32,7 +32,7 @@ Cache keys without company are leftover. Silent impersonation is a later topic. 
 - Cache key without company
 - Support impersonation silent
 
-Also reject: live product probes; shipping without re-running `test_body_cannot_switch_tenant`; keys in lessons; claiming a course gate; treating a famous-bugs list as the syllabus.
+Also reject: live product probes; shipping without re-running `test_body_cannot_switch_tenant`; keys in lessons; claiming this page as a check-in; treating a famous-bugs list as the syllabus.
 
 ## Common mix-ups
 

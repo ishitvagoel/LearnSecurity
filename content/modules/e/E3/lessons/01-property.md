@@ -74,4 +74,4 @@ Health record append-only audit. Simulated copay.
 
 ## What this page is not doing
 
-Do not use live processors, real card numbers, claiming a questionnaire or a course gate. Answer keys are not on this site.
+Do not use live processors, real card numbers, claiming a questionnaire or a check-in. Answer keys are not on this site.

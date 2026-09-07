@@ -31,7 +31,7 @@ There should also be no double-booking — two k1.
 
 ## What this is not
 
-A filled-in questionnaire. A payment company. A course gate. New-key retries (leftover). Health-record append-only as a different product (same grain).
+A filled-in questionnaire. A payment company. A check-in sticker. New-key retries (leftover). Health-record append-only as a different product (same grain).
 
 ## What can still go wrong
 

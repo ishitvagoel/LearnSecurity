@@ -112,6 +112,9 @@ export function displayHeading(raw: string): string {
   if (text.startsWith("Mental model")) {
     return `Picture${text.slice("Mental model".length)}`;
   }
+  if (text.startsWith("Picture: fail closed on ")) {
+    return `Picture: deny ${text.slice("Picture: fail closed on ".length)}`;
+  }
   if (text.startsWith("Framework defaults versus")) {
     return "What the framework does vs what you still have to check";
   }
@@ -720,6 +723,10 @@ const PROSE_PHRASES: [RegExp, string][] = [
   [/What this alert cannot do: it /g, "It "],
   [/may pass on both sides\. You still have to /g, "can still look fine. Still need to "],
   [/Do not claim a course gate from ([^.]+)\./g, "That is not a check-in — $1."],
+  [/Do not claim a course gate\./g, "This page does not finish a check-in."],
+  [/Do not claim a course gate without /g, "A check-in still needs "],
+  [/claiming a course gate;/g, "claiming this page as a check-in;"],
+  [/A course gate\./g, "A check-in sticker."],
   [/\*\*The tool \(not the rule\):\*\* /g, "**Tools, not the rule:** "],
   [/Reject any line that includes /g, "Throw out a line that has "],
   [/Fail closed: if /g, "If "],

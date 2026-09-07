@@ -54,7 +54,7 @@ An earlier topic already said path length is checking every path for *which file
 | How you stop it | `min(bufsize, declared_len, len(src))` |
 | How you notice | `copy_length_denied`; never file bytes |
 | How you recover | Reject the blob; patch the parser |
-| Not the lesson | A C exploit, an awareness-list dashboard, or a course gate |
+| Not the lesson | A C exploit, an awareness-list dashboard, or this page as a finished check-in |
 
 ## What the framework does vs what you still have to check
 
@@ -74,4 +74,4 @@ An image parser can copy past the native buffer. Predict the oversize copy witho
 
 ## What this page is not doing
 
-No public-binary, production-unpacker, or weaponized overflow instructions. Do not claim a course gate. An awareness-list name stays awareness after the cause.
+No public-binary, production-unpacker, or weaponized overflow instructions. This page does not finish a check-in. An awareness-list name stays awareness after the cause.

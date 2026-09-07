@@ -11,7 +11,7 @@ Put simply, the MAC is checked before side effects. `accept` must compute HMAC-S
 
 For the notes-app billing webhook: empty sig denies. By default, empty signature **denies** without throwing into a 500 that providers retry (6.7). An unreachable secret store does not skip the signature.
 
-## Picture: fail closed on a missing sig
+## Picture: deny a missing signature
 
 ```mermaid
 flowchart TD

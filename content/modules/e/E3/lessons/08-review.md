@@ -23,7 +23,7 @@ flowchart TD
 
 Two k1 still have to count as 1. If the change never checks key identity, that always-append leftover is still open. A questionnaire screenshot does not replace that check.
 
-Webhook races are leftover. New keys per click are leftover. Do not claim a course gate. Do not hit a live processor to prove the finding. Do not invent card numbers.
+Webhook races are leftover. New keys per click are leftover. This page does not finish a check-in. Do not hit a live processor to prove the finding. Do not invent card numbers.
 
 ## Problems to find (name them yourself)
 
@@ -32,7 +32,7 @@ Webhook races are leftover. New keys per click are leftover. Do not claim a cour
 - Webhook vs capture race ignored
 - Card-network scope claimed from this practice
 
-Also reject: live processors; shipping without re-running `test_duplicate_capture_does_not_double_charge`; keys in lessons; claiming a course gate or card-network scope.
+Also reject: live processors; shipping without re-running `test_duplicate_capture_does_not_double_charge`; keys in lessons; claiming this page as a check-in or as card-network proof.
 
 ## Common mix-ups
 

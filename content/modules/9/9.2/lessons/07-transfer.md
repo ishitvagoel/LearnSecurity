@@ -51,7 +51,7 @@ Eval-on-user still has to be rejected. Honest `int(user)` may still pass. Format
 | Weaponized eval / live GitHub | Course rules |
 | “A bot reviewed it” | Later bots are a help, not this topic |
 | Documented as dangerous, still merged | Writing it down is not reject |
-| Draft vocabulary as certified | Draft; not a course gate |
+| Draft vocabulary as certified | Draft; not a check-in |
 
 ## Practice
 

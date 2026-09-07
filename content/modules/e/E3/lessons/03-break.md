@@ -49,7 +49,7 @@ In `vulnerable/pay.py`, `capture` appends on every call. Checks:
 | How you stop it | Treat the key as identity; a duplicate is a no-op |
 | How you notice | `duplicate_capture_denied`; never card-number-like strings |
 | How you recover | Credit the extra in a runbook; still fail the test first |
-| Not the lesson | A questionnaire product; live Stripe; a course gate complete |
+| Not the lesson | A questionnaire product; live Stripe; this page as a finished check-in |
 
 ## What the framework does vs what you still have to check
 
@@ -69,4 +69,4 @@ A copay retry can capture `k1` twice. Predict without leaving this directory. Do
 
 ## What this page is not doing
 
-No live-processor, clinic-billing, or card-handling instructions. Do not claim a course gate or card-network scope. Connection-pool limits stay advanced leftover.
+No live-processor, clinic-billing, or card-handling instructions. This page is not a check-in or card-network proof. Connection-pool limits stay advanced leftover.

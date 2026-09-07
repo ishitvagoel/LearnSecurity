@@ -21,7 +21,7 @@ flowchart LR
 |---|---|
 | Wrong input / abuse | two k1 → count 1; broken files must fail |
 | Normal | first k1 → may charge (may pass on both) |
-| Not claimed | live Stripe; card-network scope; a course gate; webhook path |
+| Not claimed | live Stripe; card-network scope; this page as a check-in; webhook path |
 
 The checks are in `labs/E3/e3-lab/tests/test_property.py`. `test_duplicate_capture_does_not_double_charge` is there so always-append `capture` still fails. `reset()` keeps ledger state from leaking.
 
@@ -38,7 +38,7 @@ The first capture of `k1` is the honest path. Deny a second capture with the sam
 - The client cannot mint a new key
 - Connection-pool limits (advanced leftover)
 - Card-network scope
-- A course gate complete
+- This page as a finished check-in
 
 ## Practice
 

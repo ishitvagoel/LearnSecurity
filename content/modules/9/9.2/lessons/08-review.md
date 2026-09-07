@@ -23,7 +23,7 @@ flowchart TD
 
 Eval-on-user still has to be rejected. If the change never asks an interpreter question, that always-approve leftover is still open. A formatter screenshot does not replace that check.
 
-The lab substring is a stand-in — name `exec(` and generated code as leftover, do not skip `test_eval_on_user_input_is_rejected`. Do not dump weaponized eval. Do not claim a course gate.
+The lab substring is a stand-in — name `exec(` and generated code as leftover, do not skip `test_eval_on_user_input_is_rejected`. Do not dump weaponized eval. This page does not finish a check-in.
 
 ## Problems to find (name them yourself)
 
@@ -32,7 +32,7 @@ The lab substring is a stand-in — name `exec(` and generated code as leftover,
 - Framework-generated SQL ignored
 - No who-is-allowed question
 
-Also reject: weaponized eval; closing findings without re-running `test_eval_on_user_input_is_rejected`; keys in learner notes; claiming a course gate; treating the substring as a complete check.
+Also reject: weaponized eval; closing findings without re-running `test_eval_on_user_input_is_rejected`; keys in learner notes; claiming this page as a check-in; treating the substring as a complete check.
 
 ## Common mix-ups
 

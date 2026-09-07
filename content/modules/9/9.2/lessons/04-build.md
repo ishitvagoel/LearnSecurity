@@ -11,7 +11,7 @@ In plain words, the review asks the interpreter question. `review_ok` must be fa
 
 Put this in merge gating: `x = eval(user)` → not approved. Unknown dynamic execution denies in a real review even if this practice’s substring misses it. Do not treat the denylist as the whole avoid-eval rule. CI formatting the file does not approve eval.
 
-## Picture: fail closed on eval
+## Picture: deny eval when unsure
 
 ```mermaid
 flowchart TD

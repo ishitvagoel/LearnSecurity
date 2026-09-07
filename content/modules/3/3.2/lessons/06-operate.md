@@ -47,4 +47,4 @@ Notice missing `sms-content-leak` after the reminder feature merges. Do not past
 
 ## What this page is not doing
 
-Answer keys are not on this site. Do not claim a course gate without learner or product evidence.
+Answer keys are not on this site. Learner or product evidence is what a check-in needs.

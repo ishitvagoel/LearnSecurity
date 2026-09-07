@@ -35,7 +35,7 @@ Isolation has to be enforced — body-vs-session.
 
 ## What this is not
 
-A relationship-graph product. Identity-at-scale as a substitute. Subdomain routing. A course gate. Immediate grant-change leftover. Row-level rules as what you trust.
+A relationship-graph product. Identity-at-scale as a substitute. Subdomain routing. A check-in stamp. Immediate grant-change leftover. Row-level rules as what you trust.
 
 ## What the tool cannot do
 

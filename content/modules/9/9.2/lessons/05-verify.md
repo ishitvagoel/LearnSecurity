@@ -45,7 +45,7 @@ A diff that never calls eval is the honest path. Reject eval on a user string. I
 - That generated code is reviewed (later elective)
 - That later review bots are honest
 - That the substring is a complete avoid-eval check
-- That a course gate is done
+- That this page finished a check-in
 
 ## Practice
 
