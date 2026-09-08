@@ -4,7 +4,7 @@ title: Deployment and configuration hardening
 phase: 10
 track: core
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - 'Prior phase Pass A per blueprint §7; 5.3 secrets; 10.2 artifacts; 10.3 workload identity'

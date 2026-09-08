@@ -11,7 +11,7 @@ The notes app will later accept access tokens at its API. An access token is a c
 
 Reject **a JWT with the wrong audience accepted as a notes-app session**. The token is treated as a login even though it was minted for someone else. Then who-is-allowed runs as whoever `sub` names.
 
-The API has to accept only tokens meant for that service. Keep tokens only in components that need them (in a backend-for-frontend, the browser does not hold the access token). The code flow still needs PKCE or `state`. Sender-constrained tokens (DPoP / mutual TLS) are an advanced extra, not this check. RFC 9700 is the OAuth 2.0 security practice. RFC 10017 is the browser-app practice. RFC 8252 is native apps. Do not present OAuth 2.1 as final.
+The API has to accept only tokens meant for that service. Keep tokens only in components that need them (in a backend-for-frontend, the browser does not hold the access token). Public clients must use PKCE for the authorization-code flow. `state` binds the browser transaction for CSRF; it is a different control and must not be presented as an alternative to PKCE. Sender-constrained tokens (DPoP / mutual TLS) are an advanced extra, not this check. RFC 9700 is the OAuth 2.0 security practice. RFC 10017 is the browser-app practice. RFC 8252 is native apps. Do not present OAuth 2.1 as final.
 
 ## Picture: audience is a name, not a signature
 

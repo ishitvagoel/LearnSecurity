@@ -4,7 +4,7 @@ title: State, time, concurrency, and distributed failure
 phase: 2
 track: core
 difficulty: foundation
-status: reviewed
+status: draft
 estimatedMinutes: 300
 prerequisites:
 - 2.1 Pass A

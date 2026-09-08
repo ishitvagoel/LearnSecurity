@@ -32,14 +32,14 @@ flowchart LR
 
 If the column name is `ssn_encrypted` and the bytes are Base64, the rule is gone. FastAPI, a Postgres `bytea` type, and a disk-encryption checkbox do not invert the reader. Argon2 on the SSN is the wrong rule (password stretching, not field encryption). HTTPS does not encrypt the column.
 
-Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrapping `b64encode` in a function named `encrypt` leaves the reader unchanged. The local check is `test_protect_is_not_mere_encoding` — on a practice, not a live clinic system.
+Base64 decode of the stored stand-in is not the SSN. Renaming the column or wrapping `b64encode` in a function named `encrypt` leaves the reader unchanged. A real AEAD primitive also rejects tampering, but it does not solve key storage, authorization to view the SSN, backups, or operator access. The local checks run on practice files, not a live clinic system.
 
 ## Write this for a clinic SSN column
 
 1. who might try (database admin; stolen disk — **not** a live clinic);
 2. what you trust (which authenticated encryption plus key is trusted; the column name is not);
 3. what must not happen (Base64 round-trip of the stand-in);
-4. `protect(ssn)` must not round-trip as decode — **local** files (never on the real clinic);
+4. `protect(ssn)` must not round-trip as Base64, and a changed protected value must fail authentication — **local** files (never on the real clinic);
 5. leftover (key in the same row; nonce reuse is advanced; HTTPS is not at rest);
 6. whether a human “show SSN” path must stay masked until an explicit view — do not use color as the only cue.
 

@@ -4,7 +4,7 @@ title: Resource abuse, automation, and availability
 phase: 6
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 3.4 Pass A complete

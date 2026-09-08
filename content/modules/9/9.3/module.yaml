@@ -4,7 +4,7 @@ title: Security-focused tests
 phase: 9
 track: core
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.2 isolation; 9.1 coverage; 9.2 review

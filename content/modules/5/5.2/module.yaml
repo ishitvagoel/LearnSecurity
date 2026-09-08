@@ -4,8 +4,8 @@ title: Cryptographic properties and safe use
 phase: 5
 track: core
 difficulty: intermediate
-status: reviewed
-estimatedMinutes: 240
+status: draft
+estimatedMinutes: 300
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.1–5.1 Pass A complete
 routeTags:
@@ -27,12 +27,14 @@ invariants:
 - Labs stay in authorized local or official training scope
 - Draft standards are labeled draft
 - Encoding is not confidentiality
+- Protected note values use authenticated encryption; malformed or tampered values fail closed
 threatModelPrompts:
 - What can go wrong for this module's assets?
 - Which trust boundary or interpreter is in play?
 - What residual remains if the primary control fails?
 concepts:
 - cryptography
+- authenticated-encryption
 - securecollab
 - seven-step-loop
 learningObjects:
@@ -46,19 +48,19 @@ learningObjects:
   path: lessons/02-model.md
 - id: 5.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: protect is reversible as Base64'
+  title: 'Local fixture: reversible Base64 fails confidentiality'
   path: lessons/03-break.md
 - id: 5.2-LO-04
   kind: design-exercise
-  title: Refuse encoding as the confidentiality mechanism
+  title: Build authenticated encryption with a fresh nonce
   path: lessons/04-build.md
 - id: 5.2-LO-05
   kind: verification-lab
-  title: Fail-on-vulnerable then pass-on-fixed for Base64 round-trip
+  title: Fail on encoding and tampering; pass on authenticated encryption
   path: lessons/05-verify.md
 - id: 5.2-LO-06
   kind: operations-exercise
-  title: Detect known-plaintext encoding; treat as a leak
+  title: Detect encoding and authentication failures without logging plaintext
   path: lessons/06-operate.md
 - id: 5.2-LO-07
   kind: transfer-challenge
@@ -72,20 +74,21 @@ labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
   slug: 5.2-lab
-  summary: protect is reversible as Base64
+  summary: AES-GCM protects synthetic note data; Base64 encoding and tampering are rejected
   forbiddenOutcomes:
-  - protect is reversible as Base64
+  - Base64 of the plaintext is accepted as protected note data
+  - Tampered or malformed protected data is accepted
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Crypto decision table and misuse-focused tests
+- Crypto decision table and misuse-focused tests, including fresh nonces and tag rejection
 - Transfer task prompt
 - Local lab brief
 assessmentBlueprint:
   explain: Causal model for Cryptographic properties and safe use
   design: Crypto decision table and misuse-focused tests
-  build: Deferred to Pass B
+  build: Authenticated-encryption wrapper with a fresh nonce and a separate synthetic key
   break: Authorized local reproduction of the representative failure
   verify: Forbidden-outcome tests
   operate: Detection and recovery notes
@@ -113,8 +116,8 @@ misconceptions:
 - Base64 is hashing
 - Stronger algorithm fixes a bad key story
 operationalConsiderations:
-- known-plaintext-b64 test in CI.
-- Memory dumps; authorized operators.
+- known-plaintext, malformed-value, and authentication-failure tests in CI.
+- Key storage, rotation, backup handling, and memory dumps remain Module 5.3 concerns.
 author: choreograph-curriculum / author-module-spec
 reviewer: pending independent quality and lab-safety review
 lastReviewedAt: '2026-08-24'
@@ -141,3 +144,6 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with Base64-round-trip cause tables, teaching-flag
     limits, and clinic SSN-column transfer; independent review still required
+- date: '2026-09-07'
+  note: Replaced the prefix-only fixed fixture with AES-GCM, fresh nonces, authentication-tag
+    rejection, and a pinned cryptography dependency; independent review still required

@@ -60,3 +60,15 @@ export type LessonFile = {
   filename: string;
   body: string;
 };
+
+export type AssessmentPrompt = {
+  id: string;
+  title: string;
+  prompt: string;
+  hint?: string;
+};
+
+export type AssessmentEvidence = {
+  id: string;
+  label: string;
+};

@@ -4,7 +4,7 @@ title: Diagnostic and adaptive bridge
 phase: 0
 track: bridge
 difficulty: foundation
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - '0.1 orientation; diagnostics never skip 1.2 or Gate 1'

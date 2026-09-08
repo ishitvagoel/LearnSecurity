@@ -68,6 +68,17 @@ export function loadLessons(mod: ModuleMeta): LessonFile[] {
   });
 }
 
+/** Learner-facing rubric only. Examiner keys stay outside the site build. */
+export function loadAssessmentRubric(mod: ModuleMeta): string {
+  const file = path.join(mod.contentDir, "assessment", "rubric.md");
+  if (!fs.existsSync(file)) {
+    return "";
+  }
+  return fs
+    .readFileSync(file, "utf8")
+    .replace(/Intended findings live only in [^\n]+/gi, "Answer keys are not on this site.");
+}
+
 export function loadPins(): unknown {
   const file = path.join(contentRoot(), "standards", "pins.yaml");
   return yaml.load(fs.readFileSync(file, "utf8"));
@@ -80,4 +91,8 @@ export function moduleHref(id: string): string {
 export function lessonHref(moduleId: string, filename: string): string {
   const slug = filename.replace(/\.md$/, "");
   return `/learn/${encodeURIComponent(moduleId)}/${encodeURIComponent(slug)}/`;
+}
+
+export function assessmentHref(id: string): string {
+  return `/assess/${encodeURIComponent(id)}/`;
 }

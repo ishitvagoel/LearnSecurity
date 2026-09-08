@@ -240,6 +240,25 @@ export function pinStatusLabel(status: string): string {
   }
 }
 
+export function maturityLabel(status: string): string {
+  switch (status) {
+    case "published":
+      return "Published reference";
+    case "draft":
+      return "Draft — independent review pending";
+    case "reviewed":
+      return "Draft — review recorded, not approved";
+    case "spec":
+      return "Specification only";
+    case "stub":
+      return "Stub";
+    case "retired":
+      return "Retired";
+    default:
+      return status;
+  }
+}
+
 export function modulesInPhase(modules: ModuleMeta[], phase: number): ModuleMeta[] {
   return modules.filter((m) => m.phase === phase);
 }

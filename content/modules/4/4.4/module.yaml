@@ -4,7 +4,7 @@ title: Authorization and tenant isolation
 phase: 4
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.1–4.3 Pass A complete

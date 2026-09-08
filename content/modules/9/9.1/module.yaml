@@ -4,7 +4,7 @@ title: Verification requirements and traceability
 phase: 9
 track: core
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.2 isolation; 4.4 object grain; 8.2 MASVS-STORAGE

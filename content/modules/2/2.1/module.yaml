@@ -4,7 +4,7 @@ title: Bytes, text, formats, parsers, and interpreters
 phase: 2
 track: core
 difficulty: foundation
-status: reviewed
+status: draft
 estimatedMinutes: 270
 prerequisites:
 - 1.1–1.4 Pass A

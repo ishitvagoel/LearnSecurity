@@ -4,7 +4,7 @@ title: Browser injection and active content
 phase: 6
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 2.1 and 2.3 Pass A complete

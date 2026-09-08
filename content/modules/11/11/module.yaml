@@ -4,7 +4,7 @@ title: Integrating capstone — SecureCollab
 phase: 11
 track: capstone
 difficulty: capstone
-status: reviewed
+status: draft
 estimatedMinutes: 1200
 prerequisites:
 - 'Prior phase Pass A per blueprint §7; 1.2 mediation; 2.4 time; 4.4 isolation; 7.4 workers'

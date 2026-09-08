@@ -4,7 +4,7 @@ title: Database and persistence security
 phase: 5
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.2 and 3.3 Pass A complete

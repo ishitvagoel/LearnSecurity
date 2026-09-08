@@ -8,7 +8,7 @@ Cryptographic properties and safe use
 
 ## Evidence checklist
 
-- [ ] Crypto decision table and misuse-focused tests
+- [ ] Crypto decision table and misuse-focused tests: Base64 rejection, authenticated round-trip, fresh nonce, and tamper rejection
 - [ ] Transfer task (Clinic: SSN column labeled encrypted that is Base64)
 - [ ] Lab `labs/5.2/5.2-lab`: what must not happen: **protect is reversible as Base64**
 - [ ] `vulnerable/` deny tests fail, `fixed/` tests pass (authorized local practice files only)
@@ -19,11 +19,11 @@ Cryptographic properties and safe use
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; tool slogans |
-| Competent | System-specific rule; lab mapped; operate present |
+| Developing | Tools listed; missing attacker/trust; prefix or algorithm name treated as proof |
+| Competent | System-specific confidentiality/integrity rule; lab maps to AES-GCM, nonce, tag, and key boundary; operate present |
 | Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
 
-Knowledge check (retryable): distinguish property vs mechanism for **5.2**. Items live in the session worksheet, not here.
+Knowledge check (retryable): distinguish property vs mechanism for **5.2**, and explain why a fresh nonce and authentication tag matter. Complete the assessment worksheet on the module page; it stores notes only in this browser.
 
 ## Seeded review
 

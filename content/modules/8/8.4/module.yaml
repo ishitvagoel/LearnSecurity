@@ -4,7 +4,7 @@ title: Build, distribution, attestation, and resilience
 phase: 8
 track: mobile
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 8.1 hostile client; 5.3 secrets not in artifacts

@@ -2,6 +2,9 @@
 
 # Source of truth for sequencing: blueprint section 7 and AGENTS.md.
 # pass records historical authoring passes; it does not imply semantic publication.
+# module.yaml status is release state: published means a published reference;
+# draft means authored/map-complete content still awaiting independent review.
+# reviewed is reserved for a recorded review process and never means approved.
 # depth: map-complete | publishable
 # quality: not-attempted | developing | competent | transfer-ready
 

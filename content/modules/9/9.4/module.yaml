@@ -4,7 +4,7 @@ title: Automated analysis and tool orchestration
 phase: 9
 track: core
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 9.1 coverage; 9.2 review; 9.3 test shape

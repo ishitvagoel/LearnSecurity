@@ -7,7 +7,7 @@
 
 Open `labs/5.2/5.2-lab/vulnerable/` as at-rest protection. Does Base64 decode of `protect("secret")` still equal `"secret"`?
 
-Shipping “will add AES later” leaves `test_protect_is_not_mere_encoding` failing.
+Shipping “will add AES later” leaves the confidentiality and integrity checks failing.
 
 ## Picture: protect equals base64
 
@@ -26,9 +26,11 @@ Decode still cannot be the plaintext. If `protect` never uses a keyed, non-encod
 ## Problems to find (name them yourself)
 
 - `protect = base64`
+- `looks_encrypted` accepts a label or any non-plaintext value without authenticating it
+- No authenticated `unprotect` path, fresh-nonce test, or tamper-rejection test
 - AES-ECB “because we need it deterministic”
 - JWT as encryption
-- No `looks_encrypted` test
+- Prefix-only `looks_encrypted` test
 
 Also reject: rolling a cipher; closing findings without re-running `test_protect_is_not_mere_encoding`; keys in learner notes; real people's data in the practice files; HTTPS as at-rest encryption.
 

@@ -4,7 +4,7 @@ title: Security engineering orientation
 phase: 0
 track: core
 difficulty: foundation
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - 'None; this module opens the course'
