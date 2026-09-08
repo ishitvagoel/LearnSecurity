@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageHeader, PageShell } from "@/components/ui";
 
 const CHECKINS = [
@@ -81,7 +82,11 @@ export default function CheckpointsPage() {
           Each part of the course has a check-in. You are not “done” because you
           opened a page. You are ready when you can show the work — a rule,
           a repair, a check that fails on the broken files. This website does
-          not grade you. Answer keys are not published here.
+          not grade you. Use the{" "}
+          <Link href="/assess/" className="text-blue-900 underline underline-offset-2">
+            assessment worksheets
+          </Link>{" "}
+          to keep your own evidence. Answer keys are not published here.
         </p>
       </PageHeader>
       <ol className="grid gap-3 sm:grid-cols-2">

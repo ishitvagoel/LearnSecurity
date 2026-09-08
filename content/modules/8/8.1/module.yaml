@@ -4,7 +4,7 @@ title: The hostile-client and mobile-platform model
 phase: 8
 track: mobile
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.2 server cells; 7.1 client documents are untrusted

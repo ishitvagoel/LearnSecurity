@@ -1,17 +1,19 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProgressToggle } from "@/components/ProgressToggle";
-import { Chip, PageHeader, PageShell } from "@/components/ui";
+import { ButtonLink, Chip, PageHeader, PageShell } from "@/components/ui";
 import { kindLabel, spokenLessonTitle } from "@/lib/headings";
 import {
   difficultyLabel,
   formatMinutes,
+  maturityLabel,
   phaseHeading,
   topicBlurb,
   topicTitle,
   trackLabel,
 } from "@/lib/catalog";
 import {
+  assessmentHref,
   lessonHref,
   loadAllModules,
   loadLessons,
@@ -65,7 +67,24 @@ export default async function ModulePage({ params }: Props) {
         <Chip>{trackLabel(mod.track)}</Chip>
         <Chip>{difficultyLabel(mod.difficulty)}</Chip>
         <Chip>{formatMinutes(mod.estimatedMinutes)}</Chip>
+        <Chip>{maturityLabel(mod.status)}</Chip>
       </div>
+      <section className="mb-8 rounded-2xl border border-line bg-paper p-4">
+        <h2 className="text-xl font-semibold">What you should be able to show</h2>
+        <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-stone-800">
+          {(mod.outcomes || []).map((outcome) => <li key={outcome}>{outcome}</li>)}
+        </ul>
+        <p className="mt-4 text-sm leading-relaxed text-stone-700">
+          Prerequisites: {(mod.prerequisites || []).join(" · ") || "None listed"}
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-stone-700">
+          References: {(mod.standardsRefs || []).map((standard) => `${standard.source} ${standard.version}`).join(" · ") || "None listed"}
+          {mod.masteryGate ? ` · Mastery gate ${mod.masteryGate}` : ""}
+        </p>
+        <p className="mt-4">
+          <ButtonLink href={assessmentHref(mod.id)}>Open the assessment worksheet</ButtonLink>
+        </p>
+      </section>
       {first ? (
         <p className="mb-4">
           <Link

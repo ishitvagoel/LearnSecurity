@@ -2,11 +2,11 @@
 
 **Module:** `5.2`
 **Authorized scope:** this directory only. Local course fixture. No live KMS.
-**Invariant:** `protect("secret")` must not be reversible as Base64 of the plaintext. Encoding is not confidentiality.
+**Invariant:** `protect("secret")` must provide authenticated confidentiality for the stored value; it must not be reversible as Base64 of the plaintext, and tampering must be rejected. Encoding is not confidentiality.
 **Root cause class:** mechanism-name confusion (encoding labeled encryption)
 **Non-goals:** rolling a cipher, live ciphertext attacks, real note bodies.
 
-The fixed `aesgcm:` prefix is a **teaching flag**, not an AES-GCM implementation.
+The fixed fixture uses the vetted `cryptography` library's AES-GCM implementation with a fresh nonce, authenticated associated data, and a disposable in-memory key. It is a primitive-level teaching fixture, not a production key-management design.
 
 ## Reset
 
@@ -18,9 +18,16 @@ Re-run pytest. Optional: `git checkout -- labs/5.2/5.2-lab`.
 
 ## Structural fix
 
-Refuse encoding as the confidentiality mechanism. The lab stand-in marks AEAD-shaped output; real keys wait for 5.3.
+Refuse encoding as the confidentiality mechanism. The fixed helper performs AES-GCM encryption, creates a fresh 96-bit nonce for every call, authenticates the ciphertext, rejects tampering, and refuses malformed or unauthenticated values. Key storage, rotation, recovery, and deployment separation remain Module 5.3 concerns.
 
 ## Verify
+
+From the repository root, install the pinned local test dependencies in a
+disposable virtual environment:
+
+    python3 -m pip install -r labs/5.2/5.2-lab/requirements.txt
+
+Then run:
 
 ```
 python3 -m pytest labs/5.2/5.2-lab/tests --impl vulnerable
@@ -29,10 +36,12 @@ python3 -m pytest labs/5.2/5.2-lab/tests --impl fixed
 
 The first command must fail on the encoding test. The second must pass.
 
+The fixed suite also checks that the value decrypts, repeated plaintext receives different nonces, tampering raises an authentication error, and malformed values are not treated as encrypted.
+
 ## Operate
 
-CI check: known-plaintext must not round-trip as Base64. Treat a hit as a leak; rotate keys (5.3).
+CI checks: known-plaintext must not round-trip as Base64, valid ciphertext must authenticate, and tampering must fail closed. Treat a Base64 hit as a leak; contain the affected path, re-protect the data, and perform the key-management response from 5.3.
 
 ## Transfer
 
-Clinic SSN column labeled encrypted that is Base64. Prompt only.
+Clinic SSN column labeled encrypted that is Base64. The transfer must distinguish the AEAD primitive from key lifecycle, access policy, backups, and operator access. Prompt only.

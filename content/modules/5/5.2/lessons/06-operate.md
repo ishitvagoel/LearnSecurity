@@ -5,7 +5,7 @@
 
 ## Fixing it once is not enough
 
-A new encoding wrapper can land in a worker after `protect` prefixes `aesgcm:`. Notice that wrapper, contain the worker, re-protect the column, and do not log note bodies.
+A new encoding wrapper can land in a worker, or a deployment can begin accepting values with an invalid tag. Notice the failure, contain the worker or write path, re-protect the column, and do not log note bodies.
 
 Keep plaintext bodies and SSNs out of the ticket.
 
@@ -18,7 +18,9 @@ flowchart TD
   Sample[Known plaintext secret] --> Out[protect]
   Out --> B64{"Base64 round-trip?"}
   B64 -->|yes| Metric["encoding_labeled_encryption += 1"]
-  Metric --> Rotate[Rotate keys later]
+  Metric --> Rotate[Re-protect and rotate keys later]
+  Out --> Auth{"authentication fails?"}
+  Auth -->|yes| Alert["ciphertext_tamper_or_corruption"]
 ```
 
 A log product does not encrypt the column.
@@ -27,9 +29,9 @@ A log product does not encrypt the column.
 
 | Outcome | This topic |
 |---|---|
-| Notice | known-plaintext Base64 in CI |
+| Notice | known-plaintext Base64 or authentication failure in CI |
 | What the line holds | field name, request id — **never** the body |
-| Recover | Re-protect with authenticated encryption; rotate keys |
+| Recover | Contain the path, re-protect with authenticated encryption, then rotate keys |
 | Leftover | Memory dumps; operators who are allowed to hold the key |
 
 ```text
@@ -46,7 +48,7 @@ Keep grepping for `b64encode` wrapped as `encrypt`. Grep workers and export jobs
 
 ## What the framework does vs what you still have to check
 
-“Key enabled” on a cloud key tile still looks healthy if the column is still Base64. Prove **the round-trip of a known plaintext**, not a product tile. Plaintext `secret` or an SSN on the encoding-miss metric is a logging leak from an earlier lesson.
+“Key enabled” on a cloud key tile still looks healthy if the column is still Base64 or the application ignores authentication failures. Prove **the round-trip of a known plaintext and rejection of modified ciphertext**, not a product tile. Plaintext `secret` or an SSN on the encoding-miss metric is a logging leak from an earlier lesson.
 
 ## Practice
 

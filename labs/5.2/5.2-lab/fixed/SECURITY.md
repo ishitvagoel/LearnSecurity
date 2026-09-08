@@ -1,1 +1,1 @@
-Fixed 5.2 fixture. Local only. protect is an AEAD teaching stand-in (aesgcm: prefix), not a real cipher.
+Fixed 5.2 fixture. Local only. protect uses AES-GCM from the vetted `cryptography` package with a fresh nonce and authentication tag. The key is synthetic and generated in memory for the process; this fixture does not prove key storage, rotation, recovery, or production deployment separation.

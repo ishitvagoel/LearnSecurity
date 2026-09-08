@@ -17,6 +17,7 @@ export const RESOURCE_NAV: NavLink[] = [
 ];
 
 export const COURSE_NAV: NavLink[] = [
+  { href: "/assess/", label: "Assessments" },
   { href: "/checkpoints/", label: "Check-ins" },
   { href: "/capstone/", label: "Final project" },
   { href: "/policy/", label: "Rules" },

@@ -4,7 +4,7 @@ title: AI, LLM, and agentic application security
 phase: 7
 track: elective
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - 'Opens after Phase 7; 1.2 mediation; 6.1 interpreters; 8.1 hostile client'

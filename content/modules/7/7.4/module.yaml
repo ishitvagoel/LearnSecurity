@@ -4,7 +4,7 @@ title: Queues, workers, events, and service identity
 phase: 7
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 4.1 leftover sessions; 4.4 object grants; 2.4 retries

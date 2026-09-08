@@ -4,7 +4,7 @@ title: Payments, financial, health, and other high-assurance systems
 phase: 7
 track: elective
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - 'Opens after Phase 7; 2.4 time; 6.6 consume-once; 7.3 webhooks'

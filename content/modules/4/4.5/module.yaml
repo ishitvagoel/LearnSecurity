@@ -4,7 +4,7 @@ title: OAuth, OpenID Connect, browser apps, and native apps
 phase: 4
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.1–4.4 Pass A complete
@@ -159,3 +159,6 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with skipped-aud cause tables, expected-audience
     limits, and FHIR/native-redirect transfer; independent review still required
+- date: '2026-09-07'
+  note: 'Corrected the authorization-code guidance: public clients require PKCE;
+    state is a separate transaction and CSRF-binding control'

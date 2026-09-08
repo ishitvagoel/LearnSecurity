@@ -4,7 +4,7 @@ title: Memory safety and native-code boundaries
 phase: 7
 track: elective
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - 'Opens after Phase 7; 1.2 mediation; 6.4 file/FFI'

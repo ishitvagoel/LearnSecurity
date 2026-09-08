@@ -4,7 +4,7 @@ title: Files, paths, uploads, archives, XML, and deserialization
 phase: 6
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 6.1 Pass A complete

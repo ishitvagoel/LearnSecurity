@@ -4,7 +4,7 @@ title: API contracts, protocols, and inventory
 phase: 7
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 6.7 Pass A complete; 1.2 field grain

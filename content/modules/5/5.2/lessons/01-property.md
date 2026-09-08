@@ -7,7 +7,7 @@
 
 The notes app stores a stand-in for a note body. Secrecy against someone who can read the stored field is not “we Base64ed it.” Encoding, hex, and rot13 reverse without a key. HTTPS encrypts the hop. It does not encrypt the column. Password hashing is a different rule for a different field.
 
-> `protect("secret")` must not round-trip as Base64 of the plaintext. `looks_encrypted` is a teaching flag, not AES-GCM. The lab prefix `aesgcm:` is a **stand-in**, not a cipher you should ship.
+> `protect("secret")` must not round-trip as Base64 of the plaintext. The repaired local fixture uses AES-GCM from the vetted `cryptography` package, with a fresh nonce and authentication tag. Its key is generated in memory only for this disposable process; that is not a production key-lifecycle design.
 
 `protect()` must not be **reversible as Base64 to `secret`**. Anyone who can read the stored field gets the body. That is a secrecy failure of the stored note. Encoding is not confidentiality.
 
@@ -47,18 +47,20 @@ A stronger algorithm does not fix a missing key story (later) or nonce reuse (ad
 | What's already wrong | `protect` returns Base64 of the plaintext |
 | Trigger | Someone who can read storage reads the field |
 | What it costs | The stored secret is no longer secret |
-| How you stop it | Real authenticated encryption with a managed key; tests forbid Base64 identity |
+| How you stop it | Authenticated encryption with a fresh nonce, an authentication tag, and a managed key boundary; tests reject Base64 identity and tampering |
 | How you notice | Known-plaintext Base64 round-trip in CI |
 | How you recover | Rotate keys; re-protect; treat it as a leak |
 
 ## What the framework does vs what you still have to check
 
-Password libraries are for passwords, not note bodies. Disk encryption is not app-level secrecy against a database admin. Base64 decode of `protect("secret")` is not `"secret"` — files in `labs/5.2/5.2-lab`. Fake data only. No live key service.
+Password libraries are for passwords, not note bodies. Disk encryption is not app-level secrecy against a database admin. Base64 decode of `protect("secret")` is not `"secret"` — files in `labs/5.2/5.2-lab`. The repaired fixture uses real AES-GCM with fake data only, but its in-memory key is not a live key service or a production lifecycle.
 
 ## What the tool cannot do
 
 - AES-GCM with a reused nonce is not this lab — name the misuse; do not paste attack scripts.
 - Key sitting in the same row; “encryption” only on the client with the key in the download (later, phones).
+- Key storage, rotation, backup re-protection, and operator access are 5.3 concerns; this lab only proves the primitive's confidentiality and integrity behavior.
+- `looks_encrypted` is a small fixture predicate, not a production replacement for a typed decrypt-and-handle-error path.
 - A JWT is a format (earlier), not encryption.
 
 ## Practice

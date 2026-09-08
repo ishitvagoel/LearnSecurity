@@ -7,7 +7,7 @@
 
 Keep **the rule**, **the field**, **the algorithm family**, and **what it is not for**; “We use AES” is not that list.
 
-`protect` / `looks_encrypted` — Plaintext stand-in `secret`. No live key service.
+`protect` / `unprotect` / `looks_encrypted` — Plaintext stand-in `secret`; AES-GCM key generated only for this local process. No live key service.
 
 > `protect("secret")` must not round-trip as Base64. If the table mixes rows, the wrong tool lands on the wrong field.
 
@@ -29,7 +29,9 @@ Using Argon2 on a note body, or Base64 on a password, mixes rows.
 flowchart LR
   Out[protect output] --> B64{Base64 of secret?}
   B64 -->|yes| Fail[Rule false]
-  B64 -->|no| Flag{looks_encrypted?}
+  B64 -->|no| Auth{tag authenticates?}
+  Auth -->|no| Fail
+  Auth -->|yes| Allow[Protected value]
 ```
 
 ## Step 1: name the pieces
@@ -38,9 +40,9 @@ flowchart LR
 |---|---|
 | Who | Someone who can read storage; a developer who named the column encrypted |
 | What | field `secret` at rest |
-| Actions | `protect`; `looks_encrypted` |
+| Actions | `protect`; `unprotect`; `looks_encrypted` |
 | Paths | Database column stand-in |
-| What you trust | An authenticated-encryption-shaped `protect`; keys later |
+| What you trust | AES-GCM ciphertext, fresh nonce, authentication tag, and a key held outside the stored value |
 | What you do not trust | The column name; “HTTPS therefore encrypted” |
 | Time | Stolen disk later |
 | The rule | The stored body stays secret |
@@ -50,7 +52,8 @@ flowchart LR
 | Who | What | Action | Decision |
 |---|---|---|---|
 | storage reader | Base64 field | recover plaintext | deny (must fail) |
-| app | authenticated-encryption stand-in | store | allow if not reversible as Base64 |
+| app | AES-GCM protected value | store | allow only when it authenticates and is not Base64 of the plaintext |
+| storage reader | modified ciphertext or tag | recover plaintext | deny (authentication must fail) |
 | password path | note body | Argon2 | wrong row (named hole) |
 
 A missing “storage reader × Base64 field × deny” row is how encoding gets sold as encryption. Write the hole.

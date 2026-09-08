@@ -5,6 +5,7 @@ import {
   PHASES,
   difficultyLabel,
   formatMinutes,
+  maturityLabel,
   phaseHeading,
   topicBlurb,
   topicTitle,
@@ -21,7 +22,10 @@ export function ModuleCard({ mod }: { mod: ModuleMeta }): ReactElement {
     >
       <div className="flex items-center justify-between gap-2">
         <p className="font-mono text-xs font-medium text-stone-600">{mod.id}</p>
-        <Chip>{trackLabel(mod.track)}</Chip>
+        <div className="flex flex-wrap justify-end gap-1">
+          <Chip>{trackLabel(mod.track)}</Chip>
+          <Chip>{maturityLabel(mod.status)}</Chip>
+        </div>
       </div>
       <h3 className="mt-2 text-base font-semibold text-stone-900">{topicTitle(mod)}</h3>
       <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-stone-700">

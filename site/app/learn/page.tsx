@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PhaseJump, PhaseSection } from "@/components/PhaseSection";
 import { PageHeader, PageShell } from "@/components/ui";
 import { phaseList } from "@/lib/catalog";
@@ -17,6 +18,13 @@ export default function LearnIndexPage() {
         <p>
           Answer keys are not on this site. When a topic includes practice, you
           run it on your computer from the course files on GitHub.
+        </p>
+        <p>
+          Most topics are drafts awaiting independent review. Use the{" "}
+          <Link href="/assess/" className="text-blue-900 underline underline-offset-2">
+            assessment worksheets
+          </Link>{" "}
+          to keep your own evidence as you study.
         </p>
       </PageHeader>
       <PhaseJump phases={phases} />

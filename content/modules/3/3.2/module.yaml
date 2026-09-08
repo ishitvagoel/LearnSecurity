@@ -4,7 +4,7 @@ title: Threat modeling
 phase: 3
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.1–3.1 Pass A complete

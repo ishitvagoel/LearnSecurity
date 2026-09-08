@@ -4,7 +4,7 @@ title: Source control, CI/CD, dependencies, and software supply chain
 phase: 10
 track: core
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 5.3 secrets; 9.4 scanners as signals

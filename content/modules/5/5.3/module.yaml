@@ -4,7 +4,7 @@ title: Key and secret lifecycle
 phase: 5
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.1–5.2 Pass A complete

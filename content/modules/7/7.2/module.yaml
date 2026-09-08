@@ -4,7 +4,7 @@ title: Object, property, and function security
 phase: 7
 track: core
 difficulty: intermediate
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 4.4 object-and-tenant grants; 7.1 writable-field writes

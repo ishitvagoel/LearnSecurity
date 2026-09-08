@@ -4,7 +4,7 @@ title: Network, deep links, WebViews, and inter-app communication
 phase: 8
 track: mobile
 difficulty: advanced
-status: reviewed
+status: draft
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 8.1 hostile client; 4.5 native OAuth; 2.1 untrusted query strings
