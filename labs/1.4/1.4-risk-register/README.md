@@ -8,7 +8,7 @@
 
 ## Reset
 
-Restore `vulnerable/` and `fixed/` from git.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/1.4/1.4-risk-register`, then run `git restore --source=HEAD -- labs/1.4/1.4-risk-register` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

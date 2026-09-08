@@ -10,7 +10,7 @@ The allowlist is a **teaching stand-in** for AISVS `v1.0-C9.5.3` (policy never b
 
 ## Reset
 
-Re-run pytest. Optional: `git checkout -- labs/E1/e1-lab`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/E1/e1-lab`, then run `git restore --source=HEAD -- labs/E1/e1-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

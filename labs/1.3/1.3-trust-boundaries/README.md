@@ -178,7 +178,7 @@ Before changing code, state which test must change and which unrelated tests mus
 
 The pytest fixture imports a fresh selected module for every test, so in-memory grant consumption and events do not leak across tests. A replay case performs both uses inside one test intentionally.
 
-Delete disposable practice copies and the disposable virtual environment when finished. If you accidentally edited a course variant, restore only this lab directory from version control or re-download the repository. Do not perform a destructive repository-wide reset.
+Delete disposable practice copies and the disposable virtual environment when finished. If you accidentally edited a course variant, first inspect `git diff -- labs/1.3/1.3-trust-boundaries`, then run `git restore --source=HEAD -- labs/1.3/1.3-trust-boundaries` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Operations and recovery
 

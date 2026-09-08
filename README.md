@@ -32,6 +32,22 @@ You can still run inner skills by hand (`next-iteration`, `author-module-spec`, 
 
 Agent standing instructions: [`AGENTS.md`](AGENTS.md). Rules live in [`.cursor/rules/`](.cursor/rules/). Skills in [`.cursor/skills/`](.cursor/skills/). Review subagents in [`.cursor/agents/`](.cursor/agents/).
 
+## Reproducible QA contract
+
+The repository QA commands are rooted from the checkout, not from the caller's current directory. Start with the disposable, pinned environment:
+
+```bash
+python scripts/qa.py bootstrap
+python scripts/qa.py doctor
+python scripts/qa.py validate
+python scripts/qa.py lab-matrix
+python scripts/qa.py site
+```
+
+`validate` checks module schemas and artifact paths, relative Markdown links, publication/review invariants, canonical standards-pin drift, learner/export boundaries, and path-scoped lab reset wording. `lab-matrix` runs each vulnerable and fixed pair and reports setup failures separately from expected vulnerable failures and fixed regressions. `site` installs the locked Node dependencies when needed, then runs lint plus clean standard and fallback production builds from the repository root.
+
+For a pull request, `python scripts/qa.py changed --base-ref origin/main` runs the repository validator and the lab contracts affected by the change. The site’s ungraded local worksheets are labeled **Reflections**; they do not confer publication status or an automated grade.
+
 ## Safety
 
 Offensive exercises are limited to local course apps, official intentionally vulnerable labs, challenges whose terms authorize the work, or systems with written scope. Do not attack public or third-party targets. Do not commit real secrets or PII. Vulnerable code belongs under `labs/` with reset instructions—not in learner-facing lesson pages as copy-paste exploits.
@@ -54,6 +70,10 @@ npm --prefix site run build
 ```
 
 Static HTML is written to `site/out/`. Labs are not executed by the site. Examiner keys stay under `content/assessment/keys/` and are not linked from learner pages.
+
+### Build diagnostic
+
+The standard build is explicitly Turbopack. It passed in this checkout on 2026-09-08 and is the deployment command. If an environment reports a Turbopack cache failure, remove only the generated `site/.next/` directory and run `npm --prefix site run build:webpack` as the documented fallback. The CI site job and `python scripts/qa.py site` verify both builds from a clean `.next/` directory.
 
 ### Vercel
 

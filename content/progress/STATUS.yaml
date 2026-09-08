@@ -5,6 +5,9 @@
 # module.yaml status is release state: published means a published reference;
 # draft means authored/map-complete content still awaiting independent review.
 # reviewed is reserved for a recorded review process and never means approved.
+# module.yaml reviewStatus is workflow metadata: requested means review is pending;
+# completed requires a dated independent review artifact. Draft reviewer/date fields
+# stay null so a request is not mistaken for completed review evidence.
 # depth: map-complete | publishable
 # quality: not-attempted | developing | competent | transfer-ready
 
@@ -17,7 +20,7 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: null
+  id: '1.4'
   pass: revise
   skill: deepen-curriculum
   inner_skill: quality-gate

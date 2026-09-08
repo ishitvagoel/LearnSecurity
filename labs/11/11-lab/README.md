@@ -10,7 +10,7 @@ The in-memory `GRANTS` set is a **teaching stand-in** for 1.2 complete mediation
 
 ## Reset
 
-Re-run pytest. Optional: `git checkout -- labs/11/11-lab`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/11/11-lab`, then run `git restore --source=HEAD -- labs/11/11-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

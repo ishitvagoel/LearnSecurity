@@ -8,7 +8,7 @@
 
 ## Reset
 
-`add_share` tests call `reset()` via conftest. Re-run pytest. Optional: `git checkout -- labs/3.4/3.4-lab` if you edited fixtures.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/3.4/3.4-lab`, then run `git restore --source=HEAD -- labs/3.4/3.4-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

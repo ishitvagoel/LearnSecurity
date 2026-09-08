@@ -22,7 +22,7 @@ export default function LearnIndexPage() {
         <p>
           Most topics are drafts awaiting independent review. Use the{" "}
           <Link href="/assess/" className="text-blue-900 underline underline-offset-2">
-            assessment worksheets
+            reflection worksheets
           </Link>{" "}
           to keep your own evidence as you study.
         </p>

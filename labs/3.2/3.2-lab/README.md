@@ -8,7 +8,7 @@
 
 ## Reset
 
-No persistent state. Re-run pytest. Optional: `git checkout -- labs/3.2/3.2-lab` if you edited fixtures.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/3.2/3.2-lab`, then run `git restore --source=HEAD -- labs/3.2/3.2-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

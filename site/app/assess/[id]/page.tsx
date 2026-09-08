@@ -25,7 +25,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
   const mod = loadAllModules().find((item) => item.id === id);
-  return { title: mod ? `${mod.id} assessment` : "Assessment" };
+  return { title: mod ? `${mod.id} reflection` : "Reflection" };
 }
 
 export default async function AssessmentPage({ params }: Props) {
@@ -41,7 +41,7 @@ export default async function AssessmentPage({ params }: Props) {
     <PageShell width="narrow">
       <p className="mb-3 text-sm text-stone-600">
         <Link href="/assess/" className="text-blue-900 underline-offset-2 hover:underline">
-          Assessments
+          Reflections
         </Link>
         {" · "}
         <Link href={moduleHref(mod.id)} className="text-blue-900 underline-offset-2 hover:underline">
@@ -50,7 +50,7 @@ export default async function AssessmentPage({ params }: Props) {
         {" · "}
         Part {mod.phase} · {phaseHeading(mod.phase)}
       </p>
-      <PageHeader title={`Assessment — ${mod.id} ${topicTitle(mod)}`}>
+      <PageHeader title={`Reflection — ${mod.id} ${topicTitle(mod)}`}>
         <p>{topicBlurb(mod)}</p>
         <p>
           Write enough that another engineer could check your reasoning. The
@@ -70,7 +70,7 @@ export default async function AssessmentPage({ params }: Props) {
         <h2 className="text-xl font-semibold text-stone-900">Before you start</h2>
         <p className="mt-2 leading-relaxed text-stone-800">
           This topic is marked {maturityLabel(mod.status).toLowerCase()}. A
-          completed worksheet is useful evidence, but it does not change the
+          completed reflection is useful evidence, but it does not change the
           repository’s publication status.
         </p>
         <h3 className="mt-5 font-semibold text-stone-900">Prerequisites</h3>
@@ -87,7 +87,7 @@ export default async function AssessmentPage({ params }: Props) {
       </section>
 
       <section className="mb-10">
-        <h2 className="mb-3 text-xl font-semibold">Your worksheet</h2>
+        <h2 className="mb-3 text-xl font-semibold">Your reflection workbook</h2>
         <AssessmentWorkbook
           moduleId={mod.id}
           sections={assessmentPrompts(mod)}
@@ -100,7 +100,7 @@ export default async function AssessmentPage({ params }: Props) {
           <h2 className="mb-3 text-xl font-semibold">Industry references named by this topic</h2>
           <div className="overflow-x-auto rounded-xl border border-line bg-paper">
             <table className="w-full min-w-[34rem] text-left text-sm">
-              <caption className="sr-only">Standards references for this assessment</caption>
+              <caption className="sr-only">Standards references for this reflection</caption>
               <thead className="border-b border-line bg-stone-50 text-stone-600">
                 <tr>
                   <th className="px-3 py-2 font-medium">Source</th>
@@ -137,7 +137,7 @@ export default async function AssessmentPage({ params }: Props) {
 
       {rubric ? (
         <section className="mb-10">
-          <h2 className="mb-3 text-xl font-semibold">Learner rubric</h2>
+          <h2 className="mb-3 text-xl font-semibold">Evidence guide</h2>
           <div className="curriculum-prose rounded-2xl border border-line bg-paper p-5">
             <Markdown source={rubric} />
           </div>

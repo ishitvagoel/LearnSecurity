@@ -4,15 +4,15 @@ import { maturityLabel, phaseHeading, phaseList, topicBlurb, topicTitle } from "
 import { assessmentHref } from "@/lib/loadCurriculum";
 import { loadAllModules } from "@/lib/loadCurriculum";
 
-export default function AssessmentsPage() {
+export default function ReflectionsPage() {
   const modules = loadAllModules();
   return (
     <PageShell>
-      <PageHeader kicker="Show your work" title="Assessments">
+      <PageHeader kicker="Show your work" title="Reflection workbooks">
         <p>
-          Use a worksheet after each topic to state the rule, explain the break,
-          plan the fix, and collect evidence. Your notes stay in this browser;
-          this site does not submit or grade them.
+          Use a reflection workbook after each topic to state the rule, explain
+          the break, plan the fix, and collect evidence. Your notes stay in this
+          browser; this site does not submit or grade them.
         </p>
       </PageHeader>
       {phaseList(modules).map((phase) => (

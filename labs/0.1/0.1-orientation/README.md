@@ -8,7 +8,7 @@
 
 ## Reset
 
-Re-run pytest. Optional: `git checkout -- labs/0.1/0.1-orientation`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/0.1/0.1-orientation`, then run `git restore --source=HEAD -- labs/0.1/0.1-orientation` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

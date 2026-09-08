@@ -78,7 +78,7 @@ In the modeled product, detection plans must avoid note bodies, passwords, and t
 
 ## Reset
 
-The vulnerable and fixed directories are course fixtures. Do not edit them in place. Delete your temporary copy and virtual environment when finished. If a fixture was accidentally changed, restore only this lab directory from version control or re-download the repository; do not use a destructive repository-wide reset.
+The vulnerable and fixed directories are course fixtures. Do not edit them in place. Delete your temporary copy and virtual environment when finished. If a fixture was accidentally changed, first inspect `git diff -- labs/1.1/1.1-invariant-catalogue`, then run `git restore --source=HEAD -- labs/1.1/1.1-invariant-catalogue` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Safety notes
 

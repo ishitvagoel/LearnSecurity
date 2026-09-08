@@ -10,7 +10,7 @@ The fixed fixture uses the vetted `cryptography` library's AES-GCM implementatio
 
 ## Reset
 
-Re-run pytest. Optional: `git checkout -- labs/5.2/5.2-lab`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/5.2/5.2-lab`, then run `git restore --source=HEAD -- labs/5.2/5.2-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

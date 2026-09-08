@@ -166,6 +166,7 @@ operationalConsiderations:
   - Operator compromise and concentration of control over state and evidence remain residual risks
   - Human response and recovery paths require clear status, accessible alternatives, and safe failure behavior
 author: OpenAI Codex / deepen-curriculum
+reviewStatus: completed
 reviewer: quality-reviewer (independent semantic review); lab-safety-reviewer (independent local-lab review)
 lastReviewedAt: '2026-08-25'
 nextReviewAt: '2027-02-25'

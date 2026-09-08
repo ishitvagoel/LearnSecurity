@@ -8,7 +8,7 @@
 
 ## Reset
 
-Restore `vulnerable/` and `fixed/` from git. Synthetic JSON only.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/2.1/2.1-parser-boundaries`, then run `git restore --source=HEAD -- labs/2.1/2.1-parser-boundaries` only if you intend to discard those edits. Never use a repository-wide reset or restore. Synthetic JSON only.
 
 ## Vulnerable behavior (local only)
 

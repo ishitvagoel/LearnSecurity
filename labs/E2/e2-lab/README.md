@@ -10,7 +10,7 @@ Header-name presence is a **teaching stand-in** for browser policy mode. It does
 
 ## Reset
 
-Re-run pytest. Optional: `git checkout -- labs/E2/e2-lab`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/E2/e2-lab`, then run `git restore --source=HEAD -- labs/E2/e2-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

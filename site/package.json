@@ -6,7 +6,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "NEXT_TELEMETRY_DISABLED=1 next build",
+    "build": "NEXT_TELEMETRY_DISABLED=1 next build --turbopack",
+    "build:webpack": "NEXT_TELEMETRY_DISABLED=1 next build --webpack",
     "dev": "NEXT_TELEMETRY_DISABLED=1 next dev",
     "start": "next start",
     "lint": "eslint"

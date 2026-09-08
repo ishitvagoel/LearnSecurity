@@ -119,9 +119,10 @@ operationalConsiderations:
 - known-plaintext, malformed-value, and authentication-failure tests in CI.
 - Key storage, rotation, backup handling, and memory dumps remain Module 5.3 concerns.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+reviewStatus: requested
+reviewer: null
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map

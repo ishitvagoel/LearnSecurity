@@ -82,7 +82,7 @@ export default async function ModulePage({ params }: Props) {
           {mod.masteryGate ? ` · Mastery gate ${mod.masteryGate}` : ""}
         </p>
         <p className="mt-4">
-          <ButtonLink href={assessmentHref(mod.id)}>Open the assessment worksheet</ButtonLink>
+          <ButtonLink href={assessmentHref(mod.id)}>Open the reflection workbook</ButtonLink>
         </p>
       </section>
       {first ? (

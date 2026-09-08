@@ -4,21 +4,32 @@
 The legacy filename is retained so old authoring notes do not break. Generated text
 is not independently reviewed and MUST NOT be treated as publishable. The script
 requires an explicit opt-in and clears review metadata on every file it rewrites.
-Reference modules 1.1 and 1.2 are never modified.
+Every module marked publishable in STATUS.yaml is protected from writes.
 """
 from __future__ import annotations
 
 import json
 import os
 import re
+import argparse
+import hashlib
 from datetime import date
 from pathlib import Path
 
 import yaml
 
-ROOT = Path(os.environ.get("LEARNSECURITY_ROOT", "/workspace"))
+
+def resolve_repository_root() -> Path:
+    """Resolve the checkout from this script, with an explicit test override."""
+    override = os.environ.get("LEARNSECURITY_ROOT")
+    root = Path(override).expanduser().resolve() if override else Path(__file__).resolve().parents[1]
+    if not (root / "content").is_dir() or not (root / "labs").is_dir():
+        raise SystemExit(f"Not a LearnSecurity checkout: {root}")
+    return root
+
+
+ROOT = resolve_repository_root()
 CONTENT = ROOT / "content"
-PROTECTED_REFERENCE_MODULES = {"1.1", "1.2"}
 TODAY = date.today().isoformat()
 
 # lab slug overrides where the structural fixture is not `{id}-lab`
@@ -55,9 +66,55 @@ def module_dir(mid: str) -> Path:
     return CONTENT / "modules" / phase / mid
 
 
+def published_module_ids() -> set[str]:
+    """Read protected modules from the canonical status source, never a hard-coded list."""
+    status_path = CONTENT / "progress" / "STATUS.yaml"
+    try:
+        status = yaml.safe_load(status_path.read_text()) or {}
+    except (OSError, yaml.YAMLError) as exc:
+        raise SystemExit(f"Cannot read publication status from {status_path}: {exc}") from exc
+    entries = status.get("modules")
+    if not isinstance(entries, list):
+        raise SystemExit("STATUS.yaml must contain a modules list before generation is allowed")
+    entries = list(entries)
+    capstone = status.get("capstone")
+    if isinstance(capstone, dict):
+        entries.append(capstone)
+    electives = status.get("electives")
+    if isinstance(electives, list):
+        entries.extend(electives)
+    published = {
+        str(entry.get("id"))
+        for entry in entries
+        if isinstance(entry, dict)
+        and (entry.get("depth") == "publishable" or entry.get("status") == "published")
+    }
+    if not published:
+        raise SystemExit("No publishable modules were discovered; refusing to guess protection")
+    return published
+
+
 def lab_dir(mid: str) -> Path:
     parent = "11" if mid == "11" else mid
     return ROOT / "labs" / parent / lab_slug(mid)
+
+
+def planned_paths(mid: str) -> list[Path]:
+    """Return every path the selected module write is allowed to touch."""
+    module = module_dir(mid)
+    paths = [module / "module.yaml", module / "assessment" / "rubric.md", CONTENT / "assessment" / "keys" / f"{mid}.md"]
+    paths.extend(module / "lessons" / filename for filename, *_ in KINDS)
+    return paths
+
+
+def file_fingerprint(path: Path) -> str | None:
+    if not path.is_file():
+        return None
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def snapshot_tree(paths: list[Path]) -> dict[Path, str | None]:
+    return {path: file_fingerprint(path) for path in paths}
 
 
 # Each spec is unique. Fields drive eight differently structured lessons.
@@ -3382,6 +3439,7 @@ def stamp_yaml(mid: str, spec: dict) -> None:
     # Generation and review are deliberately separate trust domains. Rewriting a
     # module invalidates its former review evidence until quality-gate is rerun.
     data["status"] = "draft"
+    data["reviewStatus"] = "requested"
     data["reviewer"] = None
     data["lastReviewedAt"] = None
     data["nextReviewAt"] = None
@@ -3430,10 +3488,34 @@ def stamp_yaml(mid: str, spec: dict) -> None:
 
 
 def main() -> None:
-    if os.environ.get("ALLOW_DRAFT_REGENERATION") != "1":
+    parser = argparse.ArgumentParser(
+        description="Preview or explicitly regenerate one draft module. Published modules are protected by STATUS.yaml."
+    )
+    parser.add_argument("--module", required=True, help="one explicit module ID, for example 1.4")
+    parser.add_argument(
+        "--write",
+        action="store_true",
+        help="perform the regeneration; without this flag the command is a dry-run",
+    )
+    parser.add_argument(
+        "--diff-budget",
+        type=int,
+        default=40,
+        help="maximum number of planned files the write may touch (default: 40)",
+    )
+    args = parser.parse_args()
+
+    if args.module not in SPECS:
+        raise SystemExit(f"Unknown module {args.module!r}; choose one explicit module from the generator specs")
+    protected = published_module_ids()
+    if args.module in protected:
         raise SystemExit(
-            "Refusing to rewrite curriculum without ALLOW_DRAFT_REGENERATION=1. "
-            "Generated scaffolds are drafts and cannot confer publishable status."
+            f"Refusing to generate published module {args.module}; protected modules are {sorted(protected)}"
+        )
+    paths = planned_paths(args.module)
+    if len(paths) > args.diff_budget:
+        raise SystemExit(
+            f"Planned write for {args.module} contains {len(paths)} files, above --diff-budget {args.diff_budget}"
         )
     props = [SPECS[k]["property"] for k in SPECS]
     if len(props) != len(set(props)):
@@ -3441,20 +3523,33 @@ def main() -> None:
     forbs = [SPECS[k]["forbidden"] for k in SPECS]
     if len(forbs) != len(set(forbs)):
         raise SystemExit("duplicate forbidden outcomes")
-    written = []
-    for mid, spec in SPECS.items():
-        if mid in PROTECTED_REFERENCE_MODULES:
-            continue
-        write_lessons(mid, spec)
-        write_assessment(mid, spec)
-        stamp_yaml(mid, spec)
-        written.append(mid)
-    print("wrote draft lesson scaffolds for", len(written), "modules")
-    print("specs", len(SPECS))
+    print(f"dry-run: module={args.module}; protected={','.join(sorted(protected))}; planned_files={len(paths)}")
+    if not args.write:
+        print("No files changed. Pass --write and ALLOW_DRAFT_REGENERATION=1 to opt in.")
+        return
+    if os.environ.get("ALLOW_DRAFT_REGENERATION") != "1":
+        raise SystemExit(
+            "Refusing to rewrite curriculum without ALLOW_DRAFT_REGENERATION=1. "
+            "Generated scaffolds are drafts and cannot confer publishable status."
+        )
+
+    protected_paths = [
+        path
+        for mid in protected
+        for path in module_dir(mid).rglob("*")
+        if path.is_file()
+    ]
+    before_protected = snapshot_tree(protected_paths)
+    before_selected = snapshot_tree(paths)
+    write_lessons(args.module, SPECS[args.module])
+    write_assessment(args.module, SPECS[args.module])
+    stamp_yaml(args.module, SPECS[args.module])
+    after_protected = snapshot_tree(protected_paths)
+    if before_protected != after_protected:
+        raise SystemExit("Published-module protection failed: a protected file changed")
+    changed = [path for path in paths if before_selected.get(path) != file_fingerprint(path)]
+    print(f"wrote draft lesson scaffolds for {args.module}; changed_files={len(changed)}")
 
 
 if __name__ == "__main__":
     main()
-
-
-
