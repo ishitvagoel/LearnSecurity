@@ -31,6 +31,7 @@
     "misconceptions",
     "operationalConsiderations",
     "author",
+    "reviewStatus",
     "reviewer",
     "lastReviewedAt",
     "nextReviewAt",
@@ -195,7 +196,9 @@
           },
           "requirementIds": {
             "type": "array",
-            "items": { "type": "string" }
+            "items": { "type": "string" },
+            "minItems": 1,
+            "uniqueItems": true
           },
           "url": { "type": "string" }
         }
@@ -210,6 +213,11 @@
       "items": { "type": "string" }
     },
     "author": { "type": ["string", "null"] },
+    "reviewStatus": {
+      "type": "string",
+      "enum": ["not-requested", "requested", "completed"],
+      "description": "Review workflow state; completed requires a dated independent review artifact."
+    },
     "reviewer": { "type": ["string", "null"] },
     "lastReviewedAt": {
       "type": ["string", "null"],

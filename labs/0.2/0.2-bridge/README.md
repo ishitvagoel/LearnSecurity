@@ -8,7 +8,7 @@
 
 ## Reset
 
-Re-run pytest. Optional: `git checkout -- labs/0.2/0.2-bridge`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/0.2/0.2-bridge`, then run `git restore --source=HEAD -- labs/0.2/0.2-bridge` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

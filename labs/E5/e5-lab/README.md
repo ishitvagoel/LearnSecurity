@@ -10,7 +10,7 @@ Postgres RLS that `SET`s tenant from the body is the **same bug**. This Python b
 
 ## Reset
 
-Re-run pytest. Optional: `git checkout -- labs/E5/e5-lab`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/E5/e5-lab`, then run `git restore --source=HEAD -- labs/E5/e5-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

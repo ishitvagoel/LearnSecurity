@@ -10,7 +10,7 @@ The allowlist of role names is a **teaching stand-in** for a namespaced RoleBind
 
 ## Reset
 
-Re-run pytest. Optional: `git checkout -- labs/10.3/10.3-lab`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/10.3/10.3-lab`, then run `git restore --source=HEAD -- labs/10.3/10.3-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

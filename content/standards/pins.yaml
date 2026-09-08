@@ -4,6 +4,15 @@
 # Schema per row: id, source, version, status, publishedAt, reviewedAt, url, role, notes
 
 pins:
+  - id: ietf-rfc-8259-json
+    source: IETF RFC 8259 The JavaScript Object Notation (JSON) Data Interchange Format
+    version: "STD 90"
+    status: final
+    publishedAt: "2017-12"
+    reviewedAt: "2026-09-08"
+    url: "https://datatracker.ietf.org/doc/html/rfc8259"
+    role: "JSON grammar and interoperability constraints; parser behavior is not authorization"
+    notes: "RFC 8259 is the stable IETF JSON specification. Module 2.1 uses the unique-object-names SHOULD language as a parser/canonicalization decision point; it does not treat valid JSON as proof of authorization or business-rule safety."
   - id: saltzer-schroeder-1975
     source: Saltzer & Schroeder, The Protection of Information in Computer Systems
     version: "1975"

@@ -120,9 +120,10 @@ operationalConsiderations:
 - Role change must hide previously visible fields.
 - Admin or service sees secret_internal only when audited.
 author: deepen-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+reviewStatus: requested
+reviewer: null
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map

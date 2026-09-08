@@ -8,7 +8,7 @@
 
 ## Reset
 
-Git checkout this lab.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/2.3/2.3-browser-policy`, then run `git restore --source=HEAD -- labs/2.3/2.3-browser-policy` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

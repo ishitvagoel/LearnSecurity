@@ -8,7 +8,7 @@
 
 ## Reset
 
-conftest calls `reset()`. Re-run pytest. Optional: `git checkout -- labs/5.1/5.1-lab`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/5.1/5.1-lab`, then run `git restore --source=HEAD -- labs/5.1/5.1-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

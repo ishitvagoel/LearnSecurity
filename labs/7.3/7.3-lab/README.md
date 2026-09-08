@@ -8,7 +8,7 @@
 
 ## Reset
 
-Re-run pytest. Optional: `git checkout -- labs/7.3/7.3-lab`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/7.3/7.3-lab`, then run `git restore --source=HEAD -- labs/7.3/7.3-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

@@ -103,7 +103,7 @@ Gate 1 (with 1.1–1.3): given an unfamiliar product, define security without a 
 
 | source | version | status | requirementIds | url |
 |---|---|---|---|---|
-| CISA Secure by Design | current public guidance | final | customer-outcomes; secure-defaults | https://www.cisa.gov/securebydesign |
+| CISA Secure by Design | current public guidance | unverified | customer-outcomes; secure-defaults | https://www.cisa.gov/securebydesign |
 | NIST CSF | 2.0 | final | DE, RS, RC (and GV for residual ownership) | https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20 |
 | NIST SP 800-63-4 | 4 | final | risk-management; customer-experience (not full authenticator catalog) | https://pages.nist.gov/800-63-4/ |
 | WCAG | 2.2 | final | security-sensitive journeys; no mouse-only / visual-only / memory-only | https://www.w3.org/TR/WCAG22/ |

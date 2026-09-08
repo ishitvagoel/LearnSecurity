@@ -10,7 +10,7 @@ The in-memory `SEEN` set is a **teaching stand-in** for an idempotency primary k
 
 ## Reset
 
-Re-run pytest. Optional: `git checkout -- labs/E3/e3-lab`.
+Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/E3/e3-lab`, then run `git restore --source=HEAD -- labs/E3/e3-lab` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Vulnerable behavior (local only)
 

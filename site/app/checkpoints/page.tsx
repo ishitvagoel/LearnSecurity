@@ -84,7 +84,7 @@ export default function CheckpointsPage() {
           a repair, a check that fails on the broken files. This website does
           not grade you. Use the{" "}
           <Link href="/assess/" className="text-blue-900 underline underline-offset-2">
-            assessment worksheets
+            reflection worksheets
           </Link>{" "}
           to keep your own evidence. Answer keys are not published here.
         </p>

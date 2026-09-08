@@ -128,9 +128,10 @@ operationalConsiderations:
 - share_count vs unique keys; never fail-open if the key store is down.
 - Lost first response still needs a read-your-write path.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+reviewStatus: requested
+reviewer: null
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification

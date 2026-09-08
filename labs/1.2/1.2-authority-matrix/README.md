@@ -105,7 +105,7 @@ If an over-authority failure were found, containment would revoke the implicated
 
 ## Reset
 
-The test loader imports a fresh selected module for each test, so mutations to in-memory notes do not persist between tests. Delete temporary practice copies and the disposable virtual environment when finished. If a fixture file was edited accidentally, restore only this lab directory from version control or re-download the repository; do not perform a destructive repository-wide reset.
+The test loader imports a fresh selected module for each test, so mutations to in-memory notes do not persist between tests. Delete temporary practice copies and the disposable virtual environment when finished. Reset only this lab (destructive for uncommitted edits in this path): first inspect `git diff -- labs/1.2/1.2-authority-matrix`, then run `git restore --source=HEAD -- labs/1.2/1.2-authority-matrix` only if you intend to discard those edits. Never use a repository-wide reset or restore.
 
 ## Limits and review triggers
 

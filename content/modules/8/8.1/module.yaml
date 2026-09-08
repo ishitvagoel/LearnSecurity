@@ -123,9 +123,10 @@ operationalConsiderations:
 - attest_fail_export_denied.
 - Honest users on rooted devices — owned product policy, not a silent export grant.
 author: deepen-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+reviewStatus: requested
+reviewer: null
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map

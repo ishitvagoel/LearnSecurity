@@ -1,0 +1,6 @@
+# Direct QA/runtime dependencies. The reproducible install uses the exact pins
+# in requirements-dev.lock; update both files together when the QA contract changes.
+PyYAML==6.0.3
+cryptography==46.0.0
+jsonschema==4.25.1
+pytest==9.1.1
