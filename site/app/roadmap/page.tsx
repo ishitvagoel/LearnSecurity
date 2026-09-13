@@ -4,6 +4,12 @@ import { PageHeader, PageShell } from "@/components/ui";
 import { PHASES, phaseHeading, phaseList, topicTitle } from "@/lib/catalog";
 import { loadAllModules, moduleHref } from "@/lib/loadCurriculum";
 
+export const metadata = {
+  title: "Study order",
+  description:
+    "What to study next and in what order, from ground rules through the final project.",
+};
+
 export default function RoadmapPage() {
   const modules = loadAllModules();
   const phases = phaseList(modules);

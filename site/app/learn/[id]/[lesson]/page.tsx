@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { LessonReader } from "@/components/LessonReader";
 import { parseLessonLead, spokenLessonTitle } from "@/lib/headings";
-import { topicTitle } from "@/lib/catalog";
+import { topicBlurb, topicTitle } from "@/lib/catalog";
 import {
   loadAllModules,
   loadLessons,
@@ -39,7 +39,10 @@ export async function generateMetadata({ params }: Props) {
   if (!lo) {
     return { title: `${mod.id} · ${lesson}` };
   }
-  return { title: `${mod.id} · ${spokenLessonTitle(lo.title, lo.body || "")}` };
+  return {
+    title: `${mod.id} · ${spokenLessonTitle(lo.title, lo.body || "")}`,
+    description: topicBlurb(mod),
+  };
 }
 
 export default async function LessonPage({ params }: Props) {

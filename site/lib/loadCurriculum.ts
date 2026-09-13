@@ -4,6 +4,8 @@ import yaml from "js-yaml";
 import { contentRoot } from "./contentRoot";
 import type { LessonFile, ModuleMeta } from "./types";
 
+export { assessmentHref, lessonHref, moduleHref } from "./hrefs";
+
 function assertModule(data: unknown, file: string): ModuleMeta {
   if (!data || typeof data !== "object") {
     throw new Error(`Invalid module.yaml: ${file}`);
@@ -84,15 +86,3 @@ export function loadPins(): unknown {
   return yaml.load(fs.readFileSync(file, "utf8"));
 }
 
-export function moduleHref(id: string): string {
-  return `/learn/${encodeURIComponent(id)}/`;
-}
-
-export function lessonHref(moduleId: string, filename: string): string {
-  const slug = filename.replace(/\.md$/, "");
-  return `/learn/${encodeURIComponent(moduleId)}/${encodeURIComponent(slug)}/`;
-}
-
-export function assessmentHref(id: string): string {
-  return `/assess/${encodeURIComponent(id)}/`;
-}

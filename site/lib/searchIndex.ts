@@ -28,6 +28,7 @@ const STATIC_PAGES: { href: string; title: string; text: string }[] = [
   { href: "/labs/", title: "Practice", text: "Run the practice files on your own computer, from the course repository." },
   { href: "/assess/", title: "Assessments", text: "Worksheets to state the rule, explain the break, plan the fix, and collect evidence." },
   { href: "/checkpoints/", title: "Check-ins", text: "How you know you are ready to move on to the next part of the course." },
+  { href: "/progress/", title: "Your progress", text: "How far you have read through the course, tracked in this browser only." },
   { href: "/capstone/", title: "Final project", text: "Put the pieces together on the notes app the course has been building." },
   { href: "/policy/", title: "Rules for practice", text: "What you may and must not do when practicing. Authorized scope and safety." },
   { href: "/reference/", title: "The notes app", text: "The example app the course follows: teams, members, notes, files, and sharing." },

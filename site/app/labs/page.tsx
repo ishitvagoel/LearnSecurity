@@ -3,6 +3,12 @@ import { phaseHeading, phaseList, topicBlurb, topicTitle } from "@/lib/catalog";
 import { loadAllModules } from "@/lib/loadCurriculum";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Practice",
+  description:
+    "How to run this course's practice files on your own computer — never on a live website.",
+};
+
 export default function LabsIndexPage() {
   const withLabs = loadAllModules().filter((m) => m.labSpec);
   const phases = phaseList(withLabs);

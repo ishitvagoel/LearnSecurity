@@ -32,7 +32,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
   const mod = loadAllModules().find((m) => m.id === id);
-  return { title: mod ? `${mod.id} ${topicTitle(mod)}` : "Topic" };
+  return {
+    title: mod ? `${mod.id} ${topicTitle(mod)}` : "Topic",
+    description: mod ? topicBlurb(mod) : undefined,
+  };
 }
 
 export default async function ModulePage({ params }: Props) {
@@ -70,22 +73,6 @@ export default async function ModulePage({ params }: Props) {
         <Chip>{formatMinutes(mod.estimatedMinutes)}</Chip>
         <Chip>{maturityLabel(mod.status)}</Chip>
       </div>
-      <section className="mb-8 rounded-2xl border border-line bg-paper p-4">
-        <h2 className="text-xl font-semibold">What you should be able to show</h2>
-        <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-stone-800">
-          {(mod.outcomes || []).map((outcome) => <li key={outcome}>{outcome}</li>)}
-        </ul>
-        <p className="mt-4 text-sm leading-relaxed text-stone-700">
-          Prerequisites: {(mod.prerequisites || []).join(" · ") || "None listed"}
-        </p>
-        <p className="mt-3 text-sm leading-relaxed text-stone-700">
-          References: {(mod.standardsRefs || []).map((standard) => `${standard.source} ${standard.version}`).join(" · ") || "None listed"}
-          {mod.masteryGate ? ` · Mastery gate ${mod.masteryGate}` : ""}
-        </p>
-        <p className="mt-4">
-          <ButtonLink href={assessmentHref(mod.id)}>Open the assessment worksheet</ButtonLink>
-        </p>
-      </section>
       {first ? (
         <p className="mb-4">
           <Link
@@ -98,7 +85,7 @@ export default async function ModulePage({ params }: Props) {
       ) : null}
       <ProgressToggle moduleId={mod.id} />
 
-      <section className="mt-10">
+      <section className="mt-8">
         <h2 className="mb-3 text-xl font-semibold">Pages</h2>
         <ol className="divide-y divide-stone-200 overflow-hidden rounded-xl border border-stone-200 bg-white">
           {lessons.map((lo, i) => {
@@ -156,6 +143,28 @@ export default async function ModulePage({ params }: Props) {
           </p>
         </section>
       ) : null}
+
+      <details className="mt-10 rounded-2xl border border-line bg-paper p-4">
+        <summary className="cursor-pointer text-xl font-semibold text-ink">
+          Outcomes, prerequisites, and assessment
+        </summary>
+        <div className="mt-3">
+          <h3 className="font-semibold text-ink">What you should be able to show</h3>
+          <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-stone-800">
+            {(mod.outcomes || []).map((outcome) => <li key={outcome}>{outcome}</li>)}
+          </ul>
+          <p className="mt-4 text-sm leading-relaxed text-stone-700">
+            Prerequisites: {(mod.prerequisites || []).join(" · ") || "None listed"}
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-stone-700">
+            References: {(mod.standardsRefs || []).map((standard) => `${standard.source} ${standard.version}`).join(" · ") || "None listed"}
+            {mod.masteryGate ? ` · Mastery gate ${mod.masteryGate}` : ""}
+          </p>
+          <p className="mt-4">
+            <ButtonLink href={assessmentHref(mod.id)}>Open the assessment worksheet</ButtonLink>
+          </p>
+        </div>
+      </details>
     </PageShell>
   );
 }

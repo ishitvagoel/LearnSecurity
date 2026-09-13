@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { CardLink, PageHeader, PageShell } from "@/components/ui";
 
+export const metadata = {
+  title: "Final project",
+  description:
+    "Show that the notes app still keeps its promises when logins, data, APIs, background jobs, and time all run together.",
+};
+
 export default function CapstonePage() {
   return (
     <PageShell width="narrow">

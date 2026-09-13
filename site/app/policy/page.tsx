@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { PageHeader, PageShell } from "@/components/ui";
 
+export const metadata = {
+  title: "Rules for practice",
+  description:
+    "What you may and must not do when practicing on this course's files — authorized scope and safety.",
+};
+
 export default function PolicyPage() {
   return (
     <PageShell width="narrow">

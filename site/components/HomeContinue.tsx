@@ -24,6 +24,10 @@ export function HomeContinue(): ReactElement | null {
       >
         {TOPIC_TITLE[last] || last}
       </Link>
+      .{" "}
+      <Link href="/progress/" className="font-medium text-forest-accent underline underline-offset-2">
+        See your progress
+      </Link>
       .
     </p>
   );

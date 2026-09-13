@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { PageHeader, PageShell } from "@/components/ui";
 
+export const metadata = {
+  title: "Check-ins",
+  description:
+    "How you know you're ready to move on — a check-in for each part of the course.",
+};
+
 const CHECKINS = [
   {
     id: "0",

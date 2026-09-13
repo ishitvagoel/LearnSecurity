@@ -2,6 +2,12 @@ import { GlossaryFilter } from "@/components/GlossaryFilter";
 import { PageHeader, PageShell } from "@/components/ui";
 import { GLOSSARY_TERMS } from "@/lib/glossary";
 
+export const metadata = {
+  title: "Word list",
+  description:
+    "Plain-English definitions of the security terms this course uses most, from rule and mechanism to XSS, CSRF, and SSRF.",
+};
+
 export default function GlossaryPage() {
   return (
     <PageShell width="narrow">

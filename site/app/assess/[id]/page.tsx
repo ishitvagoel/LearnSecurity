@@ -25,7 +25,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
   const mod = loadAllModules().find((item) => item.id === id);
-  return { title: mod ? `${mod.id} assessment` : "Assessment" };
+  return {
+    title: mod ? `${mod.id} assessment` : "Assessment",
+    description: mod ? topicBlurb(mod) : undefined,
+  };
 }
 
 export default async function AssessmentPage({ params }: Props) {

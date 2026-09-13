@@ -4,6 +4,12 @@ import { maturityLabel, phaseHeading, phaseList, topicBlurb, topicTitle } from "
 import { assessmentHref } from "@/lib/loadCurriculum";
 import { loadAllModules } from "@/lib/loadCurriculum";
 
+export const metadata = {
+  title: "Assessments",
+  description:
+    "Worksheets to state the rule, explain the break, plan the fix, and collect evidence after each topic.",
+};
+
 export default function AssessmentsPage() {
   const modules = loadAllModules();
   return (

@@ -12,6 +12,12 @@ type Pin = {
   url: string;
 };
 
+export const metadata = {
+  title: "References",
+  description:
+    "The published security standards and lists this course cites, and which topics mention them.",
+};
+
 export default function ReferencesPage() {
   const raw = loadPins() as { pins?: Pin[] };
   const pins = raw.pins || [];

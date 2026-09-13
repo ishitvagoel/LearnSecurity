@@ -5,6 +5,12 @@ import { PageHeader, PageShell } from "@/components/ui";
 import { phaseList } from "@/lib/catalog";
 import { loadAllModules } from "@/lib/loadCurriculum";
 
+export const metadata = {
+  title: "Lessons",
+  description:
+    "All topics in this free security engineering course, in study order — from ground rules through logins, data, bad input, APIs, and shipping.",
+};
+
 export default function LearnIndexPage() {
   const modules = loadAllModules();
   const phases = phaseList(modules);
