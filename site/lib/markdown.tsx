@@ -133,6 +133,7 @@ export function Markdown({ source }: { source: string }): ReactNode {
   let codeLang = "";
   let quote: string[] = [];
   let seq = 0;
+  let diagramContext = "Lesson diagram";
   let section: {
     kind: LessonSectionKind;
     headingId: string;
@@ -250,6 +251,7 @@ export function Markdown({ source }: { source: string }): ReactNode {
     if (level === 2) {
       flushSection();
     }
+    diagramContext = plainHeadingText(raw);
     if (kind) {
       section = {
         kind,
@@ -274,7 +276,13 @@ export function Markdown({ source }: { source: string }): ReactNode {
         const source = code.join("\n");
         const lang = codeLang.toLowerCase();
         if (lang === "mermaid") {
-          pushNode(<MermaidDiagram key={nextKey("mmd")} chart={source} />);
+          pushNode(
+            <MermaidDiagram
+              key={nextKey("mmd")}
+              chart={source}
+              caption={`Diagram for ${diagramContext}`}
+            />,
+          );
         } else {
           const diagram = lang === "diagram";
           pushNode(

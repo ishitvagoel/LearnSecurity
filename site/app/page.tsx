@@ -122,12 +122,12 @@ export default function HomePage() {
                 Learn what “secure” means here
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                The next topic is not a tool. It is how to write a rule you can
+                Use a short capability bridge, then write a rule you can
                 actually check.
               </p>
               <p className="mt-5">
-                <ButtonLink href="/learn/1.1/" variant="secondary">
-                  Open the next topic
+                <ButtonLink href="/learn/0.2/" variant="secondary">
+                  Open the bridge diagnostic
                 </ButtonLink>
               </p>
             </li>

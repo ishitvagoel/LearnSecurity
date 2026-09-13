@@ -42,7 +42,9 @@ export function LessonReader({
     <>
       <LessonKeyNav
         prevHref={prev ? lessonHref(moduleId, prev.filename) : undefined}
-        nextHref={next ? lessonHref(moduleId, next.filename) : undefined}
+        nextHref={next ? lessonHref(moduleId, next.filename) : nextTopic?.href}
+        currentHref={lessonHref(moduleId, current.filename)}
+        currentTitle={lessonTitle}
       />
       <ReadingProgress />
       <div className="mx-auto max-w-[90rem] px-4 py-8 lg:grid lg:grid-cols-[16rem_minmax(0,42rem)_14rem] lg:justify-center lg:gap-10">

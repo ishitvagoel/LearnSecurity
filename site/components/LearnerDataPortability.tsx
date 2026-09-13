@@ -3,6 +3,7 @@
 import { useRef, useState, type ChangeEvent, type ReactElement } from "react";
 
 const PROGRESS_KEY = "learnsecurity-progress-v1";
+const LAST_ACTIVITY_KEY = "learnsecurity-last-activity-v1";
 const ASSESSMENT_PREFIX = "learnsecurity-assessment-v1:";
 const FORMAT = "learnsecurity-learner-state";
 const VERSION = 1;
@@ -14,12 +15,15 @@ type AssessmentState = {
   evidence: string[];
 };
 
+type LastActivity = { href: string; title: string };
+
 type LearnerExport = {
   format: typeof FORMAT;
   version: typeof VERSION;
   exportedAt: string;
   progress: string[];
   assessments: Record<string, AssessmentState>;
+  lastActivity?: LastActivity;
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -51,6 +55,17 @@ function safeAssessment(value: unknown): AssessmentState {
   };
 }
 
+function safeLastActivity(value: unknown): LastActivity | undefined {
+  if (!isRecord(value) || typeof value.href !== "string" || typeof value.title !== "string") {
+    return undefined;
+  }
+  const href = value.href.slice(0, 240);
+  if (!href.startsWith("/learn/")) {
+    return undefined;
+  }
+  return { href, title: value.title.slice(0, 200) };
+}
+
 function readExport(value: unknown): LearnerExport | null {
   if (!isRecord(value) || value.format !== FORMAT || value.version !== VERSION) {
     return null;
@@ -69,6 +84,7 @@ function readExport(value: unknown): LearnerExport | null {
     exportedAt: typeof value.exportedAt === "string" ? value.exportedAt : new Date().toISOString(),
     progress: safeStringList(value.progress),
     assessments,
+    lastActivity: safeLastActivity(value.lastActivity),
   };
 }
 
@@ -91,7 +107,13 @@ function collectState(): LearnerExport {
       // Ignore malformed local entries while exporting the rest of the work.
     }
   }
-  return { format: FORMAT, version: VERSION, exportedAt: new Date().toISOString(), progress, assessments };
+  let lastActivity: LastActivity | undefined;
+  try {
+    lastActivity = safeLastActivity(JSON.parse(window.localStorage.getItem(LAST_ACTIVITY_KEY) || "null"));
+  } catch {
+    // Ignore a malformed continuation pointer while exporting the rest of the work.
+  }
+  return { format: FORMAT, version: VERSION, exportedAt: new Date().toISOString(), progress, assessments, lastActivity };
 }
 
 export function LearnerDataPortability(): ReactElement {
@@ -130,6 +152,11 @@ export function LearnerDataPortability(): ReactElement {
           return;
         }
         window.localStorage.setItem(PROGRESS_KEY, JSON.stringify(payload.progress));
+        if (payload.lastActivity) {
+          window.localStorage.setItem(LAST_ACTIVITY_KEY, JSON.stringify(payload.lastActivity));
+        } else {
+          window.localStorage.removeItem(LAST_ACTIVITY_KEY);
+        }
         for (const [key, state] of Object.entries(payload.assessments)) {
           window.localStorage.setItem(key, JSON.stringify(state));
         }

@@ -15,6 +15,7 @@
 - `site/components/AssessmentWorkbook.tsx` and `site/components/LearnerDataPortability.tsx` — next-action guidance and versioned local export/import.
 - `site/app/reference/[slug]/page.tsx` and `site/app/project/page.tsx` — direct reference readers and SecureCollab milestone history.
 - `site/lib/plainCopy.ts` and `site/lib/markdown.tsx` call path — authored lesson prose is rendered without semantic regex rewriting.
+- `site/components/HomeContinue.tsx`, `site/components/LessonKeyNav.tsx`, and `site/components/MermaidDiagram.tsx` — last-lesson continuation, topic-boundary keyboard navigation, and heading-linked diagram labels.
 - `labs/M0/securecollab-m0/` — loopback-only browser → HTTP → SQLite teaching bridge with vulnerable/fixed tenant-boundary behavior.
 
 ## Checks completed
@@ -26,6 +27,8 @@
 - `git diff --check` — passed.
 - M0 fixed smoke test — passed; loopback HTTP trace returned Alice 200 and Bob 403.
 - M0 vulnerable smoke observation — forged client company returned 200 as the intended seeded failure.
+- M1 fixed smoke test — passed; current session, cross-company, forged-company, and revocation cases are observable.
+- M2 fixed smoke test — passed; queue execution, revocation-after-enqueue, retained-copy, and forged-tenant cases are observable.
 
 ## Review limits and follow-up
 
