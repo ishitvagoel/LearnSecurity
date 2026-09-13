@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { OverallProgress } from "@/components/ModuleProgress";
 import { PhaseJump, PhaseSection } from "@/components/PhaseSection";
 import { PageHeader, PageShell } from "@/components/ui";
 import { phaseList } from "@/lib/catalog";
@@ -27,6 +28,9 @@ export default function LearnIndexPage() {
           to keep your own evidence as you study.
         </p>
       </PageHeader>
+      <div className="mb-8">
+        <OverallProgress moduleIds={modules.map((m) => m.id)} />
+      </div>
       <PhaseJump phases={phases} />
       {phases.map((phase) => (
         <PhaseSection

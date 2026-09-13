@@ -8,31 +8,35 @@ type Pin = {
   source: string;
   version: string;
   status: string;
+  reviewedAt?: string;
   url: string;
 };
 
-export default function StandardsPage() {
+export default function ReferencesPage() {
   const raw = loadPins() as { pins?: Pin[] };
   const pins = raw.pins || [];
   const modules = loadAllModules();
   return (
     <PageShell>
-      <PageHeader title="Industry lists">
+      <PageHeader title="References">
         <p>
-          These are the published lists and papers the course points at. A list
-          of common bugs is a reminder after you have a rule — it is not the
-          course order. A draft stays labeled as a draft.
+          These are the published lists and papers the course points at, and
+          where each topic mentions them. Prefer the link and version below
+          over a blog post. A list of common bugs is a reminder after you have
+          a rule — it is not the course order. A draft stays labeled as a
+          draft, and this site does not publish answer keys.
         </p>
       </PageHeader>
       <h2 className="mb-3 text-xl font-semibold">The lists and papers</h2>
       <div className="overflow-x-auto rounded-xl border border-stone-200 bg-white">
-        <table className="w-full min-w-[36rem] text-left text-sm">
+        <table className="w-full min-w-[40rem] text-left text-sm">
           <caption className="sr-only">Industry lists and papers</caption>
           <thead className="border-b border-stone-200 bg-stone-50 text-stone-600">
             <tr>
               <th className="px-4 py-2 font-medium">Name</th>
               <th className="px-4 py-2 font-medium">Version</th>
               <th className="px-4 py-2 font-medium">Status</th>
+              <th className="px-4 py-2 font-medium">Last checked</th>
             </tr>
           </thead>
           <tbody>
@@ -51,6 +55,9 @@ export default function StandardsPage() {
                 <td className="px-4 py-3 whitespace-nowrap text-stone-800">{p.version}</td>
                 <td className="px-4 py-3 whitespace-nowrap text-stone-800">
                   {pinStatusLabel(p.status)}
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-stone-700">
+                  {p.reviewedAt || "—"}
                 </td>
               </tr>
             ))}

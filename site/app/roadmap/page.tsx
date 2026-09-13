@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ModuleDoneBadge, PhaseProgress } from "@/components/ModuleProgress";
 import { PageHeader, PageShell } from "@/components/ui";
 import { PHASES, phaseHeading, phaseList, topicTitle } from "@/lib/catalog";
 import { loadAllModules, moduleHref } from "@/lib/loadCurriculum";
@@ -38,9 +39,12 @@ export default function RoadmapPage() {
                   </span>
                   {phaseHeading(phase)}
                 </h2>
-                <p className="text-sm text-stone-600">
-                  {items.length} topic{items.length === 1 ? "" : "s"}
-                </p>
+                <div className="flex flex-col items-end gap-1.5">
+                  <p className="text-sm text-stone-600">
+                    {items.length} topic{items.length === 1 ? "" : "s"}
+                  </p>
+                  <PhaseProgress moduleIds={items.map((m) => m.id)} />
+                </div>
               </div>
               {meta ? (
                 <p className="mt-2 max-w-prose leading-relaxed text-stone-700">{meta.blurb}</p>
@@ -50,12 +54,13 @@ export default function RoadmapPage() {
                   <li key={mod.id}>
                     <Link
                       href={moduleHref(mod.id)}
-                      className="inline-flex items-center rounded-full border border-line bg-background px-2.5 py-1 font-mono text-xs text-ink hover:border-forest hover:bg-white"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-line bg-background px-2.5 py-1 font-mono text-xs text-ink hover:border-forest-accent hover:bg-white"
                     >
                       {mod.id}
-                      <span className="ml-1.5 max-w-[14rem] truncate font-sans text-stone-600">
+                      <span className="max-w-[14rem] truncate font-sans text-stone-600">
                         {topicTitle(mod)}
                       </span>
+                      <ModuleDoneBadge moduleId={mod.id} />
                     </Link>
                   </li>
                 ))}

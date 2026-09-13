@@ -20,7 +20,7 @@ export function HomeContinue(): ReactElement | null {
       computer. Last one:{" "}
       <Link
         href={`/learn/${encodeURIComponent(last)}/`}
-        className="font-medium text-forest underline underline-offset-2"
+        className="font-medium text-forest-accent underline underline-offset-2"
       >
         {TOPIC_TITLE[last] || last}
       </Link>

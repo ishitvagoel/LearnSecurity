@@ -29,7 +29,7 @@ export function PageHeader({
   return (
     <header className="mb-10">
       {kicker ? (
-        <p className="mb-3 text-sm font-medium text-forest">{kicker}</p>
+        <p className="mb-3 text-sm font-medium text-forest-accent">{kicker}</p>
       ) : null}
       <h1 className="font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
         {title}
@@ -64,10 +64,10 @@ export function ButtonLink({
 }): ReactElement {
   const styles =
     variant === "primary"
-      ? "bg-forest text-paper hover:bg-forest-hover"
+      ? "bg-forest text-on-forest hover:bg-forest-hover"
       : variant === "inverse"
-        ? "bg-paper text-forest hover:bg-white"
-        : "border border-stone-400 bg-paper text-ink hover:border-forest hover:bg-white";
+        ? "bg-on-forest text-forest hover:opacity-90"
+        : "border border-stone-400 bg-paper text-ink hover:border-forest-accent hover:bg-white";
   return (
     <Link
       href={href}
@@ -92,10 +92,10 @@ export function CardLink({
   return (
     <Link
       href={href}
-      className="block h-full rounded-2xl border border-line bg-paper p-5 text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-forest/40 hover:shadow-md"
+      className="block h-full rounded-2xl border border-line bg-paper p-5 text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-forest-accent/40 hover:shadow-md"
     >
       {kicker ? (
-        <p className="mb-1 text-xs font-medium text-forest">{kicker}</p>
+        <p className="mb-1 text-xs font-medium text-forest-accent">{kicker}</p>
       ) : null}
       <p className="font-semibold text-ink">{title}</p>
       {children ? (

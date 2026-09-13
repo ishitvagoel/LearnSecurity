@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { BrandMark } from "@/components/BrandMark";
+import { SiteSearch } from "@/components/SiteSearch";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { COURSE_NAV, MORE_NAV, PRIMARY_NAV, RESOURCE_NAV, isCurrentPath } from "@/lib/nav";
 
 function NavItem({
@@ -21,9 +23,9 @@ function NavItem({
     <Link
       href={href}
       aria-current={current ? "page" : undefined}
-      className={`rounded-full px-3 py-1.5 text-sm transition-colors ${
+      className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm transition-colors ${
         current
-          ? "bg-forest text-paper"
+          ? "bg-forest text-on-forest"
           : "text-stone-700 hover:bg-white hover:text-stone-900"
       }`}
     >
@@ -92,12 +94,12 @@ export function SiteNav(): ReactElement {
             <span className="hidden text-xs text-muted sm:block">A course in building safer software</span>
           </span>
         </Link>
-        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-1 xl:flex">
           <Link
             href="/"
             aria-current={home ? "page" : undefined}
-            className={`rounded-full px-3 py-1.5 text-sm transition-colors ${
-              home ? "bg-forest text-paper" : "text-stone-700 hover:bg-white hover:text-stone-900"
+            className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm transition-colors ${
+              home ? "bg-forest text-on-forest" : "text-stone-700 hover:bg-white hover:text-stone-900"
             }`}
           >
             Home
@@ -108,7 +110,7 @@ export function SiteNav(): ReactElement {
           <div className="relative" ref={moreRef}>
             <button
               type="button"
-              className={`rounded-full px-3 py-1.5 text-sm ${
+              className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm ${
                 moreCurrent || moreOpen
                   ? "bg-white text-ink ring-1 ring-line"
                   : "text-stone-700 hover:bg-white hover:text-stone-900"
@@ -153,15 +155,17 @@ export function SiteNav(): ReactElement {
           </div>
         </nav>
         <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <SiteSearch />
           <Link
             href="/learn/0.1/"
-            className="hidden rounded-full bg-forest px-3.5 py-1.5 text-sm font-medium text-paper hover:bg-forest-hover sm:inline-flex"
+            className="hidden rounded-full bg-forest px-3.5 py-1.5 text-sm font-medium text-on-forest hover:bg-forest-hover sm:inline-flex"
           >
             Start here
           </Link>
           <button
             type="button"
-            className="rounded-full border border-line bg-white px-3 py-1.5 text-sm font-medium text-ink lg:hidden"
+            className="rounded-full border border-line bg-white px-3 py-1.5 text-sm font-medium text-ink xl:hidden"
             aria-expanded={menuOpen}
             aria-controls={menuId}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -175,7 +179,7 @@ export function SiteNav(): ReactElement {
         <nav
           id={menuId}
           aria-label="Site"
-          className="max-h-[calc(100vh-4.25rem)] overflow-y-auto border-t border-line bg-paper px-4 py-4 lg:hidden"
+          className="max-h-[calc(100vh-4.25rem)] overflow-y-auto border-t border-line bg-paper px-4 py-4 xl:hidden"
         >
           <div className="flex flex-col gap-1">
             <NavItem href="/" label="Home" pathname={pathname} />
@@ -197,7 +201,7 @@ export function SiteNav(): ReactElement {
           </div>
           <Link
             href="/learn/0.1/"
-            className="mt-4 inline-flex w-full justify-center rounded-full bg-forest px-3.5 py-2.5 text-sm font-medium text-paper hover:bg-forest-hover sm:hidden"
+            className="mt-4 inline-flex w-full justify-center rounded-full bg-forest px-3.5 py-2.5 text-sm font-medium text-on-forest hover:bg-forest-hover sm:hidden"
           >
             Start here
           </Link>

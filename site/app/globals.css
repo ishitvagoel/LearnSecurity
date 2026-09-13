@@ -10,7 +10,14 @@
   --line: #e7e0d4;
   --forest: #1f4d45;
   --forest-hover: #173a34;
+  --forest-accent: #1f4d45;
   --link: #184e77;
+  /* Constant regardless of theme: painted on top of the brand-green (--forest)
+     surface, which never changes, so these must not change either. */
+  --on-forest: #fbf7f0;
+  --on-forest-muted: #cdeee3;
+  --hero-glow-1: #dce8e4;
+  --hero-glow-2: #efe4d2;
 }
 
 @theme inline {
@@ -22,10 +29,89 @@
   --color-line: var(--line);
   --color-forest: var(--forest);
   --color-forest-hover: var(--forest-hover);
+  --color-forest-accent: var(--forest-accent);
   --color-link: var(--link);
+  --color-on-forest: var(--on-forest);
+  --color-on-forest-muted: var(--on-forest-muted);
   --font-sans: var(--font-geist-sans);
   --font-serif: var(--font-source-serif);
   --font-mono: var(--font-geist-mono);
+}
+
+/* Dark palette: applied when the system prefers dark and the visitor has not
+   explicitly chosen light, or when the visitor has explicitly chosen dark.
+   Also remaps the raw Tailwind palette (stone/blue/rose/amber/emerald/white)
+   used directly across page components, so those utilities repaint too. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --background: #15130f;
+    --foreground: #ece7db;
+    --paper: #201d17;
+    --ink: #ece7db;
+    --muted: #a89f8f;
+    --line: #3a3527;
+    --forest-accent: #5fc9ae;
+    --link: #7cb8ef;
+    --hero-glow-1: #17332c;
+    --hero-glow-2: #3a2f1a;
+
+    --color-stone-50: #241f18;
+    --color-stone-100: #2a251c;
+    --color-stone-200: #3d3628;
+    --color-stone-400: #6f6656;
+    --color-stone-500: #a89f8f;
+    --color-stone-600: #b7ae9d;
+    --color-stone-700: #ded6c7;
+    --color-stone-800: #e7dfd1;
+    --color-stone-900: #f3ede0;
+    --color-white: #201d17;
+    --color-blue-50: #16283a;
+    --color-blue-200: #3b6fa0;
+    --color-blue-800: #5b9bd9;
+    --color-blue-900: #8ec4f2;
+    --color-rose-50: #2a1616;
+    --color-rose-200: #6b2f37;
+    --color-amber-50: #241d0e;
+    --color-amber-200: #5c4a1f;
+    --color-emerald-50: #10231b;
+    --color-emerald-200: #1f4d3a;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #15130f;
+  --foreground: #ece7db;
+  --paper: #201d17;
+  --ink: #ece7db;
+  --muted: #a89f8f;
+  --line: #3a3527;
+  --forest-accent: #5fc9ae;
+  --link: #7cb8ef;
+  --hero-glow-1: #17332c;
+  --hero-glow-2: #3a2f1a;
+
+  --color-stone-50: #241f18;
+  --color-stone-100: #2a251c;
+  --color-stone-200: #3d3628;
+  --color-stone-400: #6f6656;
+  --color-stone-500: #a89f8f;
+  --color-stone-600: #b7ae9d;
+  --color-stone-700: #ded6c7;
+  --color-stone-800: #e7dfd1;
+  --color-stone-900: #f3ede0;
+  --color-white: #201d17;
+  --color-blue-50: #16283a;
+  --color-blue-200: #3b6fa0;
+  --color-blue-800: #5b9bd9;
+  --color-blue-900: #8ec4f2;
+  --color-rose-50: #2a1616;
+  --color-rose-200: #6b2f37;
+  --color-amber-50: #241d0e;
+  --color-amber-200: #5c4a1f;
+  --color-emerald-50: #10231b;
+  --color-emerald-200: #1f4d3a;
 }
 
 html {
@@ -39,7 +125,7 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid #1f4d45;
+  outline: 3px solid var(--forest-accent);
   outline-offset: 2px;
 }
 
@@ -73,7 +159,7 @@ body {
 .curriculum-prose {
   font-size: 1.0625rem;
   line-height: 1.75;
-  color: #1c1917;
+  color: var(--ink);
 }
 
 .curriculum-prose .lesson-p,
@@ -137,9 +223,9 @@ body {
 
 .lesson-quote {
   margin-bottom: 1rem;
-  border-left: 4px solid #a8a29e;
+  border-left: 4px solid var(--muted);
   padding-left: 1rem;
-  color: #44403c;
+  color: var(--muted);
 }
 
 .lesson-pre,
@@ -147,8 +233,8 @@ body {
   margin-bottom: 1.25rem;
   overflow-x: auto;
   border-radius: 0.5rem;
-  border: 1px solid #e7e0d4;
-  background: #fbf7f0;
+  border: 1px solid var(--line);
+  background: var(--paper);
   padding: 0.85rem 1rem;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.875rem;
@@ -156,12 +242,13 @@ body {
 }
 
 .lesson-diagram {
-  background: #fbf7f0;
-  border-color: #d6d3d1;
   font-size: 0.82rem;
   line-height: 1.45;
 }
 
+/* Rendered mermaid diagrams keep a light card regardless of site theme: the
+   SVG's own shape and text colors are baked in by the mermaid renderer, so a
+   dark surface behind them would make the text illegible. */
 .lesson-mermaid {
   margin: 0 0 1.5rem;
   overflow-x: auto;
@@ -189,7 +276,7 @@ body {
 .lesson-diagram-failed figcaption {
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
-  color: #57534e;
+  color: var(--muted);
 }
 
 .lesson-mermaid svg {
@@ -201,8 +288,8 @@ body {
 
 .lesson-mechanism {
   margin-bottom: 1rem;
-  border-left: 4px solid #1f4d45;
-  background: #fbf7f0;
+  border-left: 4px solid var(--forest-accent);
+  background: var(--paper);
   padding: 0.75rem 1rem;
   font-size: 0.95rem;
 }
@@ -239,8 +326,8 @@ body {
 }
 
 .lesson-section-nongoal {
-  border-color: #e7e0d4;
-  background: #fbf7f0;
+  border-color: var(--line);
+  background: var(--paper);
 }
 
 .lesson-section-limits {
@@ -261,4 +348,90 @@ body {
 .lesson-section-mental {
   border-color: #c5ddd7;
   background: #f4faf8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    .lesson-section-property {
+      border-color: #2c4a6e;
+      background: #16232f;
+    }
+
+    .lesson-section-practice {
+      border-color: #5c4a1f;
+      background: #241d0e;
+    }
+
+    .lesson-section-transfer {
+      border-color: #235049;
+      background: #10201d;
+    }
+
+    .lesson-section-residual {
+      border-color: #5c3a1d;
+      background: #241a0e;
+    }
+
+    .lesson-section-limits {
+      border-color: #5c2626;
+      background: #241212;
+    }
+
+    .lesson-section-why {
+      border-color: #1f4d3a;
+      background: #10231b;
+    }
+
+    .lesson-section-usability {
+      border-color: #3f3768;
+      background: #1c1830;
+    }
+
+    .lesson-section-mental {
+      border-color: #2a3f3a;
+      background: #141f1c;
+    }
+  }
+}
+
+:root[data-theme="dark"] {
+  .lesson-section-property {
+    border-color: #2c4a6e;
+    background: #16232f;
+  }
+
+  .lesson-section-practice {
+    border-color: #5c4a1f;
+    background: #241d0e;
+  }
+
+  .lesson-section-transfer {
+    border-color: #235049;
+    background: #10201d;
+  }
+
+  .lesson-section-residual {
+    border-color: #5c3a1d;
+    background: #241a0e;
+  }
+
+  .lesson-section-limits {
+    border-color: #5c2626;
+    background: #241212;
+  }
+
+  .lesson-section-why {
+    border-color: #1f4d3a;
+    background: #10231b;
+  }
+
+  .lesson-section-usability {
+    border-color: #3f3768;
+    background: #1c1830;
+  }
+
+  .lesson-section-mental {
+    border-color: #2a3f3a;
+    background: #141f1c;
+  }
 }

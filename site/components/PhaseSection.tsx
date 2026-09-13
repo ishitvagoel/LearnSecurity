@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import Link from "next/link";
+import { ModuleDoneBadge, PhaseProgress } from "@/components/ModuleProgress";
 import { Chip } from "@/components/ui";
 import {
   PHASES,
@@ -18,11 +19,12 @@ export function ModuleCard({ mod }: { mod: ModuleMeta }): ReactElement {
   return (
     <Link
       href={moduleHref(mod.id)}
-      className="flex h-full flex-col rounded-2xl border border-line bg-paper p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-forest/40 hover:shadow-md"
+      className="flex h-full flex-col rounded-2xl border border-line bg-paper p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-forest-accent/40 hover:shadow-md"
     >
       <div className="flex items-center justify-between gap-2">
         <p className="font-mono text-xs font-medium text-stone-600">{mod.id}</p>
         <div className="flex flex-wrap justify-end gap-1">
+          <ModuleDoneBadge moduleId={mod.id} />
           <Chip>{trackLabel(mod.track)}</Chip>
           <Chip>{maturityLabel(mod.status)}</Chip>
         </div>
@@ -50,7 +52,7 @@ export function PhaseSection({
     <section id={`phase-${phase}`} className="mb-12 scroll-mt-24">
       <div className="mb-5 flex flex-wrap items-end justify-between gap-2">
         <div>
-          <p className="text-sm font-medium text-forest">Part {phase}</p>
+          <p className="text-sm font-medium text-forest-accent">Part {phase}</p>
           <h2 className="text-2xl font-semibold tracking-tight text-stone-900">
             {phaseHeading(phase)}
           </h2>
@@ -58,9 +60,12 @@ export function PhaseSection({
             <p className="mt-2 max-w-prose leading-relaxed text-stone-700">{meta.blurb}</p>
           ) : null}
         </div>
-        <p className="text-sm text-stone-600">
-          {modules.length} topic{modules.length === 1 ? "" : "s"}
-        </p>
+        <div className="flex flex-col items-end gap-1.5">
+          <p className="text-sm text-stone-600">
+            {modules.length} topic{modules.length === 1 ? "" : "s"}
+          </p>
+          <PhaseProgress moduleIds={modules.map((m) => m.id)} />
+        </div>
       </div>
       <ul className="grid gap-3 sm:grid-cols-2">
         {modules.map((m) => (
@@ -86,7 +91,7 @@ export function PhaseJump({ phases }: { phases: number[] }): ReactElement {
             <li key={phase}>
               <a
                 href={`#phase-${phase}`}
-                className="inline-flex items-center rounded-full border border-line bg-paper px-3 py-1 text-sm text-ink hover:border-forest hover:bg-white"
+                className="inline-flex items-center rounded-full border border-line bg-paper px-3 py-1 text-sm text-ink hover:border-forest-accent hover:bg-white"
               >
                 {phase}
                 {meta ? (

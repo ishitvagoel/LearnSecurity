@@ -27,7 +27,7 @@ export default function AssessmentsPage() {
                 <li key={mod.id}>
                   <Link
                     href={assessmentHref(mod.id)}
-                    className="block h-full rounded-2xl border border-line bg-paper p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-forest/40 hover:shadow-md"
+                    className="block h-full rounded-2xl border border-line bg-paper p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-forest-accent/40 hover:shadow-md"
                   >
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="font-mono text-xs text-stone-600">{mod.id}</span>

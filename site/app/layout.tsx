@@ -28,12 +28,18 @@ export const metadata: Metadata = {
     "A free course in building software that stays safe when someone tries to break it. Read lessons here. Practice on your own computer.",
 };
 
+const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('ls-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${sourceSerif.variable} h-full`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-ink antialiased">
         <a
           href="#main"

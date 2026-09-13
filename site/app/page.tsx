@@ -13,12 +13,12 @@ export default function HomePage() {
           aria-hidden="true"
           style={{
             background:
-              "radial-gradient(900px 420px at 10% -10%, #dce8e4 0%, transparent 60%), radial-gradient(700px 380px at 100% 0%, #efe4d2 0%, transparent 55%)",
+              "radial-gradient(900px 420px at 10% -10%, var(--hero-glow-1) 0%, transparent 60%), radial-gradient(700px 380px at 100% 0%, var(--hero-glow-2) 0%, transparent 55%)",
           }}
         />
         <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:py-20 lg:grid-cols-[minmax(0,1.15fr)_minmax(16rem,0.85fr)] lg:items-center">
           <div>
-            <p className="text-sm font-medium text-forest">A free course</p>
+            <p className="text-sm font-medium text-forest-accent">A free course</p>
             <h1 className="mt-3 max-w-3xl font-serif text-4xl font-semibold tracking-tight text-ink sm:text-5xl sm:leading-[1.12]">
               Learn to build software that stays safe when someone tries to break it
             </h1>
@@ -38,7 +38,7 @@ export default function HomePage() {
             <HomeContinue />
           </div>
           <aside className="rounded-3xl border border-line bg-paper p-6 shadow-sm">
-            <p className="text-sm font-medium text-forest">What is on this site</p>
+            <p className="text-sm font-medium text-forest-accent">What is on this site</p>
             <ul className="mt-4 space-y-4 text-sm leading-relaxed text-stone-700">
               <li>
                 <strong className="block text-ink">Lessons</strong>
@@ -88,7 +88,7 @@ export default function HomePage() {
               },
             ].map((step, index) => (
               <li key={step.title} className="relative py-4 pl-8">
-                <span className="absolute top-5 -left-3.5 flex h-7 w-7 items-center justify-center rounded-full bg-forest text-xs font-semibold text-paper">
+                <span className="absolute top-5 -left-3.5 flex h-7 w-7 items-center justify-center rounded-full bg-forest text-xs font-semibold text-on-forest">
                   {index + 1}
                 </span>
                 <p className="font-semibold text-ink">{step.title}</p>
@@ -103,10 +103,10 @@ export default function HomePage() {
             How to begin
           </h2>
           <ol className="mt-8 grid gap-4 md:grid-cols-3">
-            <li className="rounded-3xl bg-forest p-6 text-paper">
-              <p className="text-sm font-medium text-emerald-100">First</p>
+            <li className="rounded-3xl bg-forest p-6 text-on-forest">
+              <p className="text-sm font-medium text-on-forest">First</p>
               <h3 className="mt-2 font-serif text-xl font-semibold">Read the ground rules</h3>
-              <p className="mt-3 text-sm leading-relaxed text-emerald-50">
+              <p className="mt-3 text-sm leading-relaxed text-on-forest-muted">
                 What you may practice, what you must not, and how a topic is put
                 together. About ten minutes.
               </p>
@@ -117,7 +117,7 @@ export default function HomePage() {
               </p>
             </li>
             <li className="rounded-3xl border border-line bg-paper p-6">
-              <p className="text-sm font-medium text-forest">Then</p>
+              <p className="text-sm font-medium text-forest-accent">Then</p>
               <h3 className="mt-2 font-serif text-xl font-semibold text-ink">
                 Learn what “secure” means here
               </h3>
@@ -132,7 +132,7 @@ export default function HomePage() {
               </p>
             </li>
             <li className="rounded-3xl border border-line bg-paper p-6">
-              <p className="text-sm font-medium text-forest">After that</p>
+              <p className="text-sm font-medium text-forest-accent">After that</p>
               <h3 className="mt-2 font-serif text-xl font-semibold text-ink">
                 Follow the study order
               </h3>
