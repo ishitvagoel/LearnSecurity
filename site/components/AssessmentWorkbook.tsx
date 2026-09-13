@@ -16,6 +16,13 @@ const STATUS_OPTIONS = [
   ["competent", "Competent"],
   ["transfer-ready", "Transfer-ready"],
 ] as const;
+
+const STATUS_GUIDANCE: Record<string, string> = {
+  "not-started": "Start with the property question, then inspect the authorized local practice before writing your answers.",
+  developing: "Run the broken and repaired checks, then revise the answer that still depends on a vague claim or a dashboard score.",
+  competent: "Re-read your negative case and transfer answer. A competent worksheet names an oracle and a residual risk another engineer can check.",
+  "transfer-ready": "Keep the worksheet as evidence, record the remaining residual, and re-check it when the system or trust boundary changes.",
+};
 const listeners = new Map<string, Set<() => void>>();
 const snapshots = new Map<string, { raw: string | null; state: WorkbookState }>();
 const memoryFallbacks = new Map<string, WorkbookState>();
@@ -163,6 +170,18 @@ export function AssessmentWorkbook({
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="rounded-2xl border border-forest-accent/20 bg-surface p-4" aria-live="polite">
+        <p className="text-sm font-semibold text-ink">Next action</p>
+        <p className="mt-1 text-sm leading-relaxed text-muted">
+          {STATUS_GUIDANCE[state.status] || STATUS_GUIDANCE["not-started"]}
+        </p>
+        {evidence.length > 0 ? (
+          <p className="mt-2 text-xs text-muted">
+            Evidence collected: {state.evidence.filter((id) => evidence.some((item) => item.id === id)).length} of {evidence.length}
+          </p>
+        ) : null}
       </div>
 
       {sections.map((section, index) => (
