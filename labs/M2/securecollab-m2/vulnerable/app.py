@@ -67,6 +67,10 @@ class SecureCollabM2:
     def close(self) -> None:
         self.connection.close()
 
+    def worker_credential(self) -> str:
+        """Fixture value retained to expose that the vulnerable bridge has no real credential check."""
+        return "worker-sc"
+
     def login(self, user_id: str) -> Response:
         token = f"m2-{secrets.token_urlsafe(18)}"
         with self._lock:
@@ -112,8 +116,10 @@ class SecureCollabM2:
             self.connection.execute("UPDATE users SET active = 0 WHERE id = ?", (user_id,))
             self.connection.commit()
 
-    def run_next(self, worker_identity: str = "worker-sc") -> Response:
-        del worker_identity
+    def run_next(self, worker_credential: str | None = None) -> Response:
+        # The vulnerable bridge accepts any caller. A message or caller-supplied
+        # name is not proof of workload identity.
+        del worker_credential
         with self._lock:
             job = self.connection.execute(
                 "SELECT id, actor_id, note_id, requested_company FROM jobs WHERE status = 'queued' ORDER BY id LIMIT 1"

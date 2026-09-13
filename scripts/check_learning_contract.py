@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content" / "modules"
 ROUTE = ROOT / "content" / "route.yaml"
 PROJECT = ROOT / "content" / "reference" / "securecollab" / "milestones.yaml"
+BRIDGES = ROOT / "content" / "bridges.yaml"
 
 
 def module_files() -> list[Path]:
@@ -50,21 +51,46 @@ def main() -> int:
             lab_path = milestone.get("labPath")
             if lab_path and not (ROOT / str(lab_path)).is_dir():
                 errors.append(f"milestone {milestone_id}: missing lab path {lab_path}")
+    bridge_ids: set[str] = set()
+    if BRIDGES.is_file():
+        bridge_data = yaml.safe_load(BRIDGES.read_text(encoding="utf-8")) or {}
+        bridge_entries = bridge_data.get("bridges", []) if isinstance(bridge_data, dict) else []
+        if not isinstance(bridge_entries, list):
+            errors.append("content/bridges.yaml: bridges must be a list")
+        else:
+            for bridge in bridge_entries:
+                if not isinstance(bridge, dict) or not bridge.get("id"):
+                    errors.append("content/bridges.yaml: every bridge needs an id")
+                    continue
+                bridge_id = str(bridge["id"])
+                if bridge_id in bridge_ids:
+                    errors.append(f"content/bridges.yaml: duplicate bridge id {bridge_id}")
+                bridge_ids.add(bridge_id)
+                for field in ("title", "task", "success", "retry"):
+                    if not str(bridge.get(field, "")).strip():
+                        errors.append(f"content/bridges.yaml: {bridge_id} has no {field}")
+    else:
+        errors.append("content/bridges.yaml is missing")
     for manifest in manifests:
         module = yaml.safe_load(manifest.read_text(encoding="utf-8"))
         module_id = str(module.get("id", manifest.parent.name))
+        declared_paths: set[Path] = set()
         for obj in module.get("learningObjects", []):
             rel = obj.get("path")
             if not rel:
                 errors.append(f"{module_id}: learning object {obj.get('id')} has no path")
                 continue
             target = manifest.parent / rel
+            declared_paths.add(target.resolve())
             if not target.is_file():
                 errors.append(f"{module_id}: missing learning object {rel}")
             if target.suffix == ".md":
                 body = target.read_text(encoding="utf-8")
                 if re.search(r"Deferred to Pass [A-E]|Pass A per blueprint|phase1/lab-1\.1-local-hashed", body):
                     errors.append(f"{module_id}: authoring or stale lab reference in {rel}")
+                for bridge_id in re.findall(r"\(/bridges/([^/]+)/\)", body):
+                    if bridge_id not in bridge_ids:
+                        errors.append(f"{module_id}: unknown bridge destination {bridge_id}")
         for prerequisite in module.get("prerequisites", []):
             if "Pass A" in str(prerequisite):
                 errors.append(f"{module_id}: production pass leaked into prerequisite: {prerequisite}")
@@ -73,6 +99,22 @@ def main() -> int:
             errors.append(f"{module_id}: deferred build instruction remains in assessment metadata")
         if module_id == "1.1" and module.get("status") == "published":
             errors.append("1.1: must be independently re-reviewed before returning to published")
+        lesson_dir = manifest.parent / "lessons"
+        if lesson_dir.is_dir():
+            for lesson in lesson_dir.glob("*.md"):
+                if lesson.resolve() not in declared_paths:
+                    errors.append(f"{module_id}: lesson is not declared in learningObjects: {lesson.name}")
+    status_file = ROOT / "content" / "progress" / "STATUS.yaml"
+    if status_file.is_file():
+        status = yaml.safe_load(status_file.read_text(encoding="utf-8")) or {}
+        queue = {str(item) for item in (status.get("revision", {}).get("remaining", []) or [])}
+        status_entries = status.get("modules", []) or []
+        for entry in status_entries:
+            if not isinstance(entry, dict):
+                continue
+            module_id = str(entry.get("id", ""))
+            if entry.get("depth") == "map-complete" and module_id and module_id not in queue:
+                errors.append(f"{module_id}: map-complete module missing from revision.remaining")
     if errors:
         print("Learning contract check failed:")
         print("\n".join(f"- {error}" for error in errors))

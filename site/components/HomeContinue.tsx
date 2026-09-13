@@ -8,6 +8,10 @@ import { TOPIC_TITLE } from "@/lib/catalog";
 
 type LastActivity = { href: string; title: string };
 
+function isAllowedActivityHref(href: string): boolean {
+  return ["/learn/", "/labs/", "/assess/", "/bridges/"].some((prefix) => href.startsWith(prefix));
+}
+
 let cachedActivityRaw: string | null | undefined;
 let cachedActivity: LastActivity | null = null;
 
@@ -33,7 +37,7 @@ function readActivity(): LastActivity | null {
       typeof parsed === "object" &&
       "href" in parsed &&
       typeof parsed.href === "string" &&
-      parsed.href.startsWith("/learn/") &&
+      isAllowedActivityHref(parsed.href) &&
       "title" in parsed &&
       typeof parsed.title === "string"
     ) {
@@ -62,7 +66,7 @@ export function HomeContinue(): ReactElement | null {
   const title = activity?.title || TOPIC_TITLE[last || ""] || last;
   return (
     <p className="mt-6 max-w-xl rounded-2xl border border-line bg-paper/80 px-4 py-3 text-sm text-muted">
-      {activity ? "Continue from your last lesson:" : `You left off after ${ids.length} topic${ids.length === 1 ? "" : "s"}. Last one:`}{" "}
+      {activity ? "Continue from your last activity:" : `You left off after ${ids.length} topic${ids.length === 1 ? "" : "s"}. Last one:`}{" "}
       <Link
         href={href}
         className="font-medium text-forest-accent underline underline-offset-2"

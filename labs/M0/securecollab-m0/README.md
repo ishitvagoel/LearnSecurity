@@ -32,7 +32,7 @@ Open `http://127.0.0.1:8765/` and use the two buttons. Alice can read `n1`; Bob 
 The equivalent local trace without a browser is:
 
 ```text
-python -m fixed.smoke
+python fixed/smoke.py
 ```
 
 ## Break and verify

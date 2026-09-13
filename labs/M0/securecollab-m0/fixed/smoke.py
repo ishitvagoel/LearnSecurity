@@ -1,4 +1,7 @@
-from app import SecureCollabM0
+try:
+    from .app import SecureCollabM0
+except ImportError:  # Support the documented `python fixed/smoke.py` form.
+    from app import SecureCollabM0
 
 app = SecureCollabM0()
 try:

@@ -1,0 +1,61 @@
+name: Verify learning contract
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r labs/requirements-dev.txt
+      - run: python scripts/check_learning_contract.py
+      - name: Verify fixed teaching bridges
+        run: |
+          python -m pytest labs/0.1/0.1-orientation/tests --impl fixed -q
+          python -m pytest labs/0.2/0.2-bridge/tests --impl fixed -q
+          python -m pytest labs/1.1/1.1-invariant-catalogue/tests --claim labs/1.1/1.1-invariant-catalogue/fixed/security_claim.yaml -q
+          python -m pytest labs/M0/securecollab-m0/tests --impl fixed -q
+          python -m pytest labs/M1/securecollab-m1/tests --impl fixed -q
+          python -m pytest labs/M2/securecollab-m2/tests --impl fixed -q
+          python labs/M0/securecollab-m0/fixed/smoke.py
+          python labs/M1/securecollab-m1/fixed/smoke.py
+          python labs/M2/securecollab-m2/fixed/smoke.py
+      - name: Verify vulnerable fixtures reach their security assertions
+        run: |
+          set -e
+          for lab in \
+            "labs/M0/securecollab-m0/tests" \
+            "labs/M1/securecollab-m1/tests" \
+            "labs/M2/securecollab-m2/tests"; do
+            python -m pytest "$lab" --impl vulnerable --collect-only -q
+            set +e
+            python -m pytest "$lab" --impl vulnerable -q --tb=short
+            status=$?
+            set -e
+            if [ "$status" -eq 0 ]; then
+              echo "Vulnerable fixture unexpectedly passed: $lab"
+              exit 1
+            fi
+          done
+
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm --prefix site ci
+      - run: npm --prefix site run lint
+      - run: npm --prefix site exec tsc -- --noEmit --incremental false -p site/tsconfig.json
+      - run: npm --prefix site run build

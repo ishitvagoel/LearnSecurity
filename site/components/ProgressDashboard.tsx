@@ -14,12 +14,19 @@ export type ProgressPhase = {
   modules: ProgressModule[];
 };
 
-export function ProgressDashboard({ phases }: { phases: ProgressPhase[] }): ReactElement {
+export function ProgressDashboard({
+  phases,
+  scopeLabel = "course",
+}: {
+  phases: ProgressPhase[];
+  scopeLabel?: string;
+}): ReactElement {
   const visited = useVisitedModuleIds();
   const allModules = phases.flatMap((p) => p.modules);
   const totalDone = allModules.filter((m) => visited.includes(m.id)).length;
   const totalCount = allModules.length;
   const overallPct = totalCount === 0 ? 0 : Math.round((totalDone / totalCount) * 100);
+  const nextModule = allModules.find((module) => !visited.includes(module.id));
   const remainingMinutes = allModules
     .filter((m) => !visited.includes(m.id))
     .reduce((sum, m) => sum + m.minutes, 0);
@@ -31,7 +38,7 @@ export function ProgressDashboard({ phases }: { phases: ProgressPhase[] }): Reac
           <p className="text-lg font-semibold text-ink">
             {totalDone} of {totalCount} topics read
           </p>
-          <p className="text-sm text-muted">{overallPct}% through the course</p>
+          <p className="text-sm text-muted">{overallPct}% through the {scopeLabel}</p>
         </div>
         <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-line" aria-hidden="true">
           <div
@@ -43,9 +50,17 @@ export function ProgressDashboard({ phases }: { phases: ProgressPhase[] }): Reac
           {totalCount === 0
             ? "No topics yet."
             : totalDone === totalCount
-              ? "You have marked every topic as read."
+              ? `You have marked every topic in the ${scopeLabel} as read.`
               : `${formatMinutes(remainingMinutes)} left across the topics you have not marked read.`}
         </p>
+        {nextModule ? (
+          <p className="mt-4 text-sm">
+            <span className="font-medium text-ink">Next recommended:</span>{" "}
+            <Link href={moduleHref(nextModule.id)} className="text-link underline underline-offset-2 hover:no-underline">
+              {nextModule.id} — {nextModule.title}
+            </Link>
+          </p>
+        ) : null}
       </div>
       <ol className="space-y-0 border-l border-line">
         {phases.map((group) => {

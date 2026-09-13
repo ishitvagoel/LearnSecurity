@@ -52,7 +52,8 @@ class SecureCollabM1:
     def close(self) -> None:
         self.connection.close()
 
-    def login(self, user_id: str) -> Response:
+    def login(self, user_id: str, password: str | None = None) -> Response:
+        del password
         token = f"m1-{secrets.token_urlsafe(18)}"
         with self._lock:
             user = self.connection.execute(

@@ -5,7 +5,7 @@
 **Purpose:** extend M1 into a persistent queue and worker path, then test authority again after time and revocation.  
 **Status:** dependency-free teaching bridge; this is not production assurance.
 
-The fixture stores requests, jobs, and generated exports in SQLite. A worker runs after the HTTP-like enqueue operation has finished. The fixed policy re-resolves current account state and the note's company at execution time; it does not treat a queued label as authority.
+The fixture stores requests, jobs, and generated exports in SQLite. A worker runs after the HTTP-like enqueue operation has finished. The fixed policy re-resolves current account state and the note's company at execution time; it does not treat a queued label as authority. It also requires a synthetic credential generated for the worker instance. The credential is a local teaching stand-in for a workload identity, not a production secret manager or broker boundary.
 
 ## The property
 
@@ -21,11 +21,11 @@ From this directory, using Python 3.11+:
 python fixed/smoke.py
 ```
 
-The smoke script runs one allowed export, then enqueues another, revokes Alice before the worker runs, and checks that no export is produced and the retained-copy read is denied.
+The smoke script runs one allowed export with the worker credential, then enqueues another, revokes Alice before the worker runs, and checks that no export is produced and the retained-copy read is denied.
 
 ## Break and verify
 
-The vulnerable implementation trusts a client-supplied tenant label at enqueue and does not re-check current membership at worker time. The fixed implementation checks the session and object relation at enqueue, stores only the subject and object identifiers, and checks current state again before writing the export.
+The vulnerable implementation trusts a client-supplied tenant label at enqueue, accepts any worker caller, and does not re-check current membership at worker time. The fixed implementation checks the session and object relation at enqueue, requires the local worker credential, stores only the subject and object identifiers, and checks current state again before writing the export.
 
 ```text
 python3 -m pytest tests --impl vulnerable
@@ -40,6 +40,8 @@ The vulnerable run must fail the forged-tenant and revocation-after-enqueue asse
 - one allowed export and one cross-company denial;
 - a revocation-after-enqueue denial with no retained body written;
 - a retained-copy access denial after session revocation;
+- a forged worker credential denial with no export written;
+- a duplicate delivery that returns no job and leaves the export count at one;
 - one residual note covering broker authentication, retry/idempotency, PostgreSQL roles, backups, and production observability.
 
 Reset by stopping the script and deleting any database file named by `SECURECOLLAB_DB`. The default database is in memory. Do not add real identities, credentials, or network targets.

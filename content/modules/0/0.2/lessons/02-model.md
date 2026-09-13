@@ -18,6 +18,8 @@ Use a boolean map for demonstrated tooling capabilities. Missing or unknown valu
 
 The model is useful because another reviewer can reproduce the path from the same evidence map. A badge, title, or green LMS tile is not a 1.2 allow cell.
 
+The bridge ids are real local tasks: [Python test](/bridges/bridge-python/), [browser request](/bridges/bridge-browser/), [SQL reading](/bridges/bridge-sql/), [HTTP trace](/bridges/bridge-network/), and [Git inspection](/bridges/bridge-git/). Choose only the gaps your evidence shows; all security modules and Gate 1 still remain required.
+
 ## Practice
 
 Mark which capabilities are actually demonstrated in `labs/0.2/0.2-bridge`, then predict the bridge list before running tests.

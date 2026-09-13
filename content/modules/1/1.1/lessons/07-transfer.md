@@ -5,7 +5,7 @@
 
 ## Change the assumptions
 
-Apply one catalogue row to CivicClinic, a clinic appointment and records system. Change at least two assumptions: the asset, actor, trust boundary, retained copy, or recovery consequence.
+Apply the catalogue method to CivicClinic, a clinic appointment and records system. Produce six bounded rows: carry the five SecureCollab properties you selected, then add one privacy or safety property that becomes relevant because the asset and recovery consequence changed. Change at least two assumptions in every row: the asset, actor, trust boundary, retained copy, or recovery consequence.
 
 Write:
 
@@ -15,4 +15,4 @@ Write:
 4. the forbidden outcome and evidence oracle;
 5. the mechanism limit and one review trigger from the change.
 
-Do not copy a SecureCollab row with a new noun. Explain which original claim no longer holds and why.
+Do not copy a SecureCollab row with a new noun. Add a short comparison memo explaining which original claim no longer holds, why it fails, and which evidence oracle you changed.

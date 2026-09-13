@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LessonReader } from "@/components/LessonReader";
+import { PageHeader, PageShell } from "@/components/ui";
 import { parseLessonLead, spokenLessonTitle } from "@/lib/headings";
 import { topicBlurb, topicTitle } from "@/lib/catalog";
 import {
@@ -11,6 +13,11 @@ import { estimateReadingMinutes } from "@/lib/text";
 import { nextRouteModule } from "@/lib/route";
 
 type Props = { params: Promise<{ id: string; lesson: string }> };
+
+const LEGACY_LESSON_REDIRECTS: Record<string, { target: string; title: string }> = {
+  "0.1/03-break": { target: "03-practice", title: "Break, repair, and verify the local host gate" },
+  "0.1/04-build": { target: "04-operate-transfer-review", title: "Operate and review the scope rule" },
+};
 
 export const dynamicParams = false;
 
@@ -27,6 +34,10 @@ export function generateStaticParams() {
       });
     }
   }
+  for (const key of Object.keys(LEGACY_LESSON_REDIRECTS)) {
+    const [id, lesson] = key.split("/");
+    params.push({ id, lesson });
+  }
   return params;
 }
 
@@ -38,6 +49,8 @@ export async function generateMetadata({ params }: Props) {
   }
   const lo = loadLessons(mod).find((x) => x.filename.replace(/\.md$/, "") === lesson);
   if (!lo) {
+    const legacy = LEGACY_LESSON_REDIRECTS[`${id}/${lesson}`];
+    if (legacy) return { title: `${id} · ${legacy.title}` };
     return { title: `${mod.id} · ${lesson}` };
   }
   return {
@@ -53,13 +66,38 @@ export default async function LessonPage({ params }: Props) {
     notFound();
   }
   const mod = loadModule(id);
-  const nextTopic = nextRouteModule(loadAllModules(), mod.id);
   const lessons = loadLessons(mod).filter((x) => x.filename);
   const index = lessons.findIndex((x) => x.filename.replace(/\.md$/, "") === lesson);
   const lo = index >= 0 ? lessons[index] : undefined;
   if (!lo) {
+    const legacy = LEGACY_LESSON_REDIRECTS[`${id}/${lesson}`];
+    if (legacy) {
+      return (
+        <PageShell width="narrow">
+          <PageHeader title="This page moved">
+            <p>
+              The orientation was shortened and its old page names no longer
+              describe the learner task. Continue with the current page below.
+            </p>
+          </PageHeader>
+          <p>
+            <Link href={`/learn/${encodeURIComponent(id)}/${encodeURIComponent(legacy.target)}/`} className="text-link underline underline-offset-2 hover:no-underline">
+              Open {legacy.title}
+            </Link>
+          </p>
+        </PageShell>
+      );
+    }
     notFound();
   }
+  const routeNext = nextRouteModule(loadAllModules(), mod.id);
+  const nextTopic = index === lessons.length - 1
+    ? mod.labSpec
+      ? { href: `/labs/${encodeURIComponent(mod.id)}/`, title: "Next: run the local practice" }
+      : { href: `/assess/${encodeURIComponent(mod.id)}/`, title: "Next: open the evidence worksheet" }
+    : routeNext
+      ? { href: `/learn/${encodeURIComponent(routeNext.id)}/`, title: `Next topic: ${topicTitle(routeNext)}` }
+      : undefined;
   const lead = parseLessonLead(lo.body || `# ${lo.title}\n\nLesson file missing.`);
   const source = lead.body || `_This lesson file is empty._`;
   const lessonTitle = spokenLessonTitle(lo.title, lo.body || `# ${lo.title}\n\nLesson file missing.`);
@@ -78,7 +116,7 @@ export default async function LessonPage({ params }: Props) {
       }))}
       source={source}
       readingMinutes={estimateReadingMinutes(source)}
-      nextTopic={nextTopic ? { href: `/learn/${encodeURIComponent(nextTopic.id)}/`, title: `Next topic: ${topicTitle(nextTopic)}` } : undefined}
+      nextTopic={nextTopic}
     />
   );
 }

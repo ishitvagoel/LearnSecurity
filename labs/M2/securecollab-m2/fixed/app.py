@@ -23,6 +23,9 @@ class SecureCollabM2:
         self.connection = sqlite3.connect(self.database, check_same_thread=False)
         self.connection.row_factory = sqlite3.Row
         self._lock = threading.Lock()
+        # Local stand-in for a workload identity issued by the runtime. The
+        # credential is never copied into a queued message.
+        self._worker_credential = secrets.token_urlsafe(24)
         self.connection.executescript(
             """
             CREATE TABLE IF NOT EXISTS users (
@@ -65,6 +68,10 @@ class SecureCollabM2:
 
     def close(self) -> None:
         self.connection.close()
+
+    def worker_credential(self) -> str:
+        """Return the synthetic credential used by this local worker."""
+        return self._worker_credential
 
     def login(self, user_id: str) -> Response:
         token = f"m2-{secrets.token_urlsafe(18)}"
@@ -115,14 +122,15 @@ class SecureCollabM2:
             self.connection.execute("UPDATE sessions SET revoked = 1 WHERE user_id = ?", (user_id,))
             self.connection.commit()
 
-    def run_next(self, worker_identity: str = "worker-sc") -> Response:
+    def run_next(self, worker_credential: str | None = None) -> Response:
         with self._lock:
             job = self.connection.execute(
                 "SELECT id, actor_id, note_id FROM jobs WHERE status = 'queued' ORDER BY id LIMIT 1"
             ).fetchone()
             if job is None:
                 return Response(404, {"error": "no-job"})
-            if worker_identity != "worker-sc":
+            supplied = worker_credential or ""
+            if not secrets.compare_digest(supplied, self._worker_credential):
                 self.connection.execute("UPDATE jobs SET status = 'denied' WHERE id = ?", (job["id"],))
                 self.connection.commit()
                 return Response(403, {"error": "denied"})

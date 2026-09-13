@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useSyncExternalStore, type ReactElement } from "react";
+import { useCallback, useState, useSyncExternalStore, type ReactElement } from "react";
 import type { AssessmentEvidence, AssessmentPrompt } from "@/lib/types";
 
 type WorkbookState = {
@@ -101,15 +101,19 @@ function subscribe(storageKey: string, listener: () => void): () => void {
   };
 }
 
-function saveSnapshot(storageKey: string, state: WorkbookState): void {
+function saveSnapshot(storageKey: string, state: WorkbookState): boolean {
   memoryFallbacks.set(storageKey, state);
+  let persisted = true;
   try {
     window.localStorage.setItem(storageKey, JSON.stringify(state));
   } catch {
-    // The in-memory copy keeps the worksheet usable when storage is unavailable.
+    // The in-memory copy keeps the worksheet usable, but it will not survive
+    // closing the tab.
+    persisted = false;
   }
   snapshots.delete(storageKey);
   emit(storageKey);
+  return persisted;
 }
 
 export function AssessmentWorkbook({
@@ -128,10 +132,11 @@ export function AssessmentWorkbook({
   );
   const readForKey = useCallback(() => readSnapshot(storageKey), [storageKey]);
   const state = useSyncExternalStore(subscribeForKey, readForKey, () => EMPTY_STATE);
+  const [persistence, setPersistence] = useState<"saved" | "memory">("saved");
   const setState = useCallback(
     (update: WorkbookState | ((current: WorkbookState) => WorkbookState)): void => {
       const next = typeof update === "function" ? update(readSnapshot(storageKey)) : update;
-      saveSnapshot(storageKey, next);
+      setPersistence(saveSnapshot(storageKey, next) ? "saved" : "memory");
     },
     [storageKey],
   );
@@ -225,7 +230,9 @@ export function AssessmentWorkbook({
       ) : null}
 
       <p className="text-sm text-muted" aria-live="polite">
-        Saved in this browser only. This worksheet does not submit answers or grade you.
+        {persistence === "saved"
+          ? "Saved in this browser only. This worksheet does not submit answers or grade you."
+          : "Kept in memory for this tab because browser storage is unavailable. Download your work before leaving."}
       </p>
     </div>
   );

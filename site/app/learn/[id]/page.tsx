@@ -73,6 +73,15 @@ export default async function ModulePage({ params }: Props) {
         <Chip>{formatMinutes(mod.estimatedMinutes)}</Chip>
         <Chip>{maturityLabel(mod.status)}</Chip>
       </div>
+      <section className="mb-8 rounded-2xl border border-forest-accent/20 bg-surface p-5">
+        <h2 className="text-xl font-semibold text-ink">What you should be able to show</h2>
+        <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-ink">
+          {(mod.outcomes || []).map((outcome) => <li key={outcome}>{outcome}</li>)}
+        </ul>
+        <p className="mt-4 text-sm leading-relaxed text-muted">
+          Start with the pages below. {mod.labSpec ? "When you reach the end, run the local practice and keep its result with your evidence." : "When you reach the end, open the evidence worksheet and attempt the transfer task."}
+        </p>
+      </section>
       {first ? (
         <p className="mb-4">
           <Link
@@ -146,14 +155,11 @@ export default async function ModulePage({ params }: Props) {
 
       <details className="mt-10 rounded-2xl border border-line bg-paper p-4">
         <summary className="cursor-pointer text-xl font-semibold text-ink">
-          Outcomes, prerequisites, and assessment
+          Prerequisites, references, and assessment
         </summary>
         <div className="mt-3">
-          <h3 className="font-semibold text-ink">What you should be able to show</h3>
-          <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-ink">
-            {(mod.outcomes || []).map((outcome) => <li key={outcome}>{outcome}</li>)}
-          </ul>
-          <p className="mt-4 text-sm leading-relaxed text-muted">
+          <h3 className="font-semibold text-ink">Prerequisites</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted">
             Prerequisites: {(mod.prerequisites || []).join(" · ") || "None listed"}
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted">

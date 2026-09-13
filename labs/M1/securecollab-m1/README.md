@@ -5,7 +5,7 @@
 **Purpose:** make account, session, and object authorization state observable after the M0 request trace.  
 **Status:** dependency-free teaching bridge; this is not production assurance.
 
-The fixture uses a real local SQLite session store so the learner can follow an account from login to a note read and then through revocation. The `session` value is a disposable local token. It is not a production credential and must never be copied outside the lab.
+The fixture uses a real local SQLite session store so the learner can follow an account from login to a note read and then through revocation. The two synthetic accounts use the disposable passwords `alice-local-password` and `bob-local-password`; they exist only to make the credential check observable. The `session` value is a disposable local token. It is not a production credential and must never be copied outside the lab.
 
 ## The property
 
@@ -27,7 +27,7 @@ The smoke script logs in Alice and Bob, checks an allowed read, checks a cross-c
 
 ## Break and verify
 
-The vulnerable implementation trusts the company label and leaves sessions usable after account revocation. The fixed implementation resolves the session and account state on every request, then checks the note relation.
+The vulnerable implementation accepts any named user, trusts the company label, and leaves sessions usable after account revocation. The fixed implementation verifies the synthetic password, resolves the session and account state on every request, then checks the note relation.
 
 ```text
 python3 -m pytest tests --impl vulnerable
