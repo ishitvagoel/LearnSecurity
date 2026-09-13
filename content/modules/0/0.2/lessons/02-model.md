@@ -1,68 +1,23 @@
-# A tooling skip vs skipping a rule
+# Model capability evidence separately from security evidence
 
 **Kind:** design-exercise
 **Loop step:** 2 Model
-**Standards:** NICE SP 800-181r1 as role language. Gate 1 evidence rules of this course.
 
-## Can a second person name what a quiz may skip from your path map?
+Use a boolean map for demonstrated tooling capabilities. Missing or unknown values are gaps:
 
-The testable picture is **tooling-bridge ids, required 1.2/1.3/1.4, and check-in 1 evidence** — not “They’re advanced”.
-
-`quiz_score_grants_phase1_skip(score)` — no vendor LMS.
-
-## Picture: two skip classes
-
-```mermaid
-flowchart TD
-  Diag[diagnostic] --> Tool{tooling gap?}
-  Tool -->|Git SQL HTTP| Bridge[may assign a bridge unit]
-  Diag --> Inv["1.2 1.3 1.4"]
-  Inv --> Never[never skip]
+```text
+{"python": True, "browser": False, "sql": True, "network": False, "git": False}
+→ ["bridge-browser", "bridge-network", "bridge-git"]
 ```
 
-## Picture: a badge is not check-in 1
+| Record | May change? | Must remain separate |
+|---|---|---|
+| tooling evidence | bridge assignment | 1.2/1.3/1.4 cells |
+| quiz percentage | orientation pacing | Gate 1 evidence |
+| bridge id | practice queue | authorization decision |
 
-```mermaid
-flowchart LR
-  Badge[cert screenshot] --> Belief[cleared]
-  Ev["1.2 practice pair"] --> Gate1[check-in 1 evidence]
-  Badge --> NotGate[not check-in 1]
-```
-
-## Step 1: name the pieces
-
-| Piece | This system |
-|---|---|
-| Subjects | hurried learner; hiring manager |
-| Objects | 1.2 cells; tooling units; check-in 1 record |
-| Actions | `quiz_score_grants_phase1_skip` |
-| Channels | quiz score; LMS |
-| What you trust | a skip check that ignores score for part 1 |
-| What you do not trust | percentage; badge; job-title mapping |
-| State / time | cohort export of skipped ids |
-| The rule | integrity of the learning system |
-
-## Step 2: write the rules
-
-| Subject | Object | Action | Decision |
-|---|---|---|---|
-| score 100 | 1.2 practice | skip | deny |
-| Git gap | git-bridge unit | skip part 1 | deny (assign bridge only) |
-| badge | check-in 1 | treat as evidence | deny |
-| color-only green | skip UI | use as sole signal | deny |
+The model is useful because another reviewer can reproduce the path from the same evidence map. A badge, title, or green LMS tile is not a 1.2 allow cell.
 
 ## Practice
 
-Mark `diagnostic.py` under `labs/0.2/0.2-bridge`.
-
-## Use it somewhere new
-
-A clinic onboarding quiz used to skip a threat-model review. Same grain.
-
-## What can still go wrong
-
-Memorized 1.2 answers. Real tooling gaps still need bridges.
-
-## What this page is not doing
-
-Scoring a ranked-bugs quiz does not skip Phase 1. Keys stay out of lessons.
+Mark which capabilities are actually demonstrated in `labs/0.2/0.2-bridge`, then predict the bridge list before running tests.

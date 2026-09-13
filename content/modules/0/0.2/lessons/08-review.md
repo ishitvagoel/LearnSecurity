@@ -1,48 +1,14 @@
-# Would you merge this quiz-as-skip?
+# Review the diagnostic contract as a PR
 
 **Kind:** code-review
 **Loop step:** Review
-**Standards:** NICE as vocabulary. Gate 1 evidence rules.
 
-## Review the practice files as if they were the course placement service
+Review `labs/0.2/0.2-bridge` as if it were a placement-service change. Ask:
 
-Treat `labs/0.2/0.2-bridge/vulnerable/` as the quiz-bridge change. Does `quiz_score_grants_phase1_skip(100)` still return true?
+- Does score 100 still return false for the Phase 1 skip?
+- Does every missing or unknown capability produce a stable bridge id?
+- Does a complete map produce no bridge ids?
+- Are bridge assignments kept separate from 1.2/1.3/1.4 and Gate 1 evidence?
+- Does the record avoid quiz answers, badges, and production data?
 
-## Picture: if score >= 80: skip part 1
-
-**`if score >= 80: skip_phase(1)`**.
-
-```mermaid
-flowchart TD
-  Claim[PR claim] --> Q{"What would falsify it?"}
-  Q -->|"score 100 skips 1.2"| Property["A rule - good if tested"]
-  Q -->|LMS percentage| Mechanism[A tool - a number]
-  Q -->|job title mapped| False[False assurance]
-```
-
-A part-1 skip still has to be denied. Without an always-false skip, a 100 score still walks into part 1.
-
-## Problems to find (name them yourself)
-
-- `if score >= 80: skip_phase(1)`
-- No link from diagnostic to 1.2 evidence
-- Badge screenshot as check-in 1
-- Adaptive path hides 1.4 accessibility leftover
-
-Also reject: live LMS attacks; keys in lessons; claiming check-in 0 or check-in 1; “they’re a senior hire”; treating a Git-bridge skip as a 1.2 skip.
-
-## Common mix-ups
-
-- Placement is a security clearance
-- Fast learners skip rules
-- Tool fluency is threat modeling
-- A job-title competency is a 1.2 allow cell
-- An LMS percentage is industry-list coverage
-
-## Use it somewhere new
-
-An onboarding quiz and a job-title mapping, without keeping 1.2 required, skip the check. A 100 quiz is not a 1.2 skip — write the skip deny.
-
-## What this page is not doing
-
-Do not ship a quiz-as-skip because a comment says advanced learners may skip. Nobody owns that leftover. Do not attack an LMS to prove the finding.
+Reject a PR that returns `[]` for missing evidence or that maps a job title to security clearance. Approve only when the vulnerable run fails the intended assertions and the fixed run passes them.

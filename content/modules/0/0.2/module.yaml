@@ -5,7 +5,7 @@ phase: 0
 track: bridge
 difficulty: foundation
 status: draft
-estimatedMinutes: 240
+estimatedMinutes: 90
 prerequisites:
 - '0.1 orientation; diagnostics never skip 1.2 or Gate 1'
 routeTags:
@@ -14,9 +14,9 @@ routeTags:
 - bridge
 releaseMilestone: null
 outcomes:
+- 'Map demonstrated tooling capabilities to deterministic bridge ids.'
 - 'Refuse using a placement quiz score as authorization to skip 1.2 or Gate 1.'
-- 'Treat NICE competency language as a bridge for tooling gaps, not as a 1.2 cell.'
-- 'Keep LMS percentages from looking like ASVS coverage.'
+- 'Keep bridge work, security evidence, and LMS reporting as separate records.'
 reviewTriggers:
 - Score grants Phase 1 skip
 - No link from diagnostic to 1.2 evidence
@@ -40,58 +40,58 @@ concepts:
 learningObjects:
 - id: 0.2-LO-01
   kind: concept-model
-  title: A quiz score is not a 1.2 cell
+  title: A diagnostic chooses bridge work, not security clearance
   path: lessons/01-property.md
 - id: 0.2-LO-02
   kind: design-exercise
-  title: Tooling skip vs invariant skip
+  title: Capability evidence vs invariant evidence
   path: lessons/02-model.md
 - id: 0.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: score grants Phase 1 skip'
+  title: 'Local fixture: score skip and dropped bridge gaps'
   path: lessons/03-break.md
 - id: 0.2-LO-04
   kind: design-exercise
-  title: Diagnostics never grant 1.2 or Gate 1
+  title: Build a deterministic bridge recommendation
   path: lessons/04-build.md
 - id: 0.2-LO-05
   kind: verification-lab
-  title: Fail-on-vulnerable then pass-on-fixed for quiz skip
+  title: Verify every missing capability gets a bridge
   path: lessons/05-verify.md
 - id: 0.2-LO-06
   kind: operations-exercise
-  title: phase1_skip_denied without back-dating Gate 1
+  title: Operate bridge assignments without back-dating Gate 1
   path: lessons/06-operate.md
 - id: 0.2-LO-07
   kind: transfer-challenge
-  title: 'Transfer: clinic onboarding quiz'
+  title: 'Transfer: clinic capability diagnostic'
   path: lessons/07-transfer.md
 - id: 0.2-LO-08
   kind: code-review
-  title: Review quiz-as-skip as a PR
+  title: Review the diagnostic contract as a PR
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
   slug: 0.2-bridge
-  summary: Quiz score used as authorization to skip 1.2/Gate 1
+  summary: Capability evidence maps to tooling bridges; scores never waive 1.2/Gate 1
   forbiddenOutcomes:
   - Quiz score used as authorization to skip 1.2/Gate 1
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Diagnostic repository and individualized path
+- Capability evidence map and individualized bridge path
 - Transfer task prompt
-- Local lab brief with quiz-skip deny tests
+- Local lab brief with score-deny and bridge-completeness tests
 assessmentBlueprint:
   explain: Placement may skip orientation prose, never mediation labs
-  design: Tooling-bridge vs 1.2/Gate 1 evidence
-  build: quiz_score_grants_phase1_skip is false in labs/0.2/0.2-bridge/fixed
+  design: Capability evidence to bridge ids; keep 1.2/Gate 1 separate
+  build: bridge_recommendations covers every missing capability; score skip is false
   break: Authorized local score-as-skip
-  verify: Forbidden-outcome tests plus honest low score
+  verify: Vulnerable fails score and bridge completeness; fixed passes
   operate: phase1_skip_denied; audit skipped-module lists
-  communicate: Residual Git/SQL/HTTP gaps still need bridges
+  communicate: Bridge ids explain Git/SQL/HTTP gaps without implying security clearance
 masteryGate: '0'
 standardsRefs:
 - source: NIST SP 800-181 Rev. 1 NICE Workforce Framework
@@ -140,3 +140,6 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with score-as-skip cause tables, always-false Phase 1
     predicate, and clinic onboarding transfer; independent review still required
+
+- date: '2026-09-13'
+  note: Added capability evidence map and deterministic tooling bridge recommendations; independent review still required
