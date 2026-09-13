@@ -36,9 +36,9 @@ export default function CapstonePage() {
           </CardLink>
         </li>
       </ul>
-      <p className="mt-6 text-sm text-stone-600">
+      <p className="mt-6 text-sm text-muted">
         Also see{" "}
-        <Link href="/checkpoints/" className="text-blue-900 underline underline-offset-2">
+        <Link href="/checkpoints/" className="text-link underline underline-offset-2">
           check-in 11
         </Link>
         .

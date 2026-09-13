@@ -34,10 +34,10 @@ export default function ReferencesPage() {
         </p>
       </PageHeader>
       <h2 className="mb-3 text-xl font-semibold">The lists and papers</h2>
-      <div className="overflow-x-auto rounded-xl border border-stone-200 bg-white">
+      <div className="overflow-x-auto rounded-xl border border-line bg-surface">
         <table className="w-full min-w-[40rem] text-left text-sm">
           <caption className="sr-only">Industry lists and papers</caption>
-          <thead className="border-b border-stone-200 bg-stone-50 text-stone-600">
+          <thead className="border-b border-line bg-surface-hover text-muted">
             <tr>
               <th className="px-4 py-2 font-medium">Name</th>
               <th className="px-4 py-2 font-medium">Version</th>
@@ -47,22 +47,22 @@ export default function ReferencesPage() {
           </thead>
           <tbody>
             {pins.map((p) => (
-              <tr key={p.id} className="border-b border-stone-100 last:border-0">
+              <tr key={p.id} className="border-b border-line last:border-0">
                 <td className="px-4 py-3">
                   <a
                     href={p.url}
-                    className="font-medium text-blue-900 underline-offset-2 hover:underline"
+                    className="font-medium text-link underline-offset-2 hover:underline"
                     rel="noreferrer"
                     target="_blank"
                   >
                     {p.source}
                   </a>
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap text-stone-800">{p.version}</td>
-                <td className="px-4 py-3 whitespace-nowrap text-stone-800">
+                <td className="px-4 py-3 whitespace-nowrap text-ink">{p.version}</td>
+                <td className="px-4 py-3 whitespace-nowrap text-ink">
                   {pinStatusLabel(p.status)}
                 </td>
-                <td className="px-4 py-3 whitespace-nowrap text-stone-700">
+                <td className="px-4 py-3 whitespace-nowrap text-muted">
                   {p.reviewedAt || "—"}
                 </td>
               </tr>
@@ -71,10 +71,10 @@ export default function ReferencesPage() {
         </table>
       </div>
       <h2 className="mt-10 mb-3 text-xl font-semibold">Where topics mention them</h2>
-      <div className="overflow-x-auto rounded-xl border border-stone-200 bg-white">
+      <div className="overflow-x-auto rounded-xl border border-line bg-surface">
         <table className="w-full min-w-[28rem] text-left text-sm">
           <caption className="sr-only">Topics and the lists they mention</caption>
-          <thead className="border-b border-stone-200 bg-stone-50 text-stone-600">
+          <thead className="border-b border-line bg-surface-hover text-muted">
             <tr>
               <th className="px-4 py-2 font-medium">Topic</th>
               <th className="px-4 py-2 font-medium">Lists</th>
@@ -82,16 +82,16 @@ export default function ReferencesPage() {
           </thead>
           <tbody>
             {modules.map((m) => (
-              <tr key={m.id} className="border-b border-stone-100 last:border-0">
+              <tr key={m.id} className="border-b border-line last:border-0">
                 <td className="px-4 py-3 align-top whitespace-nowrap">
                   <Link
                     href={moduleHref(m.id)}
-                    className="font-medium text-blue-900 underline-offset-2 hover:underline"
+                    className="font-medium text-link underline-offset-2 hover:underline"
                   >
                     {m.id}
                   </Link>
                 </td>
-                <td className="px-4 py-3 leading-relaxed text-stone-700">
+                <td className="px-4 py-3 leading-relaxed text-muted">
                   {m.standardsRefs
                     .map((s) => `${s.source} ${s.version}`)
                     .join(" · ")}

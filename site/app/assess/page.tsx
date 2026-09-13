@@ -36,13 +36,13 @@ export default function AssessmentsPage() {
                     className="block h-full rounded-2xl border border-line bg-paper p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-forest-accent/40 hover:shadow-md"
                   >
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-mono text-xs text-stone-600">{mod.id}</span>
-                      <span className="rounded-full border border-line px-2 py-0.5 text-xs text-stone-700">
+                      <span className="font-mono text-xs text-muted">{mod.id}</span>
+                      <span className="rounded-full border border-line px-2 py-0.5 text-xs text-muted">
                         {maturityLabel(mod.status)}
                       </span>
                     </div>
-                    <p className="mt-2 font-semibold text-blue-900">{topicTitle(mod)}</p>
-                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-stone-700">
+                    <p className="mt-2 font-semibold text-link">{topicTitle(mod)}</p>
+                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">
                       {topicBlurb(mod)}
                     </p>
                   </Link>

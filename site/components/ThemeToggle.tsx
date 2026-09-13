@@ -61,7 +61,7 @@ export function ThemeToggle(): ReactElement {
       type="button"
       onClick={toggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-white text-stone-700 hover:border-forest-accent hover:text-stone-900"
+      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-muted hover:border-forest-accent hover:text-ink"
     >
       {isDark ? (
         <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true" fill="none">

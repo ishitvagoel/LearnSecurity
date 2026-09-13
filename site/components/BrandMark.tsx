@@ -8,8 +8,8 @@ export function BrandMark({ className = "h-8 w-8" }: { className?: string }): Re
       aria-hidden="true"
       focusable="false"
     >
-      <rect width="32" height="32" rx="8" fill="#1f4d45" />
-      <path d="M11 8.5h3.2V20.2H22V23.5H11V8.5z" fill="#fbf7f0" />
+      <rect width="32" height="32" rx="8" className="fill-forest" />
+      <path d="M11 8.5h3.2V20.2H22V23.5H11V8.5z" className="fill-on-forest" />
     </svg>
   );
 }

@@ -50,8 +50,8 @@ export default async function ModulePage({ params }: Props) {
 
   return (
     <PageShell width="narrow">
-      <p className="mb-3 text-sm text-stone-600">
-        <Link href="/learn/" className="text-blue-900 underline-offset-2 hover:underline">
+      <p className="mb-3 text-sm text-muted">
+        <Link href="/learn/" className="text-link underline-offset-2 hover:underline">
           Lessons
         </Link>
         {" · "}
@@ -87,7 +87,7 @@ export default async function ModulePage({ params }: Props) {
 
       <section className="mt-8">
         <h2 className="mb-3 text-xl font-semibold">Pages</h2>
-        <ol className="divide-y divide-stone-200 overflow-hidden rounded-xl border border-stone-200 bg-white">
+        <ol className="divide-y divide-line overflow-hidden rounded-xl border border-line bg-surface">
           {lessons.map((lo, i) => {
             const spoken = spokenLessonTitle(lo.title, lo.body || "");
             const minutes = lo.body
@@ -98,24 +98,24 @@ export default async function ModulePage({ params }: Props) {
               {lo.filename ? (
                 <Link
                   href={lessonHref(mod.id, lo.filename)}
-                  className="flex gap-3 px-4 py-3 hover:bg-stone-50"
+                  className="flex gap-3 px-4 py-3 hover:bg-surface-hover"
                 >
-                  <span className="w-6 shrink-0 font-mono text-sm text-stone-500">
+                  <span className="w-6 shrink-0 font-mono text-sm text-muted">
                     {i + 1}
                   </span>
                   <span>
-                    <span className="block font-medium text-blue-900">
+                    <span className="block font-medium text-link">
                       {spoken}
                     </span>
-                    <span className="block text-sm text-stone-600">
+                    <span className="block text-sm text-muted">
                       {kindLabel(lo.kind)}
                       {minutes ? ` · ${formatMinutes(minutes)}` : ""}
                     </span>
                   </span>
                 </Link>
               ) : (
-                <span className="flex gap-3 px-4 py-3 text-stone-700">
-                  <span className="w-6 shrink-0 font-mono text-sm text-stone-500">
+                <span className="flex gap-3 px-4 py-3 text-muted">
+                  <span className="w-6 shrink-0 font-mono text-sm text-muted">
                     {i + 1}
                   </span>
                   {spoken}
@@ -136,7 +136,7 @@ export default async function ModulePage({ params }: Props) {
           <p>
             <Link
               href={`/labs/${encodeURIComponent(mod.id)}/`}
-              className="font-medium text-blue-900 underline underline-offset-2"
+              className="font-medium text-link underline underline-offset-2"
             >
               How to run the practice
             </Link>
@@ -150,13 +150,13 @@ export default async function ModulePage({ params }: Props) {
         </summary>
         <div className="mt-3">
           <h3 className="font-semibold text-ink">What you should be able to show</h3>
-          <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-stone-800">
+          <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-ink">
             {(mod.outcomes || []).map((outcome) => <li key={outcome}>{outcome}</li>)}
           </ul>
-          <p className="mt-4 text-sm leading-relaxed text-stone-700">
+          <p className="mt-4 text-sm leading-relaxed text-muted">
             Prerequisites: {(mod.prerequisites || []).join(" · ") || "None listed"}
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-stone-700">
+          <p className="mt-3 text-sm leading-relaxed text-muted">
             References: {(mod.standardsRefs || []).map((standard) => `${standard.source} ${standard.version}`).join(" · ") || "None listed"}
             {mod.masteryGate ? ` · Mastery gate ${mod.masteryGate}` : ""}
           </p>

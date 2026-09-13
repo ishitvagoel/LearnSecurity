@@ -80,10 +80,10 @@ export function ProgressToggle({ moduleId }: { moduleId: string }): ReactElement
         className="mt-0.5 h-4 w-4 shrink-0"
       />
       <span>
-        <span className="font-medium text-stone-900">
+        <span className="font-medium text-ink">
           {done ? "You’ve marked this as read" : "I’ve read this"}
         </span>
-        <span className="mt-0.5 block text-stone-600">
+        <span className="mt-0.5 block text-muted">
           {done
             ? "Saved in this browser only. Untick if you want to clear it."
             : "Saved in this browser only. No account."}

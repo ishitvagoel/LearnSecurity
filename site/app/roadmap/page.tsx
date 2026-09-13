@@ -39,31 +39,31 @@ export default function RoadmapPage() {
               className="scroll-mt-24 rounded-2xl border border-line bg-paper p-5 shadow-sm"
             >
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h2 className="text-xl font-semibold tracking-tight text-stone-900">
-                  <span className="mr-2 font-mono text-sm font-medium text-stone-500">
+                <h2 className="text-xl font-semibold tracking-tight text-ink">
+                  <span className="mr-2 font-mono text-sm font-medium text-muted">
                     {phase}
                   </span>
                   {phaseHeading(phase)}
                 </h2>
                 <div className="flex flex-col items-end gap-1.5">
-                  <p className="text-sm text-stone-600">
+                  <p className="text-sm text-muted">
                     {items.length} topic{items.length === 1 ? "" : "s"}
                   </p>
                   <PhaseProgress moduleIds={items.map((m) => m.id)} />
                 </div>
               </div>
               {meta ? (
-                <p className="mt-2 max-w-prose leading-relaxed text-stone-700">{meta.blurb}</p>
+                <p className="mt-2 max-w-prose leading-relaxed text-muted">{meta.blurb}</p>
               ) : null}
               <ul className="mt-4 flex flex-wrap gap-2">
                 {items.map((mod) => (
                   <li key={mod.id}>
                     <Link
                       href={moduleHref(mod.id)}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-line bg-background px-2.5 py-1 font-mono text-xs text-ink hover:border-forest-accent hover:bg-white"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-line bg-background px-2.5 py-1 font-mono text-xs text-ink hover:border-forest-accent hover:bg-surface"
                     >
                       {mod.id}
-                      <span className="max-w-[14rem] truncate font-sans text-stone-600">
+                      <span className="max-w-[14rem] truncate font-sans text-muted">
                         {topicTitle(mod)}
                       </span>
                       <ModuleDoneBadge moduleId={mod.id} />
@@ -75,7 +75,7 @@ export default function RoadmapPage() {
           );
         })}
       </ol>
-      <p className="mt-8 text-sm text-stone-600">
+      <p className="mt-8 text-sm text-muted">
         Want a card for each topic instead of this list? Use the{" "}
         <Link href="/learn/" className="text-link underline underline-offset-2">
           lesson list

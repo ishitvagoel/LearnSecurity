@@ -25,17 +25,17 @@ export default function LabsIndexPage() {
       <ol className="mb-8 max-w-prose list-decimal space-y-2 pl-5 leading-relaxed">
         <li>Copy the repository to your computer. Stay inside the listed practice folder.</li>
         <li>
-          Follow that folder’s <code className="rounded bg-white px-1">README.md</code>.
+          Follow that folder’s <code className="rounded bg-surface-hover px-1">README.md</code>.
           The check should <strong>fail</strong> on the broken version and{" "}
           <strong>pass</strong> on the repaired version.
         </li>
         <li>Reset from git when you are done. Do not treat practice files as a real product.</li>
       </ol>
-      <p className="mb-8 max-w-prose leading-relaxed text-stone-800">
+      <p className="mb-8 max-w-prose leading-relaxed text-ink">
         Practice data is fake. Practice secrets are throwaway. Do not point
         these tests at other people’s systems, or at anything running in
         production. See the{" "}
-        <Link href="/policy/" className="text-blue-900 underline underline-offset-2">
+        <Link href="/policy/" className="text-link underline underline-offset-2">
           rules
         </Link>
         .
@@ -52,11 +52,11 @@ export default function LabsIndexPage() {
                 <li key={m.id}>
                   <Link
                     href={`/labs/${encodeURIComponent(m.id)}/`}
-                    className="block h-full rounded-xl border border-stone-200 bg-white p-4 shadow-sm hover:border-stone-400"
+                    className="block h-full rounded-xl border border-line bg-surface p-4 shadow-sm hover:border-border"
                   >
-                    <p className="font-mono text-xs text-stone-600">{m.id}</p>
-                    <p className="mt-1 font-semibold text-blue-900">{topicTitle(m)}</p>
-                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-stone-700">
+                    <p className="font-mono text-xs text-muted">{m.id}</p>
+                    <p className="mt-1 font-semibold text-link">{topicTitle(m)}</p>
+                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">
                       {topicBlurb(m)}
                     </p>
                   </Link>

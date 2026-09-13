@@ -22,7 +22,7 @@ export default function HomePage() {
             <h1 className="mt-3 max-w-3xl font-serif text-4xl font-semibold tracking-tight text-ink sm:text-5xl sm:leading-[1.12]">
               Learn to build software that stays safe when someone tries to break it
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-stone-700">
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
               Read the lessons here, in your browser. When it is time to
               practice, you use files on your own computer. You never attack a
               live website from this course.
@@ -39,7 +39,7 @@ export default function HomePage() {
           </div>
           <aside className="rounded-3xl border border-line bg-paper p-6 shadow-sm">
             <p className="text-sm font-medium text-forest-accent">What is on this site</p>
-            <ul className="mt-4 space-y-4 text-sm leading-relaxed text-stone-700">
+            <ul className="mt-4 space-y-4 text-sm leading-relaxed text-muted">
               <li>
                 <strong className="block text-ink">Lessons</strong>
                 Short pages you read in order.
@@ -91,7 +91,7 @@ export default function HomePage() {
                   {index + 1}
                 </span>
                 <p className="font-semibold text-ink">{step.title}</p>
-                <p className="mt-1 text-sm leading-relaxed text-stone-700">{step.body}</p>
+                <p className="mt-1 text-sm leading-relaxed text-muted">{step.body}</p>
               </li>
             ))}
           </ol>
@@ -120,7 +120,7 @@ export default function HomePage() {
               <h3 className="mt-2 font-serif text-xl font-semibold text-ink">
                 Learn what “secure” means here
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-stone-700">
+              <p className="mt-3 text-sm leading-relaxed text-muted">
                 The next topic is not a tool. It is how to write a rule you can
                 actually check.
               </p>
@@ -135,7 +135,7 @@ export default function HomePage() {
               <h3 className="mt-2 font-serif text-xl font-semibold text-ink">
                 Follow the study order
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-stone-700">
+              <p className="mt-3 text-sm leading-relaxed text-muted">
                 Do not skip ahead to the flashy attacks. Each new idea sits on
                 the last one.
               </p>
@@ -152,7 +152,7 @@ export default function HomePage() {
           <h2 className="font-serif text-3xl font-semibold tracking-tight text-ink">
             Who this is for
           </h2>
-          <p className="mt-4 max-w-2xl leading-relaxed text-stone-700">
+          <p className="mt-4 max-w-2xl leading-relaxed text-muted">
             People who write or review software and want safety to be part of
             that work. You will follow one small notes app as it grows, instead
             of a pile of disconnected demos. This is not a hacking playground,

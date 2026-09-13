@@ -54,7 +54,7 @@ export function LessonToc({
             href={`#${h.id}`}
             aria-current={active === h.id ? "location" : undefined}
             className={`block leading-snug underline-offset-2 hover:underline ${
-              active === h.id ? "font-medium text-stone-900" : "text-stone-700"
+              active === h.id ? "font-medium text-ink" : "text-muted"
             }`}
           >
             {h.text}
@@ -66,8 +66,8 @@ export function LessonToc({
 
   if (variant === "mobile") {
     return (
-      <details className="mb-6 rounded-lg border border-stone-200 bg-white px-3 py-2 lg:hidden">
-        <summary className="cursor-pointer font-medium text-stone-900">On this page</summary>
+      <details className="mb-6 rounded-lg border border-line bg-surface px-3 py-2 lg:hidden">
+        <summary className="cursor-pointer font-medium text-ink">On this page</summary>
         {list}
       </details>
     );
@@ -78,7 +78,7 @@ export function LessonToc({
       aria-label="On this page"
       className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-8"
     >
-      <p className="text-xs font-semibold uppercase tracking-wide text-stone-600">
+      <p className="text-xs font-semibold uppercase tracking-wide text-muted">
         On this page
       </p>
       {list}
@@ -110,14 +110,14 @@ export function ReadingProgress(): ReactElement {
 
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 top-16 z-40 h-1 bg-stone-200"
+      className="pointer-events-none fixed inset-x-0 top-16 z-40 h-1 bg-line"
       role="progressbar"
       aria-label="Reading progress"
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(percent)}
     >
-      <div className="h-full bg-blue-800" style={{ width: `${percent}%` }} />
+      <div className="h-full bg-forest-accent" style={{ width: `${percent}%` }} />
     </div>
   );
 }

@@ -165,7 +165,7 @@ export function SiteSearch(): ReactElement {
         ref={triggerRef}
         type="button"
         onClick={openSearch}
-        className="flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1.5 text-sm text-stone-700 hover:border-forest-accent hover:text-stone-900"
+        className="flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-sm text-muted hover:border-forest-accent hover:text-ink"
         aria-haspopup="dialog"
       >
         <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true" fill="none">
@@ -180,7 +180,7 @@ export function SiteSearch(): ReactElement {
       {open ? (
         <div className="fixed inset-0 z-[60] flex items-start justify-center px-4 pt-[10vh]">
           <div
-            className="absolute inset-0 bg-stone-900/40"
+            className="absolute inset-0 bg-ink/30"
             onClick={close}
             aria-hidden="true"
           />
@@ -213,7 +213,7 @@ export function SiteSearch(): ReactElement {
               <button
                 type="button"
                 onClick={close}
-                className="shrink-0 rounded-md px-2 py-1 text-xs text-muted hover:bg-white hover:text-ink"
+                className="shrink-0 rounded-md px-2 py-1 text-xs text-muted hover:bg-surface hover:text-ink"
               >
                 Esc
               </button>
@@ -226,7 +226,7 @@ export function SiteSearch(): ReactElement {
                   Type to search {entries.length} pages, topics, and lessons.
                 </p>
               ) : results.length === 0 ? (
-                <p className="px-3 py-6 text-center text-sm text-muted">Nothing matched “{query}.”</p>
+                <p className="px-3 py-6 text-center text-sm text-muted">Nothing matched "{query}."</p>
               ) : (
                 <ul>
                   {results.map((entry, i) => (
@@ -239,7 +239,7 @@ export function SiteSearch(): ReactElement {
                           router.push(entry.href);
                         }}
                         className={`flex w-full flex-col items-start gap-0.5 rounded-lg px-3 py-2 text-left ${
-                          i === activeIndex ? "bg-forest text-on-forest" : "text-ink hover:bg-white"
+                          i === activeIndex ? "bg-forest text-on-forest" : "text-ink hover:bg-surface"
                         }`}
                       >
                         <span className="flex w-full items-center justify-between gap-2">

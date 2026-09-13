@@ -31,7 +31,7 @@ export function LessonReader({
   const headings = extractHeadings(source);
   const current = lessons[index];
   if (!current) {
-    return <p className="text-stone-700">This page is not in the topic list.</p>;
+    return <p className="text-muted">This page is not in the topic list.</p>;
   }
   const prev = index > 0 ? lessons[index - 1] : undefined;
   const next = index < lessons.length - 1 ? lessons[index + 1] : undefined;
@@ -55,14 +55,14 @@ export function LessonReader({
           </div>
         </aside>
         <article id="lesson-article" className="min-w-0">
-          <nav className="mb-4 text-sm text-stone-700" aria-label="Breadcrumb">
-            <Link href="/learn/" className="text-blue-900 underline-offset-2 hover:underline">
+          <nav className="mb-4 text-sm text-muted" aria-label="Breadcrumb">
+            <Link href="/learn/" className="text-link underline-offset-2 hover:underline">
               Lessons
             </Link>
             {" · "}
             <Link
               href={moduleHref(moduleId)}
-              className="text-blue-900 underline-offset-2 hover:underline"
+              className="text-link underline-offset-2 hover:underline"
             >
               {moduleId}
             </Link>
@@ -71,8 +71,8 @@ export function LessonReader({
               · Page {index + 1} of {lessons.length}
             </span>
           </nav>
-          <details className="mb-6 rounded-lg border border-stone-200 bg-white px-3 py-2 lg:hidden">
-            <summary className="cursor-pointer font-medium text-stone-900">
+          <details className="mb-6 rounded-lg border border-line bg-surface px-3 py-2 lg:hidden">
+            <summary className="cursor-pointer font-medium text-ink">
               Pages in this topic
             </summary>
             <div className="mt-3">
@@ -85,7 +85,7 @@ export function LessonReader({
             </div>
           </details>
           <LessonToc headings={headings} variant="mobile" />
-          <header className="mb-8 border-b border-stone-200 pb-6">
+          <header className="mb-8 border-b border-line pb-6">
             <h1 className="font-serif text-3xl font-semibold tracking-tight text-ink">
               {lessonTitle}
             </h1>

@@ -40,7 +40,7 @@ function inline(text: string): ReactNode[] {
       nodes.push(<strong key={key}>{token.slice(2, -2)}</strong>);
     } else if (token.startsWith("`")) {
       nodes.push(
-        <code key={key} className="rounded bg-stone-200/80 px-1 py-0.5 font-mono text-[0.9em]">
+        <code key={key} className="rounded bg-surface-hover px-1 py-0.5 font-mono text-[0.9em]">
           {token.slice(1, -1)}
         </code>,
       );
@@ -53,7 +53,7 @@ function inline(text: string): ReactNode[] {
           <a
             key={key}
             href={href}
-            className="text-blue-900 underline decoration-blue-900/30 underline-offset-2 hover:decoration-blue-900"
+            className="text-link underline decoration-link/30 underline-offset-2 hover:decoration-link"
             {...(external ? { rel: "noreferrer", target: "_blank" } : {})}
           >
             {link[1]}
@@ -90,14 +90,14 @@ function renderTable(rows: string[], key: string): ReactNode {
   const header = body[0];
   const rest = body.slice(1);
   return (
-    <div key={key} className="mb-5 overflow-x-auto rounded-lg border border-stone-200">
+    <div key={key} className="mb-5 overflow-x-auto rounded-lg border border-line">
       <table className="w-full min-w-[32rem] border-collapse text-left text-sm">
         <thead>
           <tr>
             {header.map((cell) => (
               <th
                 key={cell}
-                className="border-b border-stone-200 bg-stone-100 px-3 py-2 font-semibold text-stone-900"
+                className="border-b border-line bg-surface-hover px-3 py-2 font-semibold text-ink"
               >
                 {inline(cell)}
               </th>
@@ -106,9 +106,9 @@ function renderTable(rows: string[], key: string): ReactNode {
         </thead>
         <tbody>
           {rest.map((row, ri) => (
-            <tr key={ri} className="odd:bg-white even:bg-stone-50">
+            <tr key={ri} className="odd:bg-surface even:bg-surface-hover">
               {row.map((cell, ci) => (
-                <td key={ci} className="border-t border-stone-100 px-3 py-2 align-top text-stone-800">
+                <td key={ci} className="border-t border-line px-3 py-2 align-top text-ink">
                   {inline(cell)}
                 </td>
               ))}

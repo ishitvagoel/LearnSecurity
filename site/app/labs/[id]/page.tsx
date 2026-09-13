@@ -37,14 +37,14 @@ export default async function LabBriefPage({ params }: Props) {
   const slug = mod.labSpec.slug || `${mod.id}-lab`;
   return (
     <PageShell width="narrow">
-      <p className="mb-3 text-sm text-stone-600">
-        <Link href="/labs/" className="text-blue-900 underline-offset-2 hover:underline">
+      <p className="mb-3 text-sm text-muted">
+        <Link href="/labs/" className="text-link underline-offset-2 hover:underline">
           All practice
         </Link>
         {" · "}
         <Link
           href={moduleHref(mod.id)}
-          className="text-blue-900 underline-offset-2 hover:underline"
+          className="text-link underline-offset-2 hover:underline"
         >
           {mod.id} — {topicTitle(mod)}
         </Link>
@@ -58,7 +58,7 @@ export default async function LabBriefPage({ params }: Props) {
       </PageHeader>
       <section className="mb-8 rounded-xl border border-rose-200 bg-rose-50 px-4 py-4">
         <h2 className="mb-2 text-xl font-semibold">What must not happen</h2>
-        <p className="mb-3 text-sm text-stone-700">
+        <p className="mb-3 text-sm text-muted">
           The check should fail on the broken files and pass on the repaired
           ones. If both pass, the check is not catching the bug.
         </p>
@@ -70,13 +70,13 @@ export default async function LabBriefPage({ params }: Props) {
       </section>
       <section>
         <h2 className="mb-3 text-xl font-semibold">Where to find it</h2>
-        <p className="leading-relaxed text-stone-700">
+        <p className="leading-relaxed text-muted">
           In your copy of the repository, open{" "}
-          <code className="rounded bg-stone-200 px-1">
+          <code className="rounded bg-surface-hover px-1">
             labs/{mod.id}/{slug}/
           </code>{" "}
           and read its README. See{" "}
-          <Link href="/labs/" className="font-medium text-blue-900 underline underline-offset-2">
+          <Link href="/labs/" className="font-medium text-link underline underline-offset-2">
             Practice
           </Link>{" "}
           for the steps to copy, run, and reset the files.

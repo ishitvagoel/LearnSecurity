@@ -2,22 +2,25 @@
 
 :root {
   color-scheme: light;
-  --background: #f3eee4;
-  --foreground: #1c1917;
-  --paper: #fbf7f0;
-  --ink: #1c1917;
-  --muted: #57534e;
-  --line: #e7e0d4;
-  --forest: #1f4d45;
-  --forest-hover: #173a34;
-  --forest-accent: #1f4d45;
-  --link: #184e77;
+  --background: #f4efe5;
+  --foreground: #1a1714;
+  --paper: #faf6ee;
+  --ink: #1a1714;
+  --muted: #6b655d;
+  --line: #ddd6c8;
+  --surface: #ffffff;
+  --surface-hover: #f7f3ea;
+  --border: #b5ad9e;
+  --forest: #1a5e4e;
+  --forest-hover: #134a3d;
+  --forest-accent: #278a72;
+  --link: #1768a3;
   /* Constant regardless of theme: painted on top of the brand-green (--forest)
      surface, which never changes, so these must not change either. */
-  --on-forest: #fbf7f0;
-  --on-forest-muted: #cdeee3;
-  --hero-glow-1: #dce8e4;
-  --hero-glow-2: #efe4d2;
+  --on-forest: #faf6ee;
+  --on-forest-muted: #a8dac8;
+  --hero-glow-1: #b8d8cc;
+  --hero-glow-2: #e2d0b5;
 }
 
 @theme inline {
@@ -27,6 +30,9 @@
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
   --color-forest: var(--forest);
   --color-forest-hover: var(--forest-hover);
   --color-forest-accent: var(--forest-accent);
@@ -45,73 +51,79 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --background: #15130f;
-    --foreground: #ece7db;
-    --paper: #201d17;
-    --ink: #ece7db;
-    --muted: #a89f8f;
-    --line: #3a3527;
-    --forest-accent: #5fc9ae;
-    --link: #7cb8ef;
-    --hero-glow-1: #17332c;
-    --hero-glow-2: #3a2f1a;
+    --background: #111210;
+    --foreground: #e5e0d5;
+    --paper: #1a1c18;
+    --ink: #e5e0d5;
+    --muted: #9b958a;
+    --line: #2e2f28;
+    --surface: #222420;
+    --surface-hover: #2a2c27;
+    --border: #4a4640;
+    --forest-accent: #3dddb5;
+    --link: #5fb8f0;
+    --hero-glow-1: #132b24;
+    --hero-glow-2: #33281a;
 
-    --color-stone-50: #241f18;
-    --color-stone-100: #2a251c;
-    --color-stone-200: #3d3628;
-    --color-stone-400: #6f6656;
-    --color-stone-500: #a89f8f;
-    --color-stone-600: #b7ae9d;
-    --color-stone-700: #ded6c7;
-    --color-stone-800: #e7dfd1;
-    --color-stone-900: #f3ede0;
-    --color-white: #201d17;
-    --color-blue-50: #16283a;
-    --color-blue-200: #3b6fa0;
-    --color-blue-800: #5b9bd9;
-    --color-blue-900: #8ec4f2;
-    --color-rose-50: #2a1616;
-    --color-rose-200: #6b2f37;
-    --color-amber-50: #241d0e;
-    --color-amber-200: #5c4a1f;
-    --color-emerald-50: #10231b;
-    --color-emerald-200: #1f4d3a;
+    --color-stone-50: #1c1e1a;
+    --color-stone-100: #222420;
+    --color-stone-200: #33352e;
+    --color-stone-400: #636058;
+    --color-stone-500: #9b958a;
+    --color-stone-600: #b0a99c;
+    --color-stone-700: #d2cbc0;
+    --color-stone-800: #ddd6ca;
+    --color-stone-900: #e8e2d7;
+    --color-white: #1a1c18;
+    --color-blue-50: #142638;
+    --color-blue-200: #3870a5;
+    --color-blue-800: #4da0e0;
+    --color-blue-900: #5fb8f0;
+    --color-rose-50: #261618;
+    --color-rose-200: #6d3038;
+    --color-amber-50: #221d10;
+    --color-amber-200: #5c4b22;
+    --color-emerald-50: #10241c;
+    --color-emerald-200: #1f503c;
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --background: #15130f;
-  --foreground: #ece7db;
-  --paper: #201d17;
-  --ink: #ece7db;
-  --muted: #a89f8f;
-  --line: #3a3527;
-  --forest-accent: #5fc9ae;
-  --link: #7cb8ef;
-  --hero-glow-1: #17332c;
-  --hero-glow-2: #3a2f1a;
+  --background: #111210;
+  --foreground: #e5e0d5;
+  --paper: #1a1c18;
+  --ink: #e5e0d5;
+  --muted: #9b958a;
+  --line: #2e2f28;
+  --surface: #222420;
+  --surface-hover: #2a2c27;
+  --border: #4a4640;
+  --forest-accent: #3dddb5;
+  --link: #5fb8f0;
+  --hero-glow-1: #132b24;
+  --hero-glow-2: #33281a;
 
-  --color-stone-50: #241f18;
-  --color-stone-100: #2a251c;
-  --color-stone-200: #3d3628;
-  --color-stone-400: #6f6656;
-  --color-stone-500: #a89f8f;
-  --color-stone-600: #b7ae9d;
-  --color-stone-700: #ded6c7;
-  --color-stone-800: #e7dfd1;
-  --color-stone-900: #f3ede0;
-  --color-white: #201d17;
-  --color-blue-50: #16283a;
-  --color-blue-200: #3b6fa0;
-  --color-blue-800: #5b9bd9;
-  --color-blue-900: #8ec4f2;
-  --color-rose-50: #2a1616;
-  --color-rose-200: #6b2f37;
-  --color-amber-50: #241d0e;
-  --color-amber-200: #5c4a1f;
-  --color-emerald-50: #10231b;
-  --color-emerald-200: #1f4d3a;
+  --color-stone-50: #1c1e1a;
+  --color-stone-100: #222420;
+  --color-stone-200: #33352e;
+  --color-stone-400: #636058;
+  --color-stone-500: #9b958a;
+  --color-stone-600: #b0a99c;
+  --color-stone-700: #d2cbc0;
+  --color-stone-800: #ddd6ca;
+  --color-stone-900: #e8e2d7;
+  --color-white: #1a1c18;
+  --color-blue-50: #142638;
+  --color-blue-200: #3870a5;
+  --color-blue-800: #4da0e0;
+  --color-blue-900: #5fb8f0;
+  --color-rose-50: #261618;
+  --color-rose-200: #6d3038;
+  --color-amber-50: #221d10;
+  --color-amber-200: #5c4b22;
+  --color-emerald-50: #10241c;
+  --color-emerald-200: #1f503c;
 }
 
 html {
@@ -253,7 +265,7 @@ body {
   margin: 0 0 1.5rem;
   overflow-x: auto;
   border-radius: 0.75rem;
-  border: 1px solid #e7e0d4;
+  border: 1px solid #e0d9cc;
   background: #fff;
   padding: 0.75rem 1rem;
 }
@@ -262,10 +274,10 @@ body {
   min-height: 7rem;
   background: repeating-linear-gradient(
     -45deg,
-    #fbf7f0,
-    #fbf7f0 12px,
-    #f3eee4 12px,
-    #f3eee4 24px
+    #faf6ee,
+    #faf6ee 12px,
+    #f4efe5 12px,
+    #f4efe5 24px
   );
 }
 
@@ -306,22 +318,22 @@ body {
 }
 
 .lesson-section-property {
-  border-color: #bfdbfe;
+  border-color: #93c5fd;
   background: #eff6ff;
 }
 
 .lesson-section-practice {
-  border-color: #fde68a;
+  border-color: #fcd34d;
   background: #fffbeb;
 }
 
 .lesson-section-transfer {
-  border-color: #99f6e4;
-  background: #f0fdfa;
+  border-color: #6ee7b7;
+  background: #ecfdf5;
 }
 
 .lesson-section-residual {
-  border-color: #fed7aa;
+  border-color: #fdba74;
   background: #fff7ed;
 }
 
@@ -331,107 +343,107 @@ body {
 }
 
 .lesson-section-limits {
-  border-color: #fecaca;
+  border-color: #fca5a5;
   background: #fff1f2;
 }
 
 .lesson-section-why {
-  border-color: #a7f3d0;
+  border-color: #6ee7b7;
   background: #ecfdf5;
 }
 
 .lesson-section-usability {
-  border-color: #ddd6fe;
+  border-color: #c4b5fd;
   background: #f5f3ff;
 }
 
 .lesson-section-mental {
-  border-color: #c5ddd7;
-  background: #f4faf8;
+  border-color: #99d1c1;
+  background: #f0faf6;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     .lesson-section-property {
-      border-color: #2c4a6e;
-      background: #16232f;
+      border-color: #2d4d75;
+      background: #141f2e;
     }
 
     .lesson-section-practice {
-      border-color: #5c4a1f;
-      background: #241d0e;
+      border-color: #604e22;
+      background: #1e1a0e;
     }
 
     .lesson-section-transfer {
-      border-color: #235049;
-      background: #10201d;
+      border-color: #26554e;
+      background: #0e1f1c;
     }
 
     .lesson-section-residual {
-      border-color: #5c3a1d;
-      background: #241a0e;
+      border-color: #603e20;
+      background: #1e180e;
     }
 
     .lesson-section-limits {
-      border-color: #5c2626;
-      background: #241212;
+      border-color: #602828;
+      background: #1e1010;
     }
 
     .lesson-section-why {
-      border-color: #1f4d3a;
-      background: #10231b;
+      border-color: #22503c;
+      background: #0e1f18;
     }
 
     .lesson-section-usability {
-      border-color: #3f3768;
-      background: #1c1830;
+      border-color: #433a6e;
+      background: #1a162e;
     }
 
     .lesson-section-mental {
-      border-color: #2a3f3a;
-      background: #141f1c;
+      border-color: #2e453e;
+      background: #121e1a;
     }
   }
 }
 
 :root[data-theme="dark"] {
   .lesson-section-property {
-    border-color: #2c4a6e;
-    background: #16232f;
+    border-color: #2d4d75;
+    background: #141f2e;
   }
 
   .lesson-section-practice {
-    border-color: #5c4a1f;
-    background: #241d0e;
+    border-color: #604e22;
+    background: #1e1a0e;
   }
 
   .lesson-section-transfer {
-    border-color: #235049;
-    background: #10201d;
+    border-color: #26554e;
+    background: #0e1f1c;
   }
 
   .lesson-section-residual {
-    border-color: #5c3a1d;
-    background: #241a0e;
+    border-color: #603e20;
+    background: #1e180e;
   }
 
   .lesson-section-limits {
-    border-color: #5c2626;
-    background: #241212;
+    border-color: #602828;
+    background: #1e1010;
   }
 
   .lesson-section-why {
-    border-color: #1f4d3a;
-    background: #10231b;
+    border-color: #22503c;
+    background: #0e1f18;
   }
 
   .lesson-section-usability {
-    border-color: #3f3768;
-    background: #1c1830;
+    border-color: #433a6e;
+    background: #1a162e;
   }
 
   .lesson-section-mental {
-    border-color: #2a3f3a;
-    background: #141f1c;
+    border-color: #2e453e;
+    background: #121e1a;
   }
 }

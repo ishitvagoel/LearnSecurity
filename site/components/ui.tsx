@@ -35,7 +35,7 @@ export function PageHeader({
         {title}
       </h1>
       {children ? (
-        <div className="mt-4 max-w-prose space-y-3 text-[1.05rem] leading-relaxed text-stone-700">
+        <div className="mt-4 max-w-prose space-y-3 text-[1.05rem] leading-relaxed text-muted">
           {children}
         </div>
       ) : null}
@@ -45,7 +45,7 @@ export function PageHeader({
 
 export function Chip({ children }: { children: ReactNode }): ReactElement {
   return (
-    <span className="inline-flex items-center rounded-full border border-line bg-paper px-2.5 py-0.5 text-xs font-medium text-stone-800">
+    <span className="inline-flex items-center rounded-full border border-line bg-paper px-2.5 py-0.5 text-xs font-medium text-ink">
       {children}
     </span>
   );
@@ -67,7 +67,7 @@ export function ButtonLink({
       ? "bg-forest text-on-forest hover:bg-forest-hover"
       : variant === "inverse"
         ? "bg-on-forest text-forest hover:opacity-90"
-        : "border border-stone-400 bg-paper text-ink hover:border-forest-accent hover:bg-white";
+        : "border border-border bg-paper text-ink hover:border-forest-accent hover:bg-surface";
   return (
     <Link
       href={href}
@@ -99,7 +99,7 @@ export function CardLink({
       ) : null}
       <p className="font-semibold text-ink">{title}</p>
       {children ? (
-        <div className="mt-2 text-sm leading-relaxed text-stone-700">{children}</div>
+        <div className="mt-2 text-sm leading-relaxed text-muted">{children}</div>
       ) : null}
     </Link>
   );

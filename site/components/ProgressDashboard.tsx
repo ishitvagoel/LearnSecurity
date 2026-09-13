@@ -31,7 +31,7 @@ export function ProgressDashboard({ phases }: { phases: ProgressPhase[] }): Reac
           <p className="text-lg font-semibold text-ink">
             {totalDone} of {totalCount} topics read
           </p>
-          <p className="text-sm text-stone-600">{overallPct}% through the course</p>
+          <p className="text-sm text-muted">{overallPct}% through the course</p>
         </div>
         <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-line" aria-hidden="true">
           <div
@@ -39,7 +39,7 @@ export function ProgressDashboard({ phases }: { phases: ProgressPhase[] }): Reac
             style={{ width: `${overallPct}%` }}
           />
         </div>
-        <p className="mt-3 text-sm text-stone-600">
+        <p className="mt-3 text-sm text-muted">
           {totalCount === 0
             ? "No topics yet."
             : totalDone === totalCount
@@ -59,19 +59,19 @@ export function ProgressDashboard({ phases }: { phases: ProgressPhase[] }): Reac
                 className={`absolute top-6 -left-3.5 flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold ${
                   complete
                     ? "bg-forest text-on-forest"
-                    : "border border-line bg-white text-stone-600"
+                    : "border border-line bg-surface text-muted"
                 }`}
               >
                 {group.phase}
               </span>
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <p className="font-semibold text-ink">{group.title}</p>
-                <p className="text-sm text-stone-600">
+                <p className="text-sm text-muted">
                   {done} of {total} read
                 </p>
               </div>
               {group.blurb ? (
-                <p className="mt-1 max-w-prose text-sm text-stone-600">{group.blurb}</p>
+                <p className="mt-1 max-w-prose text-sm text-muted">{group.blurb}</p>
               ) : null}
               <div
                 className="mt-2 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-line"
@@ -92,7 +92,7 @@ export function ProgressDashboard({ phases }: { phases: ProgressPhase[] }): Reac
                         className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs ${
                           isDone
                             ? "border-forest bg-forest text-on-forest"
-                            : "border-line bg-background text-ink hover:border-forest-accent hover:bg-white"
+                            : "border-line bg-background text-ink hover:border-forest-accent hover:bg-surface"
                         }`}
                       >
                         {m.id}

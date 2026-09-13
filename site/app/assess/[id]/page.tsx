@@ -42,12 +42,12 @@ export default async function AssessmentPage({ params }: Props) {
 
   return (
     <PageShell width="narrow">
-      <p className="mb-3 text-sm text-stone-600">
-        <Link href="/assess/" className="text-blue-900 underline-offset-2 hover:underline">
+      <p className="mb-3 text-sm text-muted">
+        <Link href="/assess/" className="text-link underline-offset-2 hover:underline">
           Assessments
         </Link>
         {" · "}
-        <Link href={moduleHref(mod.id)} className="text-blue-900 underline-offset-2 hover:underline">
+        <Link href={moduleHref(mod.id)} className="text-link underline-offset-2 hover:underline">
           {mod.id} — {topicTitle(mod)}
         </Link>
         {" · "}
@@ -70,21 +70,21 @@ export default async function AssessmentPage({ params }: Props) {
       </div>
 
       <section className="mb-10 rounded-2xl border border-amber-200 bg-amber-50 p-4">
-        <h2 className="text-xl font-semibold text-stone-900">Before you start</h2>
-        <p className="mt-2 leading-relaxed text-stone-800">
+        <h2 className="text-xl font-semibold text-ink">Before you start</h2>
+        <p className="mt-2 leading-relaxed text-ink">
           This topic is marked {maturityLabel(mod.status).toLowerCase()}. A
           completed worksheet is useful evidence, but it does not change the
           repository’s publication status.
         </p>
-        <h3 className="mt-5 font-semibold text-stone-900">Prerequisites</h3>
-        <ul className="mt-2 list-disc space-y-1 pl-5 leading-relaxed text-stone-800">
+        <h3 className="mt-5 font-semibold text-ink">Prerequisites</h3>
+        <ul className="mt-2 list-disc space-y-1 pl-5 leading-relaxed text-ink">
           {(mod.prerequisites || []).map((item) => <li key={item}>{item}</li>)}
         </ul>
       </section>
 
       <section className="mb-10">
         <h2 className="mb-3 text-xl font-semibold">What you should be able to show</h2>
-        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-stone-800">
+        <ul className="list-disc space-y-2 pl-5 leading-relaxed text-ink">
           {(mod.outcomes || []).map((outcome) => <li key={outcome}>{outcome}</li>)}
         </ul>
       </section>
@@ -104,7 +104,7 @@ export default async function AssessmentPage({ params }: Props) {
           <div className="overflow-x-auto rounded-xl border border-line bg-paper">
             <table className="w-full min-w-[34rem] text-left text-sm">
               <caption className="sr-only">Standards references for this assessment</caption>
-              <thead className="border-b border-line bg-stone-50 text-stone-600">
+              <thead className="border-b border-line bg-surface-hover text-muted">
                 <tr>
                   <th className="px-3 py-2 font-medium">Source</th>
                   <th className="px-3 py-2 font-medium">Version</th>
@@ -113,21 +113,21 @@ export default async function AssessmentPage({ params }: Props) {
               </thead>
               <tbody>
                 {mod.standardsRefs.map((standard) => (
-                  <tr key={`${standard.source}-${standard.version}`} className="border-b border-stone-100 last:border-0">
+                  <tr key={`${standard.source}-${standard.version}`} className="border-b border-line last:border-0">
                     <td className="px-3 py-3 align-top">
                       <a
                         href={standard.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="font-medium text-blue-900 underline-offset-2 hover:underline"
+                        className="font-medium text-link underline-offset-2 hover:underline"
                       >
                         {standard.source}
                       </a>
                     </td>
-                    <td className="px-3 py-3 align-top whitespace-nowrap text-stone-700">
+                    <td className="px-3 py-3 align-top whitespace-nowrap text-muted">
                       {standard.version} · {standard.status}
                     </td>
-                    <td className="px-3 py-3 align-top text-stone-700">
+                    <td className="px-3 py-3 align-top text-muted">
                       {standard.requirementIds.join(", ")}
                     </td>
                   </tr>

@@ -40,7 +40,7 @@ export function OverallProgress({ moduleIds }: { moduleIds: string[] }): ReactEl
       <div className="h-2 w-32 overflow-hidden rounded-full bg-line" aria-hidden="true">
         <div className="h-full bg-forest transition-[width]" style={{ width: `${pct}%` }} />
       </div>
-      <span className="text-stone-700">
+      <span className="text-muted">
         You have marked <strong className="text-ink">{done}</strong> of {total} topics as read
         on this computer.
       </span>
@@ -61,7 +61,7 @@ export function PhaseProgress({ moduleIds }: { moduleIds: string[] }): ReactElem
       <div className="h-1.5 w-20 overflow-hidden rounded-full bg-line" aria-hidden="true">
         <div className="h-full bg-forest transition-[width]" style={{ width: `${pct}%` }} />
       </div>
-      <span className="text-sm text-stone-600">
+      <span className="text-sm text-muted">
         {done} of {total} read
       </span>
     </div>

@@ -148,14 +148,14 @@ export function AssessmentWorkbook({
   return (
     <div className="space-y-4">
       <div className="rounded-2xl border border-line bg-paper p-4">
-        <label className="block text-sm font-medium text-stone-900" htmlFor={`${moduleId}-status`}>
+        <label className="block text-sm font-medium text-ink" htmlFor={`${moduleId}-status`}>
           How does this topic feel right now?
         </label>
         <select
           id={`${moduleId}-status`}
           value={state.status}
           onChange={(event) => setState((current) => ({ ...current, status: event.target.value }))}
-          className="mt-2 w-full rounded-lg border border-stone-400 bg-white px-3 py-2 text-sm text-stone-900 sm:w-auto"
+          className="mt-2 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-ink sm:w-auto"
         >
           {STATUS_OPTIONS.map(([value, label]) => (
             <option key={value} value={value}>
@@ -168,30 +168,30 @@ export function AssessmentWorkbook({
       {sections.map((section, index) => (
         <section key={section.id} className="rounded-2xl border border-line bg-paper p-4">
           <label className="block" htmlFor={`${moduleId}-${section.id}`}>
-            <span className="block text-sm font-semibold text-stone-900">
+            <span className="block text-sm font-semibold text-ink">
               {index + 1}. {section.title}
             </span>
-            <span className="mt-2 block leading-relaxed text-stone-800">{section.prompt}</span>
+            <span className="mt-2 block leading-relaxed text-ink">{section.prompt}</span>
           </label>
           {section.hint ? (
-            <p className="mt-2 text-sm leading-relaxed text-stone-600">Helpful reminder: {section.hint}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted">Helpful reminder: {section.hint}</p>
           ) : null}
           <textarea
             id={`${moduleId}-${section.id}`}
             value={state.answers[section.id] || ""}
             onChange={(event) => setAnswer(section.id, event.target.value)}
             rows={5}
-            className="mt-3 block w-full rounded-lg border border-stone-400 bg-white px-3 py-2 text-sm leading-relaxed text-stone-900"
+            className="mt-3 block w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm leading-relaxed text-ink"
           />
         </section>
       ))}
 
       {evidence.length > 0 ? (
         <fieldset className="rounded-2xl border border-line bg-paper p-4">
-          <legend className="px-1 text-sm font-semibold text-stone-900">Evidence to collect</legend>
+          <legend className="px-1 text-sm font-semibold text-ink">Evidence to collect</legend>
           <div className="mt-2 space-y-3">
             {evidence.map((item) => (
-              <label key={item.id} className="flex items-start gap-3 text-sm leading-relaxed text-stone-800">
+              <label key={item.id} className="flex items-start gap-3 text-sm leading-relaxed text-ink">
                 <input
                   type="checkbox"
                   checked={state.evidence.includes(item.id)}
@@ -205,7 +205,7 @@ export function AssessmentWorkbook({
         </fieldset>
       ) : null}
 
-      <p className="text-sm text-stone-600" aria-live="polite">
+      <p className="text-sm text-muted" aria-live="polite">
         Saved in this browser only. This worksheet does not submit answers or grade you.
       </p>
     </div>

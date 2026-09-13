@@ -25,11 +25,11 @@ export function GlossaryFilter({ terms }: { terms: GlossaryTerm[] }): ReactEleme
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={`Filter ${terms.length} words…`}
-          className="w-full rounded-xl border border-stone-200 bg-white px-4 py-2.5 text-sm text-ink outline-none placeholder:text-muted focus-visible:border-forest-accent"
+          className="w-full rounded-xl border border-line bg-surface px-4 py-2.5 text-sm text-ink outline-none placeholder:text-muted focus-visible:border-forest-accent"
         />
       </label>
       {filtered.length === 0 ? (
-        <p className="rounded-xl border border-dashed border-stone-200 px-4 py-6 text-center text-sm text-muted">
+        <p className="rounded-xl border border-dashed border-line px-4 py-6 text-center text-sm text-muted">
           Nothing matched “{query}.”
         </p>
       ) : (
@@ -37,10 +37,10 @@ export function GlossaryFilter({ terms }: { terms: GlossaryTerm[] }): ReactEleme
           {filtered.map((t) => (
             <div
               key={t.term}
-              className="rounded-xl border border-stone-200 bg-white px-4 py-3"
+              className="rounded-xl border border-line bg-surface px-4 py-3"
             >
-              <dt className="font-semibold text-stone-900">{t.term}</dt>
-              <dd className="mt-1 leading-relaxed text-stone-800">{t.def}</dd>
+              <dt className="font-semibold text-ink">{t.term}</dt>
+              <dd className="mt-1 leading-relaxed text-ink">{t.def}</dd>
             </div>
           ))}
         </dl>

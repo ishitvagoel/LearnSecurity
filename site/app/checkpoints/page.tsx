@@ -89,7 +89,7 @@ export default function CheckpointsPage() {
           opened a page. You are ready when you can show the work — a rule,
           a repair, a check that fails on the broken files. This website does
           not grade you. Use the{" "}
-          <Link href="/assess/" className="text-blue-900 underline underline-offset-2">
+          <Link href="/assess/" className="text-link underline underline-offset-2">
             assessment worksheets
           </Link>{" "}
           to keep your own evidence. Answer keys are not published here.
@@ -99,11 +99,11 @@ export default function CheckpointsPage() {
         {CHECKINS.map((g) => (
           <li
             key={g.id}
-            className="rounded-xl border border-stone-200 bg-white p-4"
+            className="rounded-xl border border-line bg-surface p-4"
           >
-            <p className="font-mono text-xs font-medium text-stone-600">Check-in {g.id}</p>
-            <p className="mt-1 font-semibold text-stone-900">{g.title}</p>
-            <p className="mt-2 text-sm leading-relaxed text-stone-700">{g.detail}</p>
+            <p className="font-mono text-xs font-medium text-muted">Check-in {g.id}</p>
+            <p className="mt-1 font-semibold text-ink">{g.title}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted">{g.detail}</p>
           </li>
         ))}
       </ol>

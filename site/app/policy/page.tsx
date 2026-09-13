@@ -24,7 +24,7 @@ export default function PolicyPage() {
             <li>Study lessons on this website.</li>
             <li>
               Run the checks in{" "}
-              <code className="rounded bg-white/80 px-1">labs/</code> on your own
+              <code className="rounded bg-surface/80 px-1">labs/</code> on your own
               copy of this repository.
             </li>
             <li>
@@ -47,10 +47,10 @@ export default function PolicyPage() {
           </ul>
         </section>
       </div>
-      <p className="mt-6 max-w-prose leading-relaxed text-stone-800">
+      <p className="mt-6 max-w-prose leading-relaxed text-ink">
         Practice data is fake. Practice secrets are throwaway. Reset from git
         after each practice. Questions about what is allowed: start from{" "}
-        <Link href="/labs/" className="text-blue-900 underline underline-offset-2">
+        <Link href="/labs/" className="text-link underline underline-offset-2">
           Practice
         </Link>
         .

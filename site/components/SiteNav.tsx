@@ -26,7 +26,7 @@ function NavItem({
       className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm transition-colors ${
         current
           ? "bg-forest text-on-forest"
-          : "text-stone-700 hover:bg-white hover:text-stone-900"
+          : "text-muted hover:bg-surface hover:text-ink"
       }`}
     >
       {label}
@@ -99,7 +99,7 @@ export function SiteNav(): ReactElement {
             href="/"
             aria-current={home ? "page" : undefined}
             className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm transition-colors ${
-              home ? "bg-forest text-on-forest" : "text-stone-700 hover:bg-white hover:text-stone-900"
+              home ? "bg-forest text-on-forest" : "text-muted hover:bg-surface hover:text-ink"
             }`}
           >
             Home
@@ -112,8 +112,8 @@ export function SiteNav(): ReactElement {
               type="button"
               className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm ${
                 moreCurrent || moreOpen
-                  ? "bg-white text-ink ring-1 ring-line"
-                  : "text-stone-700 hover:bg-white hover:text-stone-900"
+                  ? "bg-surface text-ink ring-1 ring-line"
+                  : "text-muted hover:bg-surface hover:text-ink"
               }`}
               aria-expanded={moreOpen}
               aria-controls={moreId}
@@ -134,7 +134,7 @@ export function SiteNav(): ReactElement {
                     key={link.href}
                     href={link.href}
                     aria-current={isCurrentPath(link.href, pathname) ? "page" : undefined}
-                    className="block rounded-xl px-3 py-2 text-sm text-ink hover:bg-white"
+                    className="block rounded-xl px-3 py-2 text-sm text-ink hover:bg-surface"
                   >
                     {link.label}
                   </Link>
@@ -145,7 +145,7 @@ export function SiteNav(): ReactElement {
                     key={link.href}
                     href={link.href}
                     aria-current={isCurrentPath(link.href, pathname) ? "page" : undefined}
-                    className="block rounded-xl px-3 py-2 text-sm text-ink hover:bg-white"
+                    className="block rounded-xl px-3 py-2 text-sm text-ink hover:bg-surface"
                   >
                     {link.label}
                   </Link>
@@ -165,7 +165,7 @@ export function SiteNav(): ReactElement {
           </Link>
           <button
             type="button"
-            className="rounded-full border border-line bg-white px-3 py-1.5 text-sm font-medium text-ink xl:hidden"
+            className="rounded-full border border-line bg-surface px-3 py-1.5 text-sm font-medium text-ink xl:hidden"
             aria-expanded={menuOpen}
             aria-controls={menuId}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
