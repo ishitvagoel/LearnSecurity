@@ -7,7 +7,7 @@ difficulty: intermediate
 status: draft
 estimatedMinutes: 300
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–5.1 Pass A complete
+- Earlier phase concepts and practice; 1.1–5.1
 routeTags:
 - complete
 - web-api

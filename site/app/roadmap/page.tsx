@@ -3,6 +3,7 @@ import { ModuleDoneBadge, PhaseProgress } from "@/components/ModuleProgress";
 import { PageHeader, PageShell } from "@/components/ui";
 import { PHASES, phaseHeading, phaseList, topicTitle } from "@/lib/catalog";
 import { loadAllModules, moduleHref } from "@/lib/loadCurriculum";
+import { routeLabel, routeModules } from "@/lib/route";
 
 export const metadata = {
   title: "Study order",
@@ -11,16 +12,16 @@ export const metadata = {
 };
 
 export default function RoadmapPage() {
-  const modules = loadAllModules();
-  const phases = phaseList(modules);
+  const route = routeModules(loadAllModules());
+  const phases = phaseList(route);
 
   return (
     <PageShell>
       <PageHeader kicker="What to study next" title="Study order">
         <p>
-          Go in this order: parts 0 through 7, then 9 through 11. Part 8 (phone
-          apps) can wait until the website and API path is in place. Extra
-          topics open after part 7.
+          Follow the {routeLabel()}: parts 0 through 7, then 9 through 11. Phone
+          apps are an extension after the web/API foundations, and extra topics
+          open after part 7.
         </p>
         <p>
           You do not need a live product to study. You do need the practice
@@ -31,7 +32,7 @@ export default function RoadmapPage() {
       <ol className="space-y-4">
         {phases.map((phase) => {
           const meta = PHASES[phase];
-          const items = modules.filter((m) => m.phase === phase);
+          const items = route.filter((m) => m.phase === phase);
           return (
             <li
               key={phase}
@@ -75,6 +76,10 @@ export default function RoadmapPage() {
           );
         })}
       </ol>
+      <section className="mt-10 rounded-2xl border border-line bg-surface p-5">
+        <h2 className="text-xl font-semibold text-ink">Optional after the route</h2>
+        <p className="mt-2 leading-relaxed text-muted">Part 8 covers mobile apps. E1–E6 are electives. They remain available from the lesson list without counting against completion of the recommended web/API route.</p>
+      </section>
       <p className="mt-8 text-sm text-muted">
         Want a card for each topic instead of this list? Use the{" "}
         <Link href="/learn/" className="text-link underline underline-offset-2">

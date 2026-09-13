@@ -1,9 +1,10 @@
 import { HomeContinue } from "@/components/HomeContinue";
 import { ButtonLink } from "@/components/ui";
 import { loadAllModules } from "@/lib/loadCurriculum";
+import { routeModules } from "@/lib/route";
 
 export default function HomePage() {
-  const topicCount = loadAllModules().length;
+  const topicCount = routeModules(loadAllModules()).length;
 
   return (
     <div>

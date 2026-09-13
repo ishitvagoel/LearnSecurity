@@ -7,7 +7,7 @@ difficulty: advanced
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 9.1 coverage; 9.2 review; 9.3 test shape
+- Earlier phase concepts and practice; 9.1 coverage; 9.2 review; 9.3 test shape
 routeTags:
 - complete
 - web-api

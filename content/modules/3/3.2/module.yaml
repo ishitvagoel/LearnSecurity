@@ -7,7 +7,7 @@ difficulty: intermediate
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–3.1 Pass A complete
+- Earlier phase concepts and practice; 1.1–3.1
 routeTags:
 - complete
 - web-api
@@ -85,7 +85,7 @@ evidenceRequired:
 assessmentBlueprint:
   explain: Causal model for Threat modeling
   design: Version-controlled threat model
-  build: Deferred to Pass B
+  build: Complete the smallest property-derived mechanism
   break: Authorized local reproduction of the representative failure
   verify: Forbidden-outcome tests
   operate: Detection and recovery notes

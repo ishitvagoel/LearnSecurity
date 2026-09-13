@@ -7,10 +7,10 @@ difficulty: foundation
 status: draft
 estimatedMinutes: 300
 prerequisites:
-- 2.1 Pass A
-- 2.2 Pass A
-- 2.3 Pass A
-- 1.2 Pass A
+- 2.1
+- 2.2
+- 2.3
+- 1.2
 routeTags:
 - complete
 - accelerated

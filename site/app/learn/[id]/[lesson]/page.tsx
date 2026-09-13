@@ -8,6 +8,7 @@ import {
   loadModule,
 } from "@/lib/loadCurriculum";
 import { estimateReadingMinutes } from "@/lib/text";
+import { nextRouteModule } from "@/lib/route";
 
 type Props = { params: Promise<{ id: string; lesson: string }> };
 
@@ -52,6 +53,7 @@ export default async function LessonPage({ params }: Props) {
     notFound();
   }
   const mod = loadModule(id);
+  const nextTopic = nextRouteModule(loadAllModules(), mod.id);
   const lessons = loadLessons(mod).filter((x) => x.filename);
   const index = lessons.findIndex((x) => x.filename.replace(/\.md$/, "") === lesson);
   const lo = index >= 0 ? lessons[index] : undefined;
@@ -76,6 +78,7 @@ export default async function LessonPage({ params }: Props) {
       }))}
       source={source}
       readingMinutes={estimateReadingMinutes(source)}
+      nextTopic={nextTopic ? { href: `/learn/${encodeURIComponent(nextTopic.id)}/`, title: `Next topic: ${topicTitle(nextTopic)}` } : undefined}
     />
   );
 }

@@ -70,10 +70,12 @@ export function LessonPager({
   moduleId,
   prev,
   next,
+  nextTopic,
 }: {
   moduleId: string;
   prev?: LessonNavItem;
   next?: LessonNavItem;
+  nextTopic?: { href: string; title: string };
 }): ReactElement {
   return (
     <nav
@@ -108,13 +110,15 @@ export function LessonPager({
         </Link>
       ) : (
         <Link
-          href={moduleHref(moduleId)}
+          href={nextTopic?.href || moduleHref(moduleId)}
           className="rounded-lg border border-line bg-surface px-4 py-3 text-right hover:border-border"
         >
           <span className="block text-xs uppercase tracking-wide text-muted">
             Next
           </span>
-          <span className="mt-1 block font-medium text-link">Back to the topic</span>
+          <span className="mt-1 block font-medium text-link">
+            {nextTopic?.title || "Back to the topic"}
+          </span>
         </Link>
       )}
       </div>

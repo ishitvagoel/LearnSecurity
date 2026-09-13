@@ -1,63 +1,18 @@
-# Would you merge this password file?
+# Review a security claim like an engineer
 
 **Kind:** code-review
 **Loop step:** 7 Generalize
 
-## Review
+## Review the vulnerable fixture
 
-You are reviewing a change that "adds login" to the local notes app. The patch is small. That is not the same as safe.
+Read `labs/1.1/1.1-invariant-catalogue/vulnerable/SECURITY.md` and its claim file. Write four actionable review comments. Each comment must identify the unsupported conclusion, the missing model or mechanism limit, the minimum useful change, and the evidence that would test it.
 
-## What to look for
+“Looks secure” is not a review. Neither is replacing one product name with another.
 
-Read the store write path:
+## Review the repaired fixture
 
-- Is the password written as itself, as Base64, or as a slow hash?
-- Is there a **unique** salt per user, or one salt in a config file?
-- Are hashing settings stored next to the hash?
-- Is the compare a secret-safe function?
+Read the fixed claim only after writing your review. Explain which rows became bounded, which evidence modes were added, and what the validator still cannot prove. Keep the review local and synthetic; examiner keys are not needed for this exercise.
 
-Read the log path:
+## Ready to continue
 
-- Do failed sign-ins print the password "for debugging"?
-
-Read the tests:
-
-- Is there a test that the file has no readable password?
-- Is there a test that two users with the same password have different salts?
-
-Read the comments:
-
-- Do they claim "production ready" or "secure by default"?
-- Do they admit this is **local-only**?
-
-## Merge or block
-
-**Block** if any of these are true:
-
-- readable password in the store,
-- fast hash sold as a password store,
-- shared salt,
-- `==` on secret strings as the only check,
-- password in logs,
-- no test for plaintext-absent,
-- comment says the laptop is now safe from theft because of Argon2.
-
-**Merge** (for this week) if:
-
-- Argon2id (or the pinned slow hash) plus unique salt plus settings,
-- secret-safe compare,
-- tests named above pass,
-- comments tell the truth about local-only and leftover risk.
-
-## What to write in the review
-
-Two sentences:
-
-1. What evidence you ran or read.
-2. What leftover risk you are accepting (disk theft, no server).
-
-"Looks good to me" is not a review.
-
-## Check yourself
-
-Take the broken tree from the practice. Write the review that **blocks** it. Then take the repaired tree and write the review that **merges** it with leftover risk named. Keep both in your notes for the first check-in.
+Your 1.1 evidence pack should now contain five catalogue rows, the causal review, vulnerable-fail and fixed-pass results, four-mode evidence, operate notes, and the CivicClinic transfer. The next topic turns the model into explicit authority decisions.

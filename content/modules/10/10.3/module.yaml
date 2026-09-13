@@ -7,7 +7,7 @@ difficulty: advanced
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- 'Prior phase Pass A per blueprint §7; 3.3 least privilege; 6.5 metadata; 7.4 worker identity'
+- 'Earlier phase concepts and practice; 3.3 least privilege; 6.5 metadata; 7.4 worker identity'
 routeTags:
 - complete
 - web-api

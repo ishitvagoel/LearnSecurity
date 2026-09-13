@@ -18,6 +18,7 @@ export function LessonReader({
   lessons,
   source,
   readingMinutes,
+  nextTopic,
 }: {
   moduleId: string;
   moduleTitle: string;
@@ -27,6 +28,7 @@ export function LessonReader({
   lessons: LessonNavItem[];
   source: string;
   readingMinutes: number;
+  nextTopic?: { href: string; title: string };
 }): ReactElement {
   const headings = extractHeadings(source);
   const current = lessons[index];
@@ -98,7 +100,7 @@ export function LessonReader({
             </div>
           </header>
           <Markdown source={source} />
-          <LessonPager moduleId={moduleId} prev={prev} next={next} />
+          <LessonPager moduleId={moduleId} prev={prev} next={next} nextTopic={nextTopic} />
         </article>
         <aside className="hidden lg:block">
           <LessonToc headings={headings} variant="desktop" />

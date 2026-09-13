@@ -2,6 +2,7 @@ import { ProgressDashboard, type ProgressPhase } from "@/components/ProgressDash
 import { PageHeader, PageShell } from "@/components/ui";
 import { PHASES, phaseHeading, phaseList, topicTitle } from "@/lib/catalog";
 import { loadAllModules } from "@/lib/loadCurriculum";
+import { routeModules } from "@/lib/route";
 
 export const metadata = {
   title: "Your progress",
@@ -10,7 +11,7 @@ export const metadata = {
 };
 
 export default function ProgressPage() {
-  const modules = loadAllModules();
+  const modules = routeModules(loadAllModules());
   const phases: ProgressPhase[] = phaseList(modules).map((phase) => ({
     phase,
     title: phaseHeading(phase),

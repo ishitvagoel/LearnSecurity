@@ -7,7 +7,7 @@ difficulty: intermediate
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 4.4 object-and-tenant grants; 7.1 writable-field writes
+- Earlier phase concepts and practice; 4.4 object-and-tenant grants; 7.1 writable-field writes
 routeTags:
 - complete
 - web-api
