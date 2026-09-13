@@ -7,6 +7,7 @@ import {
   loadLessons,
   loadModule,
 } from "@/lib/loadCurriculum";
+import { estimateReadingMinutes } from "@/lib/text";
 
 type Props = { params: Promise<{ id: string; lesson: string }> };
 
@@ -71,6 +72,7 @@ export default async function LessonPage({ params }: Props) {
         kind: item.kind,
       }))}
       source={source}
+      readingMinutes={estimateReadingMinutes(source)}
     />
   );
 }

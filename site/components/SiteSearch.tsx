@@ -3,6 +3,7 @@
 import type { ReactElement } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { isTypingTarget } from "@/lib/dom";
 import type { SearchEntry, SearchEntryType } from "@/lib/searchIndex";
 
 let cachedIndex: SearchEntry[] | null = null;
@@ -74,14 +75,6 @@ function search(entries: SearchEntry[], query: string): SearchEntry[] {
     .sort((a, b) => b.s - a.s)
     .slice(0, 20)
     .map((x) => x.entry);
-}
-
-function isTypingTarget(el: EventTarget | null): boolean {
-  if (!(el instanceof HTMLElement)) {
-    return false;
-  }
-  const tag = el.tagName;
-  return tag === "INPUT" || tag === "TEXTAREA" || el.isContentEditable;
 }
 
 export function SiteSearch(): ReactElement {

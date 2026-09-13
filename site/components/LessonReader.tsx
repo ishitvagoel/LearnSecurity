@@ -1,11 +1,13 @@
 import type { ReactElement } from "react";
 import Link from "next/link";
 import { Chip } from "@/components/ui";
+import { LessonKeyNav } from "@/components/LessonKeyNav";
 import { LessonNav, LessonPager, type LessonNavItem } from "@/components/LessonNav";
 import { LessonToc, ReadingProgress } from "@/components/LessonToc";
+import { formatMinutes } from "@/lib/catalog";
 import { extractHeadings, kindLabel } from "@/lib/headings";
 import { Markdown } from "@/lib/markdown";
-import { moduleHref } from "@/lib/loadCurriculum";
+import { lessonHref, moduleHref } from "@/lib/loadCurriculum";
 
 export function LessonReader({
   moduleId,
@@ -15,6 +17,7 @@ export function LessonReader({
   index,
   lessons,
   source,
+  readingMinutes,
 }: {
   moduleId: string;
   moduleTitle: string;
@@ -23,6 +26,7 @@ export function LessonReader({
   index: number;
   lessons: LessonNavItem[];
   source: string;
+  readingMinutes: number;
 }): ReactElement {
   const headings = extractHeadings(source);
   const current = lessons[index];
@@ -34,6 +38,10 @@ export function LessonReader({
 
   return (
     <>
+      <LessonKeyNav
+        prevHref={prev ? lessonHref(moduleId, prev.filename) : undefined}
+        nextHref={next ? lessonHref(moduleId, next.filename) : undefined}
+      />
       <ReadingProgress />
       <div className="mx-auto max-w-[90rem] px-4 py-8 lg:grid lg:grid-cols-[16rem_minmax(0,42rem)_14rem] lg:justify-center lg:gap-10">
         <aside className="hidden lg:block">
@@ -86,6 +94,7 @@ export function LessonReader({
               <Chip>
                 {index + 1} / {lessons.length}
               </Chip>
+              <Chip>{formatMinutes(readingMinutes)}</Chip>
             </div>
           </header>
           <Markdown source={source} />

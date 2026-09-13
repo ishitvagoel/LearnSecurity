@@ -8,6 +8,7 @@ import {
   loadLessons,
   moduleHref,
 } from "./loadCurriculum";
+import { stripMarkdown } from "./text";
 
 export type SearchEntryType = "page" | "module" | "lesson" | "glossary";
 
@@ -33,17 +34,6 @@ const STATIC_PAGES: { href: string; title: string; text: string }[] = [
   { href: "/glossary/", title: "Word list", text: "A few words this course uses a lot, said in ordinary English." },
   { href: "/references/", title: "References", text: "Published lists and papers the course cites, with links, versions, and which topics mention them." },
 ];
-
-function stripMarkdown(md: string): string {
-  return md
-    .replace(/```[\s\S]*?```/g, " ")
-    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
-    .replace(/[`*_>#|]/g, " ")
-    .replace(/^\s*---\s*$/gm, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
 
 const MAX_LESSON_TEXT = 3000;
 

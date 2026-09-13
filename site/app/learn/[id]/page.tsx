@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProgressToggle } from "@/components/ProgressToggle";
 import { ButtonLink, Chip, PageHeader, PageShell } from "@/components/ui";
-import { kindLabel, spokenLessonTitle } from "@/lib/headings";
+import { kindLabel, parseLessonLead, spokenLessonTitle } from "@/lib/headings";
 import {
   difficultyLabel,
   formatMinutes,
@@ -19,6 +19,7 @@ import {
   loadLessons,
   loadModule,
 } from "@/lib/loadCurriculum";
+import { estimateReadingMinutes } from "@/lib/text";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -102,6 +103,9 @@ export default async function ModulePage({ params }: Props) {
         <ol className="divide-y divide-stone-200 overflow-hidden rounded-xl border border-stone-200 bg-white">
           {lessons.map((lo, i) => {
             const spoken = spokenLessonTitle(lo.title, lo.body || "");
+            const minutes = lo.body
+              ? estimateReadingMinutes(parseLessonLead(lo.body).body)
+              : null;
             return (
             <li key={lo.id}>
               {lo.filename ? (
@@ -116,7 +120,10 @@ export default async function ModulePage({ params }: Props) {
                     <span className="block font-medium text-blue-900">
                       {spoken}
                     </span>
-                    <span className="block text-sm text-stone-600">{kindLabel(lo.kind)}</span>
+                    <span className="block text-sm text-stone-600">
+                      {kindLabel(lo.kind)}
+                      {minutes ? ` · ${formatMinutes(minutes)}` : ""}
+                    </span>
                   </span>
                 </Link>
               ) : (

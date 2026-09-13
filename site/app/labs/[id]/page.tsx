@@ -60,22 +60,18 @@ export default async function LabBriefPage({ params }: Props) {
         </ul>
       </section>
       <section>
-        <h2 className="mb-3 text-xl font-semibold">How to run it on your computer</h2>
-        <ol className="list-decimal space-y-2 pl-5 leading-relaxed">
-          <li>Copy this LearnSecurity repository to your computer.</li>
-          <li>
-            Open{" "}
-            <code className="rounded bg-stone-200 px-1">
-              labs/{mod.id}/{slug}/
-            </code>{" "}
-            and read its README.
-          </li>
-          <li>
-            Run the check listed in that README on the broken files (it should
-            fail), then on the repaired files (it should pass).
-          </li>
-          <li>Restore the practice folder from git when you are done. Use only the fake data in the files.</li>
-        </ol>
+        <h2 className="mb-3 text-xl font-semibold">Where to find it</h2>
+        <p className="leading-relaxed text-stone-700">
+          In your copy of the repository, open{" "}
+          <code className="rounded bg-stone-200 px-1">
+            labs/{mod.id}/{slug}/
+          </code>{" "}
+          and read its README. See{" "}
+          <Link href="/labs/" className="font-medium text-blue-900 underline underline-offset-2">
+            Practice
+          </Link>{" "}
+          for the steps to copy, run, and reset the files.
+        </p>
       </section>
     </PageShell>
   );

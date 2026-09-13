@@ -77,9 +77,10 @@ export function LessonPager({
 }): ReactElement {
   return (
     <nav
-      className="mt-12 grid gap-3 border-t border-stone-200 pt-6 sm:grid-cols-2"
+      className="mt-12 border-t border-stone-200 pt-6"
       aria-label="Nearby pages"
     >
+      <div className="grid gap-3 sm:grid-cols-2">
       {prev ? (
         <Link
           href={lessonHref(moduleId, prev.filename)}
@@ -116,6 +117,12 @@ export function LessonPager({
           <span className="mt-1 block font-medium text-blue-900">Back to the topic</span>
         </Link>
       )}
+      </div>
+      <p className="mt-3 hidden text-center text-xs text-muted sm:block">
+        Tip: press <kbd className="rounded border border-line bg-white px-1 py-0.5 font-mono">←</kbd>{" "}
+        and <kbd className="rounded border border-line bg-white px-1 py-0.5 font-mono">→</kbd> to move
+        between pages.
+      </p>
     </nav>
   );
 }

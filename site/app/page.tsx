@@ -50,9 +50,8 @@ export default function HomePage() {
               </li>
               <li>
                 <strong className="block text-ink">Practice files</strong>
-                When a lesson asks you to try something, you clone the course
-                files and run them on your computer. This website never runs
-                the broken apps.
+                Files you clone from the course repository and run on your
+                own computer.
               </li>
             </ul>
             <p className="mt-5 text-xs leading-relaxed text-muted">
