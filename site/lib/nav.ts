@@ -13,6 +13,7 @@ export const PRIMARY_NAV: NavLink[] = [
 
 export const RESOURCE_NAV: NavLink[] = [
   { href: "/reference/", label: "The notes app" },
+  { href: "/project/", label: "Project milestones" },
   { href: "/glossary/", label: "Word list" },
   { href: "/references/", label: "References" },
 ];

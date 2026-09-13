@@ -10,6 +10,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content" / "modules"
+ROUTE = ROOT / "content" / "route.yaml"
 
 
 def module_files() -> list[Path]:
@@ -18,7 +19,25 @@ def module_files() -> list[Path]:
 
 def main() -> int:
     errors: list[str] = []
-    for manifest in module_files():
+    manifests = module_files()
+    module_ids = {str(yaml.safe_load(path.read_text(encoding="utf-8")).get("id")) for path in manifests}
+    if not ROUTE.is_file():
+        errors.append("content/route.yaml is missing")
+    else:
+        route = yaml.safe_load(ROUTE.read_text(encoding="utf-8")) or {}
+        route_ids: list[str] = []
+        for kind, values in (route.get("routes") or {}).items():
+            if not isinstance(values, list):
+                errors.append(f"route {kind}: expected a list")
+                continue
+            for value in values:
+                value = str(value)
+                route_ids.append(value)
+                if value not in module_ids:
+                    errors.append(f"route {kind}: unknown module {value}")
+        if len(route_ids) != len(set(route_ids)):
+            errors.append("content/route.yaml contains duplicate module ids")
+    for manifest in manifests:
         module = yaml.safe_load(manifest.read_text(encoding="utf-8"))
         module_id = str(module.get("id", manifest.parent.name))
         for obj in module.get("learningObjects", []):
@@ -45,7 +64,7 @@ def main() -> int:
         print("Learning contract check failed:")
         print("\n".join(f"- {error}" for error in errors))
         return 1
-    print(f"Learning contract OK: {len(module_files())} modules and all declared learning objects resolve")
+    print(f"Learning contract OK: {len(manifests)} modules, route ids, and all declared learning objects resolve")
     return 0
 
 

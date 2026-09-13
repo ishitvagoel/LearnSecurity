@@ -1,3 +1,4 @@
+import { LearnerDataPortability } from "@/components/LearnerDataPortability";
 import { ProgressDashboard, type ProgressPhase } from "@/components/ProgressDashboard";
 import { PageHeader, PageShell } from "@/components/ui";
 import { PHASES, phaseHeading, phaseList, topicTitle } from "@/lib/catalog";
@@ -30,7 +31,8 @@ export default function ProgressPage() {
           this too, and it will read as zero on a different computer.
         </p>
       </PageHeader>
-      <ProgressDashboard phases={phases} />
+      <ProgressDashboard phases={phases} scopeLabel="recommended web/API route" />
+      <LearnerDataPortability />
     </PageShell>
   );
 }

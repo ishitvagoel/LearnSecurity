@@ -32,6 +32,14 @@ You can still run inner skills by hand (`next-iteration`, `author-module-spec`, 
 
 Agent standing instructions: [`AGENTS.md`](AGENTS.md). Rules live in [`.cursor/rules/`](.cursor/rules/). Skills in [`.cursor/skills/`](.cursor/skills/). Review subagents in [`.cursor/agents/`](.cursor/agents/).
 
+## Learner route and project thread
+
+The recommended web/API route is declared in [`content/route.yaml`](content/route.yaml): 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 9 → 10 → 11. Mobile and electives are optional extensions. The site roadmap and progress views read this route instead of inferring order from numeric phase labels.
+
+The SecureCollab milestone history is available at `/project/` in the site and in [`content/reference/securecollab/milestones.yaml`](content/reference/securecollab/milestones.yaml). The first loopback-only M0 teaching bridge lives under [`labs/M0/securecollab-m0/`](labs/M0/securecollab-m0/). It is a local observation fixture, not production assurance.
+
+Progress and assessment worksheets are local-first. The progress page can export a versioned JSON work file so a learner can continue on another browser or device.
+
 ## Safety
 
 Offensive exercises are limited to local course apps, official intentionally vulnerable labs, challenges whose terms authorize the work, or systems with written scope. Do not attack public or third-party targets. Do not commit real secrets or PII. Vulnerable code belongs under `labs/` with reset instructions—not in learner-facing lesson pages as copy-paste exploits.

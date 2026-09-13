@@ -44,11 +44,11 @@ learningObjects:
   path: lessons/01-property.md
 - id: 0.2-LO-02
   kind: design-exercise
-  title: Capability evidence vs invariant evidence
+  title: Model capability evidence separately from security evidence
   path: lessons/02-model.md
 - id: 0.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: score skip and dropped bridge gaps'
+  title: Break the score skip and dropped gap
   path: lessons/03-break.md
 - id: 0.2-LO-04
   kind: design-exercise
@@ -58,18 +58,6 @@ learningObjects:
   kind: verification-lab
   title: Verify every missing capability gets a bridge
   path: lessons/05-verify.md
-- id: 0.2-LO-06
-  kind: operations-exercise
-  title: Operate bridge assignments without back-dating Gate 1
-  path: lessons/06-operate.md
-- id: 0.2-LO-07
-  kind: transfer-challenge
-  title: 'Transfer: clinic capability diagnostic'
-  path: lessons/07-transfer.md
-- id: 0.2-LO-08
-  kind: code-review
-  title: Review the diagnostic contract as a PR
-  path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets

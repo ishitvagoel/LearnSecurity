@@ -7,6 +7,7 @@ export type ReferenceDoc = {
   title: string;
   moduleId: string | null;
   relativePath: string;
+  body: string;
 };
 
 function parseTitle(h1: string): string {
@@ -26,6 +27,7 @@ export function loadReferenceDocs(): ReferenceDoc[] {
       title: parseTitle(h1),
       moduleId: moduleMatch ? moduleMatch[1] : null,
       relativePath: `content/reference/securecollab/${file}`,
+      body: raw,
     };
   });
   return docs.sort((a, b) => {
@@ -33,4 +35,8 @@ export function loadReferenceDocs(): ReferenceDoc[] {
     const bv = b.moduleId ? Number.parseFloat(b.moduleId) : Number.POSITIVE_INFINITY;
     return av - bv;
   });
+}
+
+export function loadReferenceDoc(slug: string): ReferenceDoc | null {
+  return loadReferenceDocs().find((doc) => doc.slug === slug) || null;
 }

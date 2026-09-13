@@ -50,7 +50,14 @@ export default function ReferencePage() {
           <tbody>
             {docs.map((doc) => (
               <tr key={doc.slug} className="border-b border-line last:border-0">
-                <td className="px-4 py-3 align-top text-ink">{doc.title}</td>
+                <td className="px-4 py-3 align-top text-ink">
+                  <Link
+                    href={`/reference/${encodeURIComponent(doc.slug)}/`}
+                    className="font-medium text-link underline-offset-2 hover:underline"
+                  >
+                    {doc.title}
+                  </Link>
+                </td>
                 <td className="px-4 py-3 align-top whitespace-nowrap">
                   {doc.moduleId && moduleIds.has(doc.moduleId) ? (
                     <Link
@@ -64,7 +71,12 @@ export default function ReferencePage() {
                   )}
                 </td>
                 <td className="px-4 py-3 align-top">
-                  <code className="rounded bg-surface-hover px-1 text-xs">{doc.relativePath}</code>
+                  <Link
+                    href={`/reference/${encodeURIComponent(doc.slug)}/`}
+                    className="text-link underline-offset-2 hover:underline"
+                  >
+                    Read the note
+                  </Link>
                 </td>
               </tr>
             ))}
