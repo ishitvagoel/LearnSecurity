@@ -30,3 +30,12 @@
 ## Review limits and follow-up
 
 This record does not confer publishable depth. An independent reviewer still needs to follow the learner path, inspect the actual rendered wording, and verify the local labs. The M0 fixture is a teaching bridge and does not claim the locked FastAPI/PostgreSQL production stack. Pilot learners still need to validate timings, comprehension, and remediation links.
+
+## Follow-up milestone bridges
+
+After the first implementation pass, the local project thread now includes two additional synthetic bridges:
+
+- M1 (`labs/M1/securecollab-m1/`) persists sessions and current account state in SQLite, checks the note's tenant on every read, and demonstrates both forged-company and revoked-session failures in the vulnerable pair.
+- M2 (`labs/M2/securecollab-m2/`) persists queued jobs and exports, re-checks current authority before worker execution in the fixed pair, and demonstrates revocation-after-enqueue plus retained-copy denial.
+
+These bridges make the M1/M2 state and time transitions runnable without introducing third-party dependencies. They remain teaching evidence rather than production FastAPI/PostgreSQL assurance and still require independent milestone review.

@@ -840,6 +840,14 @@ spiral_deltas:
   module: M0
   change: Added a loopback-only SecureCollab browser-to-HTTP-to-SQLite teaching bridge with vulnerable/fixed tenant-boundary behavior and an explicit milestone evidence page.
   retest: This is not production FastAPI/PostgreSQL assurance; M0 quality remains not-attempted until the canonical stack milestone exists.
+- date: '2026-09-13'
+  module: M1
+  change: Added a dependency-free SQLite teaching bridge with server-side sessions, current account state, object-level tenant checks, and revocation-after-login evidence.
+  retest: This is not production FastAPI/PostgreSQL assurance; refresh-token families, identity proofing, device caches, and independent milestone review remain open.
+- date: '2026-09-13'
+  module: M2
+  change: Added a dependency-free SQLite queue and worker teaching bridge that re-checks current authority before producing retained exports and denies revoked-session reads.
+  retest: This is not production FastAPI/PostgreSQL assurance; broker identity, retries/idempotency, database roles, backups, observability, and independent milestone review remain open.
 modules:
 - id: '0.1'
   title: Security engineering orientation

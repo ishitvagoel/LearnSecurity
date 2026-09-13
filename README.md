@@ -36,7 +36,7 @@ Agent standing instructions: [`AGENTS.md`](AGENTS.md). Rules live in [`.cursor/r
 
 The recommended web/API route is declared in [`content/route.yaml`](content/route.yaml): 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 9 → 10 → 11. Mobile and electives are optional extensions. The site roadmap and progress views read this route instead of inferring order from numeric phase labels.
 
-The SecureCollab milestone history is available at `/project/` in the site and in [`content/reference/securecollab/milestones.yaml`](content/reference/securecollab/milestones.yaml). The first loopback-only M0 teaching bridge lives under [`labs/M0/securecollab-m0/`](labs/M0/securecollab-m0/). It is a local observation fixture, not production assurance.
+The SecureCollab milestone history is available at `/project/` in the site and in [`content/reference/securecollab/milestones.yaml`](content/reference/securecollab/milestones.yaml). Loopback-only M0, M1, and M2 teaching bridges live under [`labs/M0/securecollab-m0/`](labs/M0/securecollab-m0/), [`labs/M1/securecollab-m1/`](labs/M1/securecollab-m1/), and [`labs/M2/securecollab-m2/`](labs/M2/securecollab-m2/). They make the request, session, authorization, queue, revocation, and retained-copy paths observable with synthetic data; they are not production assurance.
 
 Progress and assessment worksheets are local-first. The progress page can export a versioned JSON work file so a learner can continue on another browser or device.
 

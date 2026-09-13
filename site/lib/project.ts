@@ -6,7 +6,7 @@ import { contentRoot } from "./contentRoot";
 export type ProjectMilestone = {
   id: string;
   title: string;
-  status: "planned" | "optional" | "teaching-stand-in" | string;
+  status: "planned" | "teaching-bridge" | "optional" | "teaching-stand-in" | string;
   moduleId: string;
   labPath?: string;
   summary: string;

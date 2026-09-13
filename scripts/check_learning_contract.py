@@ -11,6 +11,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content" / "modules"
 ROUTE = ROOT / "content" / "route.yaml"
+PROJECT = ROOT / "content" / "reference" / "securecollab" / "milestones.yaml"
 
 
 def module_files() -> list[Path]:
@@ -37,6 +38,18 @@ def main() -> int:
                     errors.append(f"route {kind}: unknown module {value}")
         if len(route_ids) != len(set(route_ids)):
             errors.append("content/route.yaml contains duplicate module ids")
+    if not PROJECT.is_file():
+        errors.append("content/reference/securecollab/milestones.yaml is missing")
+    else:
+        project = yaml.safe_load(PROJECT.read_text(encoding="utf-8")) or {}
+        for milestone in project.get("milestones", []):
+            milestone_id = str(milestone.get("id", "unknown"))
+            module_id = str(milestone.get("moduleId", ""))
+            if module_id and module_id not in module_ids:
+                errors.append(f"milestone {milestone_id}: unknown module {module_id}")
+            lab_path = milestone.get("labPath")
+            if lab_path and not (ROOT / str(lab_path)).is_dir():
+                errors.append(f"milestone {milestone_id}: missing lab path {lab_path}")
     for manifest in manifests:
         module = yaml.safe_load(manifest.read_text(encoding="utf-8"))
         module_id = str(module.get("id", manifest.parent.name))
@@ -64,7 +77,7 @@ def main() -> int:
         print("Learning contract check failed:")
         print("\n".join(f"- {error}" for error in errors))
         return 1
-    print(f"Learning contract OK: {len(manifests)} modules, route ids, and all declared learning objects resolve")
+    print(f"Learning contract OK: {len(manifests)} modules, route ids, milestone paths, and all declared learning objects resolve")
     return 0
 
 

@@ -10,6 +10,7 @@ export const metadata = {
 
 const STATUS_LABEL: Record<string, string> = {
   planned: "Planned",
+  "teaching-bridge": "Teaching bridge",
   optional: "Optional extension",
   "teaching-stand-in": "Teaching stand-in",
 };

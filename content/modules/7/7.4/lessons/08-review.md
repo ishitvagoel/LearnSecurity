@@ -49,3 +49,13 @@ VLAN plus zero-trust labels, without a leftover-session deny, still inherit the 
 ## What this page is not doing
 
 A user session treated as worker identity, plus “will bind service later,” is leftover with no owner. Do not attach to a live broker to prove the finding.
+
+## SecureCollab milestone bridge
+
+M2 carries the worker rule across a persistent queue. From the repository root, run the fixed teaching bridge:
+
+```text
+python3 labs/M2/securecollab-m2/fixed/smoke.py
+```
+
+Record one allowed export, one forged-tenant denial, and the revocation-after-enqueue denial with session values redacted. The bridge makes current authority and a retained copy observable in SQLite; it does not prove production broker identity, retries, PostgreSQL roles, backups, or observability controls.

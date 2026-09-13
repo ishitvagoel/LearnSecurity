@@ -3,7 +3,7 @@ product: SecureCollab
 milestones:
   - id: M0
     title: Observable web/API skeleton
-    status: planned
+    status: teaching-bridge
     moduleId: '1.3'
     labPath: labs/M0/securecollab-m0
     summary: Trace a synthetic note request through browser input, an API boundary, and persistence with explicit trust assumptions.
@@ -14,8 +14,9 @@ milestones:
     revisit: The 1.1 invariant catalogue and 1.2 authority matrix must be checked against the actual request path.
   - id: M1
     title: Identity and current authority
-    status: planned
+    status: teaching-bridge
     moduleId: '4.1'
+    labPath: labs/M1/securecollab-m1
     summary: Add account and session behavior, then demonstrate allowed and denied operations for separate companies.
     learnerArtifacts:
       - Session lifecycle trace
@@ -24,8 +25,9 @@ milestones:
     revisit: Authentication claims do not replace object-level authorization or revocation evidence.
   - id: M2
     title: Delayed work and retained copies
-    status: planned
+    status: teaching-bridge
     moduleId: '7.4'
+    labPath: labs/M2/securecollab-m2
     summary: Carry authority into delayed work and revisit it after revocation, export, retry, and retention changes.
     learnerArtifacts:
       - Worker request and identity trace
