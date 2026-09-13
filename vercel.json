@@ -5,6 +5,12 @@
   "buildCommand": "npm --prefix site run build",
   "outputDirectory": "site/out",
   "trailingSlash": true,
+  "git": {
+    "deploymentEnabled": {
+      "*": false,
+      "main": true
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
