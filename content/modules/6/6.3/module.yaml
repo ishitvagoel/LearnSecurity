@@ -7,7 +7,7 @@ difficulty: intermediate
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 2.3 and 4.4 Pass A complete
+- Earlier phase concepts and practice; 2.3 and 4.4
 routeTags:
 - complete
 - web-api
@@ -85,7 +85,7 @@ evidenceRequired:
 assessmentBlueprint:
   explain: Causal model for Cross-site and cross-context attacks
   design: Cross-origin policy matrix and attack/defense tests
-  build: Deferred to Pass B
+  build: Complete the smallest property-derived mechanism
   break: Authorized local reproduction of the representative failure
   verify: Forbidden-outcome tests
   operate: Detection and recovery notes

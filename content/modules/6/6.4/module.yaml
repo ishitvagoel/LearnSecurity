@@ -7,7 +7,7 @@ difficulty: intermediate
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 6.1 Pass A complete
+- Earlier phase concepts and practice; 6.1
 routeTags:
 - complete
 - web-api
@@ -85,7 +85,7 @@ evidenceRequired:
 assessmentBlueprint:
   explain: Causal model for Files, paths, uploads, archives, XML, and deserialization
   design: Hostile-file corpus and isolated processing design
-  build: Deferred to Pass B
+  build: Complete the smallest property-derived mechanism
   break: Authorized local reproduction of the representative failure
   verify: Forbidden-outcome tests
   operate: Detection and recovery notes

@@ -51,3 +51,13 @@ If the dashboard shows a signed-out badge, do not encode it as color only. That 
 ## What this page is not doing
 
 A deleted-user session with only “will revoke later” is still a live session nobody owns. Do not replay a live cookie to prove the finding.
+
+## SecureCollab milestone bridge
+
+M1 carries this rule into a small local session store. From the repository root, run the fixed teaching bridge:
+
+```text
+python3 labs/M1/securecollab-m1/fixed/smoke.py
+```
+
+Record the allow, cross-company denial, forged-company denial, and revocation-after-login denial with session values redacted. This is a dependency-free SQLite observation path; it does not replace the canonical FastAPI/PostgreSQL implementation or prove refresh-token, identity-provider, or device-cache behavior.

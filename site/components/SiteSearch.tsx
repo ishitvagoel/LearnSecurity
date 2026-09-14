@@ -226,7 +226,7 @@ export function SiteSearch(): ReactElement {
                   Type to search {entries.length} pages, topics, and lessons.
                 </p>
               ) : results.length === 0 ? (
-                <p className="px-3 py-6 text-center text-sm text-muted">Nothing matched "{query}."</p>
+                <p className="px-3 py-6 text-center text-sm text-muted">Nothing matched &quot;{query}.&quot;</p>
               ) : (
                 <ul>
                   {results.map((entry, i) => (

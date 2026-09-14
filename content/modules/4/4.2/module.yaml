@@ -7,7 +7,7 @@ difficulty: intermediate
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–4.1 Pass A complete
+- Earlier phase concepts and practice; 1.1–4.1
 routeTags:
 - complete
 - web-api
@@ -85,7 +85,7 @@ evidenceRequired:
 assessmentBlueprint:
   explain: Causal model for Authentication, phishing resistance, and usable access
   design: Authenticator decision record, accessible-flow review
-  build: Deferred to Pass B
+  build: Complete the smallest property-derived mechanism
   break: Authorized local reproduction of the representative failure
   verify: Forbidden-outcome tests
   operate: Detection and recovery notes

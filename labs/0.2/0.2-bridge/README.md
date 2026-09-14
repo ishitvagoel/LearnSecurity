@@ -1,36 +1,39 @@
-# Lab 0.2 — a quiz score is not a 1.2 cell
+# Lab 0.2 — diagnostic evidence chooses bridges, never security clearance
 
 **Module:** `0.2`
 **Authorized scope:** this directory only. Local course fixture.
-**Invariant:** `quiz_score_grants_phase1_skip(100)` is false. A low score also does not skip.
-**Root cause class:** a number treated as a capability
-**Non-goals:** NICE work-role fluency as Gate 1; LMS percentage as ASVS.
+**Invariant:** `quiz_score_grants_phase1_skip(100)` is false, and every missing tooling capability gets a named bridge.
+**Root cause class:** a number treated as a capability, or a capability gap silently dropped
+**Non-goals:** NICE work-role fluency as Gate 1; LMS percentage as ASVS; live LMS testing.
 
 ## Reset
 
 Re-run pytest. Optional: `git checkout -- labs/0.2/0.2-bridge`.
 
+## The diagnostic contract
+
+The input is a small, reviewable evidence map for `python`, `browser`, `sql`, `network`, and `git`. The fixed implementation returns deterministic bridge ids for every capability not demonstrated:
+
+```text
+{"python": True, "browser": False, "sql": True, "network": False, "git": False}
+→ ["bridge-browser", "bridge-network", "bridge-git"]
+```
+
+A bridge id assigns tooling practice. It does not create 1.2 cells, complete 1.3 or 1.4, or waive Gate 1. Unknown or absent evidence is treated as a gap so the learner gets practice instead of an accidental skip.
+
 ## Vulnerable behavior (local only)
 
-Score ≥ 80 grants a Phase 1 skip. Forbidden outcome: quiz score used as authorization to skip 1.2 / Gate 1.
-
-## Structural fix
-
-Diagnostics never grant 1.2 cells or skip Gate 1 evidence. Tooling-bridge skips stay a separate decision.
+The vulnerable function still grants a Phase 1 skip at score ≥ 80 and returns no bridge recommendations. Both are forbidden outcomes: a score is not authorization, and a missing bridge must not disappear from the learner's path.
 
 ## Verify
 
-```
+```text
 python3 -m pytest labs/0.2/0.2-bridge/tests --impl vulnerable
 python3 -m pytest labs/0.2/0.2-bridge/tests --impl fixed
 ```
 
-The first command must fail `test_high_quiz_score_is_not_authorization`. The second must pass. Honest low-score tests may pass on both.
+The vulnerable run must fail the score and missing-bridge assertions. The fixed run must pass all checks. A setup error is not evidence that the contract holds.
 
-## Operate
+## Operate and transfer
 
-Signal: `phase1_skip_denied`. Audit skipped-module lists. Do not back-date Gate 1.
-
-## Transfer
-
-Vendor cert used to skip a threat-model review. Clinic onboarding quiz. Prompt only.
+Record bridge ids and evidence summaries, never quiz answers or badges. Audit that 1.2/1.3/1.4 and Gate 1 remain required after a bridge is assigned. Apply the same contract to a clinic onboarding diagnostic or a vendor-cert intake: missing tool fluency gets a bridge; security review still needs its own evidence.

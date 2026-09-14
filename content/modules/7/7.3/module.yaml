@@ -7,7 +7,7 @@ difficulty: intermediate
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 5.2 MAC vs encoding; 6.5 egress; 2.1 parsers
+- Earlier phase concepts and practice; 5.2 MAC vs encoding; 6.5 egress; 2.1 parsers
 routeTags:
 - complete
 - web-api

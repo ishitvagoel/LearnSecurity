@@ -1,0 +1,3 @@
+# Local lab test runner. Labs never need network access or production secrets.
+pytest>=8.0,<10.0
+PyYAML>=6.0,<7.0

@@ -7,7 +7,7 @@ difficulty: advanced
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.2 isolation; 4.4 object grain; 8.2 MASVS-STORAGE
+- Earlier phase concepts and practice; 1.2 isolation; 4.4 object grain; 8.2 MASVS-STORAGE
 routeTags:
 - complete
 - web-api

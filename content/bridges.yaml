@@ -1,0 +1,83 @@
+version: 1
+bridges:
+  - id: bridge-python
+    capability: python
+    title: Run and interpret a Python security test
+    objective: >
+      Run one local test, distinguish an assertion failure from a setup error,
+      and name the property under test.
+    task: >
+      From the repository root, run `python -m pytest
+      labs/0.1/0.1-orientation/tests --impl fixed -q`. Read the test name and
+      explain what the allow and deny cases establish.
+    success: >
+      You can name the command exit status, the assertion's forbidden outcome,
+      and one thing the test does not prove.
+    retry: >
+      Read the lab README, install `labs/requirements-dev.txt`, and rerun the
+      command. If collection still fails, record the traceback as an environment
+      defect rather than calling the property secure.
+  - id: bridge-browser
+    capability: browser
+    title: Inspect a local browser request
+    objective: >
+      Identify the actor, path, query, and response decision in a local browser
+      flow.
+    task: >
+      Start `python labs/M0/securecollab-m0/fixed/server.py`, open
+      `http://127.0.0.1:8765/`, and use the Alice and Bob buttons. Record which
+      request fields come from the browser and which company value the server
+      derives.
+    success: >
+      You can point to the local request, the allow/deny response, and the client
+      field that must not become authority.
+    retry: >
+      Use the equivalent curl trace in the M0 README and compare it with the
+      browser action before trying the browser again.
+  - id: bridge-sql
+    capability: sql
+    title: Read a parameterized query
+    objective: >
+      Explain how a query binds data and where the authorization decision is
+      made.
+    task: >
+      Open `labs/M0/securecollab-m0/fixed/app.py`. Locate the parameterized note
+      lookup and write down the value bound to `?`, the row relation checked
+      afterward, and the body returned only after that check.
+    success: >
+      You can explain why a parameterized locator is not the same thing as an
+      authorization policy.
+    retry: >
+      Compare the fixed file with its vulnerable pair and identify the
+      client-controlled company value that the vulnerable path trusts.
+  - id: bridge-network
+    capability: network
+    title: Trace a local HTTP exchange
+    objective: >
+      Read a request and response without contacting a public host.
+    task: >
+      With the M0 fixed server running, run `curl -i
+      http://127.0.0.1:8765/notes/n1 -H 'X-Demo-Actor: alice'` and repeat with
+      Bob. Record the method, path, actor header, status, and whether a note body
+      is returned.
+    success: >
+      You can describe the complete loopback exchange and the stop condition that
+      keeps the exercise local.
+    retry: >
+      Stop the server, verify the address is `127.0.0.1`, and use the README's
+      no-network unit tests if curl is unavailable.
+  - id: bridge-git
+    capability: git
+    title: Inspect and preserve a security change
+    objective: >
+      Use Git to identify the exact change that repaired a security property.
+    task: >
+      Run `git diff HEAD~1..HEAD -- labs/M0/securecollab-m0` and identify the
+      changed policy line, the test that would fail before it, and the README
+      claim that limits the fixture.
+    success: >
+      You can name the commit, changed files, tested forbidden outcome, and
+      remaining limitation without relying on a badge or file count.
+    retry: >
+      Run `git log --oneline -- labs/M0/securecollab-m0`, then inspect the most
+      recent commit before repeating the diff.

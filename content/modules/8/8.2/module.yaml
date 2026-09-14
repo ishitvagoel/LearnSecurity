@@ -7,7 +7,7 @@ difficulty: advanced
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 5.2 AEAD properties; 8.1 hostile client; 4.2 local auth is not server auth
+- Earlier phase concepts and practice; 5.2 AEAD properties; 8.1 hostile client; 4.2 local auth is not server auth
 routeTags:
 - complete
 - mobile

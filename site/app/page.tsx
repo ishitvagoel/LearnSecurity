@@ -1,9 +1,10 @@
 import { HomeContinue } from "@/components/HomeContinue";
 import { ButtonLink } from "@/components/ui";
 import { loadAllModules } from "@/lib/loadCurriculum";
+import { routeModules } from "@/lib/route";
 
 export default function HomePage() {
-  const topicCount = loadAllModules().length;
+  const topicCount = routeModules(loadAllModules()).length;
 
   return (
     <div>
@@ -52,6 +53,10 @@ export default function HomePage() {
                 <strong className="block text-ink">Practice files</strong>
                 Files you clone from the course repository and run on your
                 own computer.
+              </li>
+              <li>
+                <strong className="block text-ink">Tooling bridges</strong>
+                Short local tasks for the Python, browser, SQL, network, and Git skills the route assumes.
               </li>
             </ul>
             <p className="mt-5 text-xs leading-relaxed text-muted">
@@ -107,7 +112,7 @@ export default function HomePage() {
               <h3 className="mt-2 font-serif text-xl font-semibold">Read the ground rules</h3>
               <p className="mt-3 text-sm leading-relaxed text-on-forest-muted">
                 What you may practice, what you must not, and how a topic is put
-                together. About ten minutes.
+                together. About 15 minutes for the orientation.
               </p>
               <p className="mt-5">
                 <ButtonLink href="/learn/0.1/" variant="inverse">
@@ -121,12 +126,12 @@ export default function HomePage() {
                 Learn what “secure” means here
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                The next topic is not a tool. It is how to write a rule you can
+                Use a short capability bridge, then write a rule you can
                 actually check.
               </p>
               <p className="mt-5">
-                <ButtonLink href="/learn/1.1/" variant="secondary">
-                  Open the next topic
+                <ButtonLink href="/learn/0.2/" variant="secondary">
+                  Open the bridge diagnostic
                 </ButtonLink>
               </p>
             </li>

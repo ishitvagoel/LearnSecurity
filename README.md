@@ -32,9 +32,31 @@ You can still run inner skills by hand (`next-iteration`, `author-module-spec`, 
 
 Agent standing instructions: [`AGENTS.md`](AGENTS.md). Rules live in [`.cursor/rules/`](.cursor/rules/). Skills in [`.cursor/skills/`](.cursor/skills/). Review subagents in [`.cursor/agents/`](.cursor/agents/).
 
+## Learner route and project thread
+
+The recommended web/API route is declared in [`content/route.yaml`](content/route.yaml): 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7 → 9 → 10 → 11. Mobile and electives are optional extensions. The site roadmap and progress views read this route instead of inferring order from numeric phase labels.
+
+The opening page sends learners from orientation to the 0.2 capability bridge before 1.1. Lesson, bridge, practice, and assessment pages remember the last valid activity in this browser, while the route progress label stays scoped to the recommended web/API path.
+
+The SecureCollab milestone history is available at `/project/` in the site and in [`content/reference/securecollab/milestones.yaml`](content/reference/securecollab/milestones.yaml). Loopback-only M0, M1, and M2 teaching bridges live under [`labs/M0/securecollab-m0/`](labs/M0/securecollab-m0/), [`labs/M1/securecollab-m1/`](labs/M1/securecollab-m1/), and [`labs/M2/securecollab-m2/`](labs/M2/securecollab-m2/). They make the request, session, authorization, queue, revocation, and retained-copy paths observable with synthetic data; they are not production assurance.
+
+Progress and assessment worksheets are local-first. The progress page can export a versioned JSON work file so a learner can continue on another browser or device.
+
 ## Safety
 
 Offensive exercises are limited to local course apps, official intentionally vulnerable labs, challenges whose terms authorize the work, or systems with written scope. Do not attack public or third-party targets. Do not commit real secrets or PII. Vulnerable code belongs under `labs/` with reset instructions—not in learner-facing lesson pages as copy-paste exploits.
+
+### Running local labs
+
+Use Python 3.11 or newer and install the test runner from the repository root:
+
+```bash
+python -m pip install -r labs/requirements-dev.txt
+```
+
+Run each lab from the repository root. The vulnerable command is expected to
+fail its named security assertion; the fixed command must pass. A collection or
+import error is a setup failure and does not count as security evidence.
 
 ## Layout
 

@@ -8,7 +8,7 @@ Pass A specification. Lesson prose lives in `lessons/`. A public URL is out of s
 - **slug:** security-engineering-orientation
 - **title:** Security engineering orientation
 - **phase / track / difficulty:** 0 / core / foundation
-- **estimatedMinutes:** 240
+- **estimatedMinutes:** 15
 - **prerequisites:** None; this module opens the course.
 - **routeTags:** complete, web-api
 - **releaseMilestone:** none
@@ -47,7 +47,7 @@ Reachability (break) → written host allow-list (this module) → official Juic
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08).
+See `module.yaml` learningObjects (LO-01–04). The orientation combines related loop steps into four task-sized episodes.
 
 ## Lab briefs
 
@@ -70,7 +70,7 @@ Any URL in-scope; no stop on redirect; live-target language; quiz as scan permis
 
 ## Time budget and SecureCollab
 
-Orientation. Python host allow-list stand-in only.
+Approximately 15 minutes for scope, the local host gate, one red/green check, and a transfer decision. Python host allow-list stand-in only.
 
 ## Operational considerations
 
@@ -82,3 +82,4 @@ Orientation. Python host allow-list stand-in only.
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
 | 2026-09-06 | Depth pass: reachability is not authorization |
+| 2026-09-13 | Shortened the opening to four task-sized episodes and made the first action explicit |

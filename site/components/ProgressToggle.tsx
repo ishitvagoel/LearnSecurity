@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useSyncExternalStore, type ReactElement } from "react";
+import { useCallback, useState, useSyncExternalStore, type ReactElement } from "react";
 
 const KEY = "learnsecurity-progress-v1";
 const listeners = new Set<() => void>();
@@ -21,6 +21,7 @@ function subscribe(onStoreChange: () => void): () => void {
 const EMPTY_VISITED: string[] = [];
 let cachedRaw: string | null | undefined = undefined;
 let cachedIds: string[] = EMPTY_VISITED;
+let memoryVisited: string[] = EMPTY_VISITED;
 
 function readVisited(): string[] {
   try {
@@ -42,7 +43,7 @@ function readVisited(): string[] {
     return cachedIds;
   } catch {
     cachedRaw = undefined;
-    cachedIds = EMPTY_VISITED;
+    cachedIds = memoryVisited;
     return cachedIds;
   }
 }
@@ -58,6 +59,7 @@ export function useVisitedModuleIds(): string[] {
 export function ProgressToggle({ moduleId }: { moduleId: string }): ReactElement {
   const getSnapshot = useCallback(() => snapshot(moduleId), [moduleId]);
   const done = useSyncExternalStore(subscribe, getSnapshot, () => false);
+  const [persistence, setPersistence] = useState<"saved" | "memory">("saved");
 
   const onChange = (): void => {
     const current = snapshot(moduleId);
@@ -67,7 +69,16 @@ export function ProgressToggle({ moduleId }: { moduleId: string }): ReactElement
     } else {
       next = [...next, moduleId];
     }
-    localStorage.setItem(KEY, JSON.stringify(next));
+    try {
+      localStorage.setItem(KEY, JSON.stringify(next));
+      memoryVisited = next;
+      setPersistence("saved");
+    } catch {
+      memoryVisited = next;
+      cachedRaw = undefined;
+      cachedIds = next;
+      setPersistence("memory");
+    }
     emit();
   };
 
@@ -84,9 +95,11 @@ export function ProgressToggle({ moduleId }: { moduleId: string }): ReactElement
           {done ? "You’ve marked this as read" : "I’ve read this"}
         </span>
         <span className="mt-0.5 block text-muted">
-          {done
-            ? "Saved in this browser only. Untick if you want to clear it."
-            : "Saved in this browser only. No account."}
+          {persistence === "memory"
+            ? "Kept in memory for this tab because browser storage is unavailable."
+            : done
+              ? "Saved in this browser only. Untick if you want to clear it."
+              : "Saved in this browser only. No account."}
         </span>
       </span>
     </label>

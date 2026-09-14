@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useSyncExternalStore, type ReactElement } from "react";
+import { useCallback, useState, useSyncExternalStore, type ReactElement } from "react";
 import type { AssessmentEvidence, AssessmentPrompt } from "@/lib/types";
 
 type WorkbookState = {
@@ -16,6 +16,13 @@ const STATUS_OPTIONS = [
   ["competent", "Competent"],
   ["transfer-ready", "Transfer-ready"],
 ] as const;
+
+const STATUS_GUIDANCE: Record<string, string> = {
+  "not-started": "Start with the property question, then inspect the authorized local practice before writing your answers.",
+  developing: "Run the broken and repaired checks, then revise the answer that still depends on a vague claim or a dashboard score.",
+  competent: "Re-read your negative case and transfer answer. A competent worksheet names an oracle and a residual risk another engineer can check.",
+  "transfer-ready": "Keep the worksheet as evidence, record the remaining residual, and re-check it when the system or trust boundary changes.",
+};
 const listeners = new Map<string, Set<() => void>>();
 const snapshots = new Map<string, { raw: string | null; state: WorkbookState }>();
 const memoryFallbacks = new Map<string, WorkbookState>();
@@ -94,15 +101,19 @@ function subscribe(storageKey: string, listener: () => void): () => void {
   };
 }
 
-function saveSnapshot(storageKey: string, state: WorkbookState): void {
+function saveSnapshot(storageKey: string, state: WorkbookState): boolean {
   memoryFallbacks.set(storageKey, state);
+  let persisted = true;
   try {
     window.localStorage.setItem(storageKey, JSON.stringify(state));
   } catch {
-    // The in-memory copy keeps the worksheet usable when storage is unavailable.
+    // The in-memory copy keeps the worksheet usable, but it will not survive
+    // closing the tab.
+    persisted = false;
   }
   snapshots.delete(storageKey);
   emit(storageKey);
+  return persisted;
 }
 
 export function AssessmentWorkbook({
@@ -121,10 +132,11 @@ export function AssessmentWorkbook({
   );
   const readForKey = useCallback(() => readSnapshot(storageKey), [storageKey]);
   const state = useSyncExternalStore(subscribeForKey, readForKey, () => EMPTY_STATE);
+  const [persistence, setPersistence] = useState<"saved" | "memory">("saved");
   const setState = useCallback(
     (update: WorkbookState | ((current: WorkbookState) => WorkbookState)): void => {
       const next = typeof update === "function" ? update(readSnapshot(storageKey)) : update;
-      saveSnapshot(storageKey, next);
+      setPersistence(saveSnapshot(storageKey, next) ? "saved" : "memory");
     },
     [storageKey],
   );
@@ -163,6 +175,18 @@ export function AssessmentWorkbook({
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="rounded-2xl border border-forest-accent/20 bg-surface p-4" aria-live="polite">
+        <p className="text-sm font-semibold text-ink">Next action</p>
+        <p className="mt-1 text-sm leading-relaxed text-muted">
+          {STATUS_GUIDANCE[state.status] || STATUS_GUIDANCE["not-started"]}
+        </p>
+        {evidence.length > 0 ? (
+          <p className="mt-2 text-xs text-muted">
+            Evidence collected: {state.evidence.filter((id) => evidence.some((item) => item.id === id)).length} of {evidence.length}
+          </p>
+        ) : null}
       </div>
 
       {sections.map((section, index) => (
@@ -206,7 +230,9 @@ export function AssessmentWorkbook({
       ) : null}
 
       <p className="text-sm text-muted" aria-live="polite">
-        Saved in this browser only. This worksheet does not submit answers or grade you.
+        {persistence === "saved"
+          ? "Saved in this browser only. This worksheet does not submit answers or grade you."
+          : "Kept in memory for this tab because browser storage is unavailable. Download your work before leaving."}
       </p>
     </div>
   );

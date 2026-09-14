@@ -7,7 +7,7 @@ difficulty: intermediate
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–4.5 Pass A complete
+- Earlier phase concepts and practice; 1.1–4.5
 routeTags:
 - complete
 - web-api
@@ -85,7 +85,7 @@ evidenceRequired:
 assessmentBlueprint:
   explain: Causal model for Data lifecycle and privacy engineering
   design: Data-flow inventory, retention/deletion matrix, privacy review
-  build: Deferred to Pass B
+  build: Complete the smallest property-derived mechanism
   break: Authorized local reproduction of the representative failure
   verify: Forbidden-outcome tests
   operate: Detection and recovery notes

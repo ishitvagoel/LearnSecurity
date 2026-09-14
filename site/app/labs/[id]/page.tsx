@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { LastActivityMarker } from "@/components/LastActivityMarker";
 import { PageHeader, PageShell } from "@/components/ui";
 import { topicBlurb, topicTitle } from "@/lib/catalog";
 import { loadAllModules, loadModule, moduleHref } from "@/lib/loadCurriculum";
@@ -37,6 +38,7 @@ export default async function LabBriefPage({ params }: Props) {
   const slug = mod.labSpec.slug || `${mod.id}-lab`;
   return (
     <PageShell width="narrow">
+      <LastActivityMarker href={`/labs/${encodeURIComponent(mod.id)}/`} title={`Practice — ${mod.id}`} />
       <p className="mb-3 text-sm text-muted">
         <Link href="/labs/" className="text-link underline-offset-2 hover:underline">
           All practice
@@ -80,6 +82,16 @@ export default async function LabBriefPage({ params }: Props) {
             Practice
           </Link>{" "}
           for the steps to copy, run, and reset the files.
+        </p>
+      </section>
+      <section className="mt-8 rounded-xl border border-line bg-surface px-4 py-4">
+        <h2 className="mb-2 text-xl font-semibold">After the practice</h2>
+        <p className="leading-relaxed text-muted">
+          Record the intended failure and the repaired result, then use the{" "}
+          <Link href={`/assess/${encodeURIComponent(mod.id)}/`} className="font-medium text-link underline underline-offset-2">
+            evidence worksheet
+          </Link>{" "}
+          to explain what the lab proves and what it leaves open.
         </p>
       </section>
     </PageShell>

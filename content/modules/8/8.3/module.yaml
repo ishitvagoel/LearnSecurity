@@ -7,7 +7,7 @@ difficulty: advanced
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 8.1 hostile client; 4.5 native OAuth; 2.1 untrusted query strings
+- Earlier phase concepts and practice; 8.1 hostile client; 4.5 native OAuth; 2.1 untrusted query strings
 routeTags:
 - complete
 - mobile

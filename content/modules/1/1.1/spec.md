@@ -1,6 +1,6 @@
 # Module 1.1 specification — Security as invariants under attack
 
-This specification is the publishable-depth reference for the remediation queue. It remains subordinate to blueprint revision 1.1 and does not introduce a parallel syllabus.
+This specification is the depth reference for the remediation queue. It remains subordinate to blueprint revision 1.1 and is under independent re-review; it does not introduce a parallel syllabus.
 
 ## Identity
 
@@ -37,7 +37,7 @@ Every outcome must have all five evidence types before publication.
 | Outcome | Explanation and model | Worked reasoning | Learner practice | Assessment evidence | Transfer |
 |---|---|---|---|---|---|
 | 1 | LO-01 claim envelope; LO-02 product/state model | LO-02 confidentiality-row interrogation | Five-row catalogue and peer classification | Catalogue dimensions in rubric | CivicClinic six-row catalogue |
-| 2 | LO-01 property/mechanism distinction | Hashed-password causal trace; logging alternatives in LO-04 | Slogan-to-bounded-claim rewrite | Mechanism-limit and counterexample criteria | Signed worker-token review |
+| 2 | LO-01 property/mechanism distinction | Bounded password-hash example and logging alternatives in LO-04 | Slogan-to-bounded-claim rewrite | Mechanism-limit and counterexample criteria | Signed worker-token review |
 | 3 | LO-01 claim envelope; LO-02 actor/state tables | Bounded confidentiality example | Full row template and peer challenge | Model completeness is critical | Changed guardian/vendor/shared-device assumptions |
 | 4 | LO-03 causal diagnostic table | Vulnerable fixture diagnosis | Annotated SECURITY.md and failure grouping | Seeded review and examiner findings | Alternate mechanism slogan |
 | 5 | LO-05 oracle and evidence modes | Cross-tenant evidence trace | Forbidden-outcome matrix | Four evidence modes required | Evidence revised for delegated/time-dependent actions |

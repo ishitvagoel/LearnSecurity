@@ -7,7 +7,7 @@ difficulty: intermediate
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 6.7 Pass A complete; 1.2 field grain
+- Earlier phase concepts and practice; 6.7; 1.2 field grain
 routeTags:
 - complete
 - web-api

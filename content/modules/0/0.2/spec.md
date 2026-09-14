@@ -8,7 +8,7 @@ Pass A specification. Lesson prose lives in `lessons/`. A placement quiz of 100 
 - **slug:** diagnostic-and-adaptive-bridge
 - **title:** Diagnostic and adaptive bridge
 - **phase / track / difficulty:** 0 / bridge / foundation
-- **estimatedMinutes:** 240
+- **estimatedMinutes:** 90
 - **prerequisites:** 0.1 orientation; diagnostics never skip 1.2 or Gate 1.
 - **routeTags:** complete, web-api, bridge
 - **releaseMilestone:** none
@@ -16,7 +16,7 @@ Pass A specification. Lesson prose lives in `lessons/`. A placement quiz of 100 
 
 ## Objective hierarchy
 
-1. Produce a **skip predicate** so `quiz_score_grants_phase1_skip(100)` is false.
+1. Produce a **capability evidence map** that assigns deterministic tooling bridge ids for gaps while `quiz_score_grants_phase1_skip(100)` remains false.
 2. Name attacker capabilities (hurried learner; hiring manager with a badge) and trust assumptions (local diagnostic repo is honest; quiz items are not production secrets).
 3. Transfer: clinic onboarding quiz; vendor cert used to skip a threat-model review.
 
@@ -47,7 +47,7 @@ Score-as-capability (break) → skip only tooling units (this module) → 1.2/1.
 
 ## Lesson inventory (titles only)
 
-See `module.yaml` learningObjects (LO-01–08).
+See `module.yaml` learningObjects (LO-01–05). The diagnostic combines related loop steps into five task-sized episodes.
 
 ## Lab briefs
 
@@ -69,7 +69,7 @@ Score grants Phase 1 skip; badge as Gate 1; 1.4 hidden by adaptive path.
 
 ## Time budget and SecureCollab
 
-Bridge. Python skip predicate stand-in only.
+Approximately 90 minutes when bridge work is needed: inspect the capability map, run the local red/green diagnostic, and record the separate security evidence still required. The score skip is a stand-in only.
 
 ## Operational considerations
 
@@ -81,3 +81,4 @@ Bridge. Python skip predicate stand-in only.
 |---|---|
 | 2026-08-23 | Pass A specification (curriculum map complete) |
 | 2026-09-06 | Depth pass: quiz score is not a 1.2 cell |
+| 2026-09-13 | Replaced score-only exercise with capability evidence and bridge recommendations; reduced to five episodes |

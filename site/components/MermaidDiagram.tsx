@@ -17,11 +17,13 @@ function diagramLabel(chart: string): string {
   return line.replace(/["[\]]/g, " ").replace(/\s+/g, " ").trim().slice(0, 120);
 }
 
-export function MermaidDiagram({ chart }: { chart: string }): ReactElement {
+export function MermaidDiagram({ chart, caption }: { chart: string; caption?: string }): ReactElement {
   const reactId = useId().replace(/:/g, "");
   const [svg, setSvg] = useState("");
   const [failed, setFailed] = useState(false);
   const label = useMemo(() => diagramLabel(chart), [chart]);
+  const accessibleLabel = caption || `Diagram: ${label}`;
+  const captionId = `mmd-caption-${reactId}`;
 
   useEffect(() => {
     let cancelled = false;
@@ -53,7 +55,10 @@ export function MermaidDiagram({ chart }: { chart: string }): ReactElement {
   if (failed) {
     return (
       <figure className="lesson-diagram-failed">
-        <figcaption>This diagram could not be drawn. The source is shown so you can still read the model.</figcaption>
+        <figcaption>
+          <span className="sr-only">{accessibleLabel}. </span>
+          This diagram could not be drawn. The source is shown so you can still read the model.
+        </figcaption>
         <pre className="lesson-diagram">
           <code>{chart}</code>
         </pre>
@@ -63,8 +68,8 @@ export function MermaidDiagram({ chart }: { chart: string }): ReactElement {
 
   if (!svg) {
     return (
-      <figure className="lesson-mermaid lesson-mermaid-loading" aria-busy="true" aria-label={label}>
-        <p className="sr-only">Loading diagram: {label}</p>
+      <figure className="lesson-mermaid lesson-mermaid-loading" aria-busy="true" aria-labelledby={captionId}>
+        <figcaption id={captionId} className="sr-only">Loading diagram: {accessibleLabel}</figcaption>
       </figure>
     );
   }
@@ -73,8 +78,10 @@ export function MermaidDiagram({ chart }: { chart: string }): ReactElement {
     <figure
       className="lesson-mermaid"
       role="img"
-      aria-label={label}
-      dangerouslySetInnerHTML={{ __html: svg }}
-    />
+      aria-labelledby={captionId}
+    >
+      <figcaption id={captionId} className="sr-only">{accessibleLabel}</figcaption>
+      <div dangerouslySetInnerHTML={{ __html: svg }} />
+    </figure>
   );
 }

@@ -1,7 +1,9 @@
+import { LearnerDataPortability } from "@/components/LearnerDataPortability";
 import { ProgressDashboard, type ProgressPhase } from "@/components/ProgressDashboard";
 import { PageHeader, PageShell } from "@/components/ui";
 import { PHASES, phaseHeading, phaseList, topicTitle } from "@/lib/catalog";
 import { loadAllModules } from "@/lib/loadCurriculum";
+import { routeModules } from "@/lib/route";
 
 export const metadata = {
   title: "Your progress",
@@ -10,7 +12,7 @@ export const metadata = {
 };
 
 export default function ProgressPage() {
-  const modules = loadAllModules();
+  const modules = routeModules(loadAllModules());
   const phases: ProgressPhase[] = phaseList(modules).map((phase) => ({
     phase,
     title: phaseHeading(phase),
@@ -29,7 +31,8 @@ export default function ProgressPage() {
           this too, and it will read as zero on a different computer.
         </p>
       </PageHeader>
-      <ProgressDashboard phases={phases} />
+      <ProgressDashboard phases={phases} scopeLabel="recommended web/API route" />
+      <LearnerDataPortability />
     </PageShell>
   );
 }

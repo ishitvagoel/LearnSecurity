@@ -5,17 +5,17 @@ phase: 0
 track: core
 difficulty: foundation
 status: draft
-estimatedMinutes: 240
+estimatedMinutes: 15
 prerequisites:
-- 'None; this module opens the course'
+- 'None; start here'
 routeTags:
 - complete
 - web-api
 releaseMilestone: null
 outcomes:
+- 'State the course outcome, authorized local scope, and first action.'
 - 'Refuse treating a public URL as authorized just because TCP connects.'
 - 'Treat WSTG as a method catalogue, not as a licence to scan the internet.'
-- 'Keep NICE work-role language from becoming a pentest permit.'
 reviewTriggers:
 - Any URL treated as in-scope
 - No stop condition on redirect
@@ -39,36 +39,20 @@ concepts:
 learningObjects:
 - id: 0.1-LO-01
   kind: concept-model
-  title: Reachability is not authorization
+  title: Course outcome and authorized scope
   path: lessons/01-property.md
 - id: 0.1-LO-02
   kind: design-exercise
-  title: In-scope hosts vs stop condition
+  title: Model the host check and stop condition
   path: lessons/02-model.md
 - id: 0.1-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: any URL treated as authorized'
-  path: lessons/03-break.md
+  title: Break, repair, and verify the local host gate
+  path: lessons/03-practice.md
 - id: 0.1-LO-04
-  kind: design-exercise
-  title: Allow-list named local lab hosts
-  path: lessons/04-build.md
-- id: 0.1-LO-05
-  kind: verification-lab
-  title: Fail-on-vulnerable then pass-on-fixed for public host
-  path: lessons/05-verify.md
-- id: 0.1-LO-06
-  kind: operations-exercise
-  title: out_of_scope without storing response bodies
-  path: lessons/06-operate.md
-- id: 0.1-LO-07
   kind: transfer-challenge
-  title: 'Transfer: contractor asked to test a customer WordPress'
-  path: lessons/07-transfer.md
-- id: 0.1-LO-08
-  kind: code-review
-  title: Review any-URL-in-scope as a PR
-  path: lessons/08-review.md
+  title: Operate and review the scope rule
+  path: lessons/04-operate-transfer-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
@@ -148,3 +132,6 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with host-gate cause tables, no-fetch oracle, and
     contractor WordPress transfer; independent review still required
+
+- date: '2026-09-13'
+  note: Shortened orientation estimate and made the opening action explicit; independent review still required

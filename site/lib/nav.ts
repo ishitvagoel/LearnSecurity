@@ -5,6 +5,7 @@ export type NavLink = {
 
 export const PRIMARY_NAV: NavLink[] = [
   { href: "/learn/", label: "Lessons" },
+  { href: "/bridges/", label: "Tooling bridges" },
   { href: "/roadmap/", label: "Study order" },
   { href: "/labs/", label: "Practice" },
   { href: "/assess/", label: "Assessments" },
@@ -13,6 +14,7 @@ export const PRIMARY_NAV: NavLink[] = [
 
 export const RESOURCE_NAV: NavLink[] = [
   { href: "/reference/", label: "The notes app" },
+  { href: "/project/", label: "Project milestones" },
   { href: "/glossary/", label: "Word list" },
   { href: "/references/", label: "References" },
 ];

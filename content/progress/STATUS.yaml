@@ -21,13 +21,13 @@ next:
   pass: revise
   skill: deepen-curriculum
   inner_skill: quality-gate
-  note: Authoring-pass named mental models and mermaid cover every lesson. 1.4,
+  note: First-path remediation now covers a task-sized 0.1/0.2 opening, a concrete 1.1 episode, a content-owned route, portable learner work, and a loopback M0 teaching bridge. 1.4,
     2.1-2.4, 0.1, 0.2, 3.1-3.4, 4.1-4.5, 5.1-5.5, 6.1-6.7, 7.1-7.4, 8.1-8.4, 8.5,
     9.1-9.3, 9.4-10.2, 10.3-11, and E1-E6 later lessons were thickened with
     system-specific cause, limits, and transfer. Units stay developing /
     map-complete in revision.remaining until independent quality and lab-safety
     review artifacts exist under content/progress/reviews/. Do not mark depth
-    publishable in this skill. 1.1-1.3 remain the independently reviewed reference.
+    publishable in this skill. 1.2 and 1.3 retain earlier review records; 1.1 is under re-review after its September lesson and transfer revision.
 spiral_deltas:
 - date: '2026-09-06'
   module: E6
@@ -824,6 +824,30 @@ spiral_deltas:
     slugs pointed at structural labs; leftover slogan YAML labs removed
   retest: jsonschema all module.yaml; pytest --impl pair on structural labs; 1.1 --claim
     pair
+- date: '2026-09-13'
+  module: '0.1'
+  change: Opening orientation reduced to four task-sized episodes with an explicit first action, local scope contract, and first red/green check.
+  retest: Independent quality and lab-safety review still required; redirect and hosts-file residuals remain.
+- date: '2026-09-13'
+  module: '0.2'
+  change: Diagnostic reduced to five episodes and now maps missing Python/browser/SQL/network/Git evidence to deterministic bridge ids without waiving 1.2 or Gate 1.
+  retest: Independent quality and lab-safety review still required; bridge destinations need pilot validation.
+- date: '2026-09-13'
+  module: '1.1'
+  change: Opening lesson now uses an Alice/Bob prediction, worked invariant row, partial row, and explanatory feedback before the catalogue exercise.
+  retest: Independent re-review of the repaired lesson sequence and lab contract still required.
+- date: '2026-09-13'
+  module: M0
+  change: Added a loopback-only SecureCollab browser-to-HTTP-to-SQLite teaching bridge with vulnerable/fixed tenant-boundary behavior and an explicit milestone evidence page.
+  retest: This is not production FastAPI/PostgreSQL assurance; M0 quality remains not-attempted until the canonical stack milestone exists.
+- date: '2026-09-13'
+  module: M1
+  change: Added a dependency-free SQLite teaching bridge with server-side sessions, current account state, object-level tenant checks, and revocation-after-login evidence.
+  retest: This is not production FastAPI/PostgreSQL assurance; refresh-token families, identity proofing, device caches, and independent milestone review remain open.
+- date: '2026-09-13'
+  module: M2
+  change: Added a dependency-free SQLite queue and worker teaching bridge that re-checks current authority before producing retained exports and denies revoked-session reads.
+  retest: This is not production FastAPI/PostgreSQL assurance; broker identity, retries/idempotency, database roles, backups, observability, and independent milestone review remain open.
 modules:
 - id: '0.1'
   title: Security engineering orientation
@@ -850,10 +874,11 @@ modules:
   phase: 1
   track: core
   pass: E
-  quality: competent
-  notes: Depth remediation passed independent semantic and lab-safety review on 2026-08-25;
-    see progress/reviews/1.1-2026-08-25.md
-  depth: publishable
+  quality: developing
+  notes: Authoring pass 2026-09-13 repaired the opening episode and lesson sequence;
+    the August 25 review no longer covers the current content. Independent semantic
+    and lab-safety re-review is required before publishable.
+  depth: map-complete
 - id: '1.2'
   title: Authority and protection
   phase: 1
@@ -1455,6 +1480,7 @@ revision:
   reference_module: '1.1'
   auditedAt: '2026-08-25'
   remaining:
+  - '1.1'
   - '1.4'
   - '2.1'
   - '2.2'

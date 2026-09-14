@@ -7,7 +7,7 @@ difficulty: advanced
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 3.2 threat modeling; 9.1 coverage
+- Earlier phase concepts and practice; 3.2 threat modeling; 9.1 coverage
 routeTags:
 - complete
 - web-api

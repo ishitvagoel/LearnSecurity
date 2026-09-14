@@ -7,9 +7,9 @@ difficulty: foundation
 status: draft
 estimatedMinutes: 270
 prerequisites:
-- '1.1 Pass A: invariant catalogue'
-- '1.2 Pass A: authority map'
-- '1.3 Pass A: trust boundaries'
+- '1.1: invariant catalogue'
+- '1.2: authority map'
+- '1.3: trust boundaries'
 - 'Entry profile: small database-backed API, Git, tests, basic SQL'
 routeTags:
 - complete
@@ -102,7 +102,7 @@ evidenceRequired:
 assessmentBlueprint:
   explain: Actor vs vulnerability; friction as security
   design: Register completeness vs 1.1–1.3 artifacts
-  build: Deferred to Pass B; usable recovery change on local fixture
+  build: Complete the smallest property-derived mechanism; usable recovery change on local fixture
   break: Unusable control annotated as a security failure
   verify: Lockout, bypass, and accessibility forbidden outcomes
   operate: Degrade/detect/recover scenario labeled with CSF functions

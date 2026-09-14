@@ -7,7 +7,7 @@ difficulty: advanced
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- 'Prior phase Pass A per blueprint §7; 3.1 log bodies; 5.1 extra copies; 8.5 crash sinks'
+- 'Earlier phase concepts and practice; 3.1 log bodies; 5.1 extra copies; 8.5 crash sinks'
 routeTags:
 - complete
 - web-api

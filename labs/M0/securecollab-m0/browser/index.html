@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8"><title>SecureCollab M0</title></head>
+  <body>
+    <main>
+      <h1>SecureCollab M0</h1>
+      <p>Local synthetic request trace. The actor header is a teaching harness, not authentication.</p>
+      <button type="button" data-actor="alice">Read as Alice</button>
+      <button type="button" data-actor="bob">Read as Bob</button>
+      <pre id="result" aria-live="polite">Choose an actor.</pre>
+    </main>
+    <script>
+      for (const button of document.querySelectorAll("button[data-actor]")) {
+        button.addEventListener("click", async () => {
+          const actor = button.dataset.actor;
+          const response = await fetch("/notes/n1?company=company-a", { headers: { "X-Demo-Actor": actor } });
+          document.querySelector("#result").textContent = `${response.status} ${await response.text()}`;
+        });
+      }
+    </script>
+  </body>
+</html>

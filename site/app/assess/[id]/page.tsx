@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AssessmentWorkbook } from "@/components/AssessmentWorkbook";
+import { LastActivityMarker } from "@/components/LastActivityMarker";
 import { ButtonLink, Chip, PageHeader, PageShell } from "@/components/ui";
 import { assessmentEvidence, assessmentPrompts } from "@/lib/assessment";
 import {
@@ -13,6 +14,7 @@ import {
 } from "@/lib/catalog";
 import { loadAllModules, loadAssessmentRubric, loadModule, moduleHref } from "@/lib/loadCurriculum";
 import { Markdown } from "@/lib/markdown";
+import { nextRouteModule } from "@/lib/route";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -33,15 +35,18 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function AssessmentPage({ params }: Props) {
   const { id } = await params;
-  const exists = loadAllModules().some((mod) => mod.id === id);
+  const allModules = loadAllModules();
+  const exists = allModules.some((mod) => mod.id === id);
   if (!exists) {
     notFound();
   }
   const mod = loadModule(id);
   const rubric = loadAssessmentRubric(mod);
+  const next = nextRouteModule(allModules, mod.id);
 
   return (
     <PageShell width="narrow">
+      <LastActivityMarker href={`/assess/${encodeURIComponent(mod.id)}/`} title={`Assessment — ${mod.id}`} />
       <p className="mb-3 text-sm text-muted">
         <Link href="/assess/" className="text-link underline-offset-2 hover:underline">
           Assessments
@@ -144,6 +149,19 @@ export default async function AssessmentPage({ params }: Props) {
           <div className="curriculum-prose rounded-2xl border border-line bg-paper p-5">
             <Markdown source={rubric} />
           </div>
+        </section>
+      ) : null}
+
+      {next ? (
+        <section className="mb-10 rounded-xl border border-forest-accent/20 bg-surface px-4 py-4">
+          <h2 className="mb-2 text-xl font-semibold">Continue in the study order</h2>
+          <p className="leading-relaxed text-muted">
+            When you have recorded this evidence, continue with{" "}
+            <Link href={moduleHref(next.id)} className="font-medium text-link underline underline-offset-2 hover:no-underline">
+              {next.id} — {topicTitle(next)}
+            </Link>
+            .
+          </p>
         </section>
       ) : null}
 

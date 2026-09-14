@@ -7,7 +7,7 @@ difficulty: advanced
 status: draft
 estimatedMinutes: 240
 prerequisites:
-- Prior phase Pass A per blueprint §7; 9.3 test shape; authorized-lab policy
+- Earlier phase concepts and practice; 9.3 test shape; authorized-lab policy
 routeTags:
 - complete
 - web-api

@@ -1,0 +1,64 @@
+version: 1
+product: SecureCollab
+milestones:
+  - id: M0
+    title: Observable web/API skeleton
+    status: teaching-bridge
+    moduleId: '1.3'
+    labPath: labs/M0/securecollab-m0
+    summary: Trace a synthetic note request through browser input, an API boundary, and persistence with explicit trust assumptions.
+    learnerArtifacts:
+      - Request trace with trusted and untrusted fields
+      - Synthetic tenant and note fixture
+      - Boundary observation and one negative check
+    revisit: The 1.1 invariant catalogue and 1.2 authority matrix must be checked against the actual request path.
+  - id: M1
+    title: Identity and current authority
+    status: teaching-bridge
+    moduleId: '4.1'
+    labPath: labs/M1/securecollab-m1
+    summary: Add account and session behavior, then demonstrate allowed and denied operations for separate companies.
+    learnerArtifacts:
+      - Session lifecycle trace
+      - Current membership and revocation checks
+      - Allowed and cross-company denied cases
+    revisit: Authentication claims do not replace object-level authorization or revocation evidence.
+  - id: M2
+    title: Delayed work and retained copies
+    status: teaching-bridge
+    moduleId: '7.4'
+    labPath: labs/M2/securecollab-m2
+    summary: Carry authority into delayed work and revisit it after revocation, export, retry, and retention changes.
+    learnerArtifacts:
+      - Worker request and identity trace
+      - Revocation-after-enqueue test
+      - Retained-copy and evidence record
+    revisit: SC-INTEG-01 and SC-PRIV-01 must be re-evaluated when state and time expand.
+  - id: M3
+    title: Mobile extension
+    status: optional
+    moduleId: '8.1'
+    summary: Model copied clients and offline state after the web/API route is understood.
+    learnerArtifacts:
+      - Client/server trust comparison
+      - Offline state and replay decision
+    revisit: Client claims and cached copies are untrusted extensions, not a new authority source.
+  - id: M4
+    title: Release and recovery readiness
+    status: planned
+    moduleId: '10.1'
+    summary: Connect release gates, operational evidence, recovery, and changed assumptions.
+    learnerArtifacts:
+      - Release evidence pack
+      - Recovery rehearsal and residual-risk record
+    revisit: Recovery writes and operator access need their own subject, action, time, and evidence model.
+  - id: M5
+    title: Defended capstone
+    status: teaching-stand-in
+    moduleId: '11'
+    summary: Defend the accumulated design and integrated checks. The current repository fixture is a teaching stand-in, not a production application.
+    learnerArtifacts:
+      - Cross-component design defense
+      - Vulnerable/fixed evidence across milestones
+      - Changed-assumptions and residual-risk memo
+    revisit: Do not claim integrated product assurance until the M0–M4 implementation evidence exists.
