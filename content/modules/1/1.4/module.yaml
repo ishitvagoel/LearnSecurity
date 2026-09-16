@@ -4,7 +4,7 @@ title: Risk, people, economics, usable security, and resilience
 phase: 1
 track: core
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 270
 prerequisites:
 - '1.1 Pass A: invariant catalogue'
@@ -111,7 +111,7 @@ masteryGate: '1'
 standardsRefs:
 - source: CISA Secure by Design
   version: current-public-guidance
-  status: final
+  status: unverified
   requirementIds:
   - customer-outcomes
   - secure-defaults
@@ -121,6 +121,7 @@ standardsRefs:
   status: final
   requirementIds:
   - GV
+  - GV.RM
   - DE
   - RS
   - RC
@@ -137,6 +138,9 @@ standardsRefs:
   status: final
   requirementIds:
   - security-sensitive-journeys
+  - '2.1.1'
+  - '4.1.2'
+  - '1.4.1'
   url: https://www.w3.org/TR/WCAG22/
 - source: OWASP Software Assurance Maturity Model
   version: '2.0'
@@ -161,9 +165,10 @@ operationalConsiderations:
 - 'Coercion: a physically present attacker can still force a confirmation. Record
   as residual (do not pretend UX fixes coercion).'
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review;
+  see content/progress/reviews/1.4-2026-09-16.md)
+lastReviewedAt: '2026-09-16'
+nextReviewAt: '2027-03-16'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -184,3 +189,58 @@ changelog:
 - date: '2026-09-06'
   note: Thickened transfer envelope table and review notes tied to the recovery
     oracle; independent review still required
+- date: '2026-09-16'
+  note: 'Deepen (D1-D14 remediation, B0 pilot): named five teaching claims (C1-C5)
+    and a coverage contract in spec.md; expanded all eight lessons to clear the
+    900-word floor with derivation, worked examples, and counterexamples rather
+    than padding; fixed the disconnected 01-property.md diagram; added Standards
+    lines to 01-property.md and 05-verify.md; raised the lab from one test to six
+    (normal, two boundary cases, one malformed-input case, and a two-test
+    anti-fake pair verified against a constructed hardcoded-checker fake) without
+    changing its Tier-1 realism classification, which remains justified because
+    the property is a pure predicate over a declarative dict; authored an
+    eight-item assessment bank with distractor rationales and four-state banding
+    in the isolated key; rewrote the rubric to remove the non-existent "session
+    worksheet" reference. Corrected reviewer/lastReviewedAt/nextReviewAt, which
+    claimed a completed review with no artifact under content/progress/reviews/
+    (the same D12 pattern found on 53 other modules); reverted to pending with
+    null dates per metadata-honesty.mdc. Independent review requested; this pass
+    may not and does not set depth or quality.'
+- date: '2026-09-16'
+  note: 'Closed all five blockers from the independent review at content/progress/reviews/1.4-2026-09-16.md:
+    corrected spec.md''s teaching-claims table, which had cited three lab test
+    names that do not exist and a false lab mapping for claim C1 (the lab has no
+    notion of an owner or a revisit trigger; C1, C3, and C4 are now honestly
+    declared non-code-testable rather than mapped to a fabricated test); added a
+    second Discrimination item to the assessment bank (assessment-items.mdc
+    requires 2-3; the prior entry''s "eight-item" count is now nine after this
+    addition, and the changelog above is left as an accurate record of that
+    earlier state rather than edited); corrected CISA Secure by Design''s status
+    from final to unverified to match content/standards/pins.yaml, and grounded
+    OWASP SAMM 2.0, CISA Secure by Design, and NIST SP 800-63-4 by name in
+    01-property.md rather than leaving them declared but unused; synced
+    module.yaml requirementIds (WCAG SC 2.1.1/4.1.2/1.4.1, CSF GV.RM) with the
+    lessons'' Standards lines; and replaced 08-review.md''s seeded-review section,
+    which enumerated the four intended findings in learner-facing prose before
+    the student looked, with an actual submission and a checklist that does not
+    pre-state the answer, restoring an isolated findings section in the key.
+    This pass does not and may not set depth, quality, reviewer, or a review
+    date -- that decision belongs to the reviewer who granted the addendum
+    verdict at content/progress/reviews/1.4-2026-09-16.md#addendum, or to the
+    human.'
+- date: '2026-09-16'
+  note: 'Independent review resolved. The twelve-dimension quality review passed
+    (every dimension >=2, every critical dimension >=2, eight of twelve at 3) after
+    five blockers raised against b4281d8 were closed at a423273 and 1fd06cb; the
+    independent lab-safety review passed with no findings, verifying the documented
+    reset against real damage rather than against the README''s claim. Both
+    artifacts are sections of content/progress/reviews/1.4-2026-09-16.md. This
+    entry records the reviewer, lastReviewedAt (2026-09-16), nextReviewAt
+    (2027-03-16, the six-month interval used by 1.1-1.3; reviewTriggers remain
+    out-of-cycle causes), and status: published, which metadata-honesty.mdc
+    reserves to the independent reviewer and which is now accurate because the
+    module is no longer awaiting review. quality: competent and depth: publishable
+    are recorded in content/progress/STATUS.yaml, which is where those two fields
+    live -- module.schema.json sets additionalProperties: false and defines
+    neither. quality: transfer-ready is NOT claimed: it requires satisfactory
+    learner evidence from items.md #8, and none exists yet.'
