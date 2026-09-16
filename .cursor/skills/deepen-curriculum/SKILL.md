@@ -29,7 +29,9 @@ Do **not** use this skill to author a missing Pass A spec, to mark gates or mile
 
 ## Prerequisites
 
-Before conducting **any** module, confirm workstream **W0** has landed: `scripts/lint_content.py` and `scripts/run_labs.sh` exist and are calibrated (see [`content-lint`](../content-lint/SKILL.md)). Without a mechanical gate, a bad template propagates — which is how 54 modules reached their current state. If W0 is missing, say so and stop.
+Workstream **W0** has landed: `scripts/lint_content.py` (rules `L001`–`L017`, calibrated against modules 1.2/1.3) and `scripts/run_labs.sh` (all 57 labs green). Both must pass before a module goes to review — see [`content-lint`](../content-lint/SKILL.md).
+
+The linter runs against `scripts/lint_baseline.json` and reports only new or regressed findings. After deepening a module, regenerate the baseline and confirm its count **fell**. Never add a finding to it to make a module pass.
 
 ## Batch order
 

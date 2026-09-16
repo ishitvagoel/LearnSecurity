@@ -46,14 +46,14 @@ The full policy lives in the lab README and the site policy page. Repeating it f
 
 Every Mermaid block is one of four kinds and must show something the prose cannot:
 
-| Kind | Minimum |
+| Kind | What it must show |
 |---|---|
-| Trust-boundary map | 5 nodes, ≥2 distinct authority paths |
-| Protocol sequence | 4 messages |
-| State machine | 5 states or transitions |
-| Data flow with authority annotations | 5 nodes |
+| Trust-boundary map | ≥2 distinct authority paths meeting at a decision |
+| Protocol sequence | ≥4 messages |
+| State machine | transitions, including the failure transition |
+| Data flow with authority annotations | where authority is attached and where it is consumed |
 
-A two-node diagram that restates the sentence above it is a defect. If it cannot meet the minimum, it is prose.
+The mechanical test is structure, not size: a diagram fails if it is disconnected fragments, or fewer than four nodes in a straight line. A three-node decision tree that branches is fine — it shows the discriminating question. Four labels in two disconnected pairs is not, however many nodes it has. If a diagram cannot show a boundary, a branch, a sequence, or a state change, write prose.
 
 ## Cross-references
 
@@ -75,7 +75,7 @@ Tables carry data, not prose. Use them for genuine comparisons — channel × pr
 
 ## Floors
 
-Per lesson: ≥900 words of body prose, median sentence ≥11 words, fewer than 8% of sentences ≤5 words, ≥1 worked example, ≥1 counterexample. `01-property.md` and `05-verify.md` additionally carry a `**Standards:**` line whose identifiers are a subset of `module.yaml` `standardsRefs[].requirementIds`.
+Per lesson: ≥900 words of body prose, median sentence ≥11 words, fewer than 12% of sentences ≤5 words, ≥1 worked example, ≥1 counterexample. The 12% figure is measured, not chosen: the reference modules top out at 11% and the rest run 19% median. `01-property.md` and `05-verify.md` additionally carry a `**Standards:**` line whose identifiers are a subset of `module.yaml` `standardsRefs[].requirementIds`.
 
 These are floors that make room for reasoning. Padding to reach 900 words is the same defect wearing a different coat.
 

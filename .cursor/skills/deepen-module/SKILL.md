@@ -86,11 +86,15 @@ Per `metadata-honesty.mdc`: rewrite templated outcomes as observable behaviours,
 ## Step 8 — Validate, and paste the output
 
 ```bash
-python scripts/lint_content.py content/modules/<phase>/<id>
-python3 -m pytest labs/<id>/<id>-lab/tests --impl vulnerable   # must fail
-python3 -m pytest labs/<id>/<id>-lab/tests --impl fixed        # must pass
+python scripts/lint_content.py content/modules/<phase>/<id> --no-baseline   # expect clean
+bash scripts/run_labs.sh <id>                                              # vulnerable fails, fixed passes
 npm --prefix site run build
+
+python scripts/lint_content.py --update-baseline    # the count must FALL
+git diff --stat scripts/lint_baseline.json
 ```
+
+A deepened module must be clean with `--no-baseline`, not merely clean against the baseline. The baseline is for work not yet done; never add a finding to it to make this module pass.
 
 Run the lab pair in a clean environment. Paste the **exact commands and their real output** into the review request. A described result is not a result; if a command was not run, say so.
 
