@@ -1,0 +1,39 @@
+---
+description: Item-bank requirements for learner assessment and isolated examiner keys
+globs: content/modules/**/assessment/**,content/assessment/keys/**
+alwaysApply: false
+---
+
+# Assessment items
+
+Blueprint §10 promises mastery gates with four states and non-compensating evidence. A rubric plus a generic prompt does not implement that. 53 rubrics currently point at a "session worksheet" that does not exist, and `site/lib/assessment.ts` synthesizes the same seven prompts for every module.
+
+## Required per module
+
+`content/modules/<phase>/<id>/assessment/items.md` — learner-facing, **6–10 module-specific items**, no answers:
+
+| Kind | Count | Shape |
+|---|---|---|
+| Discrimination | 2–3 | Four candidate statements; identify which is the property and which are mechanisms, and justify |
+| Diagnosis | 2–3 | A short code or config excerpt; name root cause, preconditions, and impact as three distinct things |
+| Design | 1–2 | Choose between two mechanisms under a stated constraint and defend the trade-off |
+| Transfer | 1 | The module's `07-transfer.md` scenario, with success criteria |
+| Operate | 1 | Write the signal and the recovery step |
+
+An item is module-specific when it cannot be answered correctly by a reader who has only seen a different module.
+
+## Required in the key
+
+`content/assessment/keys/<id>.md`, for each item:
+
+- the expected answer;
+- **why each distractor is attractive** — the misconception it encodes and where that misconception comes from; and
+- four-state banding (`not-attempted` | `developing` | `competent` | `transfer-ready`) with a concrete example answer at each band.
+
+Distractor rationales are what make an item teach rather than merely test. An item without them is a quiz question.
+
+## Boundaries
+
+- Answers, intended findings, and banding examples live **only** under `content/assessment/keys/`. Never in `content/modules/**` and never reachable from `site/`.
+- Knowledge checks may use an 80% retryable threshold. Practical gates require satisfactory evidence for every critical invariant; a high score elsewhere never compensates.
+- Rubrics describe module-specific evidence. Delete every reference to the non-existent "session worksheet".

@@ -1,0 +1,44 @@
+---
+description: Realism tiers, test minimums, and entry-point conventions for executable labs
+globs: labs/**
+alwaysApply: false
+---
+
+# Lab realism
+
+`labs-content.mdc` and `lab-safety.mdc` govern **safety**; they still bind and nothing here relaxes them. This rule governs **realism**: whether the lab can exhibit the failure the module is about.
+
+Keep what already works — local, synthetic, deterministic, resettable, vulnerable-fails / fixed-passes. The defect is scale, not discipline: 23 labs are a two-line pure function with two tests, and the declared Android/Kotlin track has no Kotlin at all.
+
+## Tiers
+
+| Tier | Shape | Tests | Use when |
+|---|---|---|---|
+| **1 — Predicate** | Pure function, no I/O | ≥5 | The property genuinely *is* a pure function (encoding, comparison, parsing one value) |
+| **2 — Component** | FastAPI app, real request/response cycle, SQLite or Postgres store, session or token state, driven through `httpx`/`TestClient`; 60–200 LOC per variant | 6–10 | **Default.** Phases 3–7, 9, 10, most electives |
+| **3 — Cross-component** | Two or more processes or layers: API + worker + queue, API + DB with row-level policy, app + cache, client + backend | 8–14 | One module per phase, plus the capstone |
+
+A module is Tier 1 only if a reviewer can argue the property is genuinely a pure function. **Default to Tier 2.** Only a component lab can show authority resolved across a boundary, state mutated between check and use, or a parser disagreeing with its consumer — which is most of what this course is about.
+
+## Required tests
+
+Every tier includes, at minimum:
+
+1. the normal case;
+2. the module's forbidden outcome;
+3. a boundary case;
+4. a malformed or failure case; and
+5. **an anti-fake test** — one that passes on the real fix and fails on a plausible fake (a hard-coded allow-list, a label prefix, a happy-path-only patch).
+
+The anti-fake test is not optional. `labs/5.2` previously rewarded an `aesgcm:` string prefix; the anti-fake test is what stops that class of repair from scoring.
+
+## Conventions
+
+- Directory: `labs/<module-id>/<module-id>-lab/`.
+- Entry point: `pytest tests --impl vulnerable|fixed`. `--claim` is legacy and is being migrated.
+- Pin dependencies in `requirements.txt` when the lab needs any.
+- README states invariant, root cause, impact, structural fix, detection and recovery, reset, and the exact two commands.
+
+## Mobile
+
+Phase 8 declares Android/Kotlin. Either author real Kotlin/JVM fixtures with Gradle and unit tests, or record a human decision in `content/progress/STATUS.yaml` relabelling phase 8 as analysis-only. Claiming a Kotlin track while shipping Python fixtures is the one state that must not persist.

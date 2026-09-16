@@ -12,14 +12,15 @@ This directory holds **curriculum metadata and authored learning objects**. It i
 | `modules/<phase>/<id>/` | One folder per module (`spec.md`, `module.yaml`, later `lessons/`, `assessment/`) |
 | `standards/pins.yaml` | Pinned standard versions (created by `standards-pin`) |
 | `assessment/keys/` | Answer keys and examiner notes — never linked from learner pages |
-| `glossary/` | Canonical terms (later) |
+| `glossary/` | Canonical terms — `terms.yaml`, the single source the site reads (currently empty; see the `plain-language-pass` skill) |
+| `progress/reviews/` | Dated independent review artifacts; the only thing that confers publishable depth |
 
 Phase folder names: `0` … `11` and `e` for electives.
 
 ## Authoring rules
 
 - Validate `module.yaml` against `schema/module.schema.json` before marking Pass A complete.
-- Lesson prose starts with a security property or question, not a product command.
+- Lesson prose starts with a security property or question, not a product command, and meets **`lesson-prose.mdc`**: derivation before assertion, terms defined in dual form then used, at most three rejected alternatives, one authorized-scope statement, titled cross-reference links, diagrams that meet the kind and node minimums, and a ≥900-word body. Quality reference: `content/modules/1/1.3/lessons/`.
 - Required in every publishable module: misconception list, transfer task, named attacker capabilities, mechanism limits, and standards refs with status labels.
 - Do not place exploit payloads, real secrets, or PII in this tree. Break/fix code lives in `labs/`.
 - Keep frontmatter/`module.yaml` as the machine-readable source; Markdown bodies are human-facing.
@@ -28,4 +29,8 @@ Phase folder names: `0` … `11` and `e` for electives.
 
 - **Pass A:** `spec.md` + `module.yaml` only.
 - **Pass B:** `lessons/` plus pointers to `labs/...` — no answer keys here.
-- **Pass C:** learner-facing prompts and rubrics here; keys only in `assessment/keys/`.
+- **Pass C:** learner-facing prompts, rubrics, and a 6–10 item `assessment/items.md` here; answers, distractor rationales, and banding only in `assessment/keys/`.
+
+## Remediation
+
+Thin modules are rewritten with [`deepen-module`](../.cursor/skills/deepen-module/SKILL.md), not patched. Metadata truthfulness rules are in `metadata-honesty.mdc`: an authoring pass never writes `depth`, `quality`, `reviewer`, or a review date. Plan: [`progress/content-quality-improvement-plan-2026-09-16.md`](progress/content-quality-improvement-plan-2026-09-16.md).

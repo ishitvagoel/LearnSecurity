@@ -13,8 +13,8 @@ description: Pass C — write rubrics, transfer challenges, seeded reviews, and 
 ## Instructions
 
 1. Read the module spec `assessmentBlueprint` and blueprint §10 (evidence categories; four-state gates; no compensating averages).
-2. Learner-facing files: `content/modules/<phase>/<id>/assessment/` (prompts, rubrics, evidence checklists). **No answers.**
-3. Answer keys, examiner notes, and seeded-finding lists: `content/assessment/keys/<id>.md` only. Never link keys from learner pages or `site/`.
+2. Learner-facing files: `content/modules/<phase>/<id>/assessment/` (prompts, rubrics, evidence checklists). **No answers.** The rubric alone is not an assessment — author the 6–10 module-specific items with [`author-item-bank`](../author-item-bank/SKILL.md) into `assessment/items.md`. Never write that items "live in the session worksheet"; no such worksheet exists, and 53 rubrics currently say it does.
+3. Answer keys, examiner notes, and seeded-finding lists: `content/assessment/keys/<id>.md` only. Never link keys from learner pages or `site/`. Per item, the key carries the expected answer, **why each distractor is attractive**, and four-state banding with a concrete example answer at each band.
 4. Knowledge checks may use an 80% retryable threshold. Practical gates require satisfactory evidence for every critical invariant.
 5. Gate results: `not-attempted` | `developing` | `competent` | `transfer-ready`. Core completion will need **Competent** at every gate and **Transfer-ready** at Gates 3, 4, 6, 9, 10, and the capstone.
 6. Include at least one transfer challenge (materially changed case).

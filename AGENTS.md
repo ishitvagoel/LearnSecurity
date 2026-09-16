@@ -4,6 +4,8 @@ This repository produces the **Secure Application Engineering from First Princip
 
 The repository is a **map-complete curriculum prototype under depth remediation**. File presence, generated prose, and schema validity do not by themselves make a module publishable. Only `content/progress/STATUS.yaml` plus a dated independent review artifact may confer publishable depth. Do not invent a parallel syllabus.
 
+Remediation is governed by [`content/progress/content-quality-improvement-plan-2026-09-16.md`](content/progress/content-quality-improvement-plan-2026-09-16.md) — 14 defects (`D1`–`D14`) and nine workstreams (`W0`–`W8`). Quality reference modules are **`1.2` and `1.3`**; `1.1` is not the bar and is itself queued for deepening.
+
 ## Locked production defaults
 
 Override only by recording a human decision in [`content/progress/STATUS.yaml`](content/progress/STATUS.yaml).
@@ -25,7 +27,9 @@ Override only by recording a human decision in [`content/progress/STATUS.yaml`](
 | D | Vercel learning site | `site/` (after Phase 1–2 A/B pilots) |
 | E | Independent coverage and security review | `coverage-audit`, review subagents |
 
-**Default entry (generation):** **`choreograph-curriculum`**. **Default entry (after Pass E):** **`deepen-curriculum`** (`/deepen-curriculum`). Use with Goal as `/goal run /deepen-curriculum until content/progress/STATUS.yaml revision.remaining is empty`. Inner skills: `next-iteration`, `author-module-spec`, `author-lesson`, `author-lab`, `author-assessment`, `standards-pin`, `quality-gate`, `spiral-revisit`. Slash-only helpers: `pilot-phase-1`, `coverage-audit`.
+**Default entry (generation):** **`choreograph-curriculum`**. **Default entry (after Pass E):** **`deepen-curriculum`** (`/deepen-curriculum`), which sequences modules through **`deepen-module`**. Use with Goal as `/goal run /deepen-curriculum until content/progress/STATUS.yaml revision.remaining is empty`.
+
+Inner skills: `next-iteration`, `author-module-spec`, `author-lesson`, `author-lab`, `author-assessment`, `standards-pin`, `quality-gate`, `spiral-revisit`. Remediation skills: `deepen-module` (per-module runbook), `upgrade-lab` (lab realism tiers), `author-item-bank` (assessment items), `content-lint` (mechanical gate), `plain-language-pass` (W1), `metadata-audit` (W2). Slash-only helpers: `pilot-phase-1`, `coverage-audit`.
 
 A unit is one of: one module spec; one module’s learner-facing lessons; one lab set; one assessment pack; one spiral revisit of SecureCollab artifacts; or one quality/coverage audit of already-authored work. Specialist skills may still be invoked alone.
 
@@ -37,6 +41,9 @@ A unit is one of: one module spec; one module’s learner-facing lessons; one la
 - Instruct attacks on public, third-party, or production systems.
 - Put weaponized exploit payloads, copy-paste PoCs, or live-target walkthroughs in learner-facing pages.
 - Mix ASVS 4.x requirement IDs, draft standards presented as final, or MASVS L1/L2/R levels.
+- Set `depth: publishable`, `quality: competent`, `quality: transfer-ready`, `reviewer`, `lastReviewedAt`, `nextReviewAt`, or `status: published` from an authoring or conducting pass. Only the independent reviewer that wrote the artifact under `content/progress/reviews/`, or the human, writes those fields.
+- Write lesson prose as fragments, negation lists, or template fills. `lesson-prose.mdc` binds alongside blueprint §16.
+- Open bulk deepening (batch B1 onward) before the B0 pilot has passed independent review, or before the `W0` scripts exist and are calibrated.
 
 ## Seven-step learning loop
 
@@ -73,6 +80,10 @@ Before generating or materially revising a module, run **`standards-pin`**. Chec
 
 ## Skills and subagents
 
-Conductors: `choreograph-curriculum` (Pass A–E generation), `deepen-curriculum` (publishable-depth revision after generation). Inner skills: `next-iteration`, `author-module-spec`, `author-lesson`, `author-lab`, `author-assessment`, `standards-pin`, `quality-gate`, `spiral-revisit`. Slash-only helpers: `pilot-phase-1`, `coverage-audit`.
+Conductors: `choreograph-curriculum` (Pass A–E generation), `deepen-curriculum` (publishable-depth revision after generation, batched per the plan's §12). Per-module executor: `deepen-module`. Inner skills: `next-iteration`, `author-module-spec`, `author-lesson`, `author-lab`, `upgrade-lab`, `author-assessment`, `author-item-bank`, `standards-pin`, `quality-gate`, `spiral-revisit`, `content-lint`. One-shot remediation passes: `plain-language-pass`, `metadata-audit`. Slash-only helpers: `pilot-phase-1`, `coverage-audit`.
 
-Review subagents (read-only, do not rewrite in the same pass): `standards-auditor`, `quality-reviewer`, `lab-safety-reviewer`, `curriculum-architect`.
+Review subagents (read-only, do not rewrite in the same pass): `standards-auditor`, `quality-reviewer`, `lab-safety-reviewer`, `curriculum-architect`. `quality-reviewer` produces the dated artifact under `content/progress/reviews/` and is the only role that may conclude a module meets the bar.
+
+Rules: `curriculum-core`, `lab-safety`, `module-content`, `labs-content`, `site-content`, plus the remediation rules `lesson-prose` (prose bar), `lab-realism` (lab tiers), `assessment-items` (item banks), `metadata-honesty` (review fields, outcomes, estimates).
+
+CI: [`.github/workflows/content.yml`](.github/workflows/content.yml) runs the content lint, the lab matrix, the site build, and the examiner-key isolation check on every push.

@@ -1,0 +1,50 @@
+---
+description: Truthfulness rules for module.yaml and STATUS.yaml — review fields, outcomes, and time estimates
+globs: content/modules/**/module.yaml,content/progress/STATUS.yaml
+alwaysApply: false
+---
+
+# Metadata honesty
+
+Metadata is a claim about work that was done. Every field here has been wrong at some point in this repository's history, and each wrong field cost a reader their ability to trust the rest.
+
+## Review fields
+
+- If `reviewer` contains `pending`, then `lastReviewedAt` and `nextReviewAt` **must be absent**. A review date with no review is the exact failure the governance model exists to prevent; 53 modules carried one.
+- `status: published` requires a dated artifact under `content/progress/reviews/`.
+- `reviewed` is never a synonym for approved.
+
+## Who may write what
+
+An authoring or generating agent — including a conductor running a pipeline — may **never** set:
+
+`depth: publishable` · `quality: competent` · `quality: transfer-ready` · `reviewer:` · `lastReviewedAt:` · `nextReviewAt:` · `status: published`
+
+Only the independent reviewer that produced the review artifact, or the human, writes those. This is `quality-gate` step 5 and `deepen-curriculum`'s `references/publishable-depth.md`, restated here because it is the rule most often broken.
+
+## Outcomes
+
+An outcome is an observable behaviour that an assessment item can evidence.
+
+- Bad: `Demonstrate: Sessions, cookies, and tokens` — this is the module title with a verb glued on. 21 modules carry it, along with four boilerplate lines shared verbatim.
+- Good: `Given a session parser, identify which of four channels can carry a session secret and justify the ranking.`
+
+If an outcome cannot be mapped to an assessment item and a lesson passage, it is not an outcome.
+
+## Time estimates
+
+`estimatedMinutes` is computed, not chosen:
+
+```
+reading_words / 200
+  + lab_minutes          (Tier 1: 45, Tier 2: 120, Tier 3: 240)
+  + assessment_items × 12
+  + transfer_task: 60
+  → round to nearest 30
+```
+
+47 modules currently claim 240 minutes for ~460-word lessons and a two-line lab. Recompute after the content exists, not before.
+
+## Changelog
+
+Every material revision appends a dated entry naming the defect IDs addressed (`D1`–`D14` from `content/progress/content-quality-improvement-plan-2026-09-16.md`). A changelog entry that says "thickened" without saying what changed is not traceability.

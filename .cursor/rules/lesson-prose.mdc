@@ -1,0 +1,82 @@
+---
+description: Prose quality bar for learner-facing lesson Markdown — derivation, sentence shape, diagrams, references, scope statements
+globs: content/modules/**/lessons/**
+alwaysApply: false
+---
+
+# Lesson prose
+
+Blueprint §16 says what a lesson must *contain*. This rule says what it must *read like*. Both bind. A lesson that contains every required element as a label, and explains none of them, fails this rule.
+
+**Reference bar:** `content/modules/1/1.2/lessons/` and `content/modules/1/1.3/lessons/`. Read one before writing. Module `1.1` is *not* the bar — it is queued for deepening.
+
+## Derivation, not assertion
+
+Every rule sentence is earned by the sentences before it. The chain is always: **what changes → why that lets the attacker win → what therefore has to be true.**
+
+Banned shape: `X is not Y.` standing alone. If the next sentence does not say what X actually is and why the distinction decides something, delete the sentence.
+
+Banned shape: a paragraph that is a list of noun phrases. Every paragraph is at least three connected sentences.
+
+## Vocabulary
+
+Define on first use in dual form, then use the real term for the rest of the lesson:
+
+- `cross-site scripting (XSS)` → then `XSS`
+- `Content-Security-Policy (CSP)` → then `CSP`
+- `a security invariant (a rule that must stay true)` → then `invariant`
+
+Never invent a circumlocution to avoid a term the industry uses. Learners need the word to read a standard, search for it, and speak in a design review. "A content-security header in report-only mode" is worse writing than "CSP in `Report-Only` mode", not better.
+
+Do not use repository jargon a first-time reader has not met. `cell`, `grain`, `sticker`, and `oracle` are all currently used undefined. Define or replace.
+
+## Rejected alternatives
+
+At most **three** per lesson. Each gets one full sentence naming what a competent engineer would plausibly believe, why it fails *here*, and what to check instead. Delete the rest. A list of six wrong answers before the right one teaches recognition, not understanding.
+
+## Authorized scope
+
+Exactly **one** scope sentence per lesson, immediately before the first command:
+
+> Run this only inside `labs/<id>/<slug>/`. The data is synthetic; `<label>` is a fixture label, not a real credential.
+
+The full policy lives in the lab README and the site policy page. Repeating it four times in one lesson crowds out the teaching and trains readers to skim past it. This reduces repetition, never rigor — `lab-safety.mdc` still binds.
+
+## Diagrams
+
+Every Mermaid block is one of four kinds and must show something the prose cannot:
+
+| Kind | Minimum |
+|---|---|
+| Trust-boundary map | 5 nodes, ≥2 distinct authority paths |
+| Protocol sequence | 4 messages |
+| State machine | 5 states or transitions |
+| Data flow with authority annotations | 5 nodes |
+
+A two-node diagram that restates the sentence above it is a defect. If it cannot meet the minimum, it is prose.
+
+## Cross-references
+
+Every reference to another module is a titled Markdown link:
+
+```markdown
+[2.3 Browser cookies and the cookie jar](../../2/2.3/lessons/01-property.md)
+```
+
+No bare `(2.3)`. No `(later)` without a named destination — a forward reference with nothing to point at is an IOU the reader cannot redeem, so either name the module or delete the promise.
+
+## Headings
+
+Headings describe *this* lesson's content. The only headings that may repeat verbatim across modules are `## Practice` and `## Check yourself`. Identical scaffolding across 57 modules forces content into cells where it does not fit, which is how empty cells got filled with slogans.
+
+## Tables
+
+Tables carry data, not prose. Use them for genuine comparisons — channel × property, actor × capability, standard × requirement. Do not use a table as a container for a causal chain; that belongs in sentences.
+
+## Floors
+
+Per lesson: ≥900 words of body prose, median sentence ≥11 words, fewer than 8% of sentences ≤5 words, ≥1 worked example, ≥1 counterexample. `01-property.md` and `05-verify.md` additionally carry a `**Standards:**` line whose identifiers are a subset of `module.yaml` `standardsRefs[].requirementIds`.
+
+These are floors that make room for reasoning. Padding to reach 900 words is the same defect wearing a different coat.
+
+Mechanical enforcement: rules `L001`–`L017` in `.cursor/skills/content-lint/references/lint-rules.md`.
