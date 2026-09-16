@@ -200,3 +200,25 @@ changelog:
     itself still pre-stated its answer above the checklist despite the prior
     entry''s claim to have fixed this; removed that sentence. Requesting the
     limited re-review the prior artifact recommended.'
+- date: '2026-09-16'
+  note: 'Re-review at 2de4c7c found two new findings, both introduced by the
+    prior entry''s remediation rather than carried over from the original
+    review. N1 (the one that mattered): object_pairs_hook fires at every
+    nesting depth, not only the root, so a tenant key inside an unrelated
+    nested field was being treated as the note''s own top-level claim -- a
+    note with no top-level tenant field at all was accepted, using a company
+    id scraped from a nested object the submitter fully controlled. Verified
+    by hand, then fixed by scoping collection to the hook''s last invocation,
+    which is always the root object since nested objects resolve first;
+    added test_nested_tenant_is_not_mistaken_for_the_top_level_claim, which
+    the vulnerable file also fails for the same underlying reason. Lab is 9
+    tests now. N2: five documents still described the retired two-reader
+    regex mechanism after the object_pairs_hook rewrite -- rewrote
+    04-build.md''s candidate comparison as three attempts (compare
+    first/last; collect via regex; retire the second reader entirely) rather
+    than two, since the shipped fix changed category to C4''s single-reader
+    option and the lesson was still presenting that as the road not taken;
+    rewrote 05-verify.md''s worked example to trace object_pairs_hook instead
+    of re.findall; rewrote the lab README fully; fixed the key''s root-cause
+    line and four stale test-count references. This pass may not and does
+    not set depth or quality.'

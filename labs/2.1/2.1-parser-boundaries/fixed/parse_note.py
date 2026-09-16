@@ -7,18 +7,29 @@ a hypothetical one: a regex matching `"tenant"\\s*:\\s*"([^"]*)"` only
 recognizes a *string-typed* value in quotes, so `{"tenant":1,"tenant":"tA"}`
 has one occurrence the regex cannot see at all -- the integer `1` -- and the
 "collect every occurrence" logic silently believed there was only one
-occurrence to check. A regex is always an approximation of a grammar; it can
-never be a substitute for actually running the grammar's own parser.
+occurrence to check.
 
-The structural fix is to stop approximating JSON with a second, fallible
-reader, and instead ask CPython's own `json` module for every occurrence,
-using its `object_pairs_hook` -- a standard, documented mechanism that
-receives every key/value pair in an object literal, in source order, before
-the last-wins collapsing that a plain `json.loads(text)` call would perform.
-This is Lesson 04's Candidate B done correctly: one authoritative reader,
-consulted for the full truth about every occurrence, rather than two
-readers whose agreement is checked by comparing summaries each one has
-already collapsed.
+The second attempt used `json.loads`'s own `object_pairs_hook` to collect
+every occurrence, which correctly fixed the non-string-value gap -- but it
+introduced a different one, caught by independent review: `object_pairs_hook`
+fires for *every* object literal in the document, at every nesting depth, not
+only the top-level object. Collecting "every pair named tenant, anywhere in
+the document" means a `tenant` key buried inside an unrelated nested object
+(an attachment, a metadata blob -- anything the submitter controls) is
+treated as though it were the top-level claim. A note with *no* top-level
+tenant field at all was being accepted, using a company id scraped from
+whatever nested structure happened to contain a `tenant` key -- the exact
+forbidden outcome this module exists to prevent, reintroduced by the fix
+meant to close a different gap.
+
+`object_pairs_hook` is called innermost-first: by the time `json.loads`
+returns, the *last* invocation the hook has seen is necessarily the root
+object's own pairs, because every object nested inside it was already
+resolved (and folded into a plain `dict` value) before the root's own call.
+Collecting occurrences only from that last invocation restricts "every
+occurrence of tenant" to what it was always supposed to mean: every
+occurrence at the top level of the note object itself, not anywhere in the
+document.
 """
 
 from __future__ import annotations
@@ -26,24 +37,31 @@ from __future__ import annotations
 import json
 
 
-def _tenant_occurrences(text: str) -> list[object]:
-    """Every value ever assigned to a top-level "tenant" key, in the order
-    the bytes contain them, exactly as the real JSON parser sees them --
-    including non-string values and keys written with an escape sequence,
-    neither of which a regex over the raw text can reliably recognize."""
-    occurrences: list[object] = []
+def _root_tenant_occurrences(text: str) -> list[object]:
+    """Every value assigned to a "tenant" key at the TOP LEVEL of the note
+    object only -- not inside any nested object -- exactly as the real JSON
+    parser sees them, including non-string values and escaped keys that a
+    regex over the raw text cannot reliably recognize.
+
+    object_pairs_hook fires once per object literal, innermost first, so
+    the last invocation it makes is always the root object: every nested
+    object was already resolved into a plain dict by the time the root's
+    own pairs are handed to the hook.
+    """
+    invocations: list[list[tuple[str, object]]] = []
 
     def collect(pairs: list[tuple[str, object]]) -> dict:
-        occurrences.extend(value for key, value in pairs if key == "tenant")
+        invocations.append(pairs)
         return dict(pairs)
 
     json.loads(text, object_pairs_hook=collect)
-    return occurrences
+    root_pairs = invocations[-1] if invocations else []
+    return [value for key, value in root_pairs if key == "tenant"]
 
 
 def ingest_note(text: str) -> dict:
     try:
-        occurrences = _tenant_occurrences(text)
+        occurrences = _root_tenant_occurrences(text)
     except json.JSONDecodeError:
         # Malformed JSON syntax is not a duplicate-key disagreement, but it
         # is exactly as much "no single meaning was established" as a

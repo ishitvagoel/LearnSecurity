@@ -107,6 +107,29 @@ def test_malformed_json_fails_closed_not_with_an_unhandled_exception(parser) -> 
     )
 
 
+def test_nested_tenant_is_not_mistaken_for_the_top_level_claim(parser) -> None:
+    """A tenant key inside a nested object -- an attachment, a metadata
+    blob, anything the submitter controls -- is not the same claim as a
+    tenant key at the top level of the note object, and an object with no
+    top-level tenant field at all must not be accepted just because some
+    JSON decoder helper happened to walk into a nested object and find one.
+
+    This test exists because a real implementation of this fix once failed
+    it: collecting "every occurrence of tenant found anywhere in the
+    document" (rather than only at the root) let a note make no top-level
+    claim whatsoever and still be accepted under a company id scraped from
+    a nested blob -- the module's forbidden outcome, reintroduced by the
+    fix meant to close a different gap."""
+    no_top_level_claim = '{"body":"secret","attachment":{"tenant":"victimco"}}'
+    got = parser.ingest_note(no_top_level_claim)
+    assert got["accepted"] is False, (
+        "a note with no top-level tenant field must be refused, not accepted "
+        "under a tenant id found inside a nested object -- collecting every "
+        "occurrence must mean every occurrence at the root, not every "
+        "occurrence anywhere in the document"
+    )
+
+
 def test_checker_accepts_a_different_unambiguous_object(parser) -> None:
     """Anti-fake test, the other direction: a checker hardcoded to always
     refuse would make the fixed variant unusable but could still look

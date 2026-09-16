@@ -7,21 +7,20 @@
 
 A denylist of last week's bad strings does not bind this object's meaning to anything, and turning off a security scanner's warning binds it even less — both leave the underlying disagreement between readers exactly as unresolved as it was before. "Trust the framework" is still a slogan even when the framework in question is well-regarded and widely used, because no framework you did not write has any way of knowing that *this* field, in *this* request, is the one whose meaning must be shared between an authorization decision and a storage write.
 
-What actually has to change: the object must **have exactly one company meaning**, established once, before the who-is-allowed check ever runs. There are two structurally sound ways to get there. Refuse ingest outright whenever any duplicate key's occurrences disagree with each other. Or restructure the system so only one reader ever produces a value that anything downstream consumes — meaning the regex scan and `json.loads` stop being two independent sources of truth and become, at most, one canonical parse plus a cross-check against it.
+What actually has to change: the object must **have exactly one company meaning**, established once, before the who-is-allowed check ever runs. There are two structurally sound ways to get there. Refuse ingest outright whenever any occurrence of a duplicated key disagrees with another. Or restructure the system so only one reader ever produces a value that anything downstream consumes — retiring every second, approximate reader rather than checking its output more carefully.
 
-## Picture: deny when the copies disagree
+## Picture: deny when the copies disagree, using the one real reader
 
 ```mermaid
 flowchart TD
-  Bytes[Request bytes] --> P1[Reader A: first-key scan]
-  Bytes --> P2["Reader B: json.loads, last-key-wins"]
-  P1 --> Cmp{Every occurrence present, and all equal?}
-  P2 --> Cmp
+  Bytes[Request bytes] --> Root[json.loads with object_pairs_hook -- the real parser]
+  Root --> Occ[Every top-level tenant occurrence, in source order]
+  Occ --> Cmp{All present and identical?}
   Cmp -->|yes| One[One parse result, handed to both ACL and storage]
   Cmp -->|no| Deny["accepted = False -- no body is stored"]
 ```
 
-The repaired files still *have* two readers in them — the fix does not delete the regex scan or replace `json.loads` with something else. What changes is that the repaired files **refuse** whenever those two readers, checked against every occurrence rather than only the first and the last, disagree. A production system might instead choose a single strict parser configured to raise an error on any duplicate key, discarding the two-reader structure entirely. Both approaches are fail-safe in the sense this course means by that term: on uncertainty, the system does nothing rather than guessing. Guessing which key "the user probably meant" is not a third fail-safe option; it is a coin flip wearing a security control's clothing.
+The fix shipped in `fixed/parse_note.py` does not keep the vulnerable file's two readers around and check them against each other more carefully. It retires the second reader entirely: there is one call into `json.loads`, and the only question asked of it is "list every occurrence of `tenant` at the top level of this object." A production system might instead choose any strict JSON library configured to raise on a duplicate key outright, which is the same idea in a different shape — on uncertainty, the system does nothing rather than guessing. Guessing which key "the user probably meant" is not a third fail-safe option; it is a coin flip wearing a security control's clothing.
 
 ## What the repaired files must show
 
@@ -31,17 +30,22 @@ The repaired files still *have* two readers in them — the fix does not delete 
 | Messy, two duplicate keys | `accepted` is `False`, because the two occurrences genuinely differ |
 | Messy, three occurrences, endpoints matching, middle differing | `accepted` is `False` — checking only the first and last occurrence is not the same claim as checking that every occurrence agrees, and the fix has to check all of them |
 | No tenant field present at all | `accepted` is `False` — an absent claim is not the same as an agreed-upon one |
+| A tenant key nested inside a different field, with no top-level tenant field | `accepted` is `False` — an occurrence anywhere in the document is not the same claim as an occurrence at the top level of the note object |
 | Body, on any refusal | Not persisted as a note under any company |
 
 On uncertainty, **deny**, in every one of these cases without exception. Do not repair a disagreement by keeping the last key on the reasoning that "that is what Python's stdlib does" — CPython's behavior is a documented implementation detail of the standard library, not a security decision anyone made on this system's behalf, and treating an implementation detail as though it were a deliberate policy is exactly the confusion Lesson 01's four-word table exists to prevent.
 
-## Two candidate fixes, compared honestly
+## Three candidate fixes, compared honestly — because the second one shipped, briefly, and was wrong too
 
-A competent engineer reading Lesson 03's failing test would likely propose comparing the first occurrence against the last, since that is the shape of the module's original two-key example and it is the smallest change that makes that specific test pass.
+This module's own fix did not arrive correct on the first attempt, and tracing all three attempts is more instructive than presenting only the one that survived.
 
-**Candidate A — compare only the first occurrence to the last.** This closes the two-key case completely: with exactly two duplicate values, first and last are the only two values there are, so comparing them is comparing everything. It fails, however, on any object with three or more occurrences of the same key where the first and last happen to coincide while a middle value disagrees — Lesson 03's counterexample constructs exactly this input, and Candidate A accepts it, silently discarding the middle claim. The fix would ship with every test written *before* that counterexample existed passing cleanly, which is precisely why the middle-duplicate test exists as its own case rather than being treated as covered by the original two.
+**Candidate A — compare only the first occurrence to the last, using the vulnerable file's own two readers.** This closes the two-key case completely: with exactly two duplicate values, first and last are the only two values there are, so comparing them is comparing everything. It fails on any object with three or more occurrences of the same key where the first and last happen to coincide while a middle value disagrees — Lesson 03's counterexample constructs exactly this input, and Candidate A accepts it, silently discarding the middle claim.
 
-**Candidate B (the restore) — collect every occurrence and require the full set to have exactly one value.** This subsumes Candidate A: with only two occurrences, checking that the full set has one value is identical to comparing first against last. With three or more, it correctly catches a middle-value disagreement that Candidate A's endpoints-only comparison cannot see. `fixed/parse_note.py` implements Candidate B specifically because Candidate A's gap is not a theoretical concern — a real JSON payload with more than two occurrences of a repeated key is not an exotic construction; it is exactly the shape a hand-edited request, or a request built by concatenating two JSON fragments, would naturally take.
+**Candidate B — collect every occurrence with a second regex, and require the full set to have exactly one value.** This closes Candidate A's gap: checking the full set rather than two positions correctly catches a middle-value disagreement. It is still wrong, in a way that took a second, different kind of input to expose: a regex matching only quoted-string values (`"tenant":"([^"]*)"`) cannot see a non-string occurrence at all — `{"tenant":1,"tenant":"tA"}` has an occurrence the regex is blind to, so "collect every occurrence" silently believed there was only one when there were genuinely two. A regex is always an approximation of a grammar, however carefully written; it can never substitute for running the grammar's own parser.
+
+**Candidate C (the fix that shipped) — retire the second reader, and ask the real JSON parser for every occurrence via `object_pairs_hook`.** This closes Candidate B's gap, because it is not approximating JSON's own duplicate-key handling with a second technology at all — it is asking CPython's own parser, which by construction sees every occurrence regardless of value type or key escaping. This candidate then exposed a *third* kind of gap, caught only by an adversarial, independent read rather than by any input the module's own authors had tried: `object_pairs_hook` fires at every nesting depth in the document, not only at the top level, so an early version of this candidate treated a `tenant` key buried inside an unrelated nested field as though it were the note's own top-level claim — accepting a note with no top-level tenant field at all, using a company id scraped from a nested object the submitter fully controlled. The fix that shipped restricts collection to the hook's *last* invocation, which is always the root object, because every nested object is fully resolved before the root's own pairs are handed to the hook.
+
+Three attempts, three different technologies producing the ambiguity check, three different kinds of input needed to find each one's gap. None of the three authors — including this module's — found all of them by reasoning alone; each gap surfaced only once someone constructed the specific input that exposed it. That is itself a transferable lesson: a fix for "check every occurrence" is not verified by re-running the tests that motivated it, but by asking what kind of occurrence the checking mechanism itself might still be unable to see.
 
 ## What this is not
 
@@ -59,11 +63,11 @@ Write out who, what, the action, and the specific check that must hold true afte
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-All six tests must pass. If the middle-duplicate or anti-fake tests fail, the fix likely implements Candidate A rather than Candidate B.
+All nine tests must pass. If the middle-duplicate, non-string, or nested-tenant tests fail, the fix likely implements Candidate A or an incomplete version of Candidate C.
 
 ## Use it somewhere new
 
-GraphQL and REST both ingest the same clinic appointment — two grammars, each its own reader. The fix transfers as "one meaning, checked across every occurrence, or refuse," not as "sanitize quotes" or "add a regex denylist for repeated field names."
+GraphQL and REST both ingest the same clinic appointment. A GraphQL request's `variables` field is itself JSON, sent over the same wire as a REST body — not a second grammar, but the same one this lesson has been about. The fix transfers as "one meaning, checked across every top-level occurrence, or refuse," not as "sanitize quotes" or "add a regex denylist for repeated field names."
 
 ## What can still go wrong
 

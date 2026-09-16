@@ -121,7 +121,7 @@ Mastery states as in 1.x. Transfer = LO-07. Gate 2 with 2.2–2.4.
 
 ## Standards references
 
-ASVS 5.0.0 V1/V2/V15 (chapter-level, `final`). CWE families as **awareness** only. Pins in `content/standards/pins.yaml`.
+ASVS 5.0.0 V1 and V2 (chapter-level, `final`) — specifically V1.1.1, V1.5.3, V2.2.1, V2.2.2; see the exact identifiers and their correct requirement text in `01-property.md` and `05-verify.md`'s Standards lines. IETF RFC 8259 (final, STD 90). CWE families as **awareness** only. Pins in `content/standards/pins.yaml`.
 
 ## Review triggers
 

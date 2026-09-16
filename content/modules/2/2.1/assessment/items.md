@@ -105,6 +105,6 @@ Write the log line your system would emit when a note is refused because two rea
 - [ ] Parser-boundary map for the SecureCollab request path (Lesson 02), naming every reader
 - [ ] Local differential annotation: which two readers disagree, and on what input (Lesson 03)
 - [ ] Lab `labs/2.1/2.1-parser-boundaries`: forbidden outcome named as **a parser differential where the ACL tenant disagrees with the stored tenant**
-- [ ] `vulnerable/` tests show 5 of 8 failing for the stated security reason; `fixed/` tests show 8 of 8 passing
+- [ ] `vulnerable/` tests show 6 of 9 failing for the stated security reason; `fixed/` tests show 9 of 9 passing
 - [ ] Transfer answer (item 8) naming which claims change and which do not, with the GraphQL variables-JSON mechanism explained accurately
 - [ ] Operate signal (item 9) that carries no note body or raw JSON blob
