@@ -2,7 +2,7 @@
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
-**Standards:** OWASP ASVS 5.0.0 V2.2.1 and V2.2.2 (canonicalization occurs before validation, and validation logic cannot be bypassed by an alternate encoding of the same value). IETF RFC 8259 §4 (uniqueness of object member names is a "should," not an enforced guarantee every reader honors).
+**Standards:** OWASP ASVS 5.0.0 **V1.5.3** (Level 3 — different parsers for the same data type must parse consistently, which is exactly what these six tests check between the ACL-time and store-time readers), **V1.1.1** (canonicalization happens once, before validation, not after). IETF RFC 8259 §4 (uniqueness of object member names is a "should," not an enforced guarantee every reader honors).
 
 ## Check it
 
@@ -65,7 +65,7 @@ Run from `labs/2.1/2.1-parser-boundaries` directly if running from the repositor
 
 ## Use it somewhere new
 
-GraphQL and REST both ingest the same clinic appointment. Asserting HTTP 200 on a `/graphql` endpoint is not evidence of parser agreement between that endpoint and a parallel REST path — it only shows the GraphQL server accepted the request, which says nothing about whether a REST reader of the same logical field would reach the same conclusion. Write, in words rather than code, what a middle-duplicate-style test would look like for a GraphQL query that references the same `patient_id` variable under two different aliases plus one un-aliased reference — three claims about one field, the same shape as this lesson's three-occurrence JSON object. Do not test this against a live GraphQL target.
+GraphQL and REST both ingest the same clinic appointment. Asserting HTTP 200 on a `/graphql` endpoint is not evidence of parser agreement between that endpoint and a parallel REST path — it only shows the GraphQL server accepted the request, which says nothing about whether a REST reader of the same logical field would reach the same conclusion. Write, in words rather than code, what a middle-duplicate-style test would look like for a GraphQL request whose `variables` JSON carries three occurrences of a duplicated `patient_id` key — three claims about one field, in the same JSON grammar as this lesson's three-occurrence object, arriving through a `variables` field instead of a note body. Do not test this against a live GraphQL target.
 
 ## What this page is not doing
 

@@ -172,3 +172,31 @@ changelog:
     content/progress/reviews/ (the same D12 pattern found and fixed on 1.4);
     reverted to pending with null dates per metadata-honesty.mdc. Independent
     review requested; this pass may not and does not set depth or quality.'
+- date: '2026-09-16'
+  note: 'Closed nine blockers from the independent review at content/progress/
+    reviews/2.1-2026-09-16.md, three substantive: (1) ASVS citations were
+    misassigned across four requirements, including the one (V1.5.3) that
+    states this module''s own property; verified the correct text against the
+    official ASVS 5.0.0 release and rewrote both Standards lines. (2) The
+    GraphQL transfer claims were technically wrong -- variables are coerced
+    once per operation and cannot disagree with themselves via aliasing, as
+    the module previously claimed; verified against the GraphQL spec and
+    rewrote every affected passage (07-transfer.md, 03-break.md, 05-verify.md,
+    items.md #8, the key''s banding, rubric.md) around the correct mechanism,
+    duplicate keys inside the variables JSON payload itself. (3) The "fixed"
+    reader''s own re.findall-based fix (added in the prior entry) had a real
+    gap: a regex matching only quoted-string values cannot see a non-string
+    duplicate occurrence, confirmed by hand with {"tenant":1,"tenant":"tA"}
+    silently accepted. Replaced it with json.loads''s own object_pairs_hook,
+    which asks the real parser for every occurrence instead of approximating
+    it with a second regex; added a regression test for the non-string case
+    and a malformed-JSON-syntax test, fixing an unhandled JSONDecodeError in
+    both variants along the way -- the lab is now 8 tests, not 6. The six
+    bookkeeping blockers closed alongside: corrected four wrong item-outcome
+    citations in spec.md''s coverage contract, added RFC 8259 to pins.yaml,
+    fixed a stale "two of six" count, moved a design item out of the
+    retryable rubric bucket, and added an isolated seeded-review findings
+    section the rubric already pointed at but the key never had -- 08-review.md
+    itself still pre-stated its answer above the checklist despite the prior
+    entry''s claim to have fixed this; removed that sentence. Requesting the
+    limited re-review the prior artifact recommended.'

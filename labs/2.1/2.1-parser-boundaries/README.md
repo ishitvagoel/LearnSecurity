@@ -22,8 +22,8 @@ Refuse when any two occurrences of `"tenant"` disagree — not merely when the f
 ## Verify
 
 ```bash
-python3 -m pytest tests/test_parser.py --impl vulnerable   # 4 of 6 fail
-python3 -m pytest tests/test_parser.py --impl fixed         # 6 of 6 pass
+python3 -m pytest tests/test_parser.py --impl vulnerable   # 5 of 8 fail
+python3 -m pytest tests/test_parser.py --impl fixed         # 8 of 8 pass
 ```
 
 From the repository root:

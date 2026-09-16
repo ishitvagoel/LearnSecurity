@@ -454,3 +454,12 @@ pins:
     url: "https://csrc.nist.gov/pubs/sp/800/181/r1/final"
     role: "Workforce role language; not a pentest permit and not Gate 1"
     notes: "SP 800-181r1 final 16 Nov 2020 (structure). NICE Framework Components v2.2.0 released 28 Apr 2026 are living work-role/TKS data, not a replacement for the SP. Module 0.1 uses NICE as job language, not as authorization to scan. Module 0.2 uses Secure Systems Development competencies as informative placement language; a quiz score still cannot skip 1.2 or Gate 1."
+  - id: ietf-rfc-8259
+    source: IETF RFC 8259 The JavaScript Object Notation (JSON) Data Interchange Format
+    version: "STD 90"
+    status: final
+    publishedAt: "2017-12"
+    reviewedAt: "2026-09-16"
+    url: "https://www.rfc-editor.org/info/rfc8259"
+    role: "JSON grammar; the SHOULD-not-MUST clause on duplicate object member names is the standards anchor for module 2.1's parser-differential property"
+    notes: "Internet Standard, STD 90, published December 2017 (live-checked 2026-09-16 at the RFC Editor's own index page). Section 4 states object member names SHOULD be unique -- a recommendation, not a requirement -- and that when names are not unique, the behavior of software that receives such an object is unpredictable. Module 2.1 uses this exact clause: CPython's json.loads keeping the last duplicate and a first-key scan keeping the first are both spec-compliant, because the spec does not mandate either behavior."

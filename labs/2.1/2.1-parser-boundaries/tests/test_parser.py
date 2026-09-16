@@ -73,6 +73,40 @@ def test_checker_rejects_a_different_ambiguous_object(parser) -> None:
     )
 
 
+def test_non_string_duplicate_is_not_invisible_to_the_checker(parser) -> None:
+    """A regex that only matches quoted-string values (an earlier version of
+    this fix used exactly this regex) cannot see a non-string occurrence of
+    the tenant key at all -- {"tenant":1,"tenant":"tA"} has one occurrence a
+    string-only pattern is blind to, so a checker built that way believes
+    there is only one occurrence, sees no disagreement, and accepts an
+    object that in fact made two different claims about the tenant. This is
+    the exact shape of gap Lesson 03's own counterexample is about: a reader
+    built to approximate the grammar, rather than to run it, will always
+    have some input it cannot see correctly."""
+    mixed_type_duplicate = '{"tenant":1,"tenant":"tA"}'
+    got = parser.ingest_note(mixed_type_duplicate)
+    assert got["accepted"] is False, (
+        "two occurrences of the tenant key with different values -- even if "
+        "one is not a string -- is still a disagreement, and a checker that "
+        "cannot see a non-string occurrence at all is not checking every "
+        "occurrence, whatever it claims to do"
+    )
+
+
+def test_malformed_json_fails_closed_not_with_an_unhandled_exception(parser) -> None:
+    """Genuinely invalid JSON syntax is a different failure from a missing
+    or disagreeing field -- json.loads itself cannot even build an object to
+    inspect. This must be refused, the same as any other case where no
+    single meaning was established, rather than raising an unhandled
+    exception that a caller might not catch."""
+    not_json_at_all = "this is not valid json { at all"
+    got = parser.ingest_note(not_json_at_all)
+    assert got["accepted"] is False, (
+        "malformed JSON syntax must fail closed, not merely fail to raise "
+        "an exception that happens to propagate as a test error"
+    )
+
+
 def test_checker_accepts_a_different_unambiguous_object(parser) -> None:
     """Anti-fake test, the other direction: a checker hardcoded to always
     refuse would make the fixed variant unusable but could still look

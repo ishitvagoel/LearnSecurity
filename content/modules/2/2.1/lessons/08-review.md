@@ -11,8 +11,6 @@ Do not treat a green `test_duplicate_tenant_keys_are_one_meaning` as the whole r
 
 ## Picture: problems to find, but name them yourself first
 
-The single clearest problem in this file is that `json.loads` is used for the storage path while the who-is-allowed check uses an entirely different first-key regex scan — two technologies, reading the same bytes, with no code anywhere comparing their two answers.
-
 ```mermaid
 flowchart TD
   Claim[A code comment or PR description's claim] --> Q{What would prove it false?}
@@ -55,7 +53,7 @@ It calls `_first_tenant(text)`, assigns the result to `acl`. It calls `_last_ten
 
 ## Use it somewhere new
 
-GraphQL and REST both ingest data about the same clinic appointment — two grammars. Validating JSON correctly on only the REST path still leaves a two-meaning ingest if the GraphQL path was never checked against it. On both grammars, duplicate or aliased keys still need to resolve to one meaning before anything is accepted; write the specific check that would catch a disagreement between them, in the same shape as this module's `test_duplicate_tenant_keys_are_one_meaning`.
+GraphQL and REST both ingest data about the same clinic appointment. A GraphQL request's `variables` field is itself a JSON object, sent over the same wire as a REST body — not a second grammar, but the same one this review has been about. Validating JSON correctly on only the REST path still leaves a two-meaning ingest if the `variables` JSON was never checked the same way; write the specific check that would catch a duplicate key in that payload, in the same shape as this module's `test_duplicate_tenant_keys_are_one_meaning`.
 
 ## What this page is not doing
 

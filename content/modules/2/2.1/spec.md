@@ -50,11 +50,11 @@ Five falsifiable claims, ordered by dependency. The module previously taught all
 
 | Claim | Loop step(s) | Lab assertion | Assessment item |
 |---|---|---|---|
-| C1 | 1 Property, 3 Break, 5 Verify | `test_duplicate_tenant_keys_are_one_meaning` (the module's forbidden outcome) | items.md #1, #3 |
-| C2 | 1 Property, 2 Model | Not directly code-testable — this claim is about the reader chain in general, not one object's shape. Modeled in `lessons/02-model.md`'s reader table. | items.md #2 |
-| C3 | 1 Property, 4 Build | Not directly code-testable — a vocabulary distinction, not a predicate. Modeled in `lessons/01-property.md`'s four-word table and `lessons/04-build.md`. | items.md #4 |
-| C4 | 4 Build, 5 Verify | `test_unambiguous_json_is_accepted`, plus the anti-fake pair added in this pass (see `upgrade-lab`) | items.md #5, #6 |
-| C5 | 6 Operate, 7 Transfer | Not code-testable — no queue or worker exists in this fixture. Modeled in `lessons/06-operate.md` and the transfer scenario. | items.md #7, #8 |
+| C1 | 1 Property, 3 Break, 5 Verify | `test_duplicate_tenant_keys_are_one_meaning`, `test_middle_duplicate_is_not_silently_dropped`, `test_non_string_duplicate_is_not_invisible_to_the_checker` (the module's forbidden outcome and its boundary cases) | items.md #1, #2, #3, #8 |
+| C2 | 1 Property, 2 Model | Not directly code-testable — this claim is about the reader chain in general, not one object's shape. Modeled in `lessons/02-model.md`'s reader table. | items.md #2, #5 |
+| C3 | 1 Property, 4 Build | Not directly code-testable — a vocabulary distinction, not a predicate. Modeled in `lessons/01-property.md`'s four-word table and `lessons/04-build.md`. | items.md #5 |
+| C4 | 4 Build, 5 Verify | `test_unambiguous_json_is_accepted`, plus the anti-fake pair and the malformed/non-string boundary tests added in this pass (see `upgrade-lab`) | items.md #3, #4, #6 |
+| C5 | 6 Operate, 7 Transfer | Not code-testable — no queue or worker exists in this fixture. Modeled in `lessons/06-operate.md` and the transfer scenario. | items.md #7, #8, #9 |
 
 C1 and C4 carry genuine lab assertions, satisfying the ≥2-claims bar. C2, C3, and C5 are honestly declared non-code-testable rather than mapped to a fabricated test — C2 and C3 are vocabulary and modeling claims a unit test cannot assert, and C5 requires a second reader (a worker, a second grammar) this Tier-1 fixture does not have.
 
@@ -65,16 +65,16 @@ One row per outcome in `module.yaml`. Any empty cell is a blocker (`quality-gate
 | Outcome | Claim | Explanation | Worked example | Practice | Assessment item | Transfer |
 |---|---|---|---|---|---|---|
 | Produce a parser-boundary map for the SecureCollab request path | C2 | `lessons/02-model.md` §Step 1 reader table | `lessons/01-property.md` two-reader diagram | `lessons/02-model.md` map exercise | items.md #2 | `lessons/07-transfer.md` clinic REST/GraphQL |
-| Explain bytes vs characters, Unicode, canonicalization, encodings, grammars, serialization, interpreter boundaries | C2, C3 | `lessons/01-property.md` §Bytes are not characters | `lessons/01-property.md` four-word table | `lessons/01-property.md` practice | items.md #4 | `lessons/07-transfer.md` |
+| Explain bytes vs characters, Unicode, canonicalization, encodings, grammars, serialization, interpreter boundaries | C2, C3 | `lessons/01-property.md` §Bytes are not characters | `lessons/01-property.md` four-word table | `lessons/01-property.md` practice | items.md #5 | `lessons/07-transfer.md` |
 | Demonstrate a local parser differential as a property failure | C1 | `lessons/01-property.md` §One byte sequence | `lessons/03-break.md` broken `parse_note.py` fixture | `labs/2.1/2.1-parser-boundaries` vulnerable/fixed pair | items.md #1, #3 | `lessons/07-transfer.md` |
-| Separate validation, canonicalization, sanitization, and encoding by context | C3 | `lessons/01-property.md` §Four words that are not the same | `lessons/04-build.md` | `lessons/08-review.md` review exercise | items.md #4 | `lessons/07-transfer.md` |
-| Transfer the map when a new format is added | C1–C5 | `lessons/07-transfer.md` | `lessons/07-transfer.md` clinic table | `lessons/07-transfer.md` write-up prompts | items.md #8 | (is the transfer task) |
+| Separate validation, canonicalization, sanitization, and encoding by context | C3, C4 | `lessons/01-property.md` §Four words that are not the same | `lessons/04-build.md` | `lessons/08-review.md` review exercise | items.md #4, #6 | `lessons/07-transfer.md` |
+| Transfer the map when a new format is added | C1–C5 | `lessons/07-transfer.md` | `lessons/07-transfer.md` clinic table | `lessons/07-transfer.md` write-up prompts | items.md #7, #8, #9 | (is the transfer task) |
 
 ## Known residuals
 
 - PostgreSQL `jsonb` agreement with CPython's reader → named as a residual in `lessons/05-verify.md`; no module currently tests it.
 - Unicode identifier lookalike/normalization attacks on display names → named in `lessons/01-property.md` and `06-operate.md` as out of scope for this specific fixture.
-- GraphQL variable aliasing as a second grammar for the same field → the transfer task's subject; not lab-tested here.
+- Duplicate keys inside a GraphQL `variables` JSON payload → the transfer task's subject; not lab-tested here. GraphQL's variable coercion happens once per operation, so a declared variable cannot disagree with itself — the residual is in the `variables` payload's own JSON grammar, underneath the type system, not in GraphQL's alias mechanism.
 - A worker re-parsing stored bytes tomorrow → named explicitly in C5; picked up when a queue/worker module exists.
 
 ## Invariant prompts

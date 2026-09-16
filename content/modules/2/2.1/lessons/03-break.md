@@ -63,11 +63,11 @@ python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-Two of the six checks on the broken files **must fail** for the reasons this lesson names: `test_duplicate_tenant_keys_are_one_meaning` and `test_middle_duplicate_is_not_silently_dropped`. Record both failing names, and for each one, write the specific input that causes it — not merely "duplicate keys," but the exact object. Do not "fix" either check to make it pass; a test that seems wrong is a finding to write down, not a reason to weaken it.
+Five of the eight checks on the broken files **must fail**; this lesson names two of them specifically, because they are the ones whose cause this lesson has just traced: `test_duplicate_tenant_keys_are_one_meaning` and `test_middle_duplicate_is_not_silently_dropped`. Record both failing names, and for each one, write the specific input that causes it — not merely "duplicate keys," but the exact object. Do not "fix" either check to make it pass; a test that seems wrong is a finding to write down, not a reason to weaken it.
 
 ## Use it somewhere new
 
-GraphQL and REST can both ingest the same clinic appointment: two grammars, each a separate reader. Predict, without running anything outside this directory, what a middle-value disagreement would look like if a GraphQL variables map carried three separate references to the same `patient_id` field across an aliased query. Write down, specifically, which two values a naive endpoints-only check would compare, and what third value it would silently discard — the same shape of gap this lesson's counterexample constructs for JSON, transferred to a query language whose alias mechanism makes "the same field, referenced three times" an ordinary, unremarkable pattern rather than an edge case anyone would think to look for.
+GraphQL and REST can both ingest the same clinic appointment. A GraphQL request's `variables` field is itself ordinary JSON sent over the same wire — not a new grammar, but the same one this lesson has been about, carrying a different name. Predict, without running anything outside this directory, what a middle-value disagreement would look like if that `variables` JSON object carried three occurrences of a duplicated `patient_id` key before GraphQL's own coercion collapsed them to one value. Write down, specifically, which two occurrences a naive endpoints-only check would compare, and what third occurrence it would silently discard — the same shape of gap this lesson's counterexample constructs, in the payload GraphQL client libraries serialize rather than the one this fixture's own tests use.
 
 ## What this page is not doing
 

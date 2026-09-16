@@ -2,7 +2,7 @@
 
 **Kind:** concept-model
 **Loop step:** 1 Property
-**Standards:** OWASP ASVS 5.0.0 V1.1.1 (secure architecture requires a single trusted parse), V2.2.1 and V2.2.2 (input validation happens after canonicalization, at a trusted layer, not before), V1.5.3 (Level 3 — comprehensive input validation of untrusted data using a positive allow-list). IETF RFC 8259 §4 (JSON object names *should* be unique — a recommendation, not a requirement every reader honors identically).
+**Standards:** OWASP ASVS 5.0.0 **V1.5.3** (Level 3 — "different parsers used in the application for the same data type… perform parsing in a consistent way," which is this module's property stated in the standard's own words), **V1.1.1** (Level 2 — input is decoded into a canonical form exactly once, before any further processing, never after validation), **V2.2.1** (Level 1 — validation itself is positive, allow-list-based, once a canonical value exists), **V2.2.2** (Level 1 — validation is enforced at a trusted service layer; client-side validation must not be relied upon as a security control). IETF RFC 8259 §4 (JSON object names *should* be unique — a recommendation, not a requirement every reader honors identically).
 
 ## The rule
 

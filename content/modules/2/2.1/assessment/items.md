@@ -30,7 +30,7 @@ Four statements about a note-ingest system:
 
 Identify which statement states the property and which state mechanisms or proxies for it, and rank the three mechanism claims by how close each comes to being real evidence for the property.
 
-**Claim assessed:** C1, C2 · **Outcome:** Demonstrate a local parser differential as a property failure
+**Claim assessed:** C1, C2 · **Outcome:** Produce a parser-boundary map for the SecureCollab request path
 
 ## 3. Diagnosis — a different checker's gap
 
@@ -86,9 +86,9 @@ Lesson 02's design table names a row for "a worker re-parses stored bytes" as a 
 
 ## 8. Transfer — clinic REST and GraphQL
 
-Using the clinic scenario from `lessons/07-transfer.md`, state which of this module's five claims (C1–C5) transfer unchanged when the format changes from a single JSON object to two grammars (REST and GraphQL) carrying the same logical field, which claims need a materially different treatment, and why a GraphQL alias mechanism specifically requires more than a first-versus-last comparison.
+Using the clinic scenario from `lessons/07-transfer.md`, state which of this module's five claims (C1–C5) transfer unchanged when the format changes from a REST JSON body to a GraphQL request's `variables` JSON, which claims need a materially different treatment, and why "GraphQL variables are strongly typed and coerced once per operation" does not, by itself, close the gap this module teaches.
 
-**Success criteria:** Your answer must explain the GraphQL alias mechanism in your own words (not by repeating this module's phrasing), and must connect it explicitly to the same "check every occurrence, not only two of them" principle Lesson 03's middle-duplicate counterexample established for JSON.
+**Success criteria:** Your answer must explain, in your own words, why a variable's single-value coercion inside GraphQL's execution model does not protect the `variables` JSON payload itself from carrying a duplicate key before that coercion ever runs, and must connect this explicitly to the same "check every occurrence, not only two of them" principle Lesson 03's middle-duplicate counterexample established for the note body.
 
 **Claim assessed:** C1–C5 · **Outcome:** Transfer the map when a new format is added
 
@@ -105,6 +105,6 @@ Write the log line your system would emit when a note is refused because two rea
 - [ ] Parser-boundary map for the SecureCollab request path (Lesson 02), naming every reader
 - [ ] Local differential annotation: which two readers disagree, and on what input (Lesson 03)
 - [ ] Lab `labs/2.1/2.1-parser-boundaries`: forbidden outcome named as **a parser differential where the ACL tenant disagrees with the stored tenant**
-- [ ] `vulnerable/` tests show 4 of 6 failing for the stated security reason; `fixed/` tests show 6 of 6 passing
-- [ ] Transfer answer (item 8) naming which claims change and which do not, with the GraphQL alias mechanism explained
+- [ ] `vulnerable/` tests show 5 of 8 failing for the stated security reason; `fixed/` tests show 8 of 8 passing
+- [ ] Transfer answer (item 8) naming which claims change and which do not, with the GraphQL variables-JSON mechanism explained accurately
 - [ ] Operate signal (item 9) that carries no note body or raw JSON blob
