@@ -125,8 +125,8 @@ operationalConsiderations:
 - Honest unique-key JSON still needs 1.2 mediation.
 author: choreograph-curriculum / author-module-spec
 reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -150,3 +150,25 @@ changelog:
 - date: '2026-09-06'
   note: Bumped remaining later lessons to the 360-word bar with parser-agreement
     cause tables; independent review still required
+- date: '2026-09-16'
+  note: 'Deepen (D1-D14 remediation, B0 pilot): named five teaching claims (C1-C5)
+    and a coverage contract in spec.md; expanded all eight lessons to clear the
+    900-word floor with derivation, worked examples, and counterexamples rather
+    than padding; added Standards lines to 01-property.md (ASVS V1.1.1/V2.2.1/
+    V2.2.2/V1.5.3, RFC 8259 SS4) and 05-verify.md. Raised the lab from two tests
+    to six: reading the vulnerable checker closely surfaced a second, quieter
+    defect past the documented first-vs-last disagreement -- comparing only the
+    first and last occurrence of a duplicate key misses a middle value that
+    disagrees while the endpoints coincide, so the fixed reader now collects
+    every occurrence via re.findall and requires the full set to have exactly
+    one value. Added a boundary test for that gap, a malformed-input test (no
+    tenant field), and a two-test anti-fake pair verified against a constructed
+    fake that special-cases the exact AMBIGUOUS/CLEAN constants. Authored a
+    nine-item assessment bank with distractor rationales and four-state banding
+    in the isolated key; rewrote the rubric to remove the non-existent "session
+    worksheet" reference and to point the seeded review at a checklist rather
+    than a pre-stated list of findings. Corrected reviewer/lastReviewedAt/
+    nextReviewAt, which claimed a completed review with no artifact under
+    content/progress/reviews/ (the same D12 pattern found and fixed on 1.4);
+    reverted to pending with null dates per metadata-honesty.mdc. Independent
+    review requested; this pass may not and does not set depth or quality.'
