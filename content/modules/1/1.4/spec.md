@@ -73,13 +73,13 @@ Five falsifiable claims, ordered by dependency. The module previously taught all
 
 | Claim | Loop step(s) | Lab assertion | Assessment item |
 |---|---|---|---|
-| C1 | 1 Property, 2 Model, 6 Operate | `test_named_keyboard_control_is_accepted` (a residual without an owner is rejected in the register exercise) | items.md #1, #6 |
-| C2 | 1 Property, 3 Break, 4 Build, 5 Verify | `test_mouse_only_control_is_rejected`, `test_color_only_without_name_is_rejected`, `test_missing_name_fails_closed_despite_keyboard` | items.md #2, #3 |
-| C3 | 1 Property, 4 Build, 7 Transfer | `test_whitespace_only_name_is_rejected` (a name that satisfies presence but not screen-reader legibility is a convenience hole in the other direction) | items.md #4 |
-| C4 | 1 Property, 2 Model | (modeled, not code-testable — coercion is a residual, not a unit test) | items.md #1, #5 |
-| C5 | 6 Operate, 7 Transfer | `test_checker_rejects_a_bad_control_regardless_of_variant` (the anti-fake test: a degrade path cannot satisfy the rule by faking the checker) | items.md #6, #7 |
+| C1 | 1 Property, 2 Model, 6 Operate | Not code-testable — the lab is a pure predicate over `{name, keyboard, mouse_only, color}` and has no notion of an owner or a revisit trigger. Modeled instead in `lessons/02-model.md`'s register-row exercise (see the Coverage contract below). | items.md #1, #8 |
+| C2 | 1 Property, 3 Break, 4 Build, 5 Verify | `test_recovery_control_is_usable_and_accessible`, `test_color_only_without_name_is_rejected`, `test_missing_keyboard_flag_is_not_silently_accepted` (all in `labs/1.4/1.4-risk-register/tests/test_recovery_a11y.py`) | items.md #2, #3, #4, #6 |
+| C3 | 1 Property, 4 Build, 7 Transfer | Not directly code-testable — this claim is about a trade-off judgment between two costs, not a single object's shape. `test_whitespace_only_name_is_rejected` exercises C2's boundary (a name that satisfies bare presence but not screen-reader legibility), not C3 itself; modeled instead in `lessons/01-property.md`'s two-effort picture and `items.md`'s item 5 (the 24-hour-timeout scenario). | items.md #2, #5 |
+| C4 | 1 Property, 2 Model | Not code-testable — coercion is a residual, not a unit test, and this is the correct call rather than a gap. | items.md #1, #7 |
+| C5 | 6 Operate, 7 Transfer | `test_checker_rejects_a_bad_control_regardless_of_variant`, `test_checker_accepts_a_good_control_regardless_of_variant` (the anti-fake pair: an oracle that can be faked cannot be trusted to enforce a degrade path's rules either) | items.md #7, #9 |
 
-Every claim carries at least one lab assertion or is explicitly modeled as non-code-testable (C4: coercion by a physically present attacker has no code-level oracle, and pretending otherwise would be worse than naming it as residual). This satisfies the ≥2-claims-with-lab-assertions bar with margin.
+C2 and C5 carry genuine lab assertions, satisfying the ≥2-claims-with-lab-assertions bar. C1, C3, and C4 are honestly declared non-code-testable rather than mapped to a test that does not actually assert them — pretending a unit test can check "an owner and a trigger were named" or "attacker effort was weighed against user effort" would be a worse defect than naming the limit plainly.
 
 ## Coverage contract
 
@@ -88,10 +88,10 @@ One row per outcome in `module.yaml`. Any empty cell is a blocker (`quality-gate
 | Outcome | Claim | Explanation | Worked example | Practice | Assessment item | Transfer |
 |---|---|---|---|---|---|---|
 | Produce a SecureCollab risk register with assumptions, uncertainty, user-harm, residual risk, and owners | C1 | `lessons/01-property.md` §Leftover risk is a decision | `lessons/02-model.md` §Step 3 harm scenarios (Kai, Remy, support-pressure) | `lessons/02-model.md` register-row exercise | items.md #1 | `lessons/07-transfer.md` clinic/bank register |
-| Model threat actors by capability and incentive, including human error, coercion, and abuse economics | C4 | `lessons/01-property.md` §People are capability plus motive | `lessons/01-property.md` actor table (owner, person present, fake support, bulk automator) | `lessons/02-model.md` who-is-allowed rows | items.md #5 | `lessons/07-transfer.md` clinician/bank actor table |
-| Treat security friction and inaccessibility as security outcomes | C2, C3 | `lessons/01-property.md` §Two kinds of effort | `lessons/03-break.md` broken `recovery.py` fixture | `labs/1.4/1.4-risk-register` vulnerable/fixed pair | items.md #2, #3, #4 | `lessons/07-transfer.md` mouse-only second factor |
-| Include graceful degradation, detection, and recovery when prevention is not absolute | C5 | `lessons/06-operate.md` §Degrade without leftover permission | `lessons/06-operate.md` deny-line log example | `lessons/06-operate.md` practice (draft a deny line) | items.md #6 | `lessons/07-transfer.md` clinician degrade path |
-| Transfer the register after changed actor capability or a failing accessible recovery flow | C1–C5 | `lessons/07-transfer.md` | `lessons/07-transfer.md` clinic/bank table | `lessons/07-transfer.md` write-up prompts | items.md #7 | (is the transfer task) |
+| Model threat actors by capability and incentive, including human error, coercion, and abuse economics | C4 | `lessons/01-property.md` §People are capability plus motive | `lessons/01-property.md` actor table (owner, person present, fake support, bulk automator) | `lessons/02-model.md` who-is-allowed rows | items.md #7 | `lessons/07-transfer.md` clinician/bank actor table |
+| Treat security friction and inaccessibility as security outcomes | C2, C3 | `lessons/01-property.md` §Two kinds of effort | `lessons/03-break.md` broken `recovery.py` fixture | `labs/1.4/1.4-risk-register` vulnerable/fixed pair | items.md #2, #3, #4, #5, #6 | `lessons/07-transfer.md` mouse-only second factor |
+| Include graceful degradation, detection, and recovery when prevention is not absolute | C5 | `lessons/06-operate.md` §Degrade without leftover permission | `lessons/06-operate.md` deny-line log example | `lessons/06-operate.md` practice (draft a deny line) | items.md #9 | `lessons/07-transfer.md` clinician degrade path |
+| Transfer the register after changed actor capability or a failing accessible recovery flow | C1–C5 | `lessons/07-transfer.md` | `lessons/07-transfer.md` clinic/bank table | `lessons/07-transfer.md` write-up prompts | items.md #8 | (is the transfer task) |
 
 ## Known residuals
 
@@ -144,12 +144,14 @@ Gate 1 (with 1.1–1.3): given an unfamiliar product, define security without a 
 
 | source | version | status | requirementIds | url |
 |---|---|---|---|---|
-| CISA Secure by Design | current public guidance | final | customer-outcomes; secure-defaults | https://www.cisa.gov/securebydesign |
-| NIST CSF | 2.0 | final | DE, RS, RC (and GV for residual ownership) | https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20 |
+| CISA Secure by Design | current public guidance | **unverified** — canonical and independent fetches both returned 403 on the 2026-08-25 check recorded in `content/standards/pins.yaml`; do not present pledge language as an assurance baseline | customer-outcomes; secure-defaults | https://www.cisa.gov/securebydesign |
+| NIST CSF | 2.0 | final | GV, **GV.RM** (Risk Management Strategy — the category this module actually uses for residual-risk ownership), DE, RS, RC | https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20 |
 | NIST SP 800-63-4 | 4 | final | risk-management; customer-experience (not full authenticator catalog) | https://pages.nist.gov/800-63-4/ |
-| WCAG | 2.2 | final | security-sensitive journeys; no mouse-only / visual-only / memory-only | https://www.w3.org/TR/WCAG22/ |
+| WCAG | 2.2 | final | security-sensitive journeys; **2.1.1 Keyboard (Level A)**, **4.1.2 Name, Role, Value (Level A)**, **1.4.1 Use of Color (Level A)** — the exact success criteria the lab predicate checks; no mouse-only / visual-only / memory-only | https://www.w3.org/TR/WCAG22/ |
 | OWASP SAMM | 2.0 | final | Governance/metrics awareness; vanity vs outcome | https://owaspsamm.org/model/ |
 | Saltzer & Schroeder | 1975 | seminal | psychological-acceptability; work-factor; compromise-recording | https://web.mit.edu/saltzer/www/publications/protection/ |
+
+CISA Secure by Design, OWASP SAMM 2.0, and NIST SP 800-63-4 are pinned because the misconception list above names them by name, and each is grounded by an explicit prose mention (not merely gestured at) in `lessons/01-property.md`: the maturity-score refutation names OWASP SAMM 2.0 directly rather than "industry lists"; the "buying a second factor is not the rule" clause names CISA Secure by Design's own "customer-outcomes, secure-defaults" framing directly; and the two-effort model's user-cost framing names NIST SP 800-63-4's risk-management and customer-experience emphasis directly, as the alternative to reading 800-63 as a password-complexity checklist.
 
 Pinned in `content/standards/pins.yaml` on 2026-08-23.
 

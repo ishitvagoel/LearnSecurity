@@ -111,7 +111,7 @@ masteryGate: '1'
 standardsRefs:
 - source: CISA Secure by Design
   version: current-public-guidance
-  status: final
+  status: unverified
   requirementIds:
   - customer-outcomes
   - secure-defaults
@@ -121,6 +121,7 @@ standardsRefs:
   status: final
   requirementIds:
   - GV
+  - GV.RM
   - DE
   - RS
   - RC
@@ -137,6 +138,9 @@ standardsRefs:
   status: final
   requirementIds:
   - security-sensitive-journeys
+  - '2.1.1'
+  - '4.1.2'
+  - '1.4.1'
   url: https://www.w3.org/TR/WCAG22/
 - source: OWASP Software Assurance Maturity Model
   version: '2.0'

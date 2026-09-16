@@ -25,12 +25,21 @@ flowchart TD
 
 The third question is the one most reviews skip, because a change that fixes accessibility and simultaneously weakens the underlying authority check *looks* like pure progress if you only check the accessibility half. A confirm button that is now named, keyboard-operable, and reachable by anyone regardless of ownership is not a fix; it is the coercion and impersonation problem with better UX.
 
-Seeded issues to look for in a typical submission, none of which requires special tooling to spot once you know to look at the object rather than the library name attached to it:
+## The submission under review
 
-- the confirm button has no accessible name;
-- the confirming action is distinguished from canceling only by red versus green;
-- the confirm mechanism is a mouse-only drag-to-confirm gesture;
-- the accompanying risk-register entry lists the leftover as "users should be careful," with no owner and no revisit trigger named.
+You are handed the following PR description and the accompanying register row, exactly as a teammate submitted them. Do not assume either is honest; that is the thing you are checking.
+
+> **PR: "Improve recovery confirm accessibility"**
+> Switched the recovery confirm button to a red/green drag-to-confirm slider so it's more obvious which action is destructive. Updated the risk register: "Residual: users should be careful when recovering their account."
+
+Apply the four-question checklist below to this submission, in this order, before you read any further in this lesson:
+
+1. Does the changed control have an accessible name a screen reader could announce — not merely a visual label?
+2. Is the confirm action distinguished from cancel by more than color alone?
+3. Is the control operable without a pointer, or does "drag" already answer that question?
+4. Does the register's leftover entry name a specific harm with an owner and a revisit trigger, or does it read like a phrase that could apply to any change whatsoever?
+
+Write down your answer to each question — pass or fail, and why — before comparing against anything else. The point of asking in this order is that a PR description full of confident-sounding language ("more obvious," "updated the risk register") is exactly the kind of submission a reviewer approves on a skim; each question forces you to check the object itself rather than the description of it.
 
 Also reject, on sight, regardless of how the rest of the change reads: trusting the browser itself as a vault for anything sensitive; closing a finding in the tracker without re-running `--impl fixed` to confirm the fix actually holds; a key or examiner note appearing in learner-facing notes where it does not belong; and "we should try this against the staging clinic environment" as a verification plan, which this course's laboratory policy forbids regardless of whether staging is nominally non-production.
 
@@ -54,7 +63,7 @@ Read it the way this review expects, before running anything. `mouse_only` is no
 
 ## Use it somewhere new
 
-On a mouse-only second-factor screen protecting a patient chart, write the same four problem categories as they would actually appear in that UI: an unnamed confirmation dialog, a continue action distinguished only by color, a pointer-only interaction gesture, and a leftover column that says "clinicians should be careful" with no owner attached. Naming each one in the new setting, rather than only recognizing it in the notes-app version, is the actual test of whether you learned the rule or memorized this module's specific examples.
+You are handed a second submission: a clinic's second-factor dialog, described in its own PR as "a quick continue button so clinicians can get back to the chart fast." Apply the same four-question checklist to this new submission independently — do not assume it fails the same way the notes-app one did, and do not assume it fails at all. Write your pass/fail answer to each of the four questions before deciding whether this is the same defect wearing new words or a genuinely different situation. Getting the same four *categories* right without independently checking whether each one actually applies here would mean you memorized this module's specific examples rather than learned the method.
 
 ## Can people still use it
 
