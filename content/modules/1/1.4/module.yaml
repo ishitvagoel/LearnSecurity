@@ -205,3 +205,25 @@ changelog:
     (the same D12 pattern found on 53 other modules); reverted to pending with
     null dates per metadata-honesty.mdc. Independent review requested; this pass
     may not and does not set depth or quality.'
+- date: '2026-09-16'
+  note: 'Closed all five blockers from the independent review at content/progress/reviews/1.4-2026-09-16.md:
+    corrected spec.md''s teaching-claims table, which had cited three lab test
+    names that do not exist and a false lab mapping for claim C1 (the lab has no
+    notion of an owner or a revisit trigger; C1, C3, and C4 are now honestly
+    declared non-code-testable rather than mapped to a fabricated test); added a
+    second Discrimination item to the assessment bank (assessment-items.mdc
+    requires 2-3; the prior entry''s "eight-item" count is now nine after this
+    addition, and the changelog above is left as an accurate record of that
+    earlier state rather than edited); corrected CISA Secure by Design''s status
+    from final to unverified to match content/standards/pins.yaml, and grounded
+    OWASP SAMM 2.0, CISA Secure by Design, and NIST SP 800-63-4 by name in
+    01-property.md rather than leaving them declared but unused; synced
+    module.yaml requirementIds (WCAG SC 2.1.1/4.1.2/1.4.1, CSF GV.RM) with the
+    lessons'' Standards lines; and replaced 08-review.md''s seeded-review section,
+    which enumerated the four intended findings in learner-facing prose before
+    the student looked, with an actual submission and a checklist that does not
+    pre-state the answer, restoring an isolated findings section in the key.
+    This pass does not and may not set depth, quality, reviewer, or a review
+    date -- that decision belongs to the reviewer who granted the addendum
+    verdict at content/progress/reviews/1.4-2026-09-16.md#addendum, or to the
+    human.'
