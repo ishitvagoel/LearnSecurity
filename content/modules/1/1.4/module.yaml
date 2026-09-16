@@ -4,7 +4,7 @@ title: Risk, people, economics, usable security, and resilience
 phase: 1
 track: core
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 270
 prerequisites:
 - '1.1 Pass A: invariant catalogue'
@@ -165,9 +165,10 @@ operationalConsiderations:
 - 'Coercion: a physically present attacker can still force a confirmation. Record
   as residual (do not pretend UX fixes coercion).'
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review;
+  see content/progress/reviews/1.4-2026-09-16.md)
+lastReviewedAt: '2026-09-16'
+nextReviewAt: '2027-03-16'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -227,3 +228,19 @@ changelog:
     date -- that decision belongs to the reviewer who granted the addendum
     verdict at content/progress/reviews/1.4-2026-09-16.md#addendum, or to the
     human.'
+- date: '2026-09-16'
+  note: 'Independent review resolved. The twelve-dimension quality review passed
+    (every dimension >=2, every critical dimension >=2, eight of twelve at 3) after
+    five blockers raised against b4281d8 were closed at a423273 and 1fd06cb; the
+    independent lab-safety review passed with no findings, verifying the documented
+    reset against real damage rather than against the README''s claim. Both
+    artifacts are sections of content/progress/reviews/1.4-2026-09-16.md. This
+    entry records the reviewer, lastReviewedAt (2026-09-16), nextReviewAt
+    (2027-03-16, the six-month interval used by 1.1-1.3; reviewTriggers remain
+    out-of-cycle causes), and status: published, which metadata-honesty.mdc
+    reserves to the independent reviewer and which is now accurate because the
+    module is no longer awaiting review. quality: competent and depth: publishable
+    are recorded in content/progress/STATUS.yaml, which is where those two fields
+    live -- module.schema.json sets additionalProperties: false and defines
+    neither. quality: transfer-ready is NOT claimed: it requires satisfactory
+    learner evidence from items.md #8, and none exists yet.'
