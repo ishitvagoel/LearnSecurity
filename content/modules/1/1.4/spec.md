@@ -61,6 +61,47 @@ Actor capability + incentive + user harm
 - What is the cheapest abuse that still pays (notifications, invites, exports)?
 - Which assumptions are untested (honest lab, trusted operator, honest IdP)?
 
+## Teaching claims
+
+Five falsifiable claims, ordered by dependency. The module previously taught all five implicitly across the lessons without naming them; naming them here makes the coverage contract checkable and stops any one claim from being silently dropped in a future edit.
+
+1. **C1 — Residual risk is a decision, not a color.** For SecureCollab's account-recovery confirm step, "residual risk" means a specific named harm that survives after the control is applied, with an owner and a revisit trigger. A heat-map cell or a scanner color is not evidence that a residual was named; it is evidence that a table was filled in.
+2. **C2 — An unusable security control is a failed security control, not a UI defect.** If a legitimate account owner cannot complete the recovery-confirm step with a keyboard, a name a screen reader can speak, and a cue that is not color alone, the control has failed as a security control: the owner is locked out, or they take a shortcut (shared admin session, codes pasted into chat) that reintroduces the exposure the control existed to prevent. This is WCAG 2.2's success criteria (2.1.1 Keyboard, 4.1.2 Name/Role/Value, 1.4.1 Use of Color) applied to a security-sensitive journey, not a general accessibility audit of the product.
+3. **C3 — Attacker effort and legitimate-user effort are two different costs that trade against each other.** Raising attacker work while ignoring user work produces "friction theater" — a control that demos well and fails a real user under stress, a missing pointer, or a screen reader. Lowering user work without preserving the who-is-allowed check produces a "convenience hole" — emailing a password, reading a code aloud, sharing an admin session. A change that only measures one side of this trade cannot be evaluated.
+4. **C4 — Threat actors are named by capability and motive, not by a villain archetype.** "Hacker" and "insider" do not predict what recovery actually breaks against. The account owner with reduced ability, the person physically present who can force a confirmation, the caller impersonating support, and the bulk automator each have a different capability and a different motive, and each breaks a different part of the recovery path.
+5. **C5 — A degrade/detect/recover path inherits the same accessibility and authority rules as the path it replaces, and must not create a new leak.** An alternate recovery route is still subject to C2 (it must itself be usable) and to the who-is-allowed check from C1/C4 (support reading a code aloud is a new, unreviewed grant, not a fallback). The operational signal that detects a failed recovery must never carry the secret the control exists to protect.
+
+| Claim | Loop step(s) | Lab assertion | Assessment item |
+|---|---|---|---|
+| C1 | 1 Property, 2 Model, 6 Operate | `test_named_keyboard_control_is_accepted` (a residual without an owner is rejected in the register exercise) | items.md #1, #6 |
+| C2 | 1 Property, 3 Break, 4 Build, 5 Verify | `test_mouse_only_control_is_rejected`, `test_color_only_without_name_is_rejected`, `test_missing_name_fails_closed_despite_keyboard` | items.md #2, #3 |
+| C3 | 1 Property, 4 Build, 7 Transfer | `test_whitespace_only_name_is_rejected` (a name that satisfies presence but not screen-reader legibility is a convenience hole in the other direction) | items.md #4 |
+| C4 | 1 Property, 2 Model | (modeled, not code-testable — coercion is a residual, not a unit test) | items.md #1, #5 |
+| C5 | 6 Operate, 7 Transfer | `test_checker_rejects_a_bad_control_regardless_of_variant` (the anti-fake test: a degrade path cannot satisfy the rule by faking the checker) | items.md #6, #7 |
+
+Every claim carries at least one lab assertion or is explicitly modeled as non-code-testable (C4: coercion by a physically present attacker has no code-level oracle, and pretending otherwise would be worse than naming it as residual). This satisfies the ≥2-claims-with-lab-assertions bar with margin.
+
+## Coverage contract
+
+One row per outcome in `module.yaml`. Any empty cell is a blocker (`quality-gate` step 2).
+
+| Outcome | Claim | Explanation | Worked example | Practice | Assessment item | Transfer |
+|---|---|---|---|---|---|---|
+| Produce a SecureCollab risk register with assumptions, uncertainty, user-harm, residual risk, and owners | C1 | `lessons/01-property.md` §Leftover risk is a decision | `lessons/02-model.md` §Step 3 harm scenarios (Kai, Remy, support-pressure) | `lessons/02-model.md` register-row exercise | items.md #1 | `lessons/07-transfer.md` clinic/bank register |
+| Model threat actors by capability and incentive, including human error, coercion, and abuse economics | C4 | `lessons/01-property.md` §People are capability plus motive | `lessons/01-property.md` actor table (owner, person present, fake support, bulk automator) | `lessons/02-model.md` who-is-allowed rows | items.md #5 | `lessons/07-transfer.md` clinician/bank actor table |
+| Treat security friction and inaccessibility as security outcomes | C2, C3 | `lessons/01-property.md` §Two kinds of effort | `lessons/03-break.md` broken `recovery.py` fixture | `labs/1.4/1.4-risk-register` vulnerable/fixed pair | items.md #2, #3, #4 | `lessons/07-transfer.md` mouse-only second factor |
+| Include graceful degradation, detection, and recovery when prevention is not absolute | C5 | `lessons/06-operate.md` §Degrade without leftover permission | `lessons/06-operate.md` deny-line log example | `lessons/06-operate.md` practice (draft a deny line) | items.md #6 | `lessons/07-transfer.md` clinician degrade path |
+| Transfer the register after changed actor capability or a failing accessible recovery flow | C1–C5 | `lessons/07-transfer.md` | `lessons/07-transfer.md` clinic/bank table | `lessons/07-transfer.md` write-up prompts | items.md #7 | (is the transfer task) |
+
+## Known residuals
+
+Genuinely out of scope for this module:
+
+- Coercion by a physically present attacker → owned by C4/C1 as permanent residual; no module removes it. Recorded, not deferred to another module.
+- A real accessibility audit of the full product → out of scope; this module's claim is scoped to one security-sensitive journey (recovery confirm), per WCAG 2.2's own security-sensitive-journey framing, not full conformance.
+- A live user study → out of scope for a synthetic course lab; explicitly named as a limit in `lessons/02-model.md`.
+- Support-impersonation as a shipped feature → residual named in the design table; a checked, audited support-assist flow is future work, not this module's forbidden-outcome fixture.
+
 ## Lesson inventory (titles only)
 
 | Object id | Kind | Title | Loop step |

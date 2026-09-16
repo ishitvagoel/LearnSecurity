@@ -161,9 +161,9 @@ operationalConsiderations:
 - 'Coercion: a physically present attacker can still force a confirmation. Record
   as residual (do not pretend UX fixes coercion).'
 author: choreograph-curriculum / author-module-spec
-reviewer: quality-reviewer (publishable rewrite vs 1.1/1.2 bar)
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+reviewer: pending independent quality and lab-safety review
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -184,3 +184,20 @@ changelog:
 - date: '2026-09-06'
   note: Thickened transfer envelope table and review notes tied to the recovery
     oracle; independent review still required
+- date: '2026-09-16'
+  note: 'Deepen (D1-D14 remediation, B0 pilot): named five teaching claims (C1-C5)
+    and a coverage contract in spec.md; expanded all eight lessons to clear the
+    900-word floor with derivation, worked examples, and counterexamples rather
+    than padding; fixed the disconnected 01-property.md diagram; added Standards
+    lines to 01-property.md and 05-verify.md; raised the lab from one test to six
+    (normal, two boundary cases, one malformed-input case, and a two-test
+    anti-fake pair verified against a constructed hardcoded-checker fake) without
+    changing its Tier-1 realism classification, which remains justified because
+    the property is a pure predicate over a declarative dict; authored an
+    eight-item assessment bank with distractor rationales and four-state banding
+    in the isolated key; rewrote the rubric to remove the non-existent "session
+    worksheet" reference. Corrected reviewer/lastReviewedAt/nextReviewAt, which
+    claimed a completed review with no artifact under content/progress/reviews/
+    (the same D12 pattern found on 53 other modules); reverted to pending with
+    null dates per metadata-honesty.mdc. Independent review requested; this pass
+    may not and does not set depth or quality.'

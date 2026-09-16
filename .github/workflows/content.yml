@@ -68,10 +68,33 @@ jobs:
       - run: npm --prefix site ci
       - run: npm --prefix site run lint
       - run: npm --prefix site run build
-      - name: Examiner keys must not reach the published export
+      - name: Examiner keys must not be linked from the published export
+        # A bare-text grep for "assessment/keys" false-positives on every
+        # lesson that correctly tells the reader where keys live (e.g.
+        # "Answer keys are not on this site; they live only in
+        # content/assessment/keys/1.4.md") -- that sentence is the isolation
+        # policy working, not a leak. Modules 1.3 and 1.4 both say this and
+        # would trip a bare-text check. The actual risk is a *link* or
+        # *embedded content* reaching a learner page, so this checks for an
+        # href into the keys tree and for key file content appearing
+        # verbatim in the export, not for the path being named in prose.
         run: |
-          if grep -rl "assessment/keys" site/out >/dev/null 2>&1; then
-            echo "::error::site/out references content/assessment/keys"
+          if grep -rlE 'href="[^"]*assessment/keys' site/out >/dev/null 2>&1; then
+            echo "::error::site/out contains a link into content/assessment/keys"
             exit 1
           fi
-          echo "no key paths in site/out"
+          leaked=0
+          for key in content/assessment/keys/*.md; do
+            [ -f "$key" ] || continue
+            # A distinctive line from the key (skip the title and blanks) --
+            # if it appears verbatim in the export, the key's content leaked,
+            # not just its path.
+            needle="$(grep -v '^#' "$key" | grep -v '^\s*$' | head -1)"
+            [ -n "$needle" ] || continue
+            if grep -rlF "$needle" site/out >/dev/null 2>&1; then
+              echo "::error::site/out contains content from $key"
+              leaked=1
+            fi
+          done
+          [ "$leaked" -eq 0 ] && echo "no key links or key content in site/out"
+          exit "$leaked"
