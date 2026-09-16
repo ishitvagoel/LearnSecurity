@@ -12,6 +12,9 @@ Do not invent production apps or third-party targets. Wait for Pass B and the `a
 - Synthetic data only; disposable secrets
 - Isolated vulnerable configuration; reset instructions
 - Pair: `vulnerable/` and `fixed/` (or equivalent) plus tests that assert **forbidden outcomes**
+- A realism tier per `lab-realism.mdc` — **default Tier 2** (FastAPI component, real request cycle, persistent state); Tier 1 only when the property genuinely is a pure function
+- Minimum five tests: normal, forbidden outcome, boundary, malformed/failure, and an **anti-fake test** that fails on a plausible cheat (a label prefix, a hard-coded allow-list)
+- Directory `labs/<id>/<id>-lab/`; entry point `pytest tests --impl vulnerable|fixed`
 - README: invariant, root cause, impact, structural fix, detection/recovery notes, how to reset
 
 ## Forbidden
