@@ -4,7 +4,7 @@ title: Sessions, cookies, and tokens
 phase: 4
 track: core
 difficulty: intermediate
-status: draft
+status: published
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.1–4.2 Pass A complete
@@ -13,11 +13,23 @@ routeTags:
 - web-api
 releaseMilestone: M1
 outcomes:
-- 'Demonstrate: Sessions, cookies, and tokens'
-- 'Produce evidence: Session protocol/state diagram and theft/replay tests'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- Given a request carrying a candidate session value on the query string, the
+  cookie jar, and the Authorization header, identify which channel(s) must be
+  rejected outright and justify the rejection by naming the exposure paths
+  particular to a URL
+- Explain why an identifier that existed before a login event must not be the
+  identifier that carries authority after it, and name the attack this closes
+- Given a session record's issued-at and last-seen timestamps and a stated
+  idle/absolute policy, decide whether the session is still active and name
+  which limit, if either, has been exceeded
+- Distinguish what a logout request must change at the server from what
+  deleting a client-side cookie changes, and name a case where the second
+  looks like logout but the first has not happened
+- Given a cookie's intended use, choose values for Secure, HttpOnly, and
+  SameSite and name the distinct attacker capability each attribute removes
+- Transfer the channel, binding, lifetime, and revocation rules to a clinic
+  appointment deep link and a one-time magic-link email, and name which rule
+  each scenario is still testing
 reviewTriggers:
 - Material SecureCollab change in this module's concern
 - New OAuth or magic-link channel
@@ -27,10 +39,18 @@ invariants:
 - Labs stay in authorized local or official training scope
 - Draft standards are labeled draft
 - Session tokens must not appear in query strings
+- A session identifier present before login must not be the identifier that
+  carries authority after login
+- A session past its idle or absolute limit is not active regardless of who
+  last touched it
 threatModelPrompts:
 - What can go wrong for this module's assets?
 - Which trust boundary or interpreter is in play?
 - What residual remains if the primary control fails?
+- Who can plant a pre-authentication identifier in a victim's browser before
+  the victim logs in?
+- Who can still use a token after the browser that received it deletes its
+  cookie?
 concepts:
 - sessions
 - securecollab
@@ -72,9 +92,11 @@ labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
   slug: 4.3-lab
-  summary: Session established from a query-string token
+  summary: Session established from a query-string token, or kept alive past its
+    absolute lifetime by activity alone
   forbiddenOutcomes:
   - Session established from a query-string token
+  - A session's activity alone extends it past its absolute lifetime
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
@@ -99,18 +121,30 @@ standardsRefs:
   - v5.0.0-14.2.1
   - v5.0.0-3.4.5
   - v5.0.0-3.3.4
+  - v5.0.0-3.3.1
+  - v5.0.0-3.3.2
+  - v5.0.0-7.2.4
+  - v5.0.0-7.3.1
+  - v5.0.0-7.3.2
+  - v5.0.0-7.4.1
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
 - Query strings are fine over TLS
 - JWT means secure
 - HttpOnly is the same as not in the URL
+- Deleting the cookie client-side is the same as revoking the session at the
+  server
+- A session that keeps getting used does not need an absolute expiry
 operationalConsiderations:
 - query_token_rejected; log-redact gateway.
 - Magic-link URLs are one-time (6.6), not standing sessions.
+- session_expired reason=idle|absolute; revoke-on-logout is a server-side
+  write, never only a client-side cookie delete.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review;
+  see content/progress/reviews/4.3-2026-09-17.md)
+lastReviewedAt: '2026-09-17'
+nextReviewAt: '2027-03-17'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
@@ -132,3 +166,78 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with query-token cause tables, cookie/header channel
     limits, and clinic deep-link transfer; independent review still required
+- date: '2026-09-17'
+  note: 'Deepen (D1-D14 remediation, B0 pilot, third of three): named five teaching
+    claims (C1-C5) and a coverage contract in spec.md -- the module previously
+    taught only C1 (query-string token) across all eight lessons. Rewrote outcomes
+    from the templated "Demonstrate: Sessions, cookies, and tokens" pattern
+    (L014) into six observable, assessable behaviours. Expanded all eight lessons
+    to clear the 900-word floor with derivation, worked examples, and
+    counterexamples rather than padding; added Standards lines to 01-property.md
+    and 05-verify.md; restructured 08-review.md as a checklist rather than a
+    pre-stated list of findings, applying the lesson from 1.4 and 2.1''s
+    independent review. Live-checked all nine ASVS 5.0.0 citations against the
+    canonical v5.0.0 tag: the three prior citations (14.2.1, 3.4.5, 3.3.4) were
+    accurate but anchored only C1 and one clause of C5; added six V7 (Session
+    Management) and V3 (cookie-attribute) identifiers this module needed and
+    never cited (7.2.4, 7.3.1, 7.3.2, 7.4.1, 3.3.1, 3.3.2). Read the lab''s
+    "fixed" token.py skeptically per upgrade-lab and found it tested only C1;
+    added session_is_active(session, now), staging C3''s forbidden outcome (an
+    idle-refreshed session that activity alone keeps alive past its absolute
+    lifetime) with a normal case, the forbidden-outcome case, an idle-deadline
+    boundary case, a fail-closed-on-missing-timestamp case, and a two-test
+    anti-fake pair against fresh, never-elsewhere-used timestamps -- raising the
+    lab from 3 tests to 9. Authored a nine-item assessment bank with distractor
+    rationales and four-state banding in the isolated key; rewrote the rubric to
+    remove the non-existent "session worksheet" reference. Corrected the same
+    D12 pattern found and fixed on 1.4 and 2.1: reviewer: pending with
+    lastReviewedAt/nextReviewAt set to real dates and no artifact under
+    content/progress/reviews/; reverted both to null per metadata-honesty.mdc.
+    Independent review requested; this pass may not and does not set depth or
+    quality.'
+- date: '2026-09-17'
+  note: 'Closed the one blocker from the independent review at
+    content/progress/reviews/4.3-2026-09-17.md: spec.md''s coverage contract
+    and its teaching-claims table both cited the wrong assessment item for
+    five of six/five of five claim rows -- checked mechanically against
+    items.md''s own Claim/Outcome labels rather than by re-reading prose,
+    the same way the 2.1 remediation cross-checked its own citation bug.
+    Rewrote both tables'' Assessment-item columns; every one of the nine
+    items is now cited by exactly the row(s) whose claim it actually tests,
+    and no item is uncited (item #9 previously received no correct citation
+    anywhere). Also fixed the two minor findings the same review flagged
+    as worth closing alongside: item #9''s Outcome field named only C4 while
+    its Claim field and its own content span C3 and C4, so broadened the
+    Outcome to match; and ASVS v5.0.0-3.3.1''s citation in spec.md paraphrased
+    only the Secure-attribute half of the requirement, omitting the mandatory
+    __Host-/__Secure- cookie-name-prefix clause -- corrected the paraphrase
+    and noted that this module''s own worked cookie name (sc_session) carries
+    neither prefix, as an explicit simplification rather than a silent gap.
+    Verified: lint clean (0/0), lab matrix unchanged (vulnerable fails,
+    fixed passes), and both citation tables re-checked with a script against
+    items.md''s actual tags rather than by eye. This pass may not and does
+    not set depth or quality; requesting the narrow re-review the blocking
+    review itself expected.'
+- date: '2026-09-17'
+  note: 'Independent re-review closed the blocker. Confirmed by hand, cell by
+    cell against items.md''s own Claim/Outcome tags (not by trusting the prior
+    pass''s script), that both spec.md tables -- the teaching-claims table and
+    the coverage contract -- now cite the correct assessment item for every
+    row: all nine items in items.md are each cited by exactly the row(s) whose
+    claim they test, and none is uncited. Confirmed item #9''s Claim assessed
+    (C3, C4) now agrees in scope with its broadened Outcome field. Confirmed
+    ASVS v5.0.0-3.3.1''s citation in spec.md''s Standards references now
+    includes the __Host-/__Secure- cookie-name-prefix clause, and honestly
+    notes that this module''s own worked cookie name (sc_session) satisfies
+    neither prefix rather than papering over the gap. Both artifacts are
+    sections of content/progress/reviews/4.3-2026-09-17.md (quality-review
+    confirmation in the closing addendum; lab-safety PASS already recorded in
+    the original pass of that same artifact -- both gates are therefore
+    satisfied). reviewer, lastReviewedAt (2026-09-17), nextReviewAt
+    (2027-03-17), and status: published are recorded here per
+    metadata-honesty.mdc, which reserves these fields to the independent
+    reviewer. quality: competent and depth: publishable are recorded in
+    content/progress/STATUS.yaml, which is where those two fields live --
+    module.schema.json sets additionalProperties: false and defines neither.
+    quality: transfer-ready is NOT claimed: it requires satisfactory learner
+    evidence from items.md #8, and none exists yet.'

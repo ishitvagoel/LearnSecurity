@@ -999,11 +999,16 @@ modules:
   phase: 4
   track: core
   pass: E
-  quality: developing
-  notes: Authoring pass 2026-09-06 added URL-as-postcard mental models and diagrams;
-    03-08 thickened with query-token cause tables; independent quality and lab-safety
-    review still required before publishable
-  depth: map-complete
+  quality: competent
+  notes: Depth remediation passed independent quality review on 2026-09-17 after
+    the one blocker raised against 7813829 (spec.md's coverage-contract and
+    teaching-claims tables citing the wrong assessment item for 5 of 6 rows) was
+    closed at d8ffbff, and passed independent lab-safety review on 2026-09-17 with
+    no findings; see progress/reviews/4.3-2026-09-17.md (blocker and lab-safety PASS
+    in the original pass, closure confirmation in the addendum). transfer-ready is
+    withheld because it needs learner evidence from assessment item 8 in items.md,
+    which does not exist yet.
+  depth: publishable
 - id: '4.4'
   title: Authorization and tenant isolation
   phase: 4
@@ -1479,7 +1484,6 @@ revision:
   - '3.4'
   - '4.1'
   - '4.2'
-  - '4.3'
   - '4.4'
   - '4.5'
   - '5.1'

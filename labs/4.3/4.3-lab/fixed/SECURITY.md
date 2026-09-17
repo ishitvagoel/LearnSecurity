@@ -1,1 +1,1 @@
-Fixed 4.3 fixture. Local only. Query tokens are ignored; cookie and Authorization still work.
+Fixed 4.3 fixture. Local only. Query tokens are ignored; cookie and Authorization still work. Session lifetime enforces both an idle window and an absolute window, and fails closed on a missing or future-dated timestamp.
