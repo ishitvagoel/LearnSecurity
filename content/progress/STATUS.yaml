@@ -880,12 +880,12 @@ modules:
   track: core
   pass: E
   quality: competent
-  notes: Depth remediation passed independent quality review on 2026-09-16 after five
+  notes: 'Depth remediation passed independent quality review on 2026-09-16 after five
     blockers raised against b4281d8 were closed at a423273 and 1fd06cb, and passed
     independent lab-safety review on 2026-09-16 with no findings; see
     progress/reviews/1.4-2026-09-16.md (quality verdict in the addendum, lab-safety
     section appended after it). transfer-ready is withheld because it needs learner
-    evidence from items.md #8, which does not exist yet.
+    evidence from items.md #8, which does not exist yet.'
   depth: publishable
 - id: '2.1'
   title: Bytes, text, formats, parsers, and interpreters
