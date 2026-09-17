@@ -4,7 +4,7 @@ title: Bytes, text, formats, parsers, and interpreters
 phase: 2
 track: core
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 270
 prerequisites:
 - 1.1–1.4 Pass A
@@ -124,9 +124,11 @@ operationalConsiderations:
 - ingest_reject_duplicate_key count; never log raw ambiguous bodies.
 - Honest unique-key JSON still needs 1.2 mediation.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer (independent read-only review chain across four rounds;
+  see content/progress/reviews/2.1-2026-09-16.md). A separate lab-safety review is
+  still outstanding and has never been performed for this module.
+lastReviewedAt: '2026-09-17'
+nextReviewAt: '2027-03-17'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -239,3 +241,19 @@ changelog:
     diagnosis exercise and historical changelog entries, both correct as
     written. This pass may not and does not set depth or quality; requesting
     the narrow re-review the second re-review itself scoped out.'
+- date: '2026-09-17'
+  note: 'Independent confirmation pass at b3603ef: verified the one blocker
+    from the second re-review is genuinely closed. Read 02-model.md''s
+    Practice section myself and confirmed it now accurately describes the
+    shipped mechanism (object_pairs_hook, occurrences scoped to the hook''s
+    last/root invocation, regex scan retired), consistent with 04-build.md''s
+    equivalent passage. Confirmed test_parser.py''s module docstring now
+    correctly names the fifth and ninth tests as the anti-fake pair, matching
+    the actual test order. Grepped content/modules/2/2.1 and labs/2.1 for any
+    remaining stale reference to the retired regex/two-reader mechanism and
+    found none outside item 3''s intentional diagnosis exercise and
+    historical changelog/docstring narration. Re-ran the gates myself:
+    lint_content.py 0 errors/0 warnings; vulnerable 6/9 fail, fixed 9/9 pass.
+    depth: publishable granted. A separate lab-safety review is still
+    outstanding and has never been performed for this module -- do not read
+    this entry as covering it.'

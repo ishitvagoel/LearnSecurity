@@ -891,10 +891,19 @@ modules:
   phase: 2
   track: core
   pass: E
-  quality: developing
-  notes: Authoring pass 2026-09-06 thickened verify/review with parser-agreement
-    oracles; independent quality and lab-safety review still required before publishable
-  depth: map-complete
+  quality: competent
+  notes: 'Depth remediation passed independent quality review across three rounds
+    (2026-09-16 initial review found two critical dimensions at 1; both closed and
+    quality: competent granted at 2de4c7c; a re-review at 1c1d968 confirmed the N1
+    fail-open regression genuinely fixed but found N2 only partially closed --
+    02-model.md''s Practice section still described the retired regex/two-reader
+    mechanism); that one blocker was closed at b3603ef and confirmed genuinely
+    fixed by this narrow re-review on 2026-09-17, which re-ran the full lab
+    matrix and lint itself. See progress/reviews/2.1-2026-09-16.md for all four
+    rounds. transfer-ready is withheld because it needs learner evidence from
+    items.md #8, which does not exist yet. A separate lab-safety review is still
+    outstanding and has never been performed for this module.'
+  depth: publishable
 - id: '2.2'
   title: DNS, transport, HTTP, TLS, proxies, CDNs, and caches
   phase: 2
