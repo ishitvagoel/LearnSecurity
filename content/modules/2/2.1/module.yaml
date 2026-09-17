@@ -4,7 +4,7 @@ title: Bytes, text, formats, parsers, and interpreters
 phase: 2
 track: core
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 270
 prerequisites:
 - 1.1–1.4 Pass A
@@ -124,9 +124,10 @@ operationalConsiderations:
 - ingest_reject_duplicate_key count; never log raw ambiguous bodies.
 - Honest unique-key JSON still needs 1.2 mediation.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review;
+  see content/progress/reviews/2.1-2026-09-16.md)
+lastReviewedAt: '2026-09-17'
+nextReviewAt: '2027-03-17'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -271,3 +272,23 @@ changelog:
     themselves are not reopened; they were independently re-verified across
     four rounds and stand. Requesting the lab-safety review this module has
     never had.'
+- date: '2026-09-17'
+  note: 'Independent review resolved. The lab-safety review requested by the
+    prior entry passed with no blocking findings (labs/2.1/2.1-parser-boundaries/
+    at commit 540a57a: authorized scope stated before any command, no
+    live-target instructions, no real PII or production secrets, vulnerable/
+    fixed pairing and reset verified by direct run, no reach to the site/
+    origin). One non-blocking nit it raised -- 03-break.md L66 still said
+    "five of the eight checks" after the suite grew to nine tests -- is fixed
+    alongside this entry. Both gates (four quality rounds plus this
+    lab-safety pass) are now closed; both artifacts are sections of
+    content/progress/reviews/2.1-2026-09-16.md. This entry records reviewer,
+    lastReviewedAt (2026-09-17), nextReviewAt (2027-03-17, the six-month
+    interval used by 1.1-1.4), and status: published, which metadata-honesty.mdc
+    reserves to the independent reviewer and which is now accurate because the
+    module is no longer awaiting review. quality: competent and depth:
+    publishable are recorded in content/progress/STATUS.yaml, which is where
+    those two fields live -- module.schema.json sets additionalProperties:
+    false and defines neither. quality: transfer-ready is NOT claimed: it
+    requires satisfactory learner evidence from items.md #8, and none exists
+    yet.'

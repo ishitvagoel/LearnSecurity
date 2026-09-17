@@ -63,7 +63,7 @@ python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl vulnerable
 python3 -m pytest labs/2.1/2.1-parser-boundaries/tests --impl fixed
 ```
 
-Five of the eight checks on the broken files **must fail**; this lesson names two of them specifically, because they are the ones whose cause this lesson has just traced: `test_duplicate_tenant_keys_are_one_meaning` and `test_middle_duplicate_is_not_silently_dropped`. Record both failing names, and for each one, write the specific input that causes it — not merely "duplicate keys," but the exact object. Do not "fix" either check to make it pass; a test that seems wrong is a finding to write down, not a reason to weaken it.
+Six of the nine checks on the broken files **must fail**; this lesson names two of them specifically, because they are the ones whose cause this lesson has just traced: `test_duplicate_tenant_keys_are_one_meaning` and `test_middle_duplicate_is_not_silently_dropped`. Record both failing names, and for each one, write the specific input that causes it — not merely "duplicate keys," but the exact object. Do not "fix" either check to make it pass; a test that seems wrong is a finding to write down, not a reason to weaken it.
 
 ## Use it somewhere new
 
