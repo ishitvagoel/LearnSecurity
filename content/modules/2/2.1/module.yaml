@@ -222,3 +222,20 @@ changelog:
     of re.findall; rewrote the lab README fully; fixed the key''s root-cause
     line and four stale test-count references. This pass may not and does
     not set depth or quality.'
+- date: '2026-09-17'
+  note: 'Closed the one blocker from the second re-review at 1c1d968: N1 was
+    confirmed fixed by that pass, but `lessons/02-model.md`''s Practice
+    section still claimed the fixed reader keeps the regex first-key scan
+    and json.loads as two separate readers that are not merged -- false
+    since 29279d7 retired the regex scan entirely in favor of a single
+    object_pairs_hook-based reader; rewrote that paragraph to name the
+    actual mechanism. Also fixed the lab test file''s module docstring,
+    which said the anti-fake pair was "the last two" tests when a
+    nesting-boundary test was inserted between them, making it the fifth
+    and ninth, not the eighth and ninth. Verified: lint clean (0/0),
+    vulnerable 6 of 9 fail, fixed 9 of 9 pass, and grepped the module for
+    any other reference to the retired first-key-scan/two-reader mechanism
+    -- found none outside item 3''s intentional third-implementation
+    diagnosis exercise and historical changelog entries, both correct as
+    written. This pass may not and does not set depth or quality; requesting
+    the narrow re-review the second re-review itself scoped out.'

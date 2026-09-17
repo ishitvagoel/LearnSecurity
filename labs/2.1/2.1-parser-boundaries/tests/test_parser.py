@@ -4,11 +4,14 @@ C1 is the property under test. The first two tests are the normal case and
 the module's stated forbidden outcome, on the fixture's own constants. The
 third is a boundary the original two-value comparison could not see: three
 occurrences whose first and last happen to coincide while a middle one
-disagrees. The fourth is a malformed-input case. The last two are the
+disagrees. The fourth is a missing-field case. The fifth and ninth are the
 anti-fake pair: they construct their own ambiguous and unambiguous objects,
 never seen in these module-level constants, so a fake "fixed" checker that
 special-cases exactly `AMBIGUOUS` and `CLEAN` cannot pass by memorizing the
-two strings this file happens to use elsewhere.
+two strings this file happens to use elsewhere. The sixth is a non-string
+duplicate value, the seventh is malformed JSON syntax, and the eighth is a
+tenant key nested inside an unrelated field, which must not be mistaken for
+the note's own top-level claim.
 """
 
 CLEAN = '{"tenant":"tA","body":"secret"}'

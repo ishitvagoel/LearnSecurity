@@ -91,7 +91,7 @@ Run the same template against the fixed fixture's behavior on the identical byte
 
 ## Practice
 
-Open `parse_note.py` under `labs/2.1/2.1-parser-boundaries`. After the fix, the first-key scan and `json.loads` are still two separate readers — the fix does not merge them into one parser, and it does not make the regex scan into a real JSON parser either. The restore is agreement-or-refuse, applied to every occurrence of the tenant key, not "make the scan behave like real JSON" and not "compare only the first and the last value and call that agreement," which Lesson 03 shows is not the same claim.
+Open `parse_note.py` under `labs/2.1/2.1-parser-boundaries`. After the fix, the first-key regex scan is gone — the fixed reader retires it entirely rather than patching it, and asks CPython's own parser for every occurrence of the tenant key via `object_pairs_hook`, scoped to the hook's last invocation (always the root object, since nested objects resolve first). The restore is agreement-or-refuse, applied to every occurrence the real parser reports at the top level, not "make the scan behave like real JSON" and not "compare only the first and the last value and call that agreement," which Lesson 03 shows is not the same claim.
 
 ## Use it somewhere new
 
