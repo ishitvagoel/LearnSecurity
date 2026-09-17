@@ -104,7 +104,7 @@ Using the clinic and magic-link scenarios from `lessons/07-transfer.md`, state w
 
 Write the two distinct log lines your system would emit when a session ends: once for hitting an idle or absolute lifetime limit, and once for an explicit logout. State which field distinguishes the two cases, which field must never appear in either line, and why a single `session_ended` event with no reason code would be operationally worse than two distinct ones, even though both indicate the same session is no longer usable.
 
-**Claim assessed:** C3, C4 · **Outcome:** Distinguish server-side revocation from client-side cookie deletion
+**Claim assessed:** C3, C4 · **Outcome:** Distinguish an idle/absolute lifetime expiry from an explicit logout in the operational signal each one emits, without letting either collapse into the other or leak the session value
 
 ---
 

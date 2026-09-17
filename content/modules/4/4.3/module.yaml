@@ -194,3 +194,26 @@ changelog:
     content/progress/reviews/; reverted both to null per metadata-honesty.mdc.
     Independent review requested; this pass may not and does not set depth or
     quality.'
+- date: '2026-09-17'
+  note: 'Closed the one blocker from the independent review at
+    content/progress/reviews/4.3-2026-09-17.md: spec.md''s coverage contract
+    and its teaching-claims table both cited the wrong assessment item for
+    five of six/five of five claim rows -- checked mechanically against
+    items.md''s own Claim/Outcome labels rather than by re-reading prose,
+    the same way the 2.1 remediation cross-checked its own citation bug.
+    Rewrote both tables'' Assessment-item columns; every one of the nine
+    items is now cited by exactly the row(s) whose claim it actually tests,
+    and no item is uncited (item #9 previously received no correct citation
+    anywhere). Also fixed the two minor findings the same review flagged
+    as worth closing alongside: item #9''s Outcome field named only C4 while
+    its Claim field and its own content span C3 and C4, so broadened the
+    Outcome to match; and ASVS v5.0.0-3.3.1''s citation in spec.md paraphrased
+    only the Secure-attribute half of the requirement, omitting the mandatory
+    __Host-/__Secure- cookie-name-prefix clause -- corrected the paraphrase
+    and noted that this module''s own worked cookie name (sc_session) carries
+    neither prefix, as an explicit simplification rather than a silent gap.
+    Verified: lint clean (0/0), lab matrix unchanged (vulnerable fails,
+    fixed passes), and both citation tables re-checked with a script against
+    items.md''s actual tags rather than by eye. This pass may not and does
+    not set depth or quality; requesting the narrow re-review the blocking
+    review itself expected.'

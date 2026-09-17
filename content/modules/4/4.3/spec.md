@@ -48,11 +48,11 @@ Five falsifiable claims, ordered by dependency. The module previously taught onl
 
 | Claim | Loop step(s) | Lab assertion | Assessment item |
 |---|---|---|---|
-| C1 | 1 Property, 3 Break, 5 Verify | `test_query_string_token_is_rejected`, `test_cookie_session_still_works`, `test_authorization_header_still_works` (module's forbidden outcome plus the two channels it must not break) | items.md #1, #2 |
-| C2 | 1 Property, 2 Model, 4 Build | Not directly code-testable — minting a new identifier at login is owned by module 4.2's authentication lab, and this Tier-1 fixture has no login event for an identifier to be bound to. Modeled in `lessons/02-model.md`'s state diagram and `lessons/04-build.md`. | items.md #3, #4 |
-| C3 | 3 Break, 4 Build, 5 Verify | `test_active_session_within_both_windows_is_active`, `test_forbidden_outcome_activity_alone_does_not_extend_the_absolute_limit`, `test_idle_timeout_boundary_*`, `test_missing_timestamp_fails_closed_not_open`, plus the anti-fake pair added in this pass (see `upgrade-lab`) | items.md #5, #6, #7 |
-| C4 | 6 Operate | Not directly code-testable — this stateless request-parsing fixture has no persisted session store for a revocation fact to live in. Modeled in `lessons/06-operate.md`. | items.md #8 |
-| C5 | 4 Build, 7 Transfer | Not directly code-testable — cookie-attribute emission is a response-building decision this request-parsing fixture does not make. Modeled in `lessons/04-build.md` and `lessons/07-transfer.md`. | items.md #4, #9 |
+| C1 | 1 Property, 3 Break, 5 Verify | `test_query_string_token_is_rejected`, `test_cookie_session_still_works`, `test_authorization_header_still_works` (module's forbidden outcome plus the two channels it must not break) | items.md #1 |
+| C2 | 1 Property, 2 Model, 4 Build | Not directly code-testable — minting a new identifier at login is owned by module 4.2's authentication lab, and this Tier-1 fixture has no login event for an identifier to be bound to. Modeled in `lessons/02-model.md`'s state diagram and `lessons/04-build.md`. | items.md #2 |
+| C3 | 3 Break, 4 Build, 5 Verify | `test_active_session_within_both_windows_is_active`, `test_forbidden_outcome_activity_alone_does_not_extend_the_absolute_limit`, `test_idle_timeout_boundary_*`, `test_missing_timestamp_fails_closed_not_open`, plus the anti-fake pair added in this pass (see `upgrade-lab`) | items.md #3, #4, #7 |
+| C4 | 6 Operate | Not directly code-testable — this stateless request-parsing fixture has no persisted session store for a revocation fact to live in. Modeled in `lessons/06-operate.md`. | items.md #6, #9 |
+| C5 | 4 Build, 7 Transfer | Not directly code-testable — cookie-attribute emission is a response-building decision this request-parsing fixture does not make. Modeled in `lessons/04-build.md` and `lessons/07-transfer.md`. | items.md #5 |
 
 C1 and C3 carry genuine lab assertions, satisfying the ≥2-claims bar, and C3's forbidden-outcome test is new in this pass — the lab previously exercised only C1. C2, C4, and C5 are honestly declared non-code-testable rather than mapped to a fabricated test: C2 needs an actual login event this fixture does not have, C4 needs a persisted session store this fixture does not have, and C5 is a response-header decision this request-side fixture does not make.
 
@@ -63,11 +63,11 @@ One row per outcome in `module.yaml`. Any empty cell is a blocker (`quality-gate
 | Outcome | Claim | Explanation | Worked example | Practice | Assessment item | Transfer |
 |---|---|---|---|---|---|---|
 | Identify which channel(s) a candidate session value arrived on and justify rejecting the query string | C1 | `lessons/01-property.md` §The URL is a postcard | `lessons/01-property.md` `?access_token=secret` walkthrough | `lessons/03-break.md` | items.md #1 | `lessons/07-transfer.md` clinic deep link |
-| Explain why a pre-authentication identifier must not survive login | C2 | `lessons/01-property.md` §An old identifier does not become trustworthy | `lessons/02-model.md` fixation walkthrough | `lessons/02-model.md` state-diagram exercise | items.md #3 | `lessons/07-transfer.md` |
-| Decide whether a session is still active under a stated idle/absolute policy | C3 | `lessons/04-build.md` §Two clocks, not one | `lessons/03-break.md` counterexample; `lessons/05-verify.md` | `labs/4.3/4.3-lab` `session_is_active` tests | items.md #5, #6 | `lessons/07-transfer.md` |
-| Distinguish server-side revocation from client-side cookie deletion | C4 | `lessons/06-operate.md` §Deleting is not revoking | `lessons/06-operate.md` worked incident | `lessons/06-operate.md` runbook exercise | items.md #8 | `lessons/07-transfer.md` |
-| Choose `Secure`/`HttpOnly`/`SameSite` and name the capability each removes | C5 | `lessons/04-build.md` §Three attributes, three attackers | `lessons/04-build.md` attribute table | `lessons/08-review.md` review checklist | items.md #4, #9 | `lessons/07-transfer.md` |
-| Transfer channel/binding/lifetime/revocation rules to a deep link and a magic link | C1–C5 | `lessons/07-transfer.md` | `lessons/07-transfer.md` clinic table | `lessons/07-transfer.md` write-up prompts | items.md #7, #9 | (is the transfer task) |
+| Explain why a pre-authentication identifier must not survive login | C2 | `lessons/01-property.md` §An old identifier does not become trustworthy | `lessons/02-model.md` fixation walkthrough | `lessons/02-model.md` state-diagram exercise | items.md #2 | `lessons/07-transfer.md` |
+| Decide whether a session is still active under a stated idle/absolute policy | C3 | `lessons/04-build.md` §Two clocks, not one | `lessons/03-break.md` counterexample; `lessons/05-verify.md` | `labs/4.3/4.3-lab` `session_is_active` tests | items.md #3, #4, #7 | `lessons/07-transfer.md` |
+| Distinguish server-side revocation from client-side cookie deletion | C4 | `lessons/06-operate.md` §Deleting is not revoking | `lessons/06-operate.md` worked incident | `lessons/06-operate.md` runbook exercise | items.md #6, #9 | `lessons/07-transfer.md` |
+| Choose `Secure`/`HttpOnly`/`SameSite` and name the capability each removes | C5 | `lessons/04-build.md` §Three attributes, three attackers | `lessons/04-build.md` attribute table | `lessons/08-review.md` review checklist | items.md #5 | `lessons/07-transfer.md` |
+| Transfer channel/binding/lifetime/revocation rules to a deep link and a magic link | C1–C5 | `lessons/07-transfer.md` | `lessons/07-transfer.md` clinic table | `lessons/07-transfer.md` write-up prompts | items.md #8 | (is the transfer task) |
 
 ## Known residuals
 
@@ -113,7 +113,7 @@ OWASP ASVS 5.0.0 (final). Live-checked against the canonical `v5.0.0` tag on 202
 - `v5.0.0-7.3.1` — an inactivity (idle) timeout enforced per documented risk decisions. C3.
 - `v5.0.0-7.3.2` — an absolute maximum session lifetime enforced per documented risk decisions. C3.
 - `v5.0.0-7.4.1` — session termination (logout or expiration) disallows further use of the session; for reference tokens or stateful sessions this means invalidating the data at the backend. C4.
-- `v5.0.0-3.3.1` — cookies carry the `Secure` attribute. C5.
+- `v5.0.0-3.3.1` — cookies carry the `Secure` attribute, and either the cookie name uses the `__Host-` prefix or, failing that, the `__Secure-` prefix. C5. (This module's worked cookie name, `sc_session`, carries neither prefix — a known simplification, not a claim that the example itself satisfies the requirement's literal text.)
 - `v5.0.0-3.3.2` — a cookie's `SameSite` attribute is set according to its purpose. C5.
 - `v5.0.0-3.3.4` — a cookie not meant to be read by client-side scripts (a session token) carries `HttpOnly`. C5.
 
