@@ -891,19 +891,22 @@ modules:
   phase: 2
   track: core
   pass: E
-  quality: competent
-  notes: 'Depth remediation passed independent quality review across three rounds
-    (2026-09-16 initial review found two critical dimensions at 1; both closed and
-    quality: competent granted at 2de4c7c; a re-review at 1c1d968 confirmed the N1
-    fail-open regression genuinely fixed but found N2 only partially closed --
-    02-model.md''s Practice section still described the retired regex/two-reader
-    mechanism); that one blocker was closed at b3603ef and confirmed genuinely
-    fixed by this narrow re-review on 2026-09-17, which re-ran the full lab
-    matrix and lint itself. See progress/reviews/2.1-2026-09-16.md for all four
-    rounds. transfer-ready is withheld because it needs learner evidence from
-    items.md #8, which does not exist yet. A separate lab-safety review is still
-    outstanding and has never been performed for this module.'
-  depth: publishable
+  quality: developing
+  notes: 'Independent quality review passed across four rounds, all recorded in
+    progress/reviews/2.1-2026-09-16.md (initial review found two critical dimensions
+    at 1, both closed at 2de4c7c; a re-review at 1c1d968 found a residual staleness
+    finding, closed at b3603ef; a narrow confirmation at f94ce4f verified that fix
+    and re-ran the full lab matrix and lint itself). quality and depth stay at
+    developing / map-complete, not competent / publishable, because the independent
+    lab-safety review this module also requires has never been performed -- per
+    publishable-depth.md''s revision order and the 1.4 precedent, both artifacts
+    must exist before either STATUS field advances. The f94ce4f commit wrote
+    quality: competent and depth: publishable directly; that write is reverted
+    here for that reason, not because the quality findings were wrong -- they
+    were independently re-verified and stand. transfer-ready is withheld
+    regardless; it needs learner evidence from items.md #8, which does not
+    exist yet.'
+  depth: map-complete
 - id: '2.2'
   title: DNS, transport, HTTP, TLS, proxies, CDNs, and caches
   phase: 2
