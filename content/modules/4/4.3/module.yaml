@@ -4,7 +4,7 @@ title: Sessions, cookies, and tokens
 phase: 4
 track: core
 difficulty: intermediate
-status: draft
+status: published
 estimatedMinutes: 240
 prerequisites:
 - Prior phase Pass A per blueprint §7; 1.1–4.2 Pass A complete
@@ -141,9 +141,10 @@ operationalConsiderations:
 - session_expired reason=idle|absolute; revoke-on-logout is a server-side
   write, never only a client-side cookie delete.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review;
+  see content/progress/reviews/4.3-2026-09-17.md)
+lastReviewedAt: '2026-09-17'
+nextReviewAt: '2027-03-17'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
@@ -217,3 +218,26 @@ changelog:
     items.md''s actual tags rather than by eye. This pass may not and does
     not set depth or quality; requesting the narrow re-review the blocking
     review itself expected.'
+- date: '2026-09-17'
+  note: 'Independent re-review closed the blocker. Confirmed by hand, cell by
+    cell against items.md''s own Claim/Outcome tags (not by trusting the prior
+    pass''s script), that both spec.md tables -- the teaching-claims table and
+    the coverage contract -- now cite the correct assessment item for every
+    row: all nine items in items.md are each cited by exactly the row(s) whose
+    claim they test, and none is uncited. Confirmed item #9''s Claim assessed
+    (C3, C4) now agrees in scope with its broadened Outcome field. Confirmed
+    ASVS v5.0.0-3.3.1''s citation in spec.md''s Standards references now
+    includes the __Host-/__Secure- cookie-name-prefix clause, and honestly
+    notes that this module''s own worked cookie name (sc_session) satisfies
+    neither prefix rather than papering over the gap. Both artifacts are
+    sections of content/progress/reviews/4.3-2026-09-17.md (quality-review
+    confirmation in the closing addendum; lab-safety PASS already recorded in
+    the original pass of that same artifact -- both gates are therefore
+    satisfied). reviewer, lastReviewedAt (2026-09-17), nextReviewAt
+    (2027-03-17), and status: published are recorded here per
+    metadata-honesty.mdc, which reserves these fields to the independent
+    reviewer. quality: competent and depth: publishable are recorded in
+    content/progress/STATUS.yaml, which is where those two fields live --
+    module.schema.json sets additionalProperties: false and defines neither.
+    quality: transfer-ready is NOT claimed: it requires satisfactory learner
+    evidence from items.md #8, and none exists yet.'
