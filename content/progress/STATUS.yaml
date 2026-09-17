@@ -17,7 +17,7 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '2.1'
+  id: '2.2'
   pass: revise
   skill: deepen-curriculum
   inner_skill: quality-gate
@@ -27,7 +27,8 @@ next:
     system-specific cause, limits, and transfer. Units stay developing /
     map-complete in revision.remaining until independent quality and lab-safety
     review artifacts exist under content/progress/reviews/. Do not mark depth
-    publishable in this skill. 1.1-1.4 remain the independently reviewed reference.
+    publishable in this skill. 1.1-1.4 and 2.1 remain the independently reviewed
+    reference.
 spiral_deltas:
 - date: '2026-09-06'
   module: E6
@@ -891,10 +892,19 @@ modules:
   phase: 2
   track: core
   pass: E
-  quality: developing
-  notes: Authoring pass 2026-09-06 thickened verify/review with parser-agreement
-    oracles; independent quality and lab-safety review still required before publishable
-  depth: map-complete
+  quality: competent
+  notes: 'Both gates closed. Independent quality review passed across four rounds
+    (initial review found two critical dimensions at 1, both closed at 2de4c7c; a
+    re-review at 1c1d968 found a residual staleness finding, closed at b3603ef; a
+    narrow confirmation at f94ce4f verified that fix and re-ran the full lab matrix
+    and lint itself -- that commit wrote quality/depth directly and was reverted at
+    540a57a because the lab-safety gate did not yet exist, not because the quality
+    findings were wrong). Independent lab-safety review passed on 2026-09-17 with
+    no blocking findings (one non-blocking stale test-count nit in 03-break.md,
+    fixed alongside this entry). See progress/reviews/2.1-2026-09-16.md for all
+    five rounds (four quality, one lab-safety). transfer-ready is withheld; it
+    needs learner evidence from items.md #8, which does not exist yet.'
+  depth: publishable
 - id: '2.2'
   title: DNS, transport, HTTP, TLS, proxies, CDNs, and caches
   phase: 2
@@ -1458,7 +1468,6 @@ revision:
   reference_module: '1.1'
   auditedAt: '2026-08-25'
   remaining:
-  - '2.1'
   - '2.2'
   - '2.3'
   - '2.4'
