@@ -1,1 +1,1 @@
-Vulnerable 4.3 fixture. Local only. Query-string session token is the seeded failure.
+Vulnerable 4.3 fixture. Local only. Two seeded failures: a query-string session token, and a session lifetime check that reads only an idle clock, so activity alone keeps a session "active" past any absolute lifetime.

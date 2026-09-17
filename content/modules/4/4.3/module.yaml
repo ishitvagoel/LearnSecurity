@@ -13,11 +13,23 @@ routeTags:
 - web-api
 releaseMilestone: M1
 outcomes:
-- 'Demonstrate: Sessions, cookies, and tokens'
-- 'Produce evidence: Session protocol/state diagram and theft/replay tests'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- Given a request carrying a candidate session value on the query string, the
+  cookie jar, and the Authorization header, identify which channel(s) must be
+  rejected outright and justify the rejection by naming the exposure paths
+  particular to a URL
+- Explain why an identifier that existed before a login event must not be the
+  identifier that carries authority after it, and name the attack this closes
+- Given a session record's issued-at and last-seen timestamps and a stated
+  idle/absolute policy, decide whether the session is still active and name
+  which limit, if either, has been exceeded
+- Distinguish what a logout request must change at the server from what
+  deleting a client-side cookie changes, and name a case where the second
+  looks like logout but the first has not happened
+- Given a cookie's intended use, choose values for Secure, HttpOnly, and
+  SameSite and name the distinct attacker capability each attribute removes
+- Transfer the channel, binding, lifetime, and revocation rules to a clinic
+  appointment deep link and a one-time magic-link email, and name which rule
+  each scenario is still testing
 reviewTriggers:
 - Material SecureCollab change in this module's concern
 - New OAuth or magic-link channel
@@ -27,10 +39,18 @@ invariants:
 - Labs stay in authorized local or official training scope
 - Draft standards are labeled draft
 - Session tokens must not appear in query strings
+- A session identifier present before login must not be the identifier that
+  carries authority after login
+- A session past its idle or absolute limit is not active regardless of who
+  last touched it
 threatModelPrompts:
 - What can go wrong for this module's assets?
 - Which trust boundary or interpreter is in play?
 - What residual remains if the primary control fails?
+- Who can plant a pre-authentication identifier in a victim's browser before
+  the victim logs in?
+- Who can still use a token after the browser that received it deletes its
+  cookie?
 concepts:
 - sessions
 - securecollab
@@ -72,9 +92,11 @@ labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
   slug: 4.3-lab
-  summary: Session established from a query-string token
+  summary: Session established from a query-string token, or kept alive past its
+    absolute lifetime by activity alone
   forbiddenOutcomes:
   - Session established from a query-string token
+  - A session's activity alone extends it past its absolute lifetime
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
@@ -99,18 +121,29 @@ standardsRefs:
   - v5.0.0-14.2.1
   - v5.0.0-3.4.5
   - v5.0.0-3.3.4
+  - v5.0.0-3.3.1
+  - v5.0.0-3.3.2
+  - v5.0.0-7.2.4
+  - v5.0.0-7.3.1
+  - v5.0.0-7.3.2
+  - v5.0.0-7.4.1
   url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
 - Query strings are fine over TLS
 - JWT means secure
 - HttpOnly is the same as not in the URL
+- Deleting the cookie client-side is the same as revoking the session at the
+  server
+- A session that keeps getting used does not need an absolute expiry
 operationalConsiderations:
 - query_token_rejected; log-redact gateway.
 - Magic-link URLs are one-time (6.6), not standing sessions.
+- session_expired reason=idle|absolute; revoke-on-logout is a server-side
+  write, never only a client-side cookie delete.
 author: choreograph-curriculum / author-module-spec
 reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
@@ -132,3 +165,32 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with query-token cause tables, cookie/header channel
     limits, and clinic deep-link transfer; independent review still required
+- date: '2026-09-17'
+  note: 'Deepen (D1-D14 remediation, B0 pilot, third of three): named five teaching
+    claims (C1-C5) and a coverage contract in spec.md -- the module previously
+    taught only C1 (query-string token) across all eight lessons. Rewrote outcomes
+    from the templated "Demonstrate: Sessions, cookies, and tokens" pattern
+    (L014) into six observable, assessable behaviours. Expanded all eight lessons
+    to clear the 900-word floor with derivation, worked examples, and
+    counterexamples rather than padding; added Standards lines to 01-property.md
+    and 05-verify.md; restructured 08-review.md as a checklist rather than a
+    pre-stated list of findings, applying the lesson from 1.4 and 2.1''s
+    independent review. Live-checked all nine ASVS 5.0.0 citations against the
+    canonical v5.0.0 tag: the three prior citations (14.2.1, 3.4.5, 3.3.4) were
+    accurate but anchored only C1 and one clause of C5; added six V7 (Session
+    Management) and V3 (cookie-attribute) identifiers this module needed and
+    never cited (7.2.4, 7.3.1, 7.3.2, 7.4.1, 3.3.1, 3.3.2). Read the lab''s
+    "fixed" token.py skeptically per upgrade-lab and found it tested only C1;
+    added session_is_active(session, now), staging C3''s forbidden outcome (an
+    idle-refreshed session that activity alone keeps alive past its absolute
+    lifetime) with a normal case, the forbidden-outcome case, an idle-deadline
+    boundary case, a fail-closed-on-missing-timestamp case, and a two-test
+    anti-fake pair against fresh, never-elsewhere-used timestamps -- raising the
+    lab from 3 tests to 9. Authored a nine-item assessment bank with distractor
+    rationales and four-state banding in the isolated key; rewrote the rubric to
+    remove the non-existent "session worksheet" reference. Corrected the same
+    D12 pattern found and fixed on 1.4 and 2.1: reviewer: pending with
+    lastReviewedAt/nextReviewAt set to real dates and no artifact under
+    content/progress/reviews/; reverted both to null per metadata-honesty.mdc.
+    Independent review requested; this pass may not and does not set depth or
+    quality.'
