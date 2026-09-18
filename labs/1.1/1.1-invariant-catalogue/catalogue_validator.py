@@ -118,6 +118,7 @@ def validate_catalogue(data: Any) -> list[str]:
         errors.append("catalogue.claims: at least five invariant records are required")
 
     seen_ids: set[str] = set()
+    seen_signatures: dict[str, str] = {}
     for index, claim in enumerate(claims):
         location = f"claims[{index}]"
         if not isinstance(claim, dict):
@@ -127,7 +128,7 @@ def validate_catalogue(data: Any) -> list[str]:
         claim_id = _require_text(claim, "id", location, errors)
         if claim_id and not ID_PATTERN.fullmatch(claim_id):
             errors.append(f"{location}.id: expected SC-NAME-00 stable identifier")
-        if claim_id in seen_ids:
+        if claim_id and claim_id in seen_ids:
             errors.append(f"{location}.id: duplicate identifier {claim_id}")
         seen_ids.add(claim_id)
 
@@ -144,6 +145,28 @@ def validate_catalogue(data: Any) -> list[str]:
         _require_list(claim, "recovery", location, errors, minimum=2)
         _require_text(claim, "residualRisk", location, errors)
         _require_list(claim, "nonGoals", location, errors)
+
+        # A learner (or a lazily generated fixture) can satisfy every field-
+        # presence check above by writing the same generic property and
+        # forbidden outcome five times under five different ids -- "notes
+        # must never leak", "notes leak somehow", copied into every row with
+        # nothing SecureCollab-specific in either field. Field presence alone
+        # does not repair that; the fixture is still one claim wearing five
+        # identifiers. Two rows whose normalized property-plus-forbidden-
+        # outcome text is identical are flagged as one padded claim, not five
+        # system-specific ones -- this is checked here, not only against the
+        # mechanism-slogan phrase list, because the padding does not need to
+        # use any of those phrases to be empty.
+        signature = " ".join(_text(f"{property_text}\x1f{forbidden}").lower().split())
+        if signature.strip("\x1f "):
+            if signature in seen_signatures:
+                errors.append(
+                    f"{location}: property and forbiddenOutcomes duplicate "
+                    f"{seen_signatures[signature]}; five rows must be distinct "
+                    "system-specific claims, not one claim restated under a new id"
+                )
+            else:
+                seen_signatures[signature] = claim_id or location
         _require_list(claim, "reviewTriggers", location, errors)
 
         if property_text:

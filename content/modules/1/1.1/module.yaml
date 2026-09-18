@@ -4,8 +4,8 @@ title: Security as invariants under attack
 phase: 1
 track: core
 difficulty: foundation
-status: published
-estimatedMinutes: 420
+status: draft
+estimatedMinutes: 240
 prerequisites:
   - 'Entry profile: small database-backed API, Git, tests, and basic SQL'
   - 'Module 0.1 vocabulary is recommended but not blocking'
@@ -166,9 +166,9 @@ operationalConsiderations:
   - Operator compromise and concentration of control over state and evidence remain residual risks
   - Human response and recovery paths require clear status, accessible alternatives, and safe failure behavior
 author: OpenAI Codex / deepen-curriculum
-reviewer: quality-reviewer (independent semantic review); lab-safety-reviewer (independent local-lab review)
-lastReviewedAt: '2026-08-25'
-nextReviewAt: '2027-02-25'
+reviewer: pending independent quality and lab-safety review
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
   - date: '2026-08-23'
     note: Pass A specification and initial Pass B/C pilot
@@ -176,3 +176,24 @@ changelog:
     note: Rebuilt as semantic-depth reference; independent semantic and lab-safety reviews passed
   - date: '2026-09-06'
     note: Additive named mental models and mermaid diagrams on remaining lessons; independent review artifacts unchanged
+  - date: '2026-09-18'
+    note: >-
+      Deepen pass (content-quality-improvement-plan B1). Lessons 02-08 had
+      drifted onto an unrelated local password-hashing exercise never
+      matching labSpec below; all eight rewritten against five named
+      teaching claims (C1-C5) in spec.md, each mapped to a lab assertion
+      or an honest non-testability note and an assessment item. Found and
+      fixed a real validator bug (a five-row catalogue with field-complete,
+      slogan-free, but content-identical rows passed unchanged) and added
+      an anti-fake test for it. Authored assessment/items.md (8 items; none
+      existed before) and rewrote assessment/rubric.md and
+      content/assessment/keys/1.1.md to match, cross-checking every
+      coverage-contract and teaching-claim citation against each item's own
+      Claim assessed/Outcome tag. Recomputed estimatedMinutes 420 -> 240 per
+      metadata-honesty.mdc. Metadata reversion: the 2026-08-25 independent
+      review recorded above covered the pre-rewrite lessons this pass
+      replaced, not this pass's content, so reviewer/lastReviewedAt/
+      nextReviewAt/status are reverted to pending/null/draft per
+      metadata-honesty.mdc; a new independent quality review and lab-safety
+      review are required before those fields are set again.
+      content/progress/STATUS.yaml is left untouched for the reviewer.

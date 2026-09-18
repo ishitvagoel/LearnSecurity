@@ -6,7 +6,7 @@ This specification is the publishable-depth reference for the remediation queue.
 
 - **ID:** 1.1
 - **Phase / track / difficulty:** 1 / core / foundation
-- **Estimated effort:** 420 focused minutes
+- **Estimated effort:** 240 focused minutes
 - **Prerequisite:** entry profile—small database-backed API, Git, tests, and basic SQL; Module 0.1 vocabulary is recommended
 - **Routes:** complete, accelerated, web-api, mobile
 - **Mastery contribution:** Gate 1
@@ -30,19 +30,39 @@ By the end of the module, the learner can:
 6. design privacy-safe operational evidence and a bounded response/recovery path;
 7. transfer the catalogue method to a materially changed product and explain which original claims fail.
 
+## Teaching claims
+
+The module previously carried this same seven-outcome list and the eight-lesson skeleton to teach it, but the lessons that shipped against it (Pass B, 2026-08-25) drifted: only `01-property-vs-mechanism.md` actually addressed SecureCollab's invariant catalogue, and `02`–`08` instead walked through a local password-hashing exercise that matched neither the outcomes above nor `module.yaml`'s actual `labSpec` (`1.1-invariant-catalogue`). All eight lessons averaged 386 words against the 900-word floor, and none carried a fenced worked example. Naming the five falsifiable claims below, and rewriting all eight lessons directly against them, is what this deepening pass replaces that drift with.
+
+1. **C1 — A sentence that names a mechanism is not a security invariant, because the mechanism can be fully present while the outcome it is assumed to guarantee fails elsewhere.** "Passwords are hashed," "we use TLS," and "the scanner is green" can all be true on the day a Tenant B member reads a Tenant A note through a support export none of the three ever touches, because none of the three names an asset, an attacker, or a forbidden outcome that a concrete event could falsify.
+2. **C2 — A claim is checkable only once it names every envelope element, and field presence alone does not establish that it does.** A catalogue row can satisfy every schema key, avoid every mechanism-slogan phrase, and still say nothing SecureCollab-specific — five rows reading "notes must never leak," "a bad actor," "the server," "thing works," repeated under five different ids, pass a shape-only or slogan-only check while being one empty claim wearing five identifiers.
+3. **C3 — A property is verified only across four distinct evidence modes, and a mode's key being present does not mean its value actually evidences that mode.** Normal-case evidence proves a mechanism works when nobody is trying to defeat it; negative, abuse, and failure evidence each rule out a different way that proof could be hollow, and a control-presence statement ("middleware exists") observes a mechanism, not the forbidden outcome the mechanism is supposed to prevent.
+4. **C4 — When prevention is incomplete, the claim must pair a forbidden-outcome check with privacy-safe detection and a bounded, human-usable recovery step, or the claim has stated a limit and then ignored it.** A detection design that logs the exact asset a confidentiality claim protects, "to be thorough," has turned its own evidence trail into a second copy of that asset; a recovery step with no accessible path for the human who has to act on it is a claim about a person who does not exist.
+5. **C5 — The catalogue method transfers only when the transfer identifies which SecureCollab-specific assumptions fail under the new system's actors, authority relations, and time horizons; renaming nouns is not transfer.** CivicClinic's guardian delegation is revocable mid-session in a way SecureCollab's tenant membership is not, a shared household phone breaks the one-browser-one-attacker assumption, and human-scheduled appointment capacity does not respond to the same fix as compute-bound availability.
+
+| Claim | Loop step(s) | Lab assertion | Assessment item |
+|---|---|---|---|
+| C1 | 1 Property, 3 Break | `test_mechanism_slogan_is_rejected`, `test_field_presence_alone_does_not_pass` (the vulnerable fixture's forbidden outcome) | items.md #1, #4 |
+| C2 | 2 Model, 4 Build | `test_five_padded_duplicate_rows_do_not_pass` (new in this pass — see Lab contract) | items.md #2, #6 |
+| C3 | 5 Verify | `test_field_complete_but_causally_shallow_claim_does_not_pass` | items.md #3 |
+| C4 | 6 Operate | Not directly code-testable — `REQUIRED_DETECTION_FIELDS` is enforced inside `test_selected_catalogue_is_semantically_reviewable`'s pass/fail on the fixed/vulnerable pair, but no dedicated test isolates C4 alone, because this Tier-1 fixture has no persisted operational system to assert a threshold or a recovery step against. Modeled in `lessons/06-operate.md`. | items.md #5, #8 |
+| C5 | 7 Generalize | Not code-testable — transfer is assessed as written reasoning about a different system, not a predicate over SecureCollab data. Modeled in `lessons/07-transfer.md`. | items.md #7 |
+
+C1, C2, and C3 carry genuine lab assertions, exceeding the two-claim minimum. C4 and C5 are honestly declared non-code-testable rather than mapped to a fabricated test: C4 needs a persisted detection/alerting system this fixture does not have, and C5 needs a second system's actors and authority this fixture does not model.
+
 ## Coverage contract
 
-Every outcome must have all five evidence types before publication.
+Every outcome must have all five evidence types before publication. Assessment-item numbers are cross-checked against each item's own `**Claim assessed:** / **Outcome:**` tag in `content/modules/1/1.1/assessment/items.md`, not merely assigned here and assumed correct — a defect three prior deepening passes each found in this exact table.
 
-| Outcome | Explanation and model | Worked reasoning | Learner practice | Assessment evidence | Transfer |
-|---|---|---|---|---|---|
-| 1 | LO-01 claim envelope; LO-02 product/state model | LO-02 confidentiality-row interrogation | Five-row catalogue and peer classification | Catalogue dimensions in rubric | CivicClinic six-row catalogue |
-| 2 | LO-01 property/mechanism distinction | Hashed-password causal trace; logging alternatives in LO-04 | Slogan-to-bounded-claim rewrite | Mechanism-limit and counterexample criteria | Signed worker-token review |
-| 3 | LO-01 claim envelope; LO-02 actor/state tables | Bounded confidentiality example | Full row template and peer challenge | Model completeness is critical | Changed guardian/vendor/shared-device assumptions |
-| 4 | LO-03 causal diagnostic table | Vulnerable fixture diagnosis | Annotated SECURITY.md and failure grouping | Seeded review and examiner findings | Alternate mechanism slogan |
-| 5 | LO-05 oracle and evidence modes | Cross-tenant evidence trace | Forbidden-outcome matrix | Four evidence modes required | Evidence revised for delegated/time-dependent actions |
-| 6 | LO-06 event-to-response sequence | Privacy-safe authorization event | Operate paragraph | Detection/recovery and human factors | Worker/webhook operational delta |
-| 7 | LO-07 changed-system analysis | Comparison categories | Independent transfer deliverable | Transfer-ready criteria | CivicClinic is the transfer case |
+| Outcome | Claim | Explanation and model | Worked reasoning | Learner practice | Assessment evidence | Transfer |
+|---|---|---|---|---|---|---|
+| 1. Produce a 5+ row SecureCollab catalogue | C2 | `lessons/02-securecollab-catalogue.md` | `lessons/02-securecollab-catalogue.md` §Two claims that look alike and are not | `lessons/02-securecollab-catalogue.md` §Practice; `labs/1.1/1.1-invariant-catalogue` | items.md #2 | `lessons/07-transfer.md` CivicClinic catalogue |
+| 2. Separate properties from mechanisms, limits, defaults, evidence | C1 | `lessons/01-property-vs-mechanism.md` | `lessons/01-property-vs-mechanism.md` §A worked example: "passwords are hashed" | `lessons/01-property-vs-mechanism.md` §Practice | items.md #1 | `lessons/07-transfer.md` §Worked contrast |
+| 3. Bound claims with the full claim envelope | C1, C2 | `lessons/01-property-vs-mechanism.md` §The envelope a rule needs; `lessons/02-securecollab-catalogue.md` §Naming actors... | `lessons/02-securecollab-catalogue.md` state/time section | `lessons/04-smallest-mechanism.md` §Practice | items.md #6 | `lessons/07-transfer.md` success criteria |
+| 4. Distinguish root cause/preconditions/impact/prevention/detection/recovery | C1 | `lessons/03-local-hashed-claim.md` | `lessons/03-local-hashed-claim.md` §Reproduce the failure | `lessons/03-local-hashed-claim.md` §Read the causal document | items.md #4 | `lessons/07-transfer.md` |
+| 5. Specify normal/negative/abuse/failure evidence | C3 | `lessons/05-forbidden-outcomes.md` | `lessons/05-forbidden-outcomes.md` §What each mode actually rules out | `lessons/05-forbidden-outcomes.md` §Practice | items.md #3 | `lessons/07-transfer.md` |
+| 6. Design privacy-safe operational evidence and recovery | C4 | `lessons/06-operate.md` | `lessons/06-operate.md` §Designing a signal | `lessons/06-operate.md` §Practice | items.md #5, #8 | `lessons/07-transfer.md` |
+| 7. Transfer to a materially changed system | C5 | `lessons/07-transfer.md` | `lessons/07-transfer.md` §Which SecureCollab claims break | `lessons/07-transfer.md` §Success criteria | items.md #7 | (is the transfer task) |
 
 Missing explanation, practice, assessment, or transfer evidence for an outcome blocks publishable depth.
 
@@ -131,15 +151,17 @@ The sequence reduces scaffolding: LO-01 models the method, LO-02 guides construc
 
 **Authorized scope:** local course files and synthetic SecureCollab data only. No service is started and no network target is needed.
 
-**Invariant:** a submitted catalogue is bounded and semantically shaped for independent review rather than being a mechanism slogan.
+**Invariant:** a submitted catalogue is bounded, distinct row-by-row, and semantically shaped for independent review rather than being a mechanism slogan or five field-complete but content-identical rows.
 
 **Vulnerable behavior:** a universal security conclusion, public-target text, insufficient catalogue rows, and missing model/evidence/operation fields cause the selected-catalogue test to fail.
 
-**Fixed behavior:** five module-specific claims pass semantic and safety checks.
+**Fixed behavior:** five module-specific, mutually distinct claims pass semantic and safety checks.
 
 **Structural fix:** versioned claim records connect product model, forbidden outcome, mechanism limits, four evidence modes, detection/recovery, residual risk, and review triggers.
 
 **Limits:** the validator detects selected defects. Passing it is not proof that an implementation exists or satisfies the catalogue.
+
+**Bug found and fixed in this pass:** reviewing the lab skeptically per `upgrade-lab`'s precedent (1.4's inverted flag, 2.1's regex/nesting bugs, 4.3's missing absolute-lifetime check) surfaced a real gap: a catalogue with all five rows field-complete, avoiding every phrase on `MECHANISM_ONLY_PHRASES`, and using distinct `id` values, but with every row's `property` and `forbiddenOutcomes` text identical and generic ("notes must never leak," "a bad actor"), passed `validate_catalogue` outright — field presence and slogan-avoidance are not the same property as five distinct, system-specific claims. `catalogue_validator.py` now computes a normalized `property` + `forbiddenOutcomes` signature per claim and flags a repeated signature across rows; `tests/test_claim_shape.py::test_five_padded_duplicate_rows_do_not_pass` asserts both that the padded fixture is now rejected and that the real fixed fixture's five genuinely distinct rows are not falsely flagged. This is C2 (see Teaching claims).
 
 **Clean-run requirement:** record exact vulnerable-fail and fixed-pass commands in the independent review artifact.
 
@@ -163,7 +185,7 @@ Learner prompts remain under this module’s assessment directory. Intended find
 
 - **Saltzer and Schroeder, 1975, seminal:** exact named principles—economy of mechanism, fail-safe defaults, complete mediation, open design, separation of privilege, least privilege, least common mechanism, psychological acceptability, work factor, and compromise recording. These principles critique mechanisms; they do not prove a system property.
 - **NIST CSF 2.0, final:** GV, ID, PR, DE, RS, and RC are outcome functions. They help prevent a prevention-only catalogue but are not a verification baseline.
-- **ASVS 5.0.0:** intentionally not mapped at requirement level in this first-principles module. Later implementation modules map exact verification requirements; adding unrelated ASVS IDs here would be compliance theater.
+- **ASVS 5.0.0:** intentionally not mapped at requirement level in this first-principles module. Later implementation modules map exact verification requirements; adding unrelated ASVS IDs here would be compliance theater. Re-confirmed while deepening this module on 2026-09-18: no lesson, `module.yaml`, or lab file under `content/modules/1/1.1` or `labs/1.1` cites an ASVS requirement ID, so there was nothing to check against the live `v5.0.0` tag this pass — the prior modules' citation errors were all in modules that did cite ASVS IDs. The Saltzer & Schroeder principle names and NIST CSF 2.0 function names above were checked against `content/standards/pins.yaml`'s existing 2026-08-29 and 2026-08-25 reviews and found unchanged and accurately stated; no new fetch was needed for either seminal, non-versioned source.
 
 Canonical pins are recorded in content/standards/pins.yaml and were reviewed on 2026-08-25.
 
@@ -189,3 +211,4 @@ Publication requires schema validity, the clean vulnerable/fixed lab pair, seman
 | 2026-08-23 | Pass A specification and initial Pass B/C pilot |
 | 2026-08-25 | Rebuilt as the semantic-depth reference with coverage contract, causal lessons, executable semantic lab, aligned assessment, and independent-review requirement |
 | 2026-09-06 | Additive named mental models and mermaid diagrams on remaining lessons; independent review artifacts unchanged |
+| 2026-09-18 | Deepen pass (this content-quality-improvement-plan's B1 item). Lessons `02`–`08` had drifted onto a local password-hashing exercise unrelated to `module.yaml`'s actual `labSpec` (`1.1-invariant-catalogue`) and averaged 356 words against the 900-word floor; all eight lessons rewritten against five named teaching claims (C1–C5), each mapped to loop steps, a lab assertion or an honest non-testability note, and an assessment item, per `deepen-module`'s Step 2. Found and fixed a real bug in `labs/1.1/1.1-invariant-catalogue/catalogue_validator.py` while reviewing it skeptically per that skill's precedent: a catalogue with five field-complete, slogan-free, but content-identical rows passed `validate_catalogue` outright; added a per-claim `property`+`forbiddenOutcomes` signature check and `tests/test_claim_shape.py::test_five_padded_duplicate_rows_do_not_pass` (C2). Authored `content/modules/1/1.1/assessment/items.md` (8 items; none existed before this pass) with `**Claim assessed:**`/`**Outcome:**` tags on every item, rewrote `content/assessment/keys/1.1.md` and `assessment/rubric.md` to match and to drop the stale "notes app" framing, and cross-checked every coverage-contract and teaching-claim citation against those tags directly (the defect class named in this plan's remediation notes for 1.4/2.1/4.3, where an average of five of six coverage rows cited the wrong item). Recomputed `estimatedMinutes` from the metadata-honesty formula: 420 → 240 (9,511 body words across the eight lessons, Tier-1 lab at 45 minutes, 8 items × 12, plus the 60-minute transfer task). No ASVS requirement is cited anywhere in this module before or after this pass, so there was nothing to re-verify against the live ASVS tag; Saltzer & Schroeder and NIST CSF 2.0 citations were re-confirmed against the existing pins rather than re-fetched, since neither source has a newer version. **Metadata reversion (`metadata-honesty.mdc`):** this module carried `status: published`, a named `reviewer`, `lastReviewedAt: '2026-08-25'`, and `nextReviewAt: '2027-02-25'` from a real independent review — but that review was granted against the pre-rewrite lessons named above, not against this pass's content, and a review of prose that no longer exists is not a review of what ships now. Per this rule's own framing (reverting an inaccurate claim to honest "pending" is the same direction as the D12 fixes on other modules, not the forbidden direction of claiming an unreviewed pass is reviewed), `module.yaml`'s `reviewer` is reverted to `pending independent quality and lab-safety review`, `lastReviewedAt`/`nextReviewAt` to `null`, and `status` to `draft`. `content/progress/STATUS.yaml`'s `quality`/`depth` fields for 1.1 are left untouched, per Step 10 — that is the reviewer's or a human's call, not this pass's. A new independent quality review and a new independent lab-safety review are required before either field is set again. |
