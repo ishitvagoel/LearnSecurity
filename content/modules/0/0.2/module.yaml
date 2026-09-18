@@ -14,16 +14,22 @@ routeTags:
 - bridge
 releaseMilestone: null
 outcomes:
-- 'Refuse using a placement quiz score as authorization to skip 1.2 or Gate 1.'
-- 'Treat NICE competency language as a bridge for tooling gaps, not as a 1.2 cell.'
-- 'Keep LMS percentages from looking like ASVS coverage.'
+- 'Refuse a diagnostic score, at any value, as authorization to skip modules 1.2, 1.3, 1.4, or Gate 1''s evidence review.'
+- 'Grant a tooling-bridge skip only on the diagnostic''s own observed gap evidence, never on a job title, vendor certification, or LMS badge claim.'
+- 'Keep modules 1.2, 1.3, and 1.4 in every learner''s required path regardless of score, fast-track flag, or bridge assignment.'
+- 'Treat the NICE Secure Systems Development work role as informative placement vocabulary, not as Gate 1 evidence or a substitute syllabus.'
+- 'Record a denied skip attempt without leaking the diagnostic''s item text, answer content, or a badge image, and without back-dating Gate 1.'
+- 'Transfer claims C1-C4 to a clinic''s hiring diagnostic and a vendor certification, naming which claim needs its standard reference swapped.'
 reviewTriggers:
 - Score grants Phase 1 skip
 - No link from diagnostic to 1.2 evidence
 - Badge screenshot as Gate 1
 - Adaptive path hides 1.4 residual
+- A credential accepted in place of diagnostic evidence
 invariants:
 - quiz_score_grants_phase1_skip of 100 is false
+- tooling_bridge_required reads only diagnostic_gap; job_title, vendor_cert, and lms_badge are never read
+- phase1_modules_for_learner's required set is always {1.2, 1.3, 1.4}
 - Labs stay in authorized local or official training scope
 - Placement is not a security clearance
 - Tool fluency is not threat modeling
@@ -35,77 +41,88 @@ concepts:
 - quiz-not-1-2
 - tooling-bridge
 - gate-1-evidence
+- credential-not-diagnostic
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 0.2-LO-01
   kind: concept-model
-  title: A quiz score is not a 1.2 cell
+  title: A diagnostic score cannot satisfy Gate 1's evidence requirement
   path: lessons/01-property.md
 - id: 0.2-LO-02
   kind: design-exercise
-  title: Tooling skip vs invariant skip
+  title: A credential is not a diagnostic, and a syllabus is not a work role
   path: lessons/02-model.md
 - id: 0.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: score grants Phase 1 skip'
+  title: 'Local fixture: three placement decisions fail for three related reasons'
   path: lessons/03-break.md
 - id: 0.2-LO-04
   kind: design-exercise
-  title: Diagnostics never grant 1.2 or Gate 1
+  title: Required and bridge are two different sets, computed by two different rules
   path: lessons/04-build.md
 - id: 0.2-LO-05
   kind: verification-lab
-  title: Fail-on-vulnerable then pass-on-fixed for quiz skip
+  title: A green suite proves the deny fired, not that placement is fair
   path: lessons/05-verify.md
 - id: 0.2-LO-06
   kind: operations-exercise
-  title: phase1_skip_denied without back-dating Gate 1
+  title: A denial that leaks the thing it denies is not a fix
   path: lessons/06-operate.md
 - id: 0.2-LO-07
   kind: transfer-challenge
-  title: 'Transfer: clinic onboarding quiz'
+  title: 'Transfer: a clinic''s onboarding quiz, and a vendor''s certificate'
   path: lessons/07-transfer.md
 - id: 0.2-LO-08
   kind: code-review
-  title: Review quiz-as-skip as a PR
+  title: Review a placement-diagnostic change before it merges
   path: lessons/08-review.md
 labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
   slug: 0.2-bridge
-  summary: Quiz score used as authorization to skip 1.2/Gate 1
+  summary: A quiz score, a credential claim, or a fast-track flag used as authorization
+    to skip 1.2/1.3/1.4 or Gate 1
   forbiddenOutcomes:
-  - Quiz score used as authorization to skip 1.2/Gate 1
+  - Quiz score used as authorization to skip 1.2/1.3/1.4/Gate 1
+  - A job title, vendor certification, or LMS badge used as tooling-diagnostic evidence
+  - An adaptive path that drops module 1.4 from a fast learner's required set
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
 - Diagnostic repository and individualized path
 - Transfer task prompt
-- Local lab brief with quiz-skip deny tests
+- Local lab brief with quiz-skip, credential-skip, and required-set-drop deny tests
 assessmentBlueprint:
-  explain: Placement may skip orientation prose, never mediation labs
-  design: Tooling-bridge vs 1.2/Gate 1 evidence
-  build: quiz_score_grants_phase1_skip is false in labs/0.2/0.2-bridge/fixed
-  break: Authorized local score-as-skip
-  verify: Forbidden-outcome tests plus honest low score
-  operate: phase1_skip_denied; audit skipped-module lists
-  communicate: Residual Git/SQL/HTTP gaps still need bridges
+  explain: A score, a credential, and a work-role description are each a different
+    kind of evidence than a reviewed 1.2/1.3/1.4 artifact
+  design: Tooling-bridge evidence standard vs 1.2/1.3/1.4 evidence; required vs
+    bridge as two different sets
+  build: quiz_score_grants_phase1_skip is false, tooling_bridge_required reads only
+    diagnostic_gap, and required always contains 1.2/1.3/1.4, in labs/0.2/0.2-bridge/fixed
+  break: Authorized local score-as-skip, credential-as-evidence, and required-set-drop
+    failures
+  verify: Forbidden-outcome, boundary, malformed, and anti-fake tests for all three
+    functions
+  operate: phase1_skip_denied without item text, answer content, or a badge image;
+    audit skipped-module lists
+  communicate: Residual Git/SQL/HTTP gaps still need bridges; a real Gate 1 evidence
+    review is owned by 1.2-1.4, not this diagnostic
 masteryGate: '0'
 standardsRefs:
 - source: NIST SP 800-181 Rev. 1 NICE Workforce Framework
   version: '800-181r1'
   status: final
   requirementIds:
-  - secure-systems-development
+  - secure-systems-development-work-role
   url: https://csrc.nist.gov/pubs/sp/800/181/r1/final
 - source: NIST Cybersecurity Framework
   version: '2.0'
   status: final
   requirementIds:
   - GV
-  url: https://www.nist.gov/cyberframework
+  url: https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20
 - source: W3C Web Content Accessibility Guidelines
   version: '2.2'
   status: final
@@ -116,15 +133,18 @@ misconceptions:
 - Placement is a security clearance
 - Fast learners skip invariants
 - Tool fluency is threat modeling
-- LMS percentage is ASVS
+- LMS percentage is Gate 1 evidence
+- A job title or vendor certification is diagnostic evidence
 operationalConsiderations:
 - Audit skipped-module list on each cohort export.
-- Bridge units still needed for Git/SQL/HTTP gaps — those skips are OK when diagnostics
-  show skill.
+- Bridge units still needed for Git/SQL/HTTP gaps — those skips are OK when the
+  diagnostic itself, not a credential, shows the gap.
+- A phase1_skip_denied signal must never carry quiz item text, answer content, or
+  a badge image.
 author: deepen-curriculum / author-module-spec
 reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
@@ -140,3 +160,27 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with score-as-skip cause tables, always-false Phase 1
     predicate, and clinic onboarding transfer; independent review still required
+- date: '2026-09-18'
+  note: >-
+    Deepen (independent review still required): named five teaching claims
+    (C1-C5) and a six-row coverage contract in spec.md; C1, C2, and C3 carry lab
+    assertions, C4 and C5 declared honestly non-code-testable. Rewrote all eight
+    lessons to lesson-prose.mdc's floors and shapes. Upgraded the lab from one
+    predicate and two tests to three predicates and fifteen tests
+    (tooling_bridge_required and phase1_modules_for_learner are new), each new
+    predicate with its own anti-fake test verified by hand against a specific
+    incomplete fake fix. Authored an eight-item assessment bank and examiner
+    key with distractor rationales and four-state banding, replacing the
+    session-worksheet rubric reference. Corrected outcomes from templated
+    title-plus-verb phrasing to six observable behaviours matching the six
+    coverage-contract rows. Corrected the NICE standardsRef: Secure Systems
+    Development is a NICE work role, not a competency as this file and the
+    blueprint's Phase 0 table both called it; corrected the NIST CSF 2.0 url
+    to the canonical nist.gov publication page. Recomputed estimatedMinutes
+    from the formula (unchanged at 240, now backed by real lesson word counts
+    and eight assessment items rather than an unverified prior estimate). Also
+    fixed a bug shared with 1.4, 2.1, and 4.3 before their independent review:
+    reviewer said pending independent quality and lab-safety review while
+    lastReviewedAt and nextReviewAt carried real dates and no artifact existed
+    under content/progress/reviews/ -- reverted both to null per
+    metadata-honesty.mdc.

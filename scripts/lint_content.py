@@ -445,9 +445,30 @@ def lint_lesson(path: Path, corpus: Corpus, active: set[str]) -> list[Finding]:
                 extra=f"mermaid@{line}")
 
     # L006 / L007 -- references the reader can follow
-    for m in re.finditer(r"\(([^()]{0,200}?)\)", text):
-        inner, line = m.group(1), text[: m.start()].count("\n") + 1
+    fenceless = strip_fences(text)
+    for m in re.finditer(r"\(([^()]{0,200}?)\)", fenceless):
+        inner, line = m.group(1), fenceless[: m.start()].count("\n") + 1
         if "](" in inner or "[" in inner:
+            continue
+        line_start = fenceless.rfind("\n", 0, m.start()) + 1
+        if fenceless.count("`", line_start, m.start()) % 2 == 1:
+            # An odd number of backticks between the start of this line and
+            # the match means the match sits inside an inline code span
+            # (`required.discard("1.4")`) -- a Python string literal that
+            # happens to look like a module id, not a bare prose citation
+            # of one. L001's word count already exempts fenced code blocks
+            # from this same category of false positive; inline code spans
+            # need the identical exemption here.
+            continue
+        if m.start() > 0 and fenceless[m.start() - 1] == "]":
+            # This parenthetical is a Markdown link's own destination
+            # (`[title](...)`), not a bare parenthetical citation -- the
+            # link already carries a title, which is what L006/L007 exist
+            # to require. Without this check, any titled cross-module link
+            # whose relative path contains a module id (almost all of them,
+            # e.g. "../../2/2.3/lessons/01-property.md") is flagged as the
+            # exact "bare ID" defect the titled link was written to avoid,
+            # including the rule's own suggested-fix example.
             continue
         if re.search(r"\blater\b", inner, re.I):
             add("L006", ERROR, line,
