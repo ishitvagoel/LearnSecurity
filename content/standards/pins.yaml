@@ -18,10 +18,10 @@ pins:
     version: "2.0"
     status: final
     publishedAt: "2024-02-26"
-    reviewedAt: "2026-08-25"
+    reviewedAt: "2026-09-18"
     url: "https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20"
     role: "Govern, Identify, Protect, Detect, Respond, Recover outcome taxonomy"
-    notes: "NIST CSWP 29. CSF states outcomes; it does not prescribe controls. Do not treat CSF Functions as a vulnerability checklist or as proof of security. Module 10.5 uses Detect/Respond/Recover as outcome labels for the close predicate; a green SIEM is not Recover. Module 0.1 uses GV/ID as governance language for tester authorization, not as a pentest permit. Elective E6 uses GV as outcome labels, not as the exception-register row."
+    notes: "NIST CSWP 29. CSF states outcomes; it does not prescribe controls. Do not treat CSF Functions as a vulnerability checklist or as proof of security. Module 10.5 uses Detect/Respond/Recover as outcome labels for the close predicate; a green SIEM is not Recover. Module 0.1 uses GV/ID as governance language for tester authorization, not as a pentest permit. Elective E6 uses GV as outcome labels, not as the exception-register row. Module 0.1's 2026-09-18 deepen pass live-fetched nist.gov/cyberframework and confirmed CSF 2.0 (CSWP 29) is still the current release and that the page positions CSF as a risk-management/outcome framework, never as a testing authorization or permit -- consistent with the module's use of GV/ID as vocabulary only."
   - id: cisa-secure-by-design
     source: CISA Secure by Design
     version: "current-public-guidance"
@@ -73,10 +73,10 @@ Module 7.1 used v5.0.0-15.3.3 (mass assignment; GraphQL 4.3.2 introspection and 
     version: "2.2"
     status: final
     publishedAt: "2024-12-12"
-    reviewedAt: "2026-08-23"
+    reviewedAt: "2026-09-18"
     url: "https://www.w3.org/TR/WCAG22/"
     role: "Accessibility baseline for security-sensitive web journeys"
-    notes: "W3C Recommendation 12 December 2024. Does not deprecate 2.0/2.1. Security flows must not be mouse-only, visual-only, or memory-only. Module 4.2 treats a broken accessible WebAuthn path as a security residual that pushes people to shared passwords."
+    notes: "W3C Recommendation 12 December 2024. Does not deprecate 2.0/2.1. Security flows must not be mouse-only, visual-only, or memory-only. Module 4.2 treats a broken accessible WebAuthn path as a security residual that pushes people to shared passwords. Module 0.1's 2026-09-18 deepen pass live-fetched the canonical TR and confirmed the Recommendation date and non-deprecation of 2.0/2.1; the module cites WCAG 2.2 only for the scope/stop UI's keyboard operability, not as a claim of full conformance."
   - id: w3c-webauthn-l3
     source: W3C Web Authentication (WebAuthn) Level 3
     version: "Level 3"
@@ -298,10 +298,10 @@ Module 7.1 used v5.0.0-15.3.3 (mass assignment; GraphQL 4.3.2 introspection and 
     version: "4.2"
     status: final
     publishedAt: "2020-12-03"
-    reviewedAt: "2026-09-06"
+    reviewedAt: "2026-09-18"
     url: "https://owasp.org/www-project-web-security-testing-guide/v42/"
     role: "Catalogue of *what* web tests exist; not the definition of a security-test shape"
-    notes: "Stable v4.2 released 3 Dec 2020. Use versioned /v42/ links. WSTG 5.0 is in development and must be labeled draft if cited. Module 9.3 owns forbidden-outcome *shape*; WSTG names candidate tests (for example authorization). Module 9.5 uses WSTG as the authorized-assessment catalogue of *what* to retest, not as a PDF that closes a finding. Module 0.1 uses WSTG as a method catalogue for *in-scope* labs; it is not a licence to scan the public internet. Do not treat a WSTG checklist membership as coverage (9.1) or as a passing security test."
+    notes: "Stable v4.2 released 3 Dec 2020. Use versioned /v42/ links. WSTG 5.0 is in development and must be labeled draft if cited. Module 9.3 owns forbidden-outcome *shape*; WSTG names candidate tests (for example authorization). Module 9.5 uses WSTG as the authorized-assessment catalogue of *what* to retest, not as a PDF that closes a finding. Module 0.1 uses WSTG as a method catalogue for *in-scope* labs; it is not a licence to scan the public internet. Do not treat a WSTG checklist membership as coverage (9.1) or as a passing security test. Module 0.1's 2026-09-18 deepen pass live-fetched the project landing page and confirmed v4.2 is still the current stable release (v5.0 still in development) and that the page names no authorization or scope language of its own -- the module's claim that WSTG is silent on authorization, and therefore cannot supply it, is accurate."
   - id: owasp-code-review-guide-2
     source: OWASP Code Review Guide
     version: "2.0"
@@ -451,10 +451,10 @@ Module 7.1 used v5.0.0-15.3.3 (mass assignment; GraphQL 4.3.2 introspection and 
     version: "800-181r1"
     status: final
     publishedAt: "2020-11-16"
-    reviewedAt: "2026-09-06"
+    reviewedAt: "2026-09-18"
     url: "https://csrc.nist.gov/pubs/sp/800/181/r1/final"
     role: "Workforce role language; not a pentest permit and not Gate 1"
-    notes: "SP 800-181r1 final 16 Nov 2020 (structure). NICE Framework Components v2.2.0 released 28 Apr 2026 are living work-role/TKS data, not a replacement for the SP. Module 0.1 uses NICE as job language, not as authorization to scan. Module 0.2 uses Secure Systems Development competencies as informative placement language; a quiz score still cannot skip 1.2 or Gate 1."
+    notes: "SP 800-181r1 final 16 Nov 2020 (structure). NICE Framework Components v2.2.0 released 28 Apr 2026 are living work-role/TKS data, not a replacement for the SP. Module 0.1 uses NICE as job language, not as authorization to scan. Module 0.2 uses Secure Systems Development competencies as informative placement language; a quiz score still cannot skip 1.2 or Gate 1. Module 0.1's 2026-09-18 deepen pass live-fetched the NIST overview and confirmed the publication defines task/knowledge/skill statements and work roles for workforce description, with no authorization-to-test content of any kind -- the module's C2 claim that reciting a NICE role title cannot move a host onto an allow-list is accurate."
   - id: ietf-rfc-8259
     source: IETF RFC 8259 The JavaScript Object Notation (JSON) Data Interchange Format
     version: "STD 90"
