@@ -197,3 +197,19 @@ changelog:
       metadata-honesty.mdc; a new independent quality review and lab-safety
       review are required before those fields are set again.
       content/progress/STATUS.yaml is left untouched for the reviewer.
+  - date: '2026-09-18'
+    note: >-
+      Closed the one blocker from the independent review at
+      content/progress/reviews/1.1-2026-09-18.md: lessons/03-local-hashed-claim.md
+      said "four passing unit tests... two anti-fake tests" and
+      05-forbidden-outcomes.md said the suite "carries two anti-fake tests,"
+      both stale since the prior entry's fix added a sixth test and third
+      anti-fake test (test_five_padded_duplicate_rows_do_not_pass) without
+      updating either sentence. Fixed both to five passing/three anti-fake,
+      matching the actual test file and the correct "all six tests" line
+      elsewhere in 05-forbidden-outcomes.md, which the review confirmed was
+      already accurate. Verified: lint clean (0/0), lab 5/6 pass on
+      vulnerable (one intended failure) and 6/6 on fixed, unchanged from the
+      prior pass since no lab or test file was touched. This pass may not
+      and does not set depth or quality; requesting the re-check the
+      blocking review itself expected.
