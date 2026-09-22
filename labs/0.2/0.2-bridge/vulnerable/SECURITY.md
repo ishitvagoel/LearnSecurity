@@ -1,1 +1,1 @@
-Vulnerable 0.2 local fixture. Authorized directory only. Quiz-as-skip is the seeded failure, not a real LMS exploit.
+Vulnerable 0.2 local fixture. Authorized directory only. Quiz-as-skip, credential-as-tooling-evidence, and score-hides-1.4 are the three seeded failures, not a real LMS, vendor-quiz, or cert-portal exploit.

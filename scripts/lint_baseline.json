@@ -2,14 +2,6 @@
   "_comment": "Known pre-existing findings, suppressed so CI fails only on new or regressed ones. Regenerate with scripts/lint_content.py --update-baseline. These numbers should only ever go down.",
   "counts": {
     "L001": {
-      "content/modules/0/0.2/lessons/01-property.md": 1,
-      "content/modules/0/0.2/lessons/02-model.md": 1,
-      "content/modules/0/0.2/lessons/03-break.md": 1,
-      "content/modules/0/0.2/lessons/04-build.md": 1,
-      "content/modules/0/0.2/lessons/05-verify.md": 1,
-      "content/modules/0/0.2/lessons/06-operate.md": 1,
-      "content/modules/0/0.2/lessons/07-transfer.md": 1,
-      "content/modules/0/0.2/lessons/08-review.md": 1,
       "content/modules/1/1.2/lessons/03-break.md": 1,
       "content/modules/1/1.2/lessons/08-review.md": 1,
       "content/modules/10/10.1/lessons/01-property.md": 1,
@@ -406,13 +398,6 @@
       "content/modules/e/E6/lessons/08-review.md": 1
     },
     "L002": {
-      "content/modules/0/0.2/lessons/01-property.md": 1,
-      "content/modules/0/0.2/lessons/02-model.md": 1,
-      "content/modules/0/0.2/lessons/03-break.md": 1,
-      "content/modules/0/0.2/lessons/04-build.md": 1,
-      "content/modules/0/0.2/lessons/05-verify.md": 1,
-      "content/modules/0/0.2/lessons/07-transfer.md": 1,
-      "content/modules/0/0.2/lessons/08-review.md": 1,
       "content/modules/10/10.1/lessons/01-property.md": 1,
       "content/modules/10/10.1/lessons/02-model.md": 1,
       "content/modules/10/10.1/lessons/03-break.md": 1,
@@ -723,14 +708,6 @@
       "content/modules/e/E6/lessons/08-review.md": 1
     },
     "L003": {
-      "content/modules/0/0.2/lessons/01-property.md": 1,
-      "content/modules/0/0.2/lessons/02-model.md": 1,
-      "content/modules/0/0.2/lessons/03-break.md": 1,
-      "content/modules/0/0.2/lessons/04-build.md": 1,
-      "content/modules/0/0.2/lessons/05-verify.md": 1,
-      "content/modules/0/0.2/lessons/06-operate.md": 1,
-      "content/modules/0/0.2/lessons/07-transfer.md": 1,
-      "content/modules/0/0.2/lessons/08-review.md": 1,
       "content/modules/10/10.1/lessons/01-property.md": 1,
       "content/modules/10/10.1/lessons/02-model.md": 1,
       "content/modules/10/10.1/lessons/03-break.md": 1,
@@ -1118,11 +1095,6 @@
       "content/modules::## Why it happens, what it costs, how you stop it, how you notice, how you recover": 1
     },
     "L005": {
-      "content/modules/0/0.2/lessons/01-property.md::mermaid@28": 1,
-      "content/modules/0/0.2/lessons/03-break.md::mermaid@17": 1,
-      "content/modules/0/0.2/lessons/04-build.md::mermaid@15": 1,
-      "content/modules/0/0.2/lessons/05-verify.md::mermaid@15": 1,
-      "content/modules/0/0.2/lessons/07-transfer.md::mermaid@24": 1,
       "content/modules/10/10.1/lessons/02-model.md::mermaid@27": 1,
       "content/modules/10/10.1/lessons/03-break.md::mermaid@24": 1,
       "content/modules/10/10.1/lessons/05-verify.md::mermaid@14": 1,
@@ -1350,7 +1322,6 @@
       "content/modules/8/8.2/lessons/05-verify.md::later@later mirror": 1,
       "content/modules/9/9.2/lessons/01-property.md::later@later elective": 2,
       "content/modules/9/9.2/lessons/05-verify.md::later@later elective": 1,
-      "content/modules/9/9.2/lessons/07-transfer.md::later@`, generated templates, later elective": 1,
       "content/modules/9/9.2/lessons/07-transfer.md::later@later, 9.4": 1,
       "content/modules/9/9.3/lessons/01-property.md::later@later looking-around, 9.5": 1,
       "content/modules/e/E2/lessons/05-verify.md::later@extra, later, and advanced": 1,
@@ -1361,8 +1332,6 @@
       "content/modules/e/E5/lessons/05-verify.md::later@later topic": 1
     },
     "L007": {
-      "content/modules/0/0.2/lessons/05-verify.md::bareid@that is the 1.2 practice": 1,
-      "content/modules/0/0.2/lessons/07-transfer.md::bareid@tooling gaps, memorized answers, 1.4 hid": 1,
       "content/modules/10/10.1/lessons/01-property.md::bareid@3.2": 1,
       "content/modules/10/10.1/lessons/01-property.md::bareid@E6": 2,
       "content/modules/10/10.1/lessons/02-model.md::bareid@3.2": 1,
@@ -1645,7 +1614,6 @@
       "content/modules/e/E3/lessons/06-operate.md::bareid@5.1": 1
     },
     "L008": {
-      "content/modules/0/0.2/lessons/03-break.md": 1,
       "content/modules/10/10.1/lessons/03-break.md": 1,
       "content/modules/10/10.1/lessons/07-transfer.md": 1,
       "content/modules/10/10.2/lessons/03-break.md": 1,
@@ -1823,8 +1791,6 @@
       "content/modules/e/E6/lessons/05-verify.md": 1
     },
     "L013": {
-      "content/modules/0/0.2/module.yaml::lastReviewedAt": 1,
-      "content/modules/0/0.2/module.yaml::nextReviewAt": 1,
       "content/modules/10/10.1/module.yaml::lastReviewedAt": 1,
       "content/modules/10/10.1/module.yaml::nextReviewAt": 1,
       "content/modules/10/10.2/module.yaml::lastReviewedAt": 1,
@@ -1947,12 +1913,6 @@
       "content/modules/6/6.7/module.yaml::demonstrate": 1
     },
     "L016": {
-      "content/modules/0/0.2/lessons/02-model.md": 1,
-      "content/modules/0/0.2/lessons/03-break.md::counterexample": 1,
-      "content/modules/0/0.2/lessons/06-operate.md": 1,
-      "content/modules/0/0.2/lessons/07-transfer.md": 1,
-      "content/modules/0/0.2/lessons/08-review.md": 1,
-      "content/modules/0/0.2/lessons/08-review.md::counterexample": 1,
       "content/modules/1/1.3/lessons/06-operate.md": 1,
       "content/modules/10/10.1/lessons/06-operate.md": 1,
       "content/modules/10/10.1/lessons/07-transfer.md": 1,
@@ -2138,7 +2098,6 @@
       "content/modules/e/E6/lessons/08-review.md": 1
     },
     "L017": {
-      "content/modules/0/0.2/module.yaml": 1,
       "content/modules/1/1.2/module.yaml": 1,
       "content/modules/1/1.3/module.yaml": 1,
       "content/modules/10/10.1/module.yaml": 1,

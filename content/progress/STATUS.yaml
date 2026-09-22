@@ -849,11 +849,17 @@ modules:
   phase: 0
   track: bridge
   pass: E
-  quality: developing
-  notes: Authoring pass 2026-09-06 added quiz-not-1.2 mental models and diagrams; 03-08
-    thickened with score-as-skip cause tables; independent quality and lab-safety
-    review still required before publishable
-  depth: map-complete
+  quality: competent
+  notes: 'Depth remediation passed independent quality review across two rounds on
+    2026-09-22 (initial review withheld both gates over two blockers -- an
+    AND-gated lab fake that reproduced the forbidden outcome and passed all 15
+    tests including the anti-fake test, and five wrong-lesson citations for
+    Claim 2/C4 content; a same-day re-review verified both fixes by construction
+    and closed them at 209a4cc), and passed independent lab-safety review on
+    2026-09-22 with no findings; see progress/reviews/0.2-2026-09-22.md
+    (blockers and addendum). transfer-ready is withheld because it needs learner
+    evidence from items.md, which does not exist yet.'
+  depth: publishable
 - id: '1.1'
   title: Security as invariants under attack
   phase: 1
@@ -1493,7 +1499,6 @@ revision:
   - '2.2'
   - '2.3'
   - '2.4'
-  - '0.2'
   - '3.1'
   - '3.2'
   - '3.3'
