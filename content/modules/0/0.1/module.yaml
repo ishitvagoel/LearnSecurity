@@ -4,7 +4,7 @@ title: Security engineering orientation
 phase: 0
 track: core
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 240
 prerequisites:
 - 'None; this module opens the course'
@@ -13,23 +13,46 @@ routeTags:
 - web-api
 releaseMilestone: null
 outcomes:
-- 'Refuse treating a public URL as authorized just because TCP connects.'
-- 'Treat WSTG as a method catalogue, not as a licence to scan the internet.'
-- 'Keep NICE work-role language from becoming a pentest permit.'
+- 'Given a URL, decide whether target_is_authorized returns true by checking the
+  parsed hostname against the written local allow-list, not whether the host
+  answers a connection, renders a login page, or presents a valid certificate.'
+- 'Given a citation of WSTG chapter titles, NICE work-role titles, or CSF
+  Govern/Identify outcome labels in a scope discussion, identify that none of
+  them can add a host to the allow-list, and state what written artifact would.'
+- 'Given a URL target_is_authorized cannot parse, or a non-string argument,
+  state that the correct verdict is False and explain why raising an exception
+  or defaulting to True is unacceptable.'
+- 'Given a hostname that contains, starts with, or ends with an allowed name
+  (for example evillab.securecollab.test), determine that it is not a member
+  of the allow-list and explain why a substring, prefix, or suffix comparison
+  would wrongly authorize it.'
+- 'Given a denied host, write the out_of_scope signal that records the host
+  and reason, and state why the response the host returned must never be
+  captured, logged, or screenshotted.'
+- 'Transfer the reachability, vocabulary, fail-closed, and exact-match rules
+  to a contractor asked to test a customer WordPress site and to a proposed
+  company staging URL, naming a concrete written artifact for each rather
+  than treating either request as self-authorizing.'
 reviewTriggers:
 - Any URL treated as in-scope
 - No stop condition on redirect
 - Live-target language in a learner note
 - Quiz score treated as scan permission
+- A lookalike hostname (prefix or suffix of an allowed name) treated as allow-listed
+- A URL parse failure treated as an allowed verdict instead of a denial
 invariants:
 - target_is_authorized of example.com is false
+- target_is_authorized of an unparseable or non-string URL is false, not raised
+- target_is_authorized of a hostname that merely contains an allowed name is false
 - Labs stay in authorized local or official training scope
-- WSTG is not a scanning licence
+- WSTG, NICE, and CSF are vocabulary, not a scanning licence
 - Reachability is not authorization
 threatModelPrompts:
 - What can a tired learner paste into a proxy?
 - What residual remains if /etc/hosts aliases a public name to localhost?
 - What residual remains if a redirect leaves 127.0.0.1?
+- Who benefits if a scope checker's parse failure is silently treated as allowed
+  by whatever code calls it next?
 concepts:
 - reachability-not-authorization
 - written-scope
@@ -73,24 +96,35 @@ labSpec:
   authorizedScope: Local course fixture or official training lab only; no public or
     third-party targets
   slug: 0.1-orientation
-  summary: HTTP to a non-allowlisted host treated as authorized
+  summary: HTTP to a non-allowlisted host treated as authorized; a lookalike hostname
+    or a URL parse failure treated as authorized
   forbiddenOutcomes:
   - HTTP to a non-allowlisted host treated as authorized
+  - A hostname containing, prefixed by, or suffixed with an allowed name treated as
+    that allowed host
+  - A URL the checker cannot parse, or a non-string argument, treated as authorized
+    instead of denied
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Personal lab rules, scope template, vocabulary map
-- Transfer task prompt
-- Local lab brief with public-host deny tests
+- Personal lab rules, scope template, vocabulary map naming WSTG/NICE/CSF as
+  vocabulary, not authorization
+- Transfer task prompt (contractor WordPress; company staging URL), with a named
+  written artifact for each
+- Local lab brief with public-host, lookalike-host, and malformed-URL deny tests
 assessmentBlueprint:
-  explain: Scope is a property of the tester; reachability is not authorization
-  design: Named hosts, stop condition, vocabulary map
-  build: target_is_authorized allow-list in labs/0.1/0.1-orientation/fixed
-  break: Authorized local any-URL-true
-  verify: Forbidden-outcome tests plus honest localhost
+  explain: Scope is a property of the tester; reachability is not authorization;
+    a vocabulary term is not a target list
+  design: Named hosts, exact-match comparison, stop condition, vocabulary map
+  build: target_is_authorized allow-list with fail-closed parse handling in
+    labs/0.1/0.1-orientation/fixed
+  break: Authorized local any-URL-true; watch the vulnerable file ignore its input
+  verify: Forbidden-outcome tests (public, lookalike, malformed) plus honest
+    localhost, and two anti-fake fakes traced by hand
   operate: out_of_scope without response bodies
-  communicate: Residual hosts-file aliases; official Juice Shop on your machine
+  communicate: Residual hosts-file aliases and redirects; official Juice Shop on
+    your machine; a concrete written scope artifact for a contractor engagement
 masteryGate: '0'
 standardsRefs:
 - source: NIST Cybersecurity Framework
@@ -105,7 +139,7 @@ standardsRefs:
   status: final
   requirementIds:
   - method-catalogue
-  url: https://owasp.org/www-project-web-security-testing-guide/v42/
+  url: https://wstg.owasp.org/v4.2/
 - source: NIST SP 800-181 Rev. 1 NICE Workforce Framework
   version: '800-181r1'
   status: final
@@ -123,15 +157,20 @@ misconceptions:
 - WSTG chapter titles are the syllabus
 - Defensive learning requires attacking strangers
 - Burp existing is authorization
+- A hostname that contains, starts with, or ends with an allowed name is itself
+  allowed
 operationalConsiderations:
 - Denied-host log line with url and reason=out_of_scope; never store response bodies
   from out-of-scope hosts.
 - Official Juice Shop on your machine is OK; a random cloud Juice Shop you do not
   own is not.
 author: deepen-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review
+  across two rounds; see content/progress/reviews/0.1-2026-09-18.md -- initial
+  review and lab-safety PASS in the main section, narrow re-review closing the
+  WSTG URL blocker in the addendum)
+lastReviewedAt: '2026-09-22'
+nextReviewAt: '2027-03-22'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
@@ -148,3 +187,58 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with host-gate cause tables, no-fetch oracle, and
     contractor WordPress transfer; independent review still required
+- date: '2026-09-18'
+  note: 'Deepen (B0 pilot, fourth of four): named five teaching claims (C1-C5) in
+    spec.md and a six-row coverage contract; rewrote all eight lessons to the
+    lesson-prose.mdc floor (all now >=900 words, previously 61-343); rewrote
+    outcomes as six observable behaviours (previously three module-title-shaped
+    lines) mapped one-to-one to the coverage contract; authored a 7-item
+    assessment bank (content/modules/0/0.1/assessment/items.md) and rewrote
+    content/assessment/keys/0.1.md and assessment/rubric.md, deleting the
+    session-worksheet reference. Recomputed estimatedMinutes from the formula
+    (8,262 lesson words + Tier-1 lab + 7 items + transfer task ~= 230, rounds to
+    240 -- unchanged from the prior value, now for a real reason instead of an
+    inherited guess). Live-fetched and re-verified NIST CSF 2.0, OWASP WSTG 4.2,
+    NIST SP 800-181r1/NICE, and WCAG 2.2 on 2026-09-18 (content/standards/pins.yaml);
+    all four citations were already accurate. Found and fixed a genuine latent
+    bug in fixed/scope.py: urlparse raises ValueError on a malformed IPv6 authority
+    and AttributeError/TypeError on non-string input, and the pre-existing "fixed"
+    implementation let that exception escape target_is_authorized instead of
+    denying, directly contradicting lessons/04-build.md''s own stated rule. Fixed
+    with a try/except that fails closed, and grew the lab from 2 tests covering
+    one claim to 7 tests covering three (C1, C3, C5), including a boundary test
+    for lookalike hostnames and an anti-fake test verified by hand against two
+    distinct plausible fakes (a hard-coded URL table, and a suffix-match
+    comparison). Also corrected a bug shared with 1.4, 2.1, and 4.3 before their
+    independent review: this file carried reviewer: pending with lastReviewedAt
+    and nextReviewAt set to real dates (2026-08-24 / 2027-02-24) and no artifact
+    under content/progress/reviews/ -- reverted both to null per
+    metadata-honesty.mdc.'
+- date: '2026-09-22'
+  note: 'Closed the one blocker from the independent review at
+    content/progress/reviews/0.1-2026-09-18.md: the WSTG 4.2 citation''s
+    stored url (owasp.org/www-project-web-security-testing-guide/v42/)
+    redirects to a 404, contradicting this module''s own claim to have
+    live-verified it against canonical sources -- the page actually fetched
+    to confirm v4.2''s status was a different URL than the one recorded as
+    the citation. Corrected here and in content/standards/pins.yaml to
+    https://wstg.owasp.org/v4.2/, confirmed 200 by direct fetch; the same
+    dead url was also carried independently in modules 9.3 and 9.5''s own
+    standardsRefs and fixed there too, since the defect is identical and
+    mechanical. This pass may not and does not set depth or quality;
+    requesting the narrow re-review the blocking review itself expected.'
+- date: '2026-09-22'
+  note: 'Narrow independent re-review at b983639 verified the WSTG URL fix by
+    direct fetch (new url 200, old url confirmed 308-then-404) rather than
+    trusting the fix commit''s claim, confirmed pins.yaml and this file parse
+    cleanly with no other change, confirmed the 9.3/9.5 edits are equally
+    narrow, and re-ran the lint and lab gates with no regression (see the
+    addendum to content/progress/reviews/0.1-2026-09-18.md). Blocker 1 is
+    closed; nothing else substantive surfaced. reviewer, lastReviewedAt
+    (2026-09-22), nextReviewAt (2027-03-22), and status: published are
+    recorded here per metadata-honesty.mdc, which reserves these fields to
+    the independent reviewer. quality: competent and depth: publishable are
+    recorded in content/progress/STATUS.yaml, which is where those two
+    fields live -- module.schema.json sets additionalProperties: false and
+    defines neither. quality: transfer-ready is NOT claimed: it requires
+    satisfactory learner evidence from items.md #7, and none exists yet.'

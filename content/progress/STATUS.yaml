@@ -831,11 +831,19 @@ modules:
   phase: 0
   track: core
   pass: E
-  quality: developing
-  notes: Authoring pass 2026-09-06 added reachability-not-authorization mental models
-    and diagrams; 03-08 thickened with host-gate cause tables; independent quality
-    and lab-safety review still required before publishable
-  depth: map-complete
+  quality: competent
+  notes: 'Depth remediation passed independent quality review across two rounds
+    (initial review at d9a79d7 confirmed five teaching claims, the coverage
+    contract, a genuine lab bug fix verified by three independently-constructed
+    anti-fake attempts, the full 4/7-vulnerable/7/7-fixed test matrix, and
+    lab-safety with no findings, but withheld depth for one blocker: a dead
+    OWASP WSTG 4.2 canonical URL contradicting the module''s own live-verification
+    claim; a narrow re-review at b983639 confirmed the URL fix by independent
+    direct fetch and closed the blocker). See progress/reviews/0.1-2026-09-18.md
+    (main section plus the 2026-09-22 addendum). transfer-ready is withheld
+    because it needs learner evidence from items.md #7, which does not exist
+    yet.'
+  depth: publishable
 - id: '0.2'
   title: Diagnostic and adaptive bridge
   phase: 0
@@ -1476,7 +1484,6 @@ revision:
   - '2.2'
   - '2.3'
   - '2.4'
-  - '0.1'
   - '0.2'
   - '3.1'
   - '3.2'
