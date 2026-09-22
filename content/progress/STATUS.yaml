@@ -860,8 +860,17 @@ modules:
   track: core
   pass: E
   quality: competent
-  notes: Depth remediation passed independent semantic and lab-safety review on 2026-08-25;
-    see progress/reviews/1.1-2026-08-25.md
+  notes: 'New review supersedes the 2026-08-25 review of the pre-deepen content
+    (that content no longer exists on this branch). Depth remediation on
+    2026-09-18 (eca8f4a) rewrote lessons 02-08 against five named teaching
+    claims and fixed a real validator bug; independent quality review that
+    day found the lab bug fix, coverage-contract/teaching-claims citations,
+    lab-safety, and metadata reversion all genuinely done, with one blocker
+    (a stale five-vs-four-passing/three-vs-two-anti-fake test-count claim in
+    two lessons). That fix landed at c09e305 and was independently
+    re-confirmed on 2026-09-22, with no other issue found; see
+    progress/reviews/1.1-2026-09-18.md (original review plus its
+    2026-09-22 addendum).'
   depth: publishable
 - id: '1.2'
   title: Authority and protection

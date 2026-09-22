@@ -1,137 +1,85 @@
 # Security is a claim about what must stay true
 
-**Kind:** concept-model 
-**Loop step:** 1 Property 
+**Kind:** concept-model
+**Loop step:** 1 Property
 **Standards:** Saltzer and Schroeder (1975, seminal) for named protection principles; NIST CSF 2.0 (final) for outcome functions, not a control catalogue.
 
-## The question that comes before tools
+## The claim this lesson defends
 
-Suppose a design review begins with: “We use TLS, bcrypt, JWTs, a web application firewall, and a weekly scanner.” You still do not know what security means for the product.
+Here is the falsifiable sentence the rest of this module exists to defend: **a sentence that names a tool — TLS, a password hash, a JWT, a green scanner — is not a security invariant, because the tool can be fully present while the outcome it is assumed to guarantee still fails somewhere else.** A tenant's notes can stay unreadable in the login form and still leak in a support log the login form never touches; a signed JWT can prove who issued a token and say nothing about whether the reader who accepts it enforces the right tenant boundary. If a claim cannot be made false by some concrete, describable event, it is not doing the job a security claim exists to do, and naming a mechanism is the single most common way a claim ends up unfalsifiable while still sounding rigorous.
 
-Those sentences name tools. A security rule names an outcome that must stay true while a stated attacker acts, a part of the system fails, or time passes. A useful rule is precise enough that a reviewer can imagine a counterexample.
+Suppose a SecureCollab design review opens with: "We use TLS, Argon2, signed JWTs, and a weekly dependency scanner." Every one of those four things can be true on the day a Tenant B member reads a Tenant A note through a support export the scanner never inspects, because none of the four claims says anything about exports. The review has described tools. It has not stated an outcome that would be false in that scenario, so it cannot yet be checked against that scenario, and a mechanism list that cannot be checked against the failure it is supposed to prevent has not yet become a security claim at all.
 
-For the notes app, compare these claims:
+## The envelope a rule needs to be checkable
 
-| Claim | Type | Why |
-|---|---|---|
-| We use TLS. | A tool | It says nothing about note bodies in logs, backups, browser storage, or a response sent to the wrong company. |
-| A member of company B cannot read a company A note through any public API operation. | A rule, but incomplete | It names an actor, object, action, and forbidden result. It still needs assumptions, time, and evidence. |
-| Company A note bodies stay unreadable to company B members through the public API, the application logs they can reach, and retained exports; the browser is hostile and the API policy layer is trusted. | A rule you can check | It names channels, what the attacker can do, what you trust, and what you still keep around. |
+A checkable rule is more than a slogan with a subject and a verb. Treat the rule as the center of an envelope of the following elements, each one narrowing the claim until a reviewer can imagine a concrete event that would break it.
 
-A tool is valuable only after you can say which rule it supports, under which assumptions, and how you will know when it stops working.
-
-## The envelope around a rule
-
-A useful rule is more than a slogan. Treat the rule as the center of an envelope:
-
-| Element | Question it answers | Weak version | Stronger notes-app version |
+| Element | Question it answers | Weak version | Bounded SecureCollab version |
 |---|---|---|---|
-| Asset | What is valued? | data | note body, membership record, audit event |
-| Subject and action | Who may do what? | users can access notes | a current company A member may read a company A note |
-| What the attacker can do | What can they control? | malicious user | a signed-in company B member can change every browser request and guess identifiers |
-| What you trust | What must behave correctly? | the server | the FastAPI authorization path and PostgreSQL role are trusted; the browser is not |
-| State and time | When must it hold? | always | during a request and across retained logs, exports, and a backup restore |
-| What must not happen | What observable result disproves it? | breach | a company B response contains any company A note-body bytes |
-| Evidence | How could a reviewer challenge it? | scanner passes | cross-company negative tests, log-capture tests, and restore-path review |
-| Leftover risk | What remains outside the claim? | none | a cloud administrator with a database snapshot is out of scope for this part and triggers a later encryption review |
+| Asset | What is valued? | data | note body, tenant-membership record, audit event |
+| Subject and action | Who may do what? | users can access notes | a current Tenant A member may read a Tenant A note |
+| Attacker capability | What can they control? | malicious user | a signed-in Tenant B member can modify every browser request and guess note identifiers |
+| Trust | What must behave correctly? | the server | the API's tenant-policy check and the structured event constructor are trusted; the browser and every client-supplied label are not |
+| State and time | When must it hold? | always | across a live request, retained application logs, and generated tenant exports |
+| Forbidden outcome | What observable result disproves it? | breach | a Tenant B response, log line, or export contains any byte of a Tenant A note body |
+| Evidence | How could a reviewer challenge it? | scanner passes | cross-tenant negative tests, log-capture tests, and export-path review |
+| Residual risk | What remains outside the claim? | none | a cloud administrator with direct database-snapshot access is out of scope for Phase 1 and is recorded as a review trigger |
 
-The envelope stops universal claims. “No unauthorized person can ever read a note” sounds strong but is not testable until unauthorized, read, note, channels, time, and trusted pieces are defined.
+Each row removes one place a universal-sounding sentence hides an assumption. "No unauthorized person can ever read a note" sounds strong precisely because it hides all eight rows at once; it becomes checkable only once unauthorized, read, note, the channel it travels through, the time horizon, and the trusted component are all named, and it is at that point — not before — that a reviewer can propose the concrete counterexample that would break it.
 
-## Picture: a tool sits inside the envelope, not above it
+## A worked example: "passwords are hashed" as a mechanism-only claim
+
+Start with the tool claim as SecureCollab's SECURITY.md currently states it, in the exact shape the vulnerable lab fixture uses:
+
+```yaml
+property: We are secure because we use TLS
+because:
+  - Passwords are hashed
+  - We use TLS
+  - The scanner is green
+```
+
+Read that block the way a reviewer has to. The `property` field names a mechanism and calls it done; the `because` list adds two more mechanisms and a scanner result, and none of the four lines names an asset, an attacker, a trust boundary, or an observable outcome that would falsify the claim. Follow one of those mechanisms through the reasoning a bounded claim requires. The possible rule a password hash could support is narrow: a database snapshot alone should not reveal a reusable plaintext password within an assumed attacker work factor. The attacker who matters for that rule has obtained the stored credential verifiers but not the application's live memory, its password-entry logs, or its account-recovery channel — a materially different attacker from the one who matters for note confidentiality, who never needs the password database at all. The tool that supports this narrow rule is a slow, salted hashing construction with honestly recorded parameters, and that tool cannot do several things a reviewer must not assume it does: it cannot stop a user from choosing a guessable password, it cannot stop an upstream log line from capturing the password in plaintext before hashing ever runs, and it says nothing whatsoever about which tenant a signed-in member is allowed to read notes from. If the original four-line slogan is trusted as written, a reviewer can mark note confidentiality, session security, and account recovery as "covered" by a control that never touched any of them, and design work on all three quietly stops. The repair is not a better hash function; Argon2id was already correctly chosen. The repair is refusing to let one bounded mechanism claim to answer three unrelated questions, and deriving a separate, checkable rule for each one instead.
+
+## Picture: a mechanism sits inside the envelope, not above it
 
 ```mermaid
 flowchart TD
-  Env[Claim envelope] --> I[The rule]
-  I --> M["A tool - TLS, hash, JWT, scanner"]
-  Env --> A[What the attacker can do]
-  Env --> T[What you trust]
+  Env[Claim envelope] --> Rule[The bounded rule]
+  Rule --> Mech["A mechanism - TLS, a hash, a JWT, a scanner"]
+  Env --> Atk[Attacker capability]
+  Env --> Trust[What is trusted]
   Env --> Time[State and time]
-  Env --> F[What must not happen]
-  Env --> E[Evidence]
-  Env --> R[Leftover risk]
-  M -->|supports only if| F
+  Env --> Forbid[Forbidden outcome]
+  Env --> Ev[Evidence]
+  Mech -->|supports only if it changes| Forbid
+  Atk -->|constrains| Forbid
 ```
 
-If you start the review at *the tool*, you never reach a counterexample. If you start at *what must not happen*, you can ask whether bcrypt, TLS, or a scanner even belongs in the picture.
+A reviewer who starts at the mechanism box and works upward never reaches the forbidden-outcome box, because nothing about a hash function or a TLS handshake forces the question "which observable result would prove this wrong." A reviewer who starts at the forbidden-outcome box and works downward can ask, for each mechanism proposed, whether it actually changes that outcome — and that ordering is the entire difference between a design review that catches a false-assurance claim and one that rubber-stamps it.
 
-## Eight useful names, not eight checkboxes
+## Eight names, used as prompts, not as a checklist to complete
 
-The names below are prompts. They overlap, trade off, and depend on the product.
+Confidentiality, integrity, availability, authenticity, authorization, accountability, privacy, and safety describe different forbidden outcomes for the same SecureCollab system, and treating them as eight boxes to tick produces eight shallow claims instead of the two or three that actually matter this phase. A note body reaching a support log the design never intended is a confidentiality failure; a retried membership removal that leaves a tenant in an inconsistent state is an integrity failure, because the object changed through a path the design never authorized as a single clean transition. Authentication answering "who is this" is not authorization answering "may this identity do this action on this object" — a signed-in Tenant B member changing a note identifier in the URL is authenticated the whole time, and the forbidden outcome is entirely an authorization failure, not an authentication one. Do not force all eight names into every catalogue row. A property that is genuinely out of scope this phase — safety, for a text-notes product with no physical actuator — is recorded as a non-goal with a review trigger, and that recorded omission is different from a name nobody thought to ask about at all.
 
-| Name | Notes-app shape | A counterexample |
-|---|---|---|
-| Confidentiality | A note body is shown only to people allowed for that note and company, over the channels in scope. | A support log contains the full body. |
-| Integrity | Note content and membership change only through allowed transitions; corruption is detectable. | A retry applies the same membership removal twice and leaves an invalid state. |
-| Availability | One company’s expensive request cannot exhaust every company’s ability to read existing notes beyond the stated recovery goal. | An unbounded export starves normal reads. |
-| Authenticity | Security-relevant actions attributed to a person have evidence tied to the authenticator and service path used. | An internal header supplied by a browser is recorded as a worker identity. |
-| Authorization | Being signed in never grants an action by itself; the current person-object-action relationship is checked at the enforcement point. | A signed-in company B member reads company A by changing a note identifier. |
-| Accountability | High-impact changes produce privacy-safe evidence enough to reconstruct who asked for what and which policy decision occurred. | A company-admin role grant is stored with no actor or correlation identifier. |
-| Privacy | Collection, retention, inference, and disclosure stay within the stated purpose, even if storage is confidential. | Deleted note titles remain in analytics indefinitely. |
-| Safety | Failure and recovery do not create unacceptable harm to people or surrounding systems. | Account recovery exposes a coerced user or permanently locks out someone who needs an accessible path. |
+## Saltzer and Schroeder's principles test a proposed mechanism, once the rule is clear
 
-Do not force all eight into every row. If a name is not claimed, record that as out of scope and the later change that would make it relevant. Leaving it out on purpose is different from forgetting it.
+Saltzer and Schroeder's protection principles are reasoning tools for a mechanism a rule has already produced, not a substitute for stating the rule. Keeping the enforcement path small asks whether the tenant-policy check can be made narrow enough that a reviewer can read all of it in one sitting. Fail-safe defaults asks whether a missing or ambiguous authorization decision denies rather than allows. Complete mediation asks whether every relevant access is checked, including a retried request or an export path that reaches the same data through a different route. Open design asks whether the rule would still hold if the policy code were fully public, which is the question that catches "the scanner is green" hiding an assumption that nobody has actually read the policy logic. Least privilege and least common mechanism ask how far a single compromised credential or shared parser can reach. None of these principles proves a design correct; each one is a question that surfaces a hidden assumption the mechanism-only slogan was built to hide.
 
-## A worked example: “passwords are hashed”
+## Outcome labels are not proof either
 
-Start with the tool claim: “The notes app is secure because passwords are hashed.”
-
-1. **Possible rule supported:** a database snapshot alone should not reveal reusable plaintext passwords within an assumed work factor.
-2. **Attacker and preconditions:** the attacker obtains stored credential verifiers but not the application’s live memory, password-entry logs, or reset channel.
-3. **Tool:** a slow, salted password-hashing construction and safe parameter management.
-4. **What the tool cannot do:** weak user passwords can still be guessed; an application log may capture plaintext before hashing; a reset flow can bypass the password; hashing says nothing about note authorization.
-5. **Impact if the original slogan is trusted:** reviewers may incorrectly mark note confidentiality, session security, and recovery as covered.
-6. **How you stop it:** narrow the claim and design each unrelated rule separately.
-7. **How you notice:** review logs and telemetry schemas for credential fields; watch unusual authentication attempts without recording passwords.
-8. **How you recover:** invalidate exposed credentials or sessions, remove captured sensitive data, notify affected users when required, and repair the capture path.
-
-The root cause is not “bcrypt is bad.” It is treating a bounded tool as a universal rule.
-
-## Protection principles shape which tool you pick
-
-Saltzer and Schroeder’s principles help test a proposed tool after the rule is clear:
-
-- **Keep the mechanism small:** can the enforcement path be smaller and easier to review?
-- **Fail closed:** is a missing or ambiguous decision a denial?
-- **Check every path:** is permission checked on every relevant access, including retries and alternate routes?
-- **Open design:** would disclosing the design break the rule? If so, secrecy has become an unrecorded assumption.
-- **Least privilege and least sharing:** can what you trust, and how far a break can spread, shrink?
-- **People can still use it:** can legitimate users complete the secure path, including recovery?
-- **Record a compromise:** when prevention is incomplete, is useful evidence likely to survive?
-
-The principles do not prove a design. They are reasoning tools for finding hidden assumptions and unnecessarily large trust.
-
-## Outcome labels are not proof
-
-NIST CSF 2.0 groups outcomes under Govern, Identify, Protect, Detect, Respond, and Recover. The sequence reminds you that prevention alone is incomplete. A Protect tool does not satisfy a rule merely because it maps to a framework label. Evidence must still show that the system-specific “must not happen” is prevented or bounded.
+NIST CSF 2.0 groups outcomes under Govern, Identify, Protect, Detect, Respond, and Recover, and the sequence is useful precisely because it reminds a reviewer that prevention alone is an incomplete answer — a Protect-labeled control does not satisfy a rule merely because a framework maps it to that word. A green dashboard tagged "Protect: password hashing implemented" is exactly as mechanism-only as the four-line SECURITY.md above; the label changed, and the missing forbidden outcome, attacker, and evidence did not. Evidence must still show that the SecureCollab-specific "must not happen" is actually prevented, or bounded, and detected when prevention is not absolute — a claim [06-operate.md](06-operate.md) returns to once a mechanism exists to operate.
 
 ## Practice: turn a slogan into a bounded claim
 
-Choose one slogan:
+Run this only inside `labs/1.1/1.1-invariant-catalogue/`. The data is synthetic; every note body, tenant name, and identifier in the fixtures is a fixture label, not a real credential or real personal data.
 
-- “We encrypt everything.”
-- “Only admins can do that.”
-- “The framework validates input.”
-- “We keep audit logs.”
+Choose one SecureCollab slogan — "we encrypt everything," "only tenant admins can do that," "the framework validates input," or "we keep audit logs" — and write six lines: the asset, subject, action, and forbidden outcome; what the attacker can control; what is trusted and what is not; the state and time horizon; one piece of negative evidence that would falsify the claim; and one residual risk or non-goal. A peer who reads your six lines should be able to invent a concrete event that would break the claim as written. If they cannot invent one, the claim is still too vague to be a rule; if the event they invent falls outside your recorded residual risk, the claim may already be precise enough, but the residual-risk line has to defend that boundary rather than merely assert it.
 
-Write six lines:
+## Check yourself
 
-1. the asset, subject, action, and what must not happen;
-2. what the attacker can do;
-3. what you trust and what you do not;
-4. state and time horizon;
-5. one piece of negative evidence;
-6. one leftover risk or out-of-scope note.
+Before continuing to [02 SecureCollab's first invariant catalogue](02-securecollab-catalogue.md), you should be able to explain why confidentiality and privacy answer different questions, why a mechanism that supports one rule can be irrelevant to another, why "always" almost always hides an unstated channel or time horizon, and why a secure framework default is not automatically an application-level guarantee. The next lesson turns this envelope into a versioned catalogue naming SecureCollab's actual assets, actors, and forbidden outcomes.
 
-A peer should be able to invent a concrete counterexample. If they cannot, your claim is probably too vague. If their counterexample is outside your recorded scope, your claim may be precise — but the scope must be defensible.
+## What this page is not doing
 
-## Check your model
-
-Before continuing, you should be able to explain:
-
-- why confidentiality and privacy are not synonyms;
-- why a tool can support one rule while failing another;
-- why “always” usually hides channels or time;
-- why noticing and recovery belong in the claim when prevention is not absolute;
-- why a secure framework default is not an application guarantee.
-
-The next page turns this vocabulary into a versioned list of rules for the notes app.
+This lesson does not claim SecureCollab has a deployed service, a production tenant boundary, or a real customer's data; Phase 1 is the product model only, and the vulnerable fixture quoted above is a course fixture, not a real security disclosure. Answer keys are not on this site.

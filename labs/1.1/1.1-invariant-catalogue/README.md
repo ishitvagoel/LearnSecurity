@@ -14,7 +14,7 @@ A valid catalogue is evidence of reviewable reasoning. It is not evidence that a
 
 ## Root cause
 
-The vulnerable document treats control names and a scanner result as proof that the whole product is secure. It omits the product model and proof obligations. Field presence alone would not repair the error, so the validator checks relationships and minimum semantic constraints as well as shape.
+The vulnerable document treats control names and a scanner result as proof that the whole product is secure. It omits the product model and proof obligations. Field presence alone would not repair the error, so the validator checks relationships and minimum semantic constraints as well as shape, including that the five required rows are five distinct system-specific claims and not one generic claim copied under five identifiers (`validate_catalogue`'s duplicate-signature check, added while deepening this module — see the module's changelog and `content/modules/1/1.1/spec.md`).
 
 ## Impact
 

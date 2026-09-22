@@ -67,3 +67,66 @@ def test_field_complete_but_causally_shallow_claim_does_not_pass() -> None:
     errors = validate_catalogue(shallow)
     assert any("mechanism slogan" in error for error in errors)
     assert any("control presence is not property evidence" in error for error in errors)
+
+
+def test_five_padded_duplicate_rows_do_not_pass() -> None:
+    """Anti-fake: a catalogue that hits every field-presence rule by copying
+    one generic, non-SecureCollab-specific claim under five different ids
+    must not pass. This is the defect found while reviewing this lab for the
+    module's deepening pass: no trigger phrase from MECHANISM_ONLY_PHRASES
+    appears anywhere, every required list and text field is non-empty, and
+    every evidence mode has at least one item, so the pre-existing checks
+    were blind to it. The signature check added alongside this test is what
+    the real fixture's five genuinely distinct rows must still pass."""
+
+    def padded_claim(number: int) -> dict:
+        return {
+            "id": f"SC-FILL-0{number}",
+            "property": "Notes must never leak to an outsider",
+            "assets": ["notes"],
+            "attackers": ["a bad actor"],
+            "trust": ["the server"],
+            "untrusted": ["the client"],
+            "timeHorizon": "during use",
+            "preconditions": ["something happens"],
+            "mechanisms": ["a policy check"],
+            "mechanismLimits": ["some limit exists"],
+            "forbiddenOutcomes": ["notes leak somehow"],
+            "evidence": {
+                "normal": ["thing works"],
+                "negative": ["thing is denied"],
+                "abuse": ["thing is tried and fails"],
+                "failure": ["thing breaks safely"],
+            },
+            "detection": {
+                "signal": "something odd happens",
+                "threshold": "some threshold",
+                "eventFields": ["a", "b"],
+                "prohibitedFields": ["note body", "password", "token"],
+                "failureBehavior": "fails closed somehow",
+            },
+            "recovery": ["do something", "do something else"],
+            "residualRisk": "some risk remains",
+            "nonGoals": ["not doing something"],
+            "reviewTriggers": ["something changes"],
+        }
+
+    padded = {
+        "system": "SecureCollab",
+        "authorizedScope": "local synthetic course fixture",
+        "syntheticDataOnly": True,
+        "claims": [padded_claim(n) for n in range(1, 6)],
+    }
+    errors = validate_catalogue(padded)
+    assert any("duplicate" in error for error in errors), (
+        "field-presence-complete but content-identical rows must be rejected:\n- "
+        + "\n- ".join(errors or ["(no errors -- the fake passed)"])
+    )
+
+    # The real fixed fixture's five rows are genuinely distinct and must not
+    # trip the same check -- this is the guard against the fix itself being
+    # too aggressive and rejecting a legitimate catalogue.
+    fixed_path = LAB_ROOT / "fixed" / "security_claim.yaml"
+    real = yaml.safe_load(fixed_path.read_text(encoding="utf-8"))
+    real_errors = validate_catalogue(real)
+    assert not any("duplicate" in error for error in real_errors), real_errors
