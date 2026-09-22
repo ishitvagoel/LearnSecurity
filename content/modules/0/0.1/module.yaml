@@ -4,7 +4,7 @@ title: Security engineering orientation
 phase: 0
 track: core
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 240
 prerequisites:
 - 'None; this module opens the course'
@@ -165,9 +165,12 @@ operationalConsiderations:
 - Official Juice Shop on your machine is OK; a random cloud Juice Shop you do not
   own is not.
 author: deepen-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review
+  across two rounds; see content/progress/reviews/0.1-2026-09-18.md -- initial
+  review and lab-safety PASS in the main section, narrow re-review closing the
+  WSTG URL blocker in the addendum)
+lastReviewedAt: '2026-09-22'
+nextReviewAt: '2027-03-22'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
@@ -224,3 +227,18 @@ changelog:
     standardsRefs and fixed there too, since the defect is identical and
     mechanical. This pass may not and does not set depth or quality;
     requesting the narrow re-review the blocking review itself expected.'
+- date: '2026-09-22'
+  note: 'Narrow independent re-review at b983639 verified the WSTG URL fix by
+    direct fetch (new url 200, old url confirmed 308-then-404) rather than
+    trusting the fix commit''s claim, confirmed pins.yaml and this file parse
+    cleanly with no other change, confirmed the 9.3/9.5 edits are equally
+    narrow, and re-ran the lint and lab gates with no regression (see the
+    addendum to content/progress/reviews/0.1-2026-09-18.md). Blocker 1 is
+    closed; nothing else substantive surfaced. reviewer, lastReviewedAt
+    (2026-09-22), nextReviewAt (2027-03-22), and status: published are
+    recorded here per metadata-honesty.mdc, which reserves these fields to
+    the independent reviewer. quality: competent and depth: publishable are
+    recorded in content/progress/STATUS.yaml, which is where those two
+    fields live -- module.schema.json sets additionalProperties: false and
+    defines neither. quality: transfer-ready is NOT claimed: it requires
+    satisfactory learner evidence from items.md #7, and none exists yet.'
