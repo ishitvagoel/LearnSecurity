@@ -98,7 +98,7 @@ standardsRefs:
   status: final
   requirementIds:
   - WSTG-v42-catalogue
-  url: https://owasp.org/www-project-web-security-testing-guide/v42/
+  url: https://wstg.owasp.org/v4.2/
 - source: OWASP Application Security Verification Standard
   version: '5.0.0'
   status: final
@@ -145,3 +145,7 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with close-without-retest cause tables, PDF/CVSS
     limits, and clinic PDF-shelf transfer; independent review still required
+- date: '2026-09-22'
+  note: 'Fixed a dead OWASP WSTG 4.2 canonical URL (owasp.org/www-project-web-security-testing-guide/v42/
+    redirects to a 404) to https://wstg.owasp.org/v4.2/, found by module 0.1''s
+    independent review while live-verifying its own copy of the same pin.'

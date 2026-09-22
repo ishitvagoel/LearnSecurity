@@ -139,7 +139,7 @@ standardsRefs:
   status: final
   requirementIds:
   - method-catalogue
-  url: https://owasp.org/www-project-web-security-testing-guide/v42/
+  url: https://wstg.owasp.org/v4.2/
 - source: NIST SP 800-181 Rev. 1 NICE Workforce Framework
   version: '800-181r1'
   status: final
@@ -211,3 +211,16 @@ changelog:
     and nextReviewAt set to real dates (2026-08-24 / 2027-02-24) and no artifact
     under content/progress/reviews/ -- reverted both to null per
     metadata-honesty.mdc.'
+- date: '2026-09-22'
+  note: 'Closed the one blocker from the independent review at
+    content/progress/reviews/0.1-2026-09-18.md: the WSTG 4.2 citation''s
+    stored url (owasp.org/www-project-web-security-testing-guide/v42/)
+    redirects to a 404, contradicting this module''s own claim to have
+    live-verified it against canonical sources -- the page actually fetched
+    to confirm v4.2''s status was a different URL than the one recorded as
+    the citation. Corrected here and in content/standards/pins.yaml to
+    https://wstg.owasp.org/v4.2/, confirmed 200 by direct fetch; the same
+    dead url was also carried independently in modules 9.3 and 9.5''s own
+    standardsRefs and fixed there too, since the defect is identical and
+    mechanical. This pass may not and does not set depth or quality;
+    requesting the narrow re-review the blocking review itself expected.'
