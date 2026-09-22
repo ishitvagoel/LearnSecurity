@@ -168,3 +168,22 @@ def test_anti_fake_phase1_modules_fast_track_alone_does_not_drop_1_4(diagnostic)
     assert "1.4" in result["required"], (
         "a fast-track claim, on its own, must not drop 1.4 either"
     )
+
+
+def test_anti_fake_phase1_modules_high_score_and_fast_track_together_does_not_drop_1_4(
+    diagnostic,
+) -> None:
+    """Anti-fake test. Every other case in this file pairs a high score
+    with ``fast_track=False`` (the default) or pairs a low score with
+    ``fast_track=True`` -- never both signals present at once. A repair
+    that keeps the vulnerable branch but changes its ``or`` to an ``and``
+    (drop 1.4 only when the score is high AND the flag is set) would pass
+    every test above, because none of them ever sets both, while still
+    reproducing the module's own forbidden outcome for a learner who
+    happens to have both a high score and a fast-track claim."""
+    result = diagnostic.phase1_modules_for_learner(95, {}, fast_track=True)
+    assert "1.4" in result["required"], (
+        "a high score and a fast-track claim together must not drop 1.4 "
+        "either -- an and-gated branch is a narrower version of the same "
+        "defect, not a fix"
+    )

@@ -52,7 +52,7 @@ The NICE Workforce Framework's Secure Systems Development work role — named in
 | Use of the work-role text | Legitimate here? |
 |---|---|
 | Naming which Git/SQL/HTTP bridge a diagnosed gap maps to | Yes — vocabulary, matched to `bridge`, never to `required` |
-| Justifying a tooling-bridge skip because "the learner already works this job" | No — a job title is the credential claim [Claim 2](01-property.md) already excludes |
+| Justifying a tooling-bridge skip because "the learner already works this job" | No — a job title is the credential claim Claim 2 (this lesson) already excludes |
 | Treating "meets the Secure Systems Development work role" as equivalent to "passed 1.2" | No — the work role names a job's expectations; 1.2 grades a reviewed artifact against this course's own rubric, not against NICE's |
 
 ## Practice

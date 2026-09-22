@@ -184,3 +184,31 @@ changelog:
     lastReviewedAt and nextReviewAt carried real dates and no artifact existed
     under content/progress/reviews/ -- reverted both to null per
     metadata-honesty.mdc.
+- date: '2026-09-22'
+  note: >-
+    Closed both blockers from the independent review at
+    content/progress/reviews/0.2-2026-09-22.md. (1) The reviewer constructed
+    an AND-gated fake for phase1_modules_for_learner (drop 1.4 only when
+    quiz_score>=90 AND fast_track, instead of the vulnerable file's OR-gate)
+    that passed all 15 tests including the anti-fake test written for that
+    function, because no test ever set a high score and fast_track together
+    -- every case paired one signal with the other's default/absent value.
+    Added test_anti_fake_phase1_modules_high_score_and_fast_track_together_does_not_drop_1_4,
+    which sets both at once; verified by hand that it fails on the AND-gated
+    fake (and only that test), passes on the real fixed function (a constant
+    that never drops 1.4 regardless of input), and fails on the vulnerable
+    file for the intended reason. Lab is 16 tests now, not 15. (2) Five
+    citations across spec.md, lessons/02-model.md, lessons/07-transfer.md,
+    and content/assessment/keys/0.2.md (twice) pointed "Claim 2" and its
+    supporting headings ("A credential is not a diagnostic", "Vocabulary is
+    not a syllabus") at lessons/01-property.md, when both headings and
+    Claim 2's own content live in lessons/02-model.md -- confirmed by
+    grepping both files' actual heading text before fixing each occurrence.
+    02-model.md's own self-reference (Claim 2 linking to 01-property.md
+    from within Claim 2's own home lesson) was de-linked to plain text
+    rather than left as a circular or wrong link. Verified: lint clean
+    (0/0 module-scope, repo baseline unchanged at 2278), lab matrix
+    vulnerable 9/16 fail (one more than before, from the new test) fixed
+    16/16 pass, site build succeeds. This pass may not and does not set
+    depth or quality; requesting the re-review the blocking review itself
+    expected.
