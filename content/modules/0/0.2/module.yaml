@@ -4,7 +4,7 @@ title: Diagnostic and adaptive bridge
 phase: 0
 track: bridge
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 240
 prerequisites:
 - '0.1 orientation; diagnostics never skip 1.2 or Gate 1'
@@ -142,9 +142,13 @@ operationalConsiderations:
 - A phase1_skip_denied signal must never carry quiz item text, answer content, or
   a badge image.
 author: deepen-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review
+  across two rounds -- initial review on 2026-09-22 withheld both gates over two
+  blockers, a same-day re-review confirmed both closed at 209a4cc and granted
+  both; lab-safety confirmed clean, no findings, in the initial round and not
+  re-litigated in the re-review; see content/progress/reviews/0.2-2026-09-22.md)
+lastReviewedAt: '2026-09-22'
+nextReviewAt: '2027-03-22'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
@@ -212,3 +216,32 @@ changelog:
     16/16 pass, site build succeeds. This pass may not and does not set
     depth or quality; requesting the re-review the blocking review itself
     expected.
+- date: '2026-09-22'
+  note: >-
+    Independent re-review of the two blocker fixes at 209a4cc, appended to
+    content/progress/reviews/0.2-2026-09-22.md. Verified the anti-fake test
+    by construction, not by trust: read fixed/diagnostic.py (a constant
+    that never drops 1.4) and vulnerable/diagnostic.py (the OR-gate)
+    directly, then independently built the reviewer's own AND-gated fake
+    (quiz_score>=90 and fast_track) in fixed/diagnostic.py, ran the full
+    suite (1 failed -- exactly and only the new anti-fake test, 15 passed),
+    restored the file from git checkout --, and confirmed md5sum matched
+    HEAD with git status clean. Reran the real suite: fixed 16/16 pass,
+    vulnerable 9/16 fail. Verified all five citation fixes by reading the
+    actual heading text of both lesson files rather than trusting the diff:
+    confirmed "A credential is not a diagnostic" is 02-model.md's own H1
+    and "Vocabulary is not a syllabus" is its L48 H2, both absent from
+    01-property.md; confirmed spec.md's two coverage-contract cells,
+    02-model.md's self-reference (now de-linked to "this lesson"),
+    07-transfer.md, and both keys/0.2.md instances all now point at
+    02-model.md. Grepped the whole module for every remaining
+    01-property.md reference and found none that misattribute C2/C4
+    content -- all remaining instances are either Claim 1's own content or
+    correct links to other modules' own 01-property.md files. Reran
+    lint_content.py on the module scope (0/0), repo-wide (baseline
+    unchanged at 2278), and npm --prefix site run build (643/643 pages,
+    success) myself rather than trusting the prior pass's counts. Found
+    nothing else substantive wrong. Both gates granted: quality: competent
+    and depth: publishable, per the governance rule for a re-review that
+    confirms a prior blocker is genuinely closed with no new blocker
+    found.
