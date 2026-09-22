@@ -4,7 +4,7 @@ title: Security as invariants under attack
 phase: 1
 track: core
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 240
 prerequisites:
   - 'Entry profile: small database-backed API, Git, tests, and basic SQL'
@@ -166,9 +166,14 @@ operationalConsiderations:
   - Operator compromise and concentration of control over state and evidence remain residual risks
   - Human response and recovery paths require clear status, accessible alternatives, and safe failure behavior
 author: OpenAI Codex / deepen-curriculum
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review
+  across two rounds -- initial review on 2026-09-18 verified the lab bug fix,
+  coverage-contract/teaching-claims citations, and metadata reversion, and found
+  the lab-safety dimension clean with no findings, leaving one blocker; a
+  narrow confirmation on 2026-09-22 verified that blocker's fix and granted
+  both gates; see content/progress/reviews/1.1-2026-09-18.md, addendum)
+lastReviewedAt: '2026-09-22'
+nextReviewAt: '2027-03-22'
 changelog:
   - date: '2026-08-23'
     note: Pass A specification and initial Pass B/C pilot
@@ -213,3 +218,23 @@ changelog:
       prior pass since no lab or test file was touched. This pass may not
       and does not set depth or quality; requesting the re-check the
       blocking review itself expected.
+  - date: '2026-09-22'
+    note: >-
+      Independent quality reviewer re-checked commit c09e305 (the fix above)
+      in a fresh, context-free session and confirmed it: lessons/03 and
+      05 now say five passing/three anti-fake tests, matching a hand count
+      of tests/test_claim_shape.py's six def test_ lines, and lesson 05 is
+      internally consistent with its own "a third anti-fake test" and "all
+      six tests" sentences. No other stale test-count reference found in
+      the module or lab. Re-ran the mechanical gates: lint 0/0, lab 5/6 on
+      vulnerable, 6/6 on fixed. This is a NEW independent review superseding
+      progress/reviews/1.1-2026-08-25.md, which certified an earlier,
+      thinner version of these lessons under the old depth bar that no
+      longer exists on this branch -- it is not this module's first review.
+      Combining this confirmation with the 2026-09-18 review's already-clean
+      lab-safety, coverage-contract, lint, and lab-matrix findings, both
+      gates are granted: reviewer/lastReviewedAt/nextReviewAt/status set to
+      quality-reviewer-and-lab-safety-reviewer/2026-09-22/2027-03-22/published
+      per metadata-honesty.mdc, and content/progress/STATUS.yaml's 1.1 entry
+      updated to quality: competent, depth: publishable. See the addendum in
+      progress/reviews/1.1-2026-09-18.md.
