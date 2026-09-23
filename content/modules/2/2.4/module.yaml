@@ -4,7 +4,7 @@ title: State, time, concurrency, and distributed failure
 phase: 2
 track: core
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 330
 prerequisites:
 - 2.1 Pass A
@@ -155,9 +155,10 @@ operationalConsiderations:
 - Lost first response still needs a read-your-write path so the owner can see the
   existing share without minting another key.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review;
+  see content/progress/reviews/2.4-2026-09-23.md)
+lastReviewedAt: '2026-09-23'
+nextReviewAt: '2027-03-23'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -319,3 +320,36 @@ changelog:
     fixed passes, since no code changed), lint baseline unchanged. This
     pass may not and does not set depth or quality; requesting the
     re-review the blocking review itself expected.'
+- date: '2026-09-23'
+  note: 'Independent re-review closing both blockers from
+    content/progress/reviews/2.4-2026-09-23.md, recorded as an addendum
+    to that same artifact. Blocker 1: read the new 05-verify.md/spec.md
+    C4 text and confirmed it states plainly that the concurrency test
+    verifies only the within-process half of C4 and never claims the
+    suite covers the cross-process case; independently reconstructed a
+    module-level threading.Lock() fake distinct from the shipped
+    candidate_fix.py and confirmed it still passes all 7 tests (7 passed),
+    matching the acknowledged, now-honestly-scoped gap rather than a
+    silently reopened one; restored fixed/app.py from git checkout --
+    afterward (md5 938cdfb0... matched HEAD both before and after).
+    Blocker 2: re-derived every cell of both spec.md tables from scratch
+    against items.md''s own Claim/Outcome tags -- teaching-claims C5 now
+    cites only #8 (correct, the only C5-tagged item); coverage-contract
+    Row 1 cites only #1 (correct, matches Outcome 1 and Claim C1,C2); Row
+    2 and Row 5 are honestly declared non-item-tested and confirmed true
+    (no item among the 8 tags either outcome); Row 3 cites #3, #4
+    (correct, together covering C1 and C2 against Outcome 3); Row 4
+    unchanged and correct; the Transfer row''s narrowed Claim column
+    (C1, C3, C4) was checked against lessons/07-transfer.md directly --
+    that lesson names C1, C3, and C4 by letter and never mentions C2 or
+    C5 anywhere. Ran the full lab matrix myself: vulnerable 4 failed/3
+    passed, fixed 7/7 passed (unchanged, confirming no lab/test code was
+    touched by the fix). Ran python3 scripts/lint_content.py
+    content/modules/2/2.4 --no-baseline (0 errors, 0 warnings) and npm
+    --prefix site run build (compiled successfully, all static pages
+    generated) myself. Both blockers confirmed closed; no other
+    substantive issue found. Both quality and lab-safety gates (the
+    latter already passed in the 2026-09-23 review) are satisfied:
+    setting quality: competent and depth: publishable in STATUS.yaml,
+    and reviewer/status/lastReviewedAt/nextReviewAt here, per this
+    task''s governance rule.'
