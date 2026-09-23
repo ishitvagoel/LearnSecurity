@@ -15,22 +15,32 @@ routeTags:
 - web-api
 releaseMilestone: M0
 outcomes:
-- Trace a request end to end and mark where identity, scheme, host, headers, body,
-  and cache keys can be transformed or trusted incorrectly
-- State TLS 1.3 deployment responsibilities without treating HTTPS-on as the property
-- Produce a request-path diagram and hardened local edge configuration notes
-- Transfer after adding a CDN or reverse proxy
+- Given SecureCollab's Phase 2 request-path fixture, identify every point where a
+  shared cache or a forwarded-identity header could substitute a wrong company for
+  the caller's own bound identity, and justify why each point does or does not
+- State precisely what a successful TLS 1.3 handshake does and does not prove about
+  a hop's peer, and name the additional checks (hostname match, trust state,
+  accepted version) a deployment must add beyond "TLS is enabled"
+- Produce a request-path diagram for SecureCollab's browser-edge-origin path that
+  names, for each hop, which identity or name was authenticated and which was not,
+  and states the cache-key policy that must hold at the shared store
+- Given a new CDN or reverse proxy added to the path, predict which cache-key and
+  forwarded-identity assumptions from this module change, and design the detection
+  and recovery response if that boundary silently reverts them
 reviewTriggers:
 - New edge, CDN, HTTP/2-3, or mTLS
 - Change to forwarded-identity trust
 invariants:
 - Origin does not treat unauthenticated forwarded headers as identity
 - Cache keys are explicit and in the threat model
+- A hop-authentication check requires a trusted CA, a matching hostname, and an
+  accepted protocol version together, and fails closed on an unknown input
 - No attacks against real CDNs or third-party sites
 threatModelPrompts:
 - Who authenticated the name, and to which hop?
 - What is the cache key, and can an attacker influence it?
 - After TLS termination, what identity is still bound to the request?
+- Does a passing TLS handshake at one hop say anything about a hop after it?
 concepts:
 - dns
 - tls-1.3
@@ -41,27 +51,27 @@ concepts:
 learningObjects:
 - id: 2.2-LO-01
   kind: concept-model
-  title: TLS authenticates a hop; the cache key decides who reads
+  title: A hop's certificate is not a company; a cache key is not a header
   path: lessons/01-property.md
 - id: 2.2-LO-02
   kind: design-exercise
-  title: Request-path map a second engineer can key
+  title: Annotate every hop with what it authenticated, not what it encrypted
   path: lessons/02-model.md
 - id: 2.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: shared cache returns Tenant A body to Tenant B'
+  title: 'Local fixture: a shared cache and a forwarded header both grant the wrong company'
   path: lessons/03-break.md
 - id: 2.2-LO-04
   kind: design-exercise
-  title: Put the bound tenant in the key, or do not store
+  title: Bind the cache key, ignore the header, check the whole certificate
   path: lessons/04-build.md
 - id: 2.2-LO-05
   kind: verification-lab
-  title: Fail-on-vulnerable then pass-on-fixed for cache keys
+  title: Fail-on-vulnerable then pass-on-fixed for cache keys, headers, and hop trust
   path: lessons/05-verify.md
 - id: 2.2-LO-06
   kind: operations-exercise
-  title: Detect mismatched hits; purge without logging the body
+  title: Detect a mismatched hit or a mismatched hop; purge and rotate without logging bodies
   path: lessons/06-operate.md
 - id: 2.2-LO-07
   kind: transfer-challenge
@@ -69,30 +79,41 @@ learningObjects:
   path: lessons/07-transfer.md
 - id: 2.2-LO-08
   kind: code-review
-  title: Seeded review of path-only cache keys
+  title: Seeded review of a cache, a header, and a hop check that all stop too early
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only; no public or
-    third-party targets
+  authorizedScope: Local course fixture (FastAPI + TestClient) only; no public or
+    third-party targets, no real TLS handshake, no DNS resolution
   slug: 2.2-request-path
-  summary: Shared cache returns tenant A's body to tenant B
+  summary: Shared cache returns company A's body to company B; a client-supplied
+    X-Company header overrides the caller's own bound company; a hop-authentication
+    check accepts a CA-trusted certificate for the wrong hostname
   forbiddenOutcomes:
-  - Shared cache returns tenant A's body to tenant B
+  - Shared cache returns company A's body to company B
+  - A client-supplied forwarded-identity header changes which company's notes a
+    caller may read
+  - A hop-authentication check accepts a certificate whose hostname does not match
+    the intended peer
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Request-path diagram
-- Hardened local edge notes
-- Origin verification tests list
+- Request-path diagram naming, per hop, what was authenticated
+- Hardened local edge notes distinguishing cache-key policy from forwarded-identity
+  policy
+- Origin verification tests list, including the anti-fake pair for each claim
 assessmentBlueprint:
-  explain: Hops and what TLS does and does not guarantee after termination
-  design: Request-path diagram with cache keys
-  build: Deferred; origin verification of forwarded identity
-  break: Local Host or cache-key rewrite annotation
-  verify: Origin rejects unauthenticated forwarded identity
-  operate: Certificate failure drill notes
-  communicate: Residual trust after TLS termination
+  explain: Hops and what a TLS handshake does and does not guarantee about a peer,
+    after termination
+  design: Request-path diagram with cache keys and per-hop authentication notes
+  build: Origin resolves company only from the caller's own credential; cache keys
+    bind that company; hop checks bind hostname, CA trust, and version together
+  break: Local cache-key and forwarded-header rewrite annotated to the claim it
+    breaks
+  verify: Origin rejects unauthenticated forwarded identity and a mismatched hop
+    certificate
+  operate: Cache-mismatch and hop-rejection signals, and a certificate failure drill
+  communicate: Residual trust after TLS termination and after adding a CDN
 masteryGate: '2'
 standardsRefs:
 - source: OWASP Application Security Verification Standard
@@ -100,11 +121,15 @@ standardsRefs:
   status: final
   requirementIds:
   - v5.0.0-4.1.3
+  - v5.0.0-12.1.1
   - v5.0.0-12.2.1
+  - v5.0.0-12.2.2
+  - v5.0.0-12.3.2
   - v5.0.0-14.2.2
   - v5.0.0-14.3.2
   - v5.0.0-14.2.5
-  url: https://owasp.org/www-project-application-security-verification-standard/
+  - v5.0.0-16.3.4
+  url: https://owasp.org/projects/asvs
 - source: IETF RFC 9110 HTTP Semantics
   version: RFC 9110
   status: final
@@ -122,13 +147,19 @@ misconceptions:
 - HTTPS means no cache bugs
 - CDNs are only a performance layer
 - 'Vary: Cookie is enough forever'
+- A certificate that chains to a trusted CA proves the hop reached the intended
+  host, without checking the certificate's hostname
+- Once TLS has terminated at the edge, a client-supplied X-Forwarded-* or
+  X-Company header is safe for the origin to trust as identity
 operationalConsiderations:
-- cdn_hit_tenant_mismatch; purge playbook.
-- Operational error at the CDN remains; monitor.
+- cdn_hit_company_mismatch; purge playbook.
+- hop_rejected reason=hostname_mismatch|version|untrusted; certificate failure
+  drill, never logging the body or the private key.
+- Operational error at the CDN or edge remains; monitor.
 author: choreograph-curriculum / author-module-spec
 reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -153,3 +184,36 @@ changelog:
 - date: '2026-09-06'
   note: Bumped remaining later lessons to the 360-word bar with cache-key limits;
     independent review still required
+- date: '2026-09-22'
+  note: >-
+    Deepen pass (D1, D2, D3, D8, D9, D11, D12). Metadata bug fixed first:
+    reviewer said pending but lastReviewedAt/nextReviewAt were dated
+    2026-08-24/2027-02-24 -- the same review-date-with-no-review defect found and
+    fixed on 1.4/2.1/4.3/0.1/0.2/1.1; both reverted to null. Wrote five falsifiable
+    teaching claims (C1-C5) replacing the single cache-key predicate the module
+    taught across all eight lessons (D3): C1 cache-key binding (unchanged
+    property, now named), C2 forwarded-identity trust (a client-supplied
+    X-Forwarded-* or X-Company value must never override the bound company),
+    C3 TLS hop-authentication (hostname plus CA trust plus accepted version
+    together, not merely a certificate that validated), C4 TLS proves one hop at
+    a time (design/model claim, not lab-code-tested), C5 an origin fix does not
+    survive a CDN/edge config change on its own (operate claim, not
+    lab-code-tested). Rewrote all eight lessons to the 900-word/derivation bar
+    (D1, D2), each with a titled cross-reference, a trust-boundary, sequence,
+    state-machine, or data-flow diagram, and Standards lines on 01 and 05.
+    Upgraded the lab from Tier 1 (a two-line dict, two tests) to Tier 2 (D8): a
+    FastAPI app exercised through TestClient, 13 tests across two files
+    covering C1, C2, and C3, with two dedicated anti-fake tests per claim pair;
+    verified against four constructed half-fixed fakes (cache fixed with the
+    header override left open, header fixed with the cache still keyed on path
+    alone, a hostname-prefix match, a hostname-substring-anywhere match) before
+    trusting the suite. Authored content/modules/2/2.2/assessment/items.md,
+    eight items, none existed before (D9). Verified every ASVS 5.0.0 citation,
+    existing and new, against the live v5.0.0 requirements JSON; added
+    v5.0.0-12.1.1, 12.2.2, 12.3.2, and 16.3.4 for the new TLS-hop and
+    certificate-failure-drill claims. Found and fixed a dead standardsRefs url:
+    the prior www-project-application-security-verification-standard page 404s
+    after its own redirect; corrected to the live owasp.org/projects/asvs, the
+    same class of defect 0.1 caught for WSTG. Rewrote outcomes as observable
+    behaviours and recomputed estimatedMinutes from the metadata-honesty
+    formula (D12); independent review still required.

@@ -1,74 +1,82 @@
-# Practice: a shared cache hands company A’s note to company B
+# Local fixture: a shared cache and a forwarded header both grant the wrong company
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
 
-## Try it
+## Two ways to reach the same wrong answer
 
-The practice is not a website you attack. Shared cache here keys only on path. That object is the break, not a performance nit.
+`01-property.md` derived two decisions the origin has to get right, and `02-model.md` gave each one a row and a flow id. This page reproduces both failures in the local fixture, so the claims stop being sentences you take on trust and become a request you can trace yourself. Run this only inside `labs/2.2/2.2-request-path/`; the fixture is a real FastAPI application, exercised through `fastapi.testclient.TestClient`, not a live service — no traffic ever leaves this process, and every company, API key, and note body in it is synthetic.
 
-The rule:
+The property under test, stated once so the two traces below both point back to it: a caller may read a note's body only when the company bound to that caller's own credential matches the company the note was stored under, and a cached response must not weaken that match. Two independent bugs in `vulnerable/app.py` each violate this on their own, without needing the other bug's help.
 
-> A cache hit may return a note body only when the key includes the company the notes app already bound you to. Company B must not receive company A’s body for the same path.
-
-## Where you may practice
-
-Stay inside `labs/2.2/2.2-request-path/`. No live CDN, no public cache, no third-party site, no classmate deployment. Restore the broken and repaired folders from git when you are done. Fake data only.
-
-Do not paste this exercise onto a public CDN, employer origin, or live clinic portal. Do not paste cache-poison payloads.
-
-## Picture: the company argument is ignored on store
+## Trace one: the cache doesn't know whose slot it filled
 
 ```mermaid
-flowchart TD
-  Put["cache_put path, company A, secretA"] --> Key["Key = path only"]
-  Key --> Slot["/notes/n1 -> secretA"]
-  Get["cache_get path, company B"] --> Slot
-  Slot --> Leak["returns secretA"]
+sequenceDiagram
+    participant A as Company A (key-A)
+    participant O as Origin
+    participant Cache as Shared cache (dict[str, str])
+    participant B as Company B (key-B)
+    A->>O: PUT /notes/n1 {body: "alice-n1"}
+    O->>O: store (n1, companyA) = "alice-n1"
+    A->>O: GET /notes/n1
+    O->>Cache: miss -- read origin store, then cache["n1"] = "alice-n1"
+    O->>A: 200 {body: "alice-n1", source: origin}
+    B->>O: GET /notes/n1 (own valid key-B, no forged header)
+    O->>Cache: cache.get("n1") -> "alice-n1" (hit -- key never included company)
+    O->>B: 200 {body: "alice-n1", source: cache}
 ```
 
-The store is shared and the key is incomplete — not an exploit recipe. The store is a shared dict keyed only by path, and company A filled the entry. Picture a company B person who can `cache_get` the same path after company A’s put — no DNS hijack, no TLS break. The origin’s bound company is the only identity allowed in the key. TLS is not even in the practice files — on purpose. If the rule needed TLS to be “off,” the practice would be teaching the wrong sentence.
+Five messages, one property failure at the last hit. Company B never guessed an id, never sent a forged header, and never touched company A's credential. Company B's own, entirely legitimate request for a path company A had already caused to be cached is enough, because `_CACHE` in `vulnerable/app.py` is a plain `dict[str, str]` keyed on `note_id` alone — the same object flow `F4` in `02-model.md` warned would happen if the key's actual composition were never checked.
 
-## What to look at: the cause, not a hunt
+## Trace two: a header outruns a credential
 
-Read `vulnerable/cache.py` in the broken files as a design note. It accepts a `tenant` argument on put and get, then stores and looks up **only** `path`. Company B’s get returns company A’s body. `X-Forwarded-Host` is not required.
+```mermaid
+sequenceDiagram
+    participant B as Company B (key-B)
+    participant O as Origin
+    participant A as Company A (key-A)
+    B->>O: PUT /notes/n2 {body: "bob-n2"}
+    O->>O: store (n2, companyB) = "bob-n2"
+    A->>O: GET /notes/n2, header X-Company: companyB
+    O->>O: resolve_company(key-A, "companyB") -> "companyB" (header wins)
+    O->>O: origin store lookup (n2, companyB) -> "bob-n2"
+    O->>A: 200 {body: "bob-n2", source: origin}
+```
 
-Checks already bind:
+Four messages, and the note was never cached at all before this exchange — the cache is not involved in this trace, which is the point. Company A's caller holds only `key-A`, a real credential bound to `companyA`, and never obtains any credential for `companyB`. The forwarded `X-Company` header is enough on its own, because `_resolve_company` in `vulnerable/app.py` returns the header's value whenever one is present, ahead of the value the credential actually resolves to. TLS securing the connection between this caller and the origin — which this fixture does not model at all, on purpose — would not have closed this gap, because the header rides inside the encrypted connection exactly as written.
 
-- `test_same_tenant_cache_hit` — company A still reads company A.
-- `test_other_tenant_does_not_receive_cached_body` — company B must not receive `tenant-A-note` (must be `None`).
+## Where to look, not what to hunt
 
-## Why it happens vs what it costs
+Read `vulnerable/app.py` as a design note, the way `01-property.md`'s worked example did: `_resolve_company` accepts `x_company` as a parameter and returns it directly when it is truthy, before ever consulting `API_KEYS[api_key]`. `_CACHE` is declared as `dict[str, str]`, and both `get_note`'s read and its cache-fill line index it by `note_id` alone. Neither defect is a typo or an edge case a fuzzer would need to find; each is the direct, intended behavior of one function reading one variable in the wrong order, and each would look entirely reasonable to a reviewer skimming for syntax errors rather than tracing what each function actually returns for a specific, adversarially chosen input.
 
-| Slice | Practice |
-|---|---|
-| Why it happens | Key omitted the bound company; shared store |
-| What's already wrong | Path-only key; company A filled the entry |
-| Trigger | Company B `cache_get` of the same path |
-| What it costs | Cross-company read without guessing ids |
-| Not the lesson | A scanner name, a famous-bugs code, or “TLS is broken” |
-| How you stop it | Key `(path, bound company)` or refuse to cache note bodies |
-| How you notice later | Hit with mismatched company id; never log the body |
-| How you recover | Purge the prefix; secrecy incident if bodies already escaped |
+The checks already bind these two traces to names:
 
-## What the framework does vs what you still have to check
+- `test_other_company_does_not_receive_cached_body` — must fail on `vulnerable`, matching trace one.
+- `test_forwarded_company_header_cannot_grant_a_different_companys_note` — must fail on `vulnerable`, matching trace two.
 
-Next.js `fetch` cache, FastAPI in-process dicts, and a CDN “HTTPS only” checkbox do not insert the company. TLS 1.3 proves a hop. HTTP rules say what *may* be cached. Neither writes your key. `Vary` is a selector you configure; it is not a gift of the URL.
+## The two bugs do not need each other
+
+It is worth tracing explicitly why these are two bugs and not one. Trace one never sends a forged header at all — company B's request is entirely honest about who it is, and the failure happens purely inside the cache. Trace two never touches the cache — the note it asks for has never been read before, so there is no cached entry for the lookup to hit, and the failure happens purely inside company resolution. A fix that repairs only one function therefore leaves the other trace exploitable exactly as before, because nothing about closing the header channel changes what the cache key contains, and nothing about keying the cache by company changes what `_resolve_company` reads. `labs/2.2/2.2-request-path/tests/test_cache_key.py`'s two anti-fake tests exist specifically to catch a repair that closes one function while leaving the other open — each uses a company pair and note id that neither forbidden-outcome test above ever writes, so a fix that only special-cased the literal values `n1`/`n2`/`companyA`/`companyB` cannot pass by memorizing them either.
+
+## Why this is not "TLS is broken"
+
+Both traces above deliberately never mention a certificate, a cipher suite, or a handshake, because neither bug is a transport-layer failure. A learner who reaches for "enable TLS everywhere" or "rotate the certificate" as a response to either trace has misdiagnosed the failure the same way `01-property.md`'s rejected alternatives warned about: the connection between every party in both sequence diagrams could use a perfectly valid TLS 1.3 handshake at every hop, and both traces would still end in the wrong body reaching the wrong company, because the defect sits in application logic that runs *after* TLS has already done its job correctly.
 
 ## Practice
 
-Company B getting company A’s body on the broken files **must fail**. Record the check name `test_other_tenant_does_not_receive_cached_body`.
+Run the vulnerable variant and confirm both named tests fail for the reason traced above, not for an unrelated error:
 
-```text
+```bash
 python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable
 ```
 
-Do not “fix” the check to pass.
+For each failing test, write one sentence naming which trace above it matches and which line in `vulnerable/app.py` is the exact cause. Do not "fix" a test to make it pass — a passing `vulnerable` run means the tests stopped asserting the property, not that the property held.
 
 ## Use it somewhere new
 
-Authenticated RSS or export CSV via CDN. Predict a disagreement without running anything outside this directory.
+An authenticated CSV export behind the same kind of edge invites the identical two traces: a shared cache keyed on the export's path alone, and an `X-Company` header a caller could set on the export request just as easily as on a note request. Predict which of the two sequence diagrams above applies before you would need to run anything.
 
 ## What this page is not doing
 
-No live-target steps. No real people’s data. Do not “fix” the practice by deleting the check.
+No live-target steps, no real company or user data, and no cache-poisoning payloads aimed at any system outside this directory. Do not "fix" either trace by deleting or loosening its test. Answer keys are not on this site.

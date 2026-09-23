@@ -1,1 +1,1 @@
-local fixture
+Vulnerable 2.2 fixture. Local only. Two seeded failures: a shared cache keyed on path alone, so one company's cached note answers another company's request; and an origin that lets a client-supplied X-Company header override the company bound to the caller's own API key. A third, colocated check (`hop_is_trustworthy`, exposed at `POST /internal/relay`) treats any CA-trusted certificate as sufficient, without comparing its hostname to the intended peer or checking the negotiated TLS version.
