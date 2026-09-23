@@ -4,7 +4,7 @@ title: Browser security model
 phase: 2
 track: core
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 330
 prerequisites:
 - 2.1 Pass A
@@ -158,9 +158,15 @@ operationalConsiderations:
   'true' in staging scans.
 - Browser extensions; physical access.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review
+  across two rounds -- initial review on 2026-09-23 withheld both gates over two
+  blockers (wrong fake-fix arithmetic; coverage-contract citation mismatches), a
+  same-day re-review verified both fixes by independent construction and granted
+  both gates at dd8c774; lab-safety confirmed clean, no findings, in the initial
+  round and not re-litigated in the re-review; see
+  content/progress/reviews/2.3-2026-09-23.md, main section plus the addendum)
+lastReviewedAt: '2026-09-23'
+nextReviewAt: '2027-03-23'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -294,3 +300,20 @@ changelog:
     checked mechanically against items.md. This pass may not and does not
     set depth or quality; requesting the re-review the blocking review
     itself expected.'
+- date: '2026-09-23'
+  note: 'Independent re-review closed both blockers from
+    content/progress/reviews/2.3-2026-09-23.md, verified by construction: (1)
+    rebuilt the exact origin.endswith("securecollab.example") fake myself and
+    ran the real 9-test suite against it, getting 7 of 9 passing (the exact two
+    named tests failing, the other seven passing), confirming "7 of 9" is now
+    correct everywhere it appears (this file, the lab README,
+    content/assessment/keys/2.3.md) and restoring fixed/app.py to its exact
+    original text afterward (git status clean); (2) re-derived items.md''s own
+    Claim-assessed tags from scratch and checked all four coverage-contract rows
+    cell by cell, finding zero unsupported or omitted claims in any row,
+    including row 1 which the original review already found correct. Reran the
+    lab matrix (6/9 fail vulnerable, 9/9 pass fixed, unchanged) and the
+    mechanical gates (lint 0/0; site build compiles, 643/643 static pages).
+    Found nothing else substantive wrong. Both quality and lab-safety gates are
+    granted at this commit; see the addendum to
+    content/progress/reviews/2.3-2026-09-23.md for the full verification.'
