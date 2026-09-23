@@ -114,3 +114,24 @@ def test_anti_fake_hostname_substring_anywhere_is_rejected(client) -> None:
         "the expected hostname appearing anywhere inside the presented "
         "hostname is not the same claim as the two hostnames being equal"
     )
+
+
+def test_anti_fake_version_string_that_sorts_high_is_still_rejected(client) -> None:
+    """Anti-fake, for the version check specifically. A plausible fake fix
+    reads 'only 1.2 and 1.3 are accepted' as a lexicographic lower bound
+    (`tls_version < "1.2"` returns rejected) instead of exact set
+    membership against `_ACCEPTED_TLS_VERSIONS`. Every other test in this
+    file only ever sends a version that is either genuinely accepted
+    ("1.2", "1.3") or genuinely older ("1.1"), and "1.1" also sorts below
+    "1.2" as a string, so a lower-bound fake passes every one of them.
+    "1.9" is not an accepted version, but the string "1.9" sorts ABOVE the
+    string "1.2" (because "9" > "2"), so a lower-bound check wrongly
+    treats it as new enough. Hostname and trust are both otherwise valid
+    here, isolating exactly this one signal: exact membership in the
+    accepted set, not "sorts high enough as text\""""
+    r = _relay(client, "a.securecollab.internal", "a.securecollab.internal", True, "1.9")
+    assert r.status_code == 502, (
+        "a version string that merely sorts lexicographically above the "
+        "oldest accepted version is not the same claim as being a member "
+        "of the accepted version set"
+    )

@@ -262,3 +262,34 @@ changelog:
     the standing "pending independent quality and lab-safety review"),
     lastReviewedAt, or nextReviewAt field touched by this pass; independent
     review still required.
+- date: '2026-09-23'
+  note: 'Closed the blocker from the independent review at
+    content/progress/reviews/2.2-2026-09-23.md: constructed the reviewer''s
+    own adversarial fake (tls_version < "1.2" in place of exact membership
+    in _ACCEPTED_TLS_VERSIONS) and confirmed it passed all 14 existing
+    tests, including every anti-fake test, because no test ever sent a
+    tls_version that both fails set membership and sorts lexicographically
+    above "1.2" (e.g. "1.9"). Added
+    test_anti_fake_version_string_that_sorts_high_is_still_rejected to
+    tests/test_tls_hop.py; verified it fails on that fake alone and passes
+    on the real fixed and vulnerable implementations. Lab is 15 tests now,
+    not 14 (vulnerable fails 9/15, fixed passes 15/15). Updated every
+    "14 tests"/"6 of 14"/"14 of 14" live claim to match: spec.md''s C3
+    coverage-contract row, lessons/05-verify.md''s six-fake accounting (a
+    sixth fake, not five), items.md, rubric.md, the lab README''s test
+    count and fake-verification paragraph, and content/assessment/keys/2.2.md.
+    Recomputed every one of the five pre-existing fakes'' actual pass counts
+    against the new 15-test suite by re-running each rather than
+    incrementing the old numbers by one, since a new test can change which
+    tests a given fake fails, not only the denominator -- this caught that
+    the cache-only fake was previously undercounted by one failure
+    (test_unregistered_api_key_with_a_company_header_is_denied) that the
+    old "forbidden-outcome + anti-fake pair" framing had missed even before
+    this pass. Removed vulnerable/cache.py and fixed/cache.py, unreferenced
+    Tier-1 leftovers from before this module''s Tier-2 rewrite that the
+    review flagged as stale. Verified: lint clean (0/0), lab matrix as
+    above, all six fakes (five pre-existing plus the new one) independently
+    re-run against the current suite with exact failing-test names
+    recorded rather than assumed. This pass may not and does not set depth
+    or quality; requesting the re-review the blocking review itself
+    expected.'
