@@ -101,6 +101,6 @@ Write the two distinct log lines SecureCollab's origin would emit for: (a) a cac
 
 - [ ] Request-path diagram (Lesson 02) naming, per hop, what was authenticated and what was not, including the cache-key policy at the shared store
 - [ ] Local reproduction of all three forbidden outcomes: a shared-cache cross-company hit, a forwarded-header company override, and a hostname-mismatched hop accepted as trustworthy (Lesson 03)
-- [ ] Lab `labs/2.2/2.2-request-path`: `vulnerable/` tests show 9 of 15 failing for the stated security reasons; `fixed/` tests show 15 of 15 passing
+- [ ] Lab `labs/2.2/2.2-request-path`: `vulnerable/` tests show 10 of 16 failing for the stated security reasons; `fixed/` tests show 16 of 16 passing
 - [ ] Transfer answer (item 7) correctly explaining why `Vary: Cookie` does not implement C1, and naming at least one capability it leaves open
 - [ ] Operate signals (item 8) for both a cache-mismatch and a hop-rejection, neither carrying a note body, a session token, or key material

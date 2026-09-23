@@ -135,3 +135,24 @@ def test_anti_fake_version_string_that_sorts_high_is_still_rejected(client) -> N
         "oldest accepted version is not the same claim as being a member "
         "of the accepted version set"
     )
+
+
+def test_anti_fake_forward_compatible_allow_list_still_rejects_an_unaccepted_version(client) -> None:
+    """Anti-fake, the same claim from the opposite direction. The
+    lexicographic-lower-bound fake above reads "accept 1.2 and 1.3" as
+    "accept anything not older than 1.2." A different plausible fake
+    reads it as "accept 1.2, 1.3, and whatever comes next" and writes
+    its own literal set, `{"1.2", "1.3", "1.4"}`, guessing ahead of what
+    `_ACCEPTED_TLS_VERSIONS` actually contains. "1.4" is not an accepted
+    version in this fixture -- no test elsewhere in this file sends it,
+    so a hand-written set that happens to include it passes every other
+    test here, including the lower-bound anti-fake above, which never
+    sends anything above "1.9" either. Hostname and trust are both
+    otherwise valid, isolating exactly this one signal: the accepted set
+    is `_ACCEPTED_TLS_VERSIONS` itself, not any other set a fix's author
+    might guess is equivalent to it."""
+    r = _relay(client, "a.securecollab.internal", "a.securecollab.internal", True, "1.4")
+    assert r.status_code == 502, (
+        "a version not present in _ACCEPTED_TLS_VERSIONS must be rejected "
+        "even if it looks like a plausible next version to allow"
+    )
