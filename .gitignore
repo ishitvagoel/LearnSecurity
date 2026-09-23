@@ -7,4 +7,5 @@ site/out/
 .vercel/*
 !.vercel/project.json
 site/.vercel
+.claude/
 
