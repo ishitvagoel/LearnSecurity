@@ -13,10 +13,12 @@ test_concurrent_first_requests_with_a_never_seen_key_still_produce_one_share
 is C2: eight requests that are genuinely in flight at once, not a sequential
 retry, which a check-then-act implementation can pass by luck of thread
 scheduling but a database-level UNIQUE constraint cannot fail regardless of
-scheduling. test_replay_returns_the_original_share_id and
-test_a_never_elsewhere_used_key_is_still_deduplicated are the anti-fake
-pair: the first rejects a fake that reports accepted:true on replay while
-quietly minting a new row under the hood, and the second rejects a fake that
+scheduling. Two assertions carry the anti-fake weight:
+test_retry_with_the_same_key_does_not_duplicate's own second assertion
+(a replay must return the *first* call's share_id, not merely a truthy
+accepted flag) rejects a fake that reports accepted:true on replay while
+quietly minting a new row under the hood, and
+test_a_never_elsewhere_used_key_is_still_deduplicated rejects a fake that
 special-cases only the exact note/key strings this file happens to use
 elsewhere.
 """

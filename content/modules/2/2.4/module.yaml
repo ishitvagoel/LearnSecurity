@@ -214,3 +214,70 @@ changelog:
     lesson word counts, the Tier-2 lab minutes, and the 8-item assessment.
     Independent quality and lab-safety review still required before any
     depth, quality, reviewer, or review-date field is set.
+- date: '2026-09-23'
+  note: |-
+    Continuation of the 2026-09-22 deepen pass after a session rate-limit
+    interruption (the WIP commit's message said exactly what was and was not
+    done; verified against the actual files rather than trusted at face
+    value). Confirmed already done: all eight lessons rewritten, this file's
+    outcomes/invariants/standardsRefs, and the lab restructured
+    (vulnerable/fixed app.py pair, requirements.txt, review/candidate_fix.py,
+    tests/test_idempotency.py) -- ran the real suite (not just read it):
+    vulnerable fails 4/7, fixed passes 7/7, matching every lesson's claim.
+    The genuine gap: spec.md had never been touched by the interrupted pass
+    and still had no Teaching claims or Coverage contract section, even
+    though the rewritten lessons already taught that structure and had
+    already named three of five claims (C1, C3, C4) directly in
+    lessons/07-transfer.md. Wrote spec.md's five claims (C1-C5) and coverage
+    contract by extracting what the eight lessons already teach, not by
+    inventing new claims -- C5 (row-count-once does not imply the authority
+    behind the key is still valid at use) was implicit across
+    01-property/02-model/05-verify's residual paragraphs but never named.
+    Also synced spec.md's stale Identity/Lesson-inventory/Standards-refs
+    sections, which still described the pre-rewrite lesson titles and an old
+    V2/V7/V9/V16 standards line, to what this file and the lessons already
+    state. Authored the 8-item assessment bank (items.md) and rewrote the
+    isolated key (content/assessment/keys/2.4.md) and rubric.md, replacing
+    the stale "session worksheet" rubric and examiner-key test names that
+    predated this pass's lab rewrite. Constructed an adversarial fake fix
+    myself (Candidate A's check-then-act shape, substituted for fixed/app.py)
+    and ran it against the real suite to confirm the anti-fake coverage
+    actually discriminates: 5/7 pass, and it fails exactly
+    test_store_unreachable_is_denied_not_accepted and
+    test_concurrent_first_requests_with_a_never_seen_key_still_produce_one_share
+    -- matching what lessons/05-verify.md already claimed, now independently
+    re-verified rather than only re-asserted. Found and fixed a real lab bug
+    in the process: tests/test_idempotency.py's own module docstring named a
+    test function, test_replay_returns_the_original_share_id, that does not
+    exist anywhere in the file -- a stale reference to an assertion that was
+    folded into test_retry_with_the_same_key_does_not_duplicate's own second
+    assert; corrected the docstring rather than the test behavior, since the
+    test coverage itself was already correct. Updated the lab's README.md,
+    which the interrupted pass never touched and which still described the
+    old two-line share.py predicate rather than the FastAPI/SQLite fixture,
+    review/candidate_fix.py, or the concurrency test. Re-verified every
+    standards citation independently: live-fetched the canonical ASVS
+    v5.0.0 requirements JSON and confirmed the exact Shortcode, Description,
+    and Level for v5.0.0-2.3.3, 2.3.4, 15.4.1, 15.4.2, 15.4.3, 16.5.2, and
+    16.5.3 all match this module's citations verbatim, including that
+    16.5.2/16.5.3 are correctly NOT labeled Level 3 (the JSON gives L:2 for
+    both) while 15.4.1-3 correctly are; live-fetched the RFC Editor's RFC
+    9110 text and confirmed Section 9.2.2's idempotent-method definition
+    matches lessons/01-property.md's quotation; confirmed asvs.owasp.org,
+    datatracker.ietf.org/doc/html/rfc9110, and owasp.org/Top10/2025/ all
+    resolve 200 (the last two redirecting to their canonical hosts), and
+    confirmed the OLD pins.yaml URL
+    (owasp.org/www-project-application-security-verification-standard/)
+    the prior pass already replaced does in fact 404, as claimed. Checked
+    this file's reviewer/lastReviewedAt/nextReviewAt fields against the D12
+    pattern found on every other module in this remediation: already
+    correct here (reviewer says "pending", both dates already null) --
+    nothing to revert. Did not set depth, quality, reviewer beyond "pending",
+    or any review date. Validation: `python scripts/lint_content.py
+    content/modules/2/2.4 --no-baseline` -- 0 errors, 0 warnings;
+    `bash scripts/run_labs.sh 2.4` -- vulnerable failed, fixed passed, OK;
+    `npm --prefix site run build` -- compiled and generated all static pages
+    successfully; `python scripts/lint_content.py --update-baseline` --
+    baseline findings fell from 2215 to 2184 (31 stale findings resolved,
+    none added). Independent quality and lab-safety review still required
+    before any depth, quality, reviewer, or review-date field is set.
