@@ -246,12 +246,23 @@ def test_anti_fake_hostname_suffix_without_boundary_is_rejected(client) -> None:
 # for a fifth review round to find it by hand, this single parametrized
 # test asserts rejection across a broad, systematically-chosen set of
 # near-miss version strings in one pass -- covering whitespace in more
-# positions than the one already-isolated case, leading/trailing zeros,
-# an extra version segment, a sign prefix, exponential notation, and a
-# version-like substring embedded in a longer string. It does not replace
+# positions than the one already-isolated case, leading/trailing zeros in
+# either version position, an extra version segment, a sign prefix,
+# exponential notation, a version-like substring embedded in a longer
+# string, and a non-ASCII representation of a digit. It does not replace
 # the four tests above, each of which documents a specific historical
 # finding by name; it exists to catch the NEXT shape before another
 # review round has to isolate it one at a time.
+#
+# "１.２" (rendered "1.2" but each character is a FULLWIDTH
+# Unicode code point, U+FF11/U+FF0E/U+FF12, not ASCII) was added after a
+# review round found that a Unicode-normalizing comparison --
+# unicodedata.normalize("NFKC", tls_version) before checking membership,
+# a defensive habit standard Unicode security guidance actively
+# recommends for untrusted strings -- passed every ASCII-only case above,
+# because NFKC normalization is a no-op on all of them. The accepted set
+# is the two specific ASCII strings "1.2" and "1.3", not any string that
+# normalizes to one of them under NFKC or any other Unicode equivalence.
 _VERSION_NEAR_MISSES = [
     " 1.2",
     "1.2 ",
@@ -269,6 +280,7 @@ _VERSION_NEAR_MISSES = [
     "TLSv1.2",
     "v1.3",
     "1.2 or 1.3",
+    "１.２",
 ]
 
 
@@ -280,12 +292,14 @@ def test_anti_fake_version_near_miss_sweep_is_rejected(client, near_miss_version
     them: incidental whitespace in a position the dedicated whitespace
     test does not cover, a leading or trailing zero a numeric parse would
     normalize away, an extra version segment, a sign character a numeric
-    parse would accept, exponential notation, or an accepted-looking
+    parse would accept, exponential notation, an accepted-looking
     substring embedded in a longer string a regex or substring check
-    might match. Hostname and trust are both otherwise valid here,
-    isolating exactly this one signal, repeated across many inputs at
-    once: the accepted set is exactly the two canonical strings "1.2" and
-    "1.3", not any string a plausible normalization or partial match
+    might match, or a non-ASCII digit a Unicode-normalizing comparison
+    would fold onto an accepted string. Hostname and trust are both
+    otherwise valid here, isolating exactly this one signal, repeated
+    across many inputs at once: the accepted set is exactly the two
+    canonical ASCII strings "1.2" and "1.3", not any string a plausible
+    normalization or partial match -- Unicode normalization included --
     would treat as equivalent to one of them."""
     r = _relay(client, "a.securecollab.internal", "a.securecollab.internal", True, near_miss_version)
     assert r.status_code == 502, (
@@ -293,4 +307,36 @@ def test_anti_fake_version_near_miss_sweep_is_rejected(client, near_miss_version
         f"\"1.3\" and must be rejected, regardless of how close a "
         f"plausible normalization or partial match would place it to one "
         f"of the two accepted strings"
+    )
+
+
+def test_anti_fake_hostname_unicode_confusable_is_rejected(client) -> None:
+    """Anti-fake, a fourth shape for the hostname check and the same
+    class as the version sweep's non-ASCII case above. A plausible fake
+    fix Unicode-normalizes both hostnames before comparing --
+    unicodedata.normalize("NFKC", presented_hostname) ==
+    unicodedata.normalize("NFKC", expected_hostname) in place of the
+    bare `==` -- a defensive habit standard Unicode security guidance
+    actively recommends for untrusted strings in general, and therefore
+    at least as plausible a good-faith choice as the whitespace-strip
+    fake already closed for the version check. The presented hostname
+    below is built entirely from FULLWIDTH Unicode code points (U+FF21
+    etc.) standing in for the expected hostname's ASCII letters -- it
+    renders visually as something close to the expected name but is not
+    equal to it as a string, and NFKC-normalizes to a string that IS
+    equal to it, which is exactly what a normalizing fake would fold
+    over. None of this module's other hostname anti-fake tests (prefix,
+    substring-anywhere, suffix-without-boundary) uses a non-ASCII
+    character, so none of them catches this. Trust and version are both
+    otherwise valid here, isolating exactly this one signal: the
+    presented hostname must be the same sequence of code points as the
+    expected one, not a sequence that some plausible Unicode
+    normalization would fold onto it."""
+    presented = "ａ.ｓｅｃｕｒｅｃｏｌｌａｂ.ｉｎｔｅｒｎａｌ"
+    r = _relay(client, "a.securecollab.internal", presented, True, "1.3")
+    assert r.status_code == 502, (
+        "a presented hostname built from non-ASCII code points that "
+        "Unicode-normalizes to the expected hostname is not the same "
+        "sequence of code points as the expected hostname, and is not "
+        "the same claim as the two hostnames being equal"
     )

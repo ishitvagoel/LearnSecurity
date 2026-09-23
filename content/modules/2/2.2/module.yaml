@@ -639,3 +639,92 @@ changelog:
     the sixth review''s own finding is already closed by this pass, so
     it should attempt genuinely new adversarial constructions rather
     than repeat one already known to be caught.'
+- date: '2026-09-23'
+  note: 'Closed the finding from the seventh independent review round at
+    content/progress/reviews/2.2-2026-09-23.md. Asked specifically to
+    probe the sweep''s own design rather than hand-pick an eighth ASCII
+    near-miss, it found that the sweep and all eleven prior fakes vary
+    the version and hostname strings only within ASCII. A Unicode
+    canonical-compatibility normalization
+    (unicodedata.normalize("NFKC", ...)) before the version-membership
+    check and before the hostname == -- a defensive habit standard
+    Unicode security guidance actively recommends for untrusted strings
+    -- passed the entire 35-test suite, since none of its sixteen sweep
+    strings or three dedicated hostname anti-fake tests used a
+    non-ASCII character. Confirmed directly: with the fake in place,
+    tls_version="１.２" (fullwidth "1.2") returns 200 through the
+    real POST /internal/relay path; the real fixed code returns 502 for
+    the identical input. The same technique also defeats the hostname
+    check in isolation (a presented_hostname built from fullwidth
+    Unicode letters that NFKC-normalizes to the expected ASCII
+    hostname), making this the first fake found to affect both checks
+    with the same one-line change to each.
+    Added "１.２" as a seventeenth version-sweep case, and a new
+    dedicated test, test_anti_fake_hostname_unicode_confusable_is_rejected,
+    sending a fullwidth-Unicode presented_hostname that NFKC-normalizes
+    to "a.securecollab.internal" exactly (verified programmatically
+    before writing the test). The combined fake (normalizing both
+    checks) fails exactly these two tests and none of the other
+    (now nine) dedicated anti-fake tests (two failures; 35 of 37 pass);
+    isolated to the version check alone it fails only the fullwidth
+    sweep case, and isolated to the hostname check alone it fails only
+    the new dedicated test. Brought the suite from 35 to 37 tests
+    (vulnerable now fails 31/37, fixed passes 37/37).
+    Re-derived every one of the eleven pre-existing fakes'' pass/fail
+    counts against the new 37-test suite from scratch, per this
+    module''s now-established discipline, rather than trusting the
+    counts recorded when each was previously closed. This surfaced one
+    further cross-failure: the sixth review''s own .isdigit()-guarded
+    integer-tuple fake now fails a THIRD sweep case, not two -- Python''s
+    str.isdigit() returns True for fullwidth Unicode digits, not only
+    ASCII ones, and int() parses a fullwidth digit exactly as it parses
+    its ASCII counterpart, so this fake also wrongly accepts the new
+    fullwidth case for a reason distinct from the leading-zero gap it
+    was originally closed for (three failures; 34 of 37 pass). The
+    lexicographic-lower-bound and numeric-range fakes were already known
+    to be affected by non-ASCII input in a general sense but were
+    re-verified precisely: lexicographic now fails sixteen tests (four
+    dedicated plus twelve sweep cases, the fullwidth one included,
+    since a fullwidth digit sorts above ASCII by Unicode code point
+    exactly as "1.9" already did); numeric-range now fails fourteen
+    (two dedicated plus twelve sweep cases, the fullwidth one included,
+    since float() accepts fullwidth Unicode digits). The
+    whitespace-stripping fake was confirmed NOT additionally affected,
+    since a fullwidth digit is not whitespace and .strip() leaves it
+    untouched. The other six fakes (cache-only, header-only, startswith,
+    in-substring, endswith, is-None trust-state, forward-compatible-
+    allow-list) were confirmed unaffected once their denominators were
+    updated to 37.
+    Also added a spec.md "Known residuals" bullet stating this
+    predicate''s exact-code-point comparison is now verified against
+    Unicode-normalization fakes, but real IDNA/Punycode and
+    homograph-domain concerns remain out of this fixture''s scope -- the
+    secondary, non-blocking documentation gap the seventh review named.
+    Updated items.md and rubric.md (31 of 37 failing, 37 of 37 passing),
+    the lab README''s pytest comment lines, test-inventory sentence
+    (thirty-five -> thirty-seven, three hostname anti-fakes -> four,
+    sixteen-case -> seventeen-case sweep), and fake-enumeration section
+    (eleven fakes -> twelve, adding the NFKC fake''s own paragraph,
+    correcting the isdigit-tuple fake''s count to three, and updating
+    every denominator to 37), lessons/05-verify.md''s coverage table
+    (added the new hostname test to C3''s row), Mermaid diagram, "thirty-
+    one that should fail"/"thirty-one tests that fail" (from "twenty-
+    nine"), its fake-enumeration paragraphs (mirroring README''s
+    updates), and its closing paragraph (four dedicated version-check
+    fakes stated four ways -> now naming the fifth and sixth,
+    undedicated fakes explicitly), spec.md''s C3 coverage-contract row
+    (eight anti-fake tests -> nine, adding the hostname Unicode-
+    confusable test and the seventeen-case sweep), and
+    content/assessment/keys/2.2.md''s lab section (31 of 37 failing, 37
+    of 37 passing; added bullets narrating the isdigit-tuple
+    cross-failure and the seventh review''s finding, and rewrote the
+    final fake accounting as a twelve-fake, 37-test-suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all fourteen fakes
+    (twelve reviewer-found plus the two constructed only to demonstrate
+    the sweep''s generality) reconstructed and re-run against the
+    current 37-test suite with exact failing-test names recorded, not
+    assumed; fixed/app.py confirmed byte-identical to its pre-edit state
+    (md5sum ebdf983ea6753464cffd6dee0a669513) after every scratch fake
+    was restored. This pass may not and does not set depth or quality.
+    Requesting an eighth independent review -- explicitly informed that
+    the seventh review''s own finding is already closed by this pass.'
