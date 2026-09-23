@@ -158,6 +158,29 @@ def test_anti_fake_forward_compatible_allow_list_still_rejects_an_unaccepted_ver
     )
 
 
+def test_anti_fake_version_string_that_parses_in_range_is_still_rejected(client) -> None:
+    """Anti-fake, a third and distinct shape for the version check. A
+    plausible fake fix reads `_ACCEPTED_TLS_VERSIONS = {"1.2", "1.3"}` as
+    "accept protocol versions from 1.2 through 1.3" and implements that as
+    a NUMERIC range comparison -- parsing tls_version to a float and
+    checking `1.2 <= version_num <= 1.3` -- instead of exact string-set
+    membership. Every version string the two anti-fake tests above send
+    ("1.9", "1.4") happens to parse to a float outside that numeric range
+    too, so a numeric-range fake passes both of them for the wrong reason.
+    "1.30" is not a member of _ACCEPTED_TLS_VERSIONS as a string, but
+    float("1.30") == 1.3, so it falls INSIDE the numeric range a
+    range-based fake accepts. Hostname and trust are both otherwise valid
+    here, isolating exactly this one signal: the accepted set is the two
+    strings "1.2" and "1.3" themselves, not any version string that
+    happens to parse to a float between them."""
+    r = _relay(client, "a.securecollab.internal", "a.securecollab.internal", True, "1.30")
+    assert r.status_code == 502, (
+        "a version string that merely parses to a float numerically "
+        "between the accepted versions is not the same claim as being "
+        "one of the two accepted version strings itself"
+    )
+
+
 def test_anti_fake_hostname_suffix_without_boundary_is_rejected(client) -> None:
     """Anti-fake, a third shape for the hostname check. The prefix fake
     above places the expected name at the START of an attacker string,
