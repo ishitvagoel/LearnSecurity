@@ -71,7 +71,7 @@ trailing substring must still be denied); and the CSP enforcement case
 
 **Verified against an actual fake fix:** a "fixed" `/notes` that checks
 `origin.endswith("securecollab.example")` (no leading dot) instead of
-exact set membership passes 6 of 9 tests — it defeats the plain reflected
+exact set membership passes 7 of 9 tests — it defeats the plain reflected
 CORS case — but fails exactly
 `test_anti_fake_lookalike_domain_is_not_treated_as_the_trusted_origin` and
 `test_origin_vs_site_boundary_subdomain_scheme_and_port_are_each_denied`,

@@ -252,8 +252,12 @@ changelog:
     items.md, rubric.md, the isolated key, and the lab README). Independently
     re-verified, by actually constructing and running it, that the
     already-documented origin.endswith("securecollab.example") fake fix
-    passes exactly 6 of the (now 9) tests and fails only the boundary and
-    anti-fake tests, confirming that claim rather than trusting it. Live-fetched
+    passes exactly 7 of the (now 9) tests and fails only the boundary and
+    anti-fake tests -- this pass''s own re-verification of that number was
+    itself wrong (arithmetic error, not a re-run of a different fake); the
+    independent review at content/progress/reviews/2.3-2026-09-23.md caught
+    it by constructing and running the fake again, and this entry corrects
+    it. Live-fetched
     the ASVS 5.0.0 v5.0.0-tag JSON and confirmed the exact requirement text
     for v5.0.0-3.3.1/3.3.2/3.3.4/3.4.2/3.4.3/3.4.6 matches what this module
     and its lessons claim; confirmed owasp.org/projects/asvs,
@@ -270,3 +274,23 @@ changelog:
     and may not set depth, quality, reviewer beyond the pending line above,
     lastReviewedAt, nextReviewAt, or status: published; independent quality
     and lab-safety review is requested next.'
+- date: '2026-09-23'
+  note: 'Closed both blockers from the independent review at
+    content/progress/reviews/2.3-2026-09-23.md. (1) The prior entry''s own
+    re-verification of the origin.endswith("securecollab.example") fake fix
+    was itself arithmetically wrong: constructed and ran the exact fake
+    myself and got 7 of 9 tests passing, not 6 -- fixed the same wrong
+    number everywhere it appeared (this file''s changelog, the lab README,
+    content/assessment/keys/2.3.md). (2) Re-derived the coverage-contract
+    table''s Claim column mechanically from items.md''s own tags rather than
+    by eye: row 2 wrongly listed C1 (unsupported by any cited item) and
+    omitted C3 (carried by two of its four cited items); row 3 wrongly
+    listed C3 (its one cited item is tagged C2 only); row 4 omitted C1
+    (its cited item is tagged C1, C5, not just C5). Corrected all three to
+    match exactly what their cited items actually test; the teaching-claims
+    table was already clean and untouched. Verified: lint clean (0/0), lab
+    matrix unchanged (6/9 fail vulnerable, 9/9 pass fixed), every
+    coverage-contract row now has zero unsupported or omitted claims when
+    checked mechanically against items.md. This pass may not and does not
+    set depth or quality; requesting the re-review the blocking review
+    itself expected.'
