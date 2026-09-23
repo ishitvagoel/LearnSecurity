@@ -25,15 +25,15 @@ No persistent state between tests. `conftest.py` loads a fresh module and calls 
 ## Verify
 
 ```bash
-python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable   # 5 of 13 pass
-python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed        # 13 of 13 pass
+python3 -m pytest labs/2.2/2.2-request-path/tests --impl vulnerable   # 6 of 14 pass
+python3 -m pytest labs/2.2/2.2-request-path/tests --impl fixed        # 14 of 14 pass
 ```
 
 If `fastapi`/`httpx` are not already installed: `pip install -r labs/2.2/2.2-request-path/requirements.txt`.
 
-Thirteen tests across two files: `test_cache_key.py` (C1, C2 — normal case, both forbidden outcomes, a malformed-credential case, a boundary case, and one anti-fake test per claim using company and note-id values never written elsewhere in the file) and `test_tls_hop.py` (C3 — normal case, the hostname-mismatch forbidden outcome, a TLS-version boundary at 1.2, an unknown-trust-state failure case, and two anti-fake tests: a hostname-prefix fake and a hostname-substring-anywhere fake).
+Fourteen tests across two files: `test_cache_key.py` (C1, C2 — normal case, both forbidden outcomes, a malformed-credential case, a boundary case, and one anti-fake test per claim using company and note-id values never written elsewhere in the file) and `test_tls_hop.py` (C3 — normal case, the hostname-mismatch forbidden outcome, a TLS-version boundary at 1.2, an unknown-trust-state failure case, an explicitly-untrusted-CA failure case distinct from the unknown-state case, and two hostname anti-fake tests: a prefix fake and a substring-anywhere fake).
 
-Verified against two constructed half-fixed fakes: keying the cache correctly while leaving the `X-Company` override in place passes 11 of 13 and fails exactly the C2 forbidden-outcome test and its anti-fake pair; removing the header override while leaving the cache keyed on path alone passes 11 of 13 and fails exactly the C1 forbidden-outcome test and its anti-fake pair. A third fake — `presented_hostname.startswith(expected_hostname)` in place of equality — passes 12 of 13 and fails only its own anti-fake test; a fourth fake — `expected_hostname in presented_hostname` — fails both hostname anti-fake tests.
+Verified against five constructed fakes, each isolating exactly one gap: keying the cache correctly while leaving the `X-Company` override in place passes 12 of 14 and fails exactly the C2 forbidden-outcome test and its anti-fake pair; removing the header override while leaving the cache keyed on path alone passes 12 of 14 and fails exactly the C1 forbidden-outcome test and its anti-fake pair; `presented_hostname.startswith(expected_hostname)` in place of equality passes 13 of 14 and fails only its own anti-fake test; `expected_hostname in presented_hostname` passes 12 of 14 and fails both hostname anti-fake tests; and `if cert_trusted_ca is None: return False` in place of `if cert_trusted_ca is not True: return False` — a plausible reading of "fails closed on an unrecognized trust state" that only checks for the *unknown* case and lets an explicitly-resolved-untrusted certificate (`False`) fall through to the hostname/version checks — passes 13 of 14 and fails only `test_explicitly_untrusted_ca_is_rejected_even_with_matching_hostname_and_version`, the test added specifically because the original four fakes never isolated that one signal on its own.
 
 ## Operate
 

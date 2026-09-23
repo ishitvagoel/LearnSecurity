@@ -207,13 +207,58 @@ changelog:
     verified against four constructed half-fixed fakes (cache fixed with the
     header override left open, header fixed with the cache still keyed on path
     alone, a hostname-prefix match, a hostname-substring-anywhere match) before
-    trusting the suite. Authored content/modules/2/2.2/assessment/items.md,
-    eight items, none existed before (D9). Verified every ASVS 5.0.0 citation,
-    existing and new, against the live v5.0.0 requirements JSON; added
-    v5.0.0-12.1.1, 12.2.2, 12.3.2, and 16.3.4 for the new TLS-hop and
-    certificate-failure-drill claims. Found and fixed a dead standardsRefs url:
-    the prior www-project-application-security-verification-standard page 404s
-    after its own redirect; corrected to the live owasp.org/projects/asvs, the
-    same class of defect 0.1 caught for WSTG. Rewrote outcomes as observable
+    trusting the suite. Found and fixed a dead standardsRefs url: the prior
+    www-project-application-security-verification-standard page 404s after its
+    own redirect; corrected to the live owasp.org/projects/asvs, the same
+    class of defect 0.1 caught for WSTG. Rewrote outcomes as observable
     behaviours and recomputed estimatedMinutes from the metadata-honesty
-    formula (D12); independent review still required.
+    formula (D12). Session rate-limited mid-pass here: items.md not yet
+    authored, standards citations not yet independently verified beyond the
+    one dead-URL fix, no changelog entry yet -- continued below.
+- date: '2026-09-23'
+  note: >-
+    Deepen pass continued (D9, remainder of D2/D3). Authored
+    content/modules/2/2.2/assessment/items.md: 8 items (2 discrimination, 3
+    diagnosis, 1 design, 1 transfer, 1 operate) plus content/assessment/keys/2.2.md
+    (answers, distractor rationales, four-state banding) and a rewritten,
+    module-specific assessment/rubric.md replacing the "session worksheet"
+    placeholder. Cross-checked spec.md's coverage-contract and teaching-claims
+    tables cell by cell against items.md's own Claim-assessed/Outcome tags, the
+    same check 1.4/2.1/4.3/0.1/0.2/1.1 each required for their independent
+    review to pass; found a mismatch, same as every one of those modules did --
+    spec.md's item-number citations were placeholders written before items.md
+    existed and did not match the item bank actually authored (e.g. C1 cited
+    "#1, #3, #6" when the items actually tagging C1 are #1, #4, #6, #7, #8);
+    corrected both tables' Assessment item columns cell by cell against
+    items.md's real tags. Read fixed/app.py, vulnerable/app.py, and both test
+    files adversarially and constructed five fake repairs, not the four the
+    prior session had verified: keying the cache correctly while leaving the
+    X-Company override open (12 of 14 pass, fails exactly C2's forbidden-
+    outcome test and its anti-fake pair); the symmetric cache-only fake (12 of
+    14, fails C1's pair); a hostname prefix match (13 of 14); a hostname
+    substring-anywhere match (12 of 14); and a genuine latent gap found by
+    hand, not by re-running the first four: `hop_is_trustworthy` fails closed
+    on an *unknown* trust state (`cert_trusted_ca is None`) but no test had
+    ever isolated an *explicitly resolved untrusted* state
+    (`cert_trusted_ca is False`) from the unknown one, so a fake that read
+    "fails closed on an unrecognized trust state" as "checks only for None" --
+    `if cert_trusted_ca is None: return False` in place of
+    `if cert_trusted_ca is not True: return False` -- passed all 13 tests that
+    existed before this pass (13 of 13). Added
+    test_explicitly_untrusted_ca_is_rejected_even_with_matching_hostname_and_version
+    to tests/test_tls_hop.py; confirmed it fails on that fake (13 of 14) and
+    passes on both vulnerable and the genuine fixed implementation, bringing
+    the suite to 14 tests (vulnerable 6/14, fixed 14/14). Updated README.md,
+    spec.md's C3 coverage-contract row, and lessons/05-verify.md's test-count
+    prose and anti-fake-fake accounting to match. Checked pins.yaml's own note
+    before re-verifying standards from scratch: it already records the prior
+    session's 2026-09-22 live fetch of the full v5.0.0 requirements JSON
+    confirming all nine of this module's requirementIds (v5.0.0-4.1.3, 12.1.1,
+    12.2.1, 12.2.2, 12.3.2, 14.2.2, 14.3.2, 14.2.5, 16.3.4) by exact text,
+    plus the dead-URL fix and both RFC re-fetches (9846, 9110) confirming 200
+    with no redirect -- nothing in this module's standardsRefs was left
+    unverified, so no further standards work was needed this session. No
+    depth, quality, reviewer (beyond
+    the standing "pending independent quality and lab-safety review"),
+    lastReviewedAt, or nextReviewAt field touched by this pass; independent
+    review still required.

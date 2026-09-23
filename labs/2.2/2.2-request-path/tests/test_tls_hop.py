@@ -64,6 +64,27 @@ def test_unknown_trust_state_fails_closed(client) -> None:
     assert r.status_code == 502
 
 
+def test_explicitly_untrusted_ca_is_rejected_even_with_matching_hostname_and_version(client) -> None:
+    """Anti-fake, distinct from the unknown-trust-state case above. A
+    plausible fake fix reads 'fails closed on an unrecognized trust
+    state' as 'checks for None' and stops there -- for example
+    `if cert_trusted_ca is None: return False` in place of
+    `if cert_trusted_ca is not True: return False` -- which fails closed
+    on the unknown case but wrongly falls through to the hostname/version
+    checks for a trust state that was explicitly resolved to untrusted
+    (False), rather than merely unresolved. Hostname and version are both
+    otherwise valid here, isolating exactly this one signal: a completed
+    chain-trust check that failed must be rejected on its own, not only
+    when the check never completed at all."""
+    r = _relay(client, "a.securecollab.internal", "a.securecollab.internal", False, "1.3")
+    assert r.status_code == 502, (
+        "an explicitly untrusted CA (cert_trusted_ca=False) must be "
+        "rejected even when the hostname matches and the version is "
+        "accepted -- 'not yet known to be trusted' and 'known to be "
+        "untrusted' both fail closed, not only the former"
+    )
+
+
 def test_anti_fake_hostname_prefix_match_is_rejected(client) -> None:
     """Anti-fake. A plausible fake fix checks
     presented_hostname.startswith(expected_hostname) instead of exact
