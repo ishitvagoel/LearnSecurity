@@ -5,7 +5,7 @@ phase: 2
 track: core
 difficulty: foundation
 status: draft
-estimatedMinutes: 300
+estimatedMinutes: 330
 prerequisites:
 - 2.1 Pass A
 - 2.2 Pass A
@@ -18,29 +18,42 @@ routeTags:
 - mobile
 releaseMilestone: M0
 outcomes:
-- Model session state, replay, freshness, idempotency, ordering, retry, timeout, clocks,
-  TOCTOU, races, and partial failure
-- Produce a state-machine plus concurrency and replay test list
-- Show a local retry or timeout that duplicates a side effect or fail-opens
-- Treat Top 10:2025 A10 as awareness regression only
-- Transfer after adding a worker retry with stale authorization
+- Given a share endpoint that accepts an idempotency key, state the property a retry
+  must satisfy and name the check-then-act structure that still fails under real
+  concurrent access even when it passes a sequential retry test
+- Produce a state machine for the SecureCollab share workflow naming which transitions
+  a retry, a race, and a key-store failure each take
+- On the local FastAPI/SQLite fixture, show both a sequential retry and eight genuinely
+  concurrent first-requests failing to duplicate a share
+- On the same fixture, show the share endpoint denying rather than accepting a request
+  when its idempotency store is unreachable
+- Treat OWASP Top 10:2025 A10 as a regression check applied after the causal fix,
+  not as the lesson's own structure
+- Transfer the retry, race, and fail-closed reasoning to a different limited resource
+  and state which claims survive the change unchanged and which do not
 reviewTriggers:
 - New async path
 - Timeout or retry policy change
 - Clock source change
+- Idempotency-store or database technology change
 invariants:
-- Retries do not duplicate non-idempotent side effects in the scoped workflow
-- Timeouts fail closed for authorization-relevant operations
-- No load-testing of third-party APIs
+- Retries and concurrent first-requests do not duplicate a non-idempotent side effect
+  in the scoped share workflow
+- The share endpoint fails closed (denies, does not insert) when its idempotency
+  store is unreachable
+- No load-testing of third-party APIs; the lab fixture is local only
 threatModelPrompts:
 - What happens on retry, timeout, or partial commit?
 - Whose clock is trusted for freshness?
 - Can authorization become stale between check and use?
+- Can two requests that each look like the first request actually be in flight at
+  the same time?
 concepts:
 - idempotency
 - replay
 - toctou
 - race
+- check-then-act
 - partial-failure
 - fail-closed
 - exceptional-conditions
@@ -51,52 +64,57 @@ learningObjects:
   path: lessons/01-property.md
 - id: 2.4-LO-02
   kind: design-exercise
-  title: Share state machine a second engineer can test
+  title: A share state machine that names retry, race, and store failure
   path: lessons/02-model.md
 - id: 2.4-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: retry creates a second share grant'
+  title: 'Local fixture: a retry duplicates a share on a real request cycle'
   path: lessons/03-break.md
 - id: 2.4-LO-04
   kind: design-exercise
-  title: Remember the first outcome; do not append again
+  title: Push the check into the store; do not check-then-act in the handler
   path: lessons/04-build.md
 - id: 2.4-LO-05
   kind: verification-lab
-  title: Fail-on-vulnerable then pass-on-fixed for share retries
+  title: A test that holds eight requests in flight, not two in sequence
   path: lessons/05-verify.md
 - id: 2.4-LO-06
   kind: operations-exercise
-  title: Detect a second grant; never fail-open the key store
+  title: Detect a replay or a race; never fail open the key store
   path: lessons/06-operate.md
 - id: 2.4-LO-07
   kind: transfer-challenge
-  title: 'Transfer: clinic last slot, payment, or invite token'
+  title: 'Transfer: clinic last slot, payment capture, or invite token'
   path: lessons/07-transfer.md
 - id: 2.4-LO-08
   kind: code-review
-  title: Seeded review of duplicate share inserts
+  title: Seeded review of a check-then-insert share fix
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only; no public or
-    third-party targets
+  authorizedScope: Local FastAPI/SQLite course fixture only; no public or third-party
+    targets, no live load testing
   slug: 2.4-state-time
-  summary: Retry creates a second share grant
+  summary: A retry, or a genuine concurrent race, creates a second share grant; the
+    store must fail closed, not fail open, when it cannot be reached
   forbiddenOutcomes:
   - Retry creates a second share grant
+  - Concurrent first-requests for the same never-seen key create a second share grant
+  - The share endpoint reports success while the store is unreachable and nothing
+    was recorded
   - Live-target instructions
   - Real PII or production secrets
-  - Awareness list used as the syllabus
 evidenceRequired:
-- State-machine model
-- Concurrency and replay test list
-- Fail-closed timeout decision
+- State-machine model naming retry, race, and store-failure transitions
+- Concurrency and replay test list, including a genuinely concurrent case
+- Fail-closed timeout/store-failure decision, tested on the fixture
 assessmentBlueprint:
-  explain: Replay, idempotency, and partial failure
-  design: Workflow state machine
-  build: Deferred; idempotency and fail-closed timeout
-  break: Local duplicate-submit or TOCTOU annotation
-  verify: Concurrency and replay tests
+  explain: Retry vs race vs store failure as three distinct forbidden outcomes
+  design: Share workflow state machine
+  build: Idempotency key enforced by a database uniqueness constraint; fail-closed
+    store-failure path
+  break: Local duplicate-submit fixture on a real FastAPI/SQLite request cycle
+  verify: Sequential-retry, concurrent-race, and fail-closed tests, plus an anti-fake
+    pair
   operate: Exceptional-condition logging without fail-open
   communicate: A10 is awareness regression, not the lesson structure
 masteryGate: '2'
@@ -107,7 +125,12 @@ standardsRefs:
   requirementIds:
   - v5.0.0-2.3.3
   - v5.0.0-2.3.4
-  url: https://owasp.org/www-project-application-security-verification-standard/
+  - v5.0.0-15.4.1
+  - v5.0.0-15.4.2
+  - v5.0.0-15.4.3
+  - v5.0.0-16.5.2
+  - v5.0.0-16.5.3
+  url: https://asvs.owasp.org
 - source: IETF RFC 9110 HTTP Semantics
   version: RFC 9110
   status: final
@@ -121,16 +144,20 @@ standardsRefs:
   - A10
   url: https://owasp.org/Top10/2025/
 misconceptions:
-- Retries are a client bug not ours
-- 200 means once
+- Retries are a client bug, not ours
+- HTTP 200 (or 201) means it happened once
 - Databases are automatically idempotent
+- A sequential retry test proves the concurrent case is safe too
 operationalConsiderations:
 - share_count vs unique keys; never fail-open if the key store is down.
-- Lost first response still needs a read-your-write path.
+- Circuit-break or degrade gracefully when the store is slow or unreachable (ASVS
+  v5.0.0-16.5.2), rather than blocking indefinitely or silently succeeding.
+- Lost first response still needs a read-your-write path so the owner can see the
+  existing share without minting another key.
 author: choreograph-curriculum / author-module-spec
 reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -151,3 +178,39 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with retry-client cause tables, key-store fail-closed
     limits, and clinic/payment transfer; independent review still required
+- date: '2026-09-22'
+  note: |-
+    D1/D4/D5/D6/D7/D8/D9 remediation (deepen-module): fixed the L013 metadata
+    bug this module carried -- reviewer said "pending" but lastReviewedAt
+    (2026-08-24) and nextReviewAt (2027-02-24) were set anyway, the same
+    defect class already found and fixed on 1.4/2.1/4.3/0.1/0.2/1.1; both are
+    reset to null here. Wrote five falsifiable teaching claims (C1-C5) and a
+    coverage contract in spec.md. Rewrote all eight lessons from
+    template-fill fragments to derivation-first prose meeting the 1.2/1.3
+    density bar. Upgraded the lab from a two-test, two-line in-memory
+    predicate (Tier 1) to a seven-test FastAPI + SQLite component fixture
+    (Tier 2): added a genuinely concurrent test (eight requests in flight at
+    once, not two in sequence), a fail-closed store-unreachable test for a
+    claim this module's prose had stated for months with no lab assertion at
+    all, a two-different-keys boundary test, and an anti-fake test using a
+    note/key pair never used elsewhere in the suite. Verified the new
+    concurrency test against a self-constructed adversarial fake (a
+    check-then-act SELECT-then-INSERT implementation with no database
+    uniqueness constraint): the fake passed all sequential tests and failed
+    the concurrency test and the fail-closed test, confirming the anti-fake
+    coverage actually discriminates rather than merely asserting that it
+    does. Authored an 8-item assessment bank (items.md) and isolated
+    examiner key (content/assessment/keys/2.4.md) replacing the old
+    rubric-only "session worksheet" reference. Re-verified every ASVS
+    citation against the live v5.0.0 requirements JSON and RFC 9110 against
+    the live RFC Editor text; added v5.0.0-15.4.1/15.4.2/15.4.3 (Level 3
+    advanced: shared-object races, TOCTOU, and lock consistency) and
+    v5.0.0-16.5.2/16.5.3 (fail-closed on external resource failure), none of
+    which this module cited before. Found and fixed a dead OWASP ASVS
+    project URL shared across the pins.yaml entry and this module's own
+    standardsRefs (redirects to a 404); recorded in
+    content/standards/pins.yaml rather than duplicated here. Recomputed
+    estimatedMinutes from the metadata-honesty formula against the rewritten
+    lesson word counts, the Tier-2 lab minutes, and the 8-item assessment.
+    Independent quality and lab-safety review still required before any
+    depth, quality, reviewer, or review-date field is set.
