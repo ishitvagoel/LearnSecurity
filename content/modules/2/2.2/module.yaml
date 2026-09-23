@@ -437,3 +437,67 @@ changelog:
     review, given this module''s pattern of four consecutive rounds each
     finding a genuinely new, previously-uncaught adversarial gap -- three
     of them now in the version check alone.'
+- date: '2026-09-23'
+  note: 'Closed the finding from the fifth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md: a defensive
+    whitespace-strip before the version-set membership check
+    (tls_version.strip() not in _ACCEPTED_TLS_VERSIONS in place of the
+    bare membership test) passed the entire 18-test suite, including all
+    three existing version anti-fake tests, because none of the six
+    version strings any test sent ("1.1", "1.2", "1.3", "1.4", "1.9",
+    "1.30") carried any whitespace, so .strip() was a no-op on every one.
+    Added test_anti_fake_version_string_with_incidental_whitespace_is_rejected
+    to tests/test_tls_hop.py, sending "1.2\n" (whose stripped form is an
+    accepted string but which is not itself one); confirmed it fails on
+    that fake alone (18 of 18 existing tests still pass) and passes on
+    both vulnerable and the real fixed implementation, bringing the suite
+    to 19 tests (vulnerable fails 13/19, fixed passes 19/19). This is the
+    fourth distinct fake found specifically in the version check, after
+    the lexicographic-bound, forward-compatible-allow-list, and
+    numeric-range fakes, closed across the second and fourth review
+    rounds -- closing three gaps in one check was still not evidence the
+    check was exhausted.
+    Re-derived every one of the nine pre-existing fakes'' pass/fail
+    counts against the new 19-test suite from scratch rather than
+    incrementing the prior entries'' numbers, per this module''s
+    now-established discipline. This surfaced two further cross-failures.
+    The lexicographic-lower-bound fake (tls_version < "1.2") now fails
+    all four version anti-fake tests, not three -- "1.2\n" < "1.2" is
+    False in Python, because a string that shares every character "1.2"
+    has and then adds more is never lexicographically smaller than "1.2"
+    itself, so this fake wrongly accepts "1.2\n" for a fourth, independent
+    reason. And the numeric-range fake (1.2 <= float(tls_version) <= 1.3)
+    now fails two tests, not one -- float("1.2\n") is also 1.2, because
+    Python''s float() strips incidental leading/trailing whitespace
+    before parsing, so this fake also wrongly accepts the same input the
+    whitespace-strip test was built to isolate, for an independent,
+    numeric reason. The other seven fakes (cache-only, header-only,
+    startswith, in-substring, endswith, is-None trust-state,
+    forward-compatible-allow-list) were confirmed unaffected once their
+    denominators were updated to 19.
+    Updated spec.md''s C3 coverage-contract row (six anti-fake tests ->
+    seven, adding version-string-incidental-whitespace), items.md and
+    rubric.md (13 of 19 failing, 19 of 19 passing), the lab README''s
+    pytest comment lines, test-inventory sentence (eighteen tests ->
+    nineteen, three version-string anti-fake tests -> four), and full
+    fake-enumeration paragraph (now ten fakes against the 19-test suite,
+    with the lexicographic and numeric-range fakes'' corrected failure
+    counts and explanations), lessons/05-verify.md''s coverage table
+    (added the new anti-fake test to C3''s row), Mermaid diagram ("6 of
+    18"/"18 of 18" -> "6 of 19"/"19 of 19"), "twelve that should fail"
+    and "twelve tests that fail" (both -> "thirteen"), and its
+    fake-enumeration paragraph (nine fakes -> ten, with the same two
+    corrected counts), and content/assessment/keys/2.2.md''s lab section
+    (13 of 19 failing, 19 of 19 passing; added two bullets narrating this
+    round''s finding and the two cross-failures it surfaced, and rewrote
+    the fake accounting as a ten-fake, 19-test-suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all ten fakes
+    reconstructed and re-run against the current 19-test suite with exact
+    failing-test names recorded, not assumed; fixed/app.py confirmed
+    byte-identical to its pre-edit state
+    (md5sum ebdf983ea6753464cffd6dee0a669513) after every scratch fake
+    was restored. This pass may not and does not set depth or quality;
+    requesting a sixth independent review, given this module''s pattern
+    of five consecutive rounds each finding a genuinely new,
+    previously-uncaught adversarial gap -- four of them now in the
+    version check alone.'

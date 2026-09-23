@@ -181,6 +181,32 @@ def test_anti_fake_version_string_that_parses_in_range_is_still_rejected(client)
     )
 
 
+def test_anti_fake_version_string_with_incidental_whitespace_is_rejected(client) -> None:
+    """Anti-fake, a fourth and distinct shape for the version check. A
+    plausible fake fix defensively strips incidental whitespace before
+    checking membership -- `tls_version.strip() not in
+    _ACCEPTED_TLS_VERSIONS` in place of the bare membership test -- the
+    kind of defensive habit many header-adjacent codebases apply reflexively
+    to any string that arrived over the wire. Every version string every
+    other test in this file sends ("1.1", "1.2", "1.3", "1.4", "1.9",
+    "1.30") is already whitespace-free, so `.strip()` is a no-op on all of
+    them and a strip-then-check fake passes every one. "1.2\\n" is NOT one
+    of the two accepted strings -- `_ACCEPTED_TLS_VERSIONS` contains the
+    canonical strings "1.2" and "1.3" only, with no whitespace variant --
+    but its stripped form IS, so a fake that strips first wrongly accepts
+    it. Hostname and trust are both otherwise valid here, isolating
+    exactly this one signal: the accepted set contains two specific,
+    already-canonical strings, not "any string that reduces to one of them
+    after discarding whitespace\""""
+    r = _relay(client, "a.securecollab.internal", "a.securecollab.internal", True, "1.2\n")
+    assert r.status_code == 502, (
+        "a version string that is not itself one of the two accepted "
+        "strings is not made accepted by incidental leading or trailing "
+        "whitespace -- the accepted set holds two canonical strings, not "
+        "every string that trims down to one of them"
+    )
+
+
 def test_anti_fake_hostname_suffix_without_boundary_is_rejected(client) -> None:
     """Anti-fake, a third shape for the hostname check. The prefix fake
     above places the expected name at the START of an attacker string,

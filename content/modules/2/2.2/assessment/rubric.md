@@ -10,7 +10,7 @@ DNS, transport, HTTP, TLS, proxies, CDNs, and caches — five teaching claims (C
 
 - [ ] Request-path diagram (Lesson 02) naming, per hop, which identity or name was authenticated and which was not, and stating the cache-key policy that must hold at the shared store
 - [ ] Local reproduction of all three forbidden outcomes (Lesson 03): a shared-cache cross-company hit, a forwarded-header company override, and a hostname-mismatched hop accepted as trustworthy
-- [ ] Lab `labs/2.2/2.2-request-path`: `vulnerable/` tests show 12 of 18 failing for the stated security reasons; `fixed/` tests show 18 of 18 passing
+- [ ] Lab `labs/2.2/2.2-request-path`: `vulnerable/` tests show 13 of 19 failing for the stated security reasons; `fixed/` tests show 19 of 19 passing
 - [ ] Assessment items (`content/modules/2/2.2/assessment/items.md`) attempted with written reasoning, not single-word answers
 - [ ] Operate signals for both failure classes: `cdn_hit_company_mismatch` and `hop_rejected reason=hostname_mismatch|version|untrusted`, neither carrying a note body, session token, or key material
 - [ ] Transfer task (Lesson 07) applying the same cache-key and forwarded-identity rules to a clinic `/patients/me` endpoint on a shared CDN, correctly rejecting `Vary: Cookie` as a substitute for resolved-identity binding
