@@ -40,11 +40,11 @@ Five falsifiable claims, ordered by dependency. The module previously taught onl
 
 | Claim | Loop step(s) | Lab assertion | Assessment item |
 |---|---|---|---|
-| C1 | 1 Property, 3 Break, 4 Build, 5 Verify | `test_forbidden_outcome_session_cookie_missing_httponly`, `test_secure_attribute_is_also_present` | items.md #1, #2, #4 |
-| C2 | 1 Property, 2 Model, 4 Build, 5 Verify | `test_origin_vs_site_boundary_subdomain_scheme_and_port_are_each_denied`, `test_anti_fake_lookalike_domain_is_not_treated_as_the_trusted_origin` | items.md #3, #5, #6 |
-| C3 | 3 Break, 4 Build, 5 Verify | `test_trusted_origin_is_reflected_with_credentials`, `test_forbidden_outcome_attacker_origin_gets_no_credentialed_access`, `test_missing_origin_header_does_not_crash_and_grants_nothing` | items.md #2, #4 |
-| C4 | 1 Property, 4 Build, 5 Verify, 6 Operate | `test_csp_is_enforced_not_only_reported` | items.md #1, #7 |
-| C5 | 7 Generalize | Not directly code-testable — the lab fixture has no iframe, no second origin server, and no WebView runtime to host a second reader. Modeled instead in `lessons/07-transfer.md`'s two scenarios and the design table in `lessons/02-model.md`. | items.md #7, #8 |
+| C1 | 1 Property, 3 Break, 4 Build, 5 Verify | `test_forbidden_outcome_session_cookie_missing_httponly`, `test_secure_attribute_is_also_present`, `test_anti_fake_httponly_text_inside_the_cookie_value_does_not_count` | items.md #1, #4, #7 |
+| C2 | 1 Property, 2 Model, 4 Build, 5 Verify | `test_origin_vs_site_boundary_subdomain_scheme_and_port_are_each_denied`, `test_anti_fake_lookalike_domain_is_not_treated_as_the_trusted_origin` | items.md #2, #3, #5 |
+| C3 | 3 Break, 4 Build, 5 Verify | `test_trusted_origin_is_reflected_with_credentials`, `test_forbidden_outcome_attacker_origin_gets_no_credentialed_access`, `test_missing_origin_header_does_not_crash_and_grants_nothing` | items.md #2, #8 |
+| C4 | 1 Property, 4 Build, 5 Verify, 6 Operate | `test_csp_is_enforced_not_only_reported` | items.md #1, #6 |
+| C5 | 7 Generalize | Not directly code-testable — the lab fixture has no iframe, no second origin server, and no WebView runtime to host a second reader. Modeled instead in `lessons/07-transfer.md`'s two scenarios and the design table in `lessons/02-model.md`. | items.md #7 |
 
 C1, C2, C3, and C4 each carry a genuine lab assertion, well past the ≥2-claims-with-a-lab-assertion bar. C5 is honestly declared non-code-testable rather than mapped to a test that would not actually assert it — this fixture is one FastAPI process with no second origin to embed a real iframe or a real WebView bridge against, and pretending a unit test could check "the policy rows were re-derived, not inherited" would be a worse defect than naming the limit plainly.
 
@@ -54,10 +54,10 @@ One row per outcome in `module.yaml`. Any empty cell is a blocker (`quality-gate
 
 | Outcome | Claim | Explanation | Worked example | Practice | Assessment item | Transfer |
 |---|---|---|---|---|---|---|
-| Identify by exact header name and value which of Set-Cookie/ACAO/ACAC/CSP a browser treats as a guarantee vs a detection signal, and justify against ASVS V3 | C1, C4 | [`lessons/01-property.md`](lessons/01-property.md) §Four headers, four different promises | [`lessons/01-property.md`](lessons/01-property.md) §Four headers, four different promises (the `evil.example` worked trace) | [`lessons/01-property.md`](lessons/01-property.md) Practice | items.md #1 | [`lessons/07-transfer.md`](lessons/07-transfer.md) |
-| Produce a browser policy matrix for `/login`/`/notes` naming browser vs server enforcement per row | C1, C2, C4 | [`lessons/02-model.md`](lessons/02-model.md) §Step 2: write the rows | [`lessons/02-model.md`](lessons/02-model.md) §Step 3: draft versus final, and browser versus server | [`lessons/02-model.md`](lessons/02-model.md) Practice | items.md #7 | [`lessons/07-transfer.md`](lessons/07-transfer.md) |
-| Given an Origin header and the allow-list, determine same-origin/same-site/neither and predict the exact CORS response | C2, C3 | [`lessons/01-property.md`](lessons/01-property.md) §Origin and site are not the same word | [`lessons/03-break.md`](lessons/03-break.md) §What to look at: the cause, not a hunt | `labs/2.3/2.3-browser-policy` `test_origin_vs_site_boundary_subdomain_scheme_and_port_are_each_denied` | items.md #3, #5, #6 | [`lessons/07-transfer.md`](lessons/07-transfer.md) |
-| Given a new reader of `sc_session`, rebuild the policy rows without assuming any row carries over | C5 | [`lessons/07-transfer.md`](lessons/07-transfer.md) §Picture: a new bridge is a new reader | [`lessons/07-transfer.md`](lessons/07-transfer.md) §Write this for a clinic patient portal session cookie | [`lessons/07-transfer.md`](lessons/07-transfer.md) Practice | items.md #8 | (is the transfer task) |
+| Identify by exact header name and value which of Set-Cookie/ACAO/ACAC/CSP a browser treats as a guarantee vs a detection signal, and justify against ASVS V3 | C1, C4 | [`lessons/01-property.md`](lessons/01-property.md) §Four headers, four different promises | [`lessons/01-property.md`](lessons/01-property.md) §Four headers, four different promises (the `evil.example` worked trace) | [`lessons/01-property.md`](lessons/01-property.md) Practice | items.md #1, #4 | [`lessons/07-transfer.md`](lessons/07-transfer.md) |
+| Produce a browser policy matrix for `/login`/`/notes` naming browser vs server enforcement per row | C1, C2, C4 | [`lessons/02-model.md`](lessons/02-model.md) §Step 2: write the rows | [`lessons/02-model.md`](lessons/02-model.md) §Step 3: draft versus final, and browser versus server | [`lessons/02-model.md`](lessons/02-model.md) Practice | items.md #2, #5, #6, #8 | [`lessons/07-transfer.md`](lessons/07-transfer.md) |
+| Given an Origin header and the allow-list, determine same-origin/same-site/neither and predict the exact CORS response | C2, C3 | [`lessons/01-property.md`](lessons/01-property.md) §Origin and site are not the same word | [`lessons/03-break.md`](lessons/03-break.md) §What to look at: the cause, not a hunt | `labs/2.3/2.3-browser-policy` `test_origin_vs_site_boundary_subdomain_scheme_and_port_are_each_denied` | items.md #3 | [`lessons/07-transfer.md`](lessons/07-transfer.md) |
+| Given a new reader of `sc_session`, rebuild the policy rows without assuming any row carries over | C5 | [`lessons/07-transfer.md`](lessons/07-transfer.md) §Picture: a new bridge is a new reader | [`lessons/07-transfer.md`](lessons/07-transfer.md) §Write this for a clinic patient-portal session cookie | [`lessons/07-transfer.md`](lessons/07-transfer.md) Practice | items.md #7 | (is the transfer task) |
 
 ## Known residuals
 
@@ -96,3 +96,4 @@ ASVS 5.0.0 V3 `final` (cookie setup V3.3.1/V3.3.2/V3.3.4; browser security mecha
 |---|---|
 | 2026-08-23 | Pass A initial specification |
 | 2026-09-22 | Deepen (D1-D14 remediation): added teaching claims C1-C5 and this coverage contract; see `module.yaml` for the full entry. |
+| 2026-09-23 | Deepen continuation: corrected this file's teaching-claims and coverage-contract item citations against `items.md`'s own tags, fixed a heading-citation typo, closed a lab test-gaming gap (raw substring search on `Set-Cookie`) with a 9th anti-fake test, and verified all standards citations live; see `module.yaml` for the full entry. |

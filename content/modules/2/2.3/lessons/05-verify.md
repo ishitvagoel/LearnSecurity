@@ -14,8 +14,8 @@ This matters more here than in a lesson about a single pure function, because th
 
 ```mermaid
 flowchart LR
-  V["--impl vulnerable"] --> F["6 of 8 tests must fail"]
-  X["--impl fixed"] --> P["8 of 8 tests must pass"]
+  V["--impl vulnerable"] --> F["6 of 9 tests must fail"]
+  X["--impl fixed"] --> P["9 of 9 tests must pass"]
   F --> Reason["Each failure traces to one of C1-C4, not to an unrelated error"]
   P --> Reason
 ```
@@ -43,7 +43,7 @@ flowchart LR
 
 ## Counterexample: a suite that passes on both variants is not a suite at all
 
-Before this pass, the module's entire verification story was two tests asserting a pure-Python dict model of `HttpOnly`, with no representation of CORS or CSP anywhere, despite both being named in this module's objective hierarchy since Pass A. A suite that never exercises a claim cannot fail on the vulnerable variant for that claim, and a check that cannot fail is not evidence — it is closer to decoration that happens to sit next to a real one. Running `pytest --impl vulnerable` against the rebuilt suite is what actually distinguishes a real check from decoration: 6 of the 8 tests fail, and each failure traces to a specific line this module's [`lessons/03-break.md`](03-break.md) already named, not to an unrelated setup error.
+Before this pass, the module's entire verification story was two tests asserting a pure-Python dict model of `HttpOnly`, with no representation of CORS or CSP anywhere, despite both being named in this module's objective hierarchy since Pass A. A suite that never exercises a claim cannot fail on the vulnerable variant for that claim, and a check that cannot fail is not evidence — it is closer to decoration that happens to sit next to a real one. Running `pytest --impl vulnerable` against the rebuilt suite is what actually distinguishes a real check from decoration: 6 of the 9 tests fail, and each failure traces to a specific line this module's [`lessons/03-break.md`](03-break.md) already named, not to an unrelated setup error.
 
 ```bash
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable
@@ -58,7 +58,7 @@ Map each failing test on `vulnerable` to the row it exercises in [`lessons/02-mo
 
 ## Practice
 
-For each of the eight tests, write one sentence naming which teaching claim (C1–C4) it exercises and which exact header value distinguishes a pass from a failure.
+For each of the nine tests, write one sentence naming which teaching claim (C1–C4) it exercises and which exact header value or attribute distinguishes a pass from a failure.
 
 ## Use it somewhere new
 

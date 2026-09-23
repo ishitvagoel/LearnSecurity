@@ -63,7 +63,7 @@ A teammate who reads only the cookie handler and adds `httponly=True, secure=Tru
 python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable -q
 ```
 
-Record which of the eight tests fail and, for each failing test, name which of the two causes above it is failing for — not merely that it failed. Do not weaken an assertion to make it pass; an environment or import error is not security evidence either way, and a test that merely stops raising is not the same thing as a test that now asserts the right property for the right reason.
+Record which of the nine tests fail and, for each failing test, name which of the two causes above it is failing for — not merely that it failed. Do not weaken an assertion to make it pass; an environment or import error is not security evidence either way, and a test that merely stops raising is not the same thing as a test that now asserts the right property for the right reason.
 
 ## Use it somewhere new
 

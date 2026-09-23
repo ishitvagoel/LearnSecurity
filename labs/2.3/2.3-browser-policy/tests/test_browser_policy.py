@@ -22,29 +22,66 @@ TRUSTED_ORIGIN = "https://app.securecollab.example"
 ATTACKER_ORIGIN = "https://evil.example"
 
 
-# ---------------------------------------------------------------------------
-# C1 -- cookie: HttpOnly and Secure on the real Set-Cookie header.
-# ---------------------------------------------------------------------------
+def _cookie_attribute_tokens(set_cookie_header: str) -> set[str]:
+    """Return the lowercased *attribute* tokens of a Set-Cookie header,
+    excluding the leading ``name=value`` pair.
+
+    HttpOnly and Secure are boolean attributes with no ``=value`` of their
+    own; they are only real when they appear as their own ``;``-delimited
+    token, never when they merely appear as characters inside the cookie's
+    *value*. A naive ``"httponly" in set_cookie.lower()`` substring check
+    would be satisfied by a cookie whose value happens to contain the text
+    "HttpOnly" -- e.g. ``set_cookie("sc_session", "token-HttpOnly-Secure")``
+    -- without the flag ever being set, which is exactly the forbidden
+    outcome this test exists to catch. Parsing into discrete attribute
+    tokens closes that gap.
+    """
+    parts = [p.strip() for p in set_cookie_header.split(";")]
+    return {p.lower() for p in parts[1:]}
 
 
 def test_forbidden_outcome_session_cookie_missing_httponly(client: TestClient) -> None:
     resp = client.post("/login")
     set_cookie = resp.headers.get("set-cookie", "")
-    assert "httponly" in set_cookie.lower(), (
-        "the sc_session Set-Cookie header must carry HttpOnly -- without it, "
-        "page script in the origin can read the session value through "
-        "document.cookie"
+    assert "httponly" in _cookie_attribute_tokens(set_cookie), (
+        "the sc_session Set-Cookie header must carry HttpOnly as its own "
+        "attribute -- without it, page script in the origin can read the "
+        "session value through document.cookie; text that merely appears "
+        "inside the cookie's value does not count"
     )
 
 
 def test_secure_attribute_is_also_present(client: TestClient) -> None:
     resp = client.post("/login")
     set_cookie = resp.headers.get("set-cookie", "")
-    assert "secure" in set_cookie.lower(), (
+    assert "secure" in _cookie_attribute_tokens(set_cookie), (
         "Secure is a sister rule to HttpOnly (ASVS v5.0.0-3.3.1); a "
         "session cookie should not be sent over a plaintext connection "
-        "even when it is already unreadable to script"
+        "even when it is already unreadable to script, and the attribute "
+        "must be set, not merely present as text inside the cookie's value"
     )
+
+
+# ---------------------------------------------------------------------------
+# C1 anti-fake -- a cookie value that spells out "HttpOnly"/"Secure" as text
+# must not satisfy either check above.
+# ---------------------------------------------------------------------------
+
+
+def test_anti_fake_httponly_text_inside_the_cookie_value_does_not_count(
+    client: TestClient,
+) -> None:
+    """A plausible fake fix leaves the httponly/secure keyword arguments
+    unset and instead smuggles the words "HttpOnly" and "Secure" into the
+    cookie's own value, e.g. ``set_cookie("sc_session", "tok-HttpOnly-Secure")``.
+    A raw substring search over the whole Set-Cookie header would wrongly
+    accept that. This test proves the fixture-independent helper this suite
+    uses rejects it, so a regression back to a substring check would be
+    caught here even before touching app.py."""
+    faked_header = "sc_session=tok-HttpOnly-Secure; Path=/; SameSite=lax"
+    tokens = _cookie_attribute_tokens(faked_header)
+    assert "httponly" not in tokens
+    assert "secure" not in tokens
 
 
 # ---------------------------------------------------------------------------

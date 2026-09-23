@@ -51,31 +51,40 @@ No persistent state; every test builds its own `TestClient`.
 ## Verify
 
 ```bash
-python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable   # 6 of 8 fail
-python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl fixed        # 8 of 8 pass
+python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl vulnerable   # 6 of 9 fail
+python3 -m pytest labs/2.3/2.3-browser-policy/tests --impl fixed        # 9 of 9 pass
 ```
 
-Eight tests: the cookie normal case (`Secure` present) and forbidden
-outcome (`HttpOnly` missing); the CORS normal case (trusted origin
-reflected with credentials); the CORS forbidden outcome (an arbitrary
-attacker origin denied credentialed access); an origin-vs-site boundary
-case (a sibling subdomain, a scheme change, and a port change are each a
-different origin); a malformed/failure case (no `Origin` header at all
-must not crash and must not manufacture a grant); an anti-fake test (a
-domain that merely contains the trusted origin as a trailing substring
-must still be denied); and the CSP enforcement case (a real
-`Content-Security-Policy`, not only `Report-Only`).
+Nine tests: the cookie normal case (`Secure` present) and forbidden
+outcome (`HttpOnly` missing), each parsed as a discrete Set-Cookie
+attribute token rather than a raw substring search; a cookie anti-fake
+test (a cookie *value* that merely spells out the text "HttpOnly" or
+"Secure" must not satisfy either check); the CORS normal case (trusted
+origin reflected with credentials); the CORS forbidden outcome (an
+arbitrary attacker origin denied credentialed access); an origin-vs-site
+boundary case (a sibling subdomain, a scheme change, and a port change
+are each a different origin); a malformed/failure case (no `Origin`
+header at all must not crash and must not manufacture a grant); an
+anti-fake test (a domain that merely contains the trusted origin as a
+trailing substring must still be denied); and the CSP enforcement case
+(a real `Content-Security-Policy`, not only `Report-Only`).
 
 **Verified against an actual fake fix:** a "fixed" `/notes` that checks
 `origin.endswith("securecollab.example")` (no leading dot) instead of
-exact set membership passes 6 of 8 tests — it defeats the plain reflected
+exact set membership passes 6 of 9 tests — it defeats the plain reflected
 CORS case — but fails exactly
 `test_anti_fake_lookalike_domain_is_not_treated_as_the_trusted_origin` and
 `test_origin_vs_site_boundary_subdomain_scheme_and_port_are_each_denied`,
 because it also trusts `https://evilsecurecollab.example` (a substring
 lookalike with no shared dot-delimited label) and
 `https://evil.securecollab.example` (a real but unauthorized sibling
-subdomain).
+subdomain). A second fake fix was found and closed during independent
+verification of this pass: the original `HttpOnly`/`Secure` tests read
+the raw `Set-Cookie` header with a substring search, so
+`set_cookie("sc_session", "tok-HttpOnly-Secure")` — a value that never
+sets either flag — passed both tests. The tests now parse the header
+into its `;`-delimited attribute tokens before checking, and a dedicated
+anti-fake test pins that parsing down.
 
 ## What the tests do not prove
 

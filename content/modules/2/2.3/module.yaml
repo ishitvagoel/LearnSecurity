@@ -224,3 +224,49 @@ changelog:
     formula. This pass does not and may not set depth, quality, reviewer beyond
     the pending line above, lastReviewedAt, nextReviewAt, or status: published;
     independent quality and lab-safety review is requested next.'
+- date: '2026-09-23'
+  note: 'Deepen continuation after a rate-limit interruption: performed the
+    validation and cross-checks the 2026-09-22 entry above named as not yet
+    done. Cross-checked spec.md''s teaching-claims and coverage-contract
+    tables cell by cell against items.md''s own "Claim assessed"/"Outcome"
+    tags and found both tables wrong: the teaching-claims table''s C1/C2/C3/C4/C5
+    -> item mappings were each off by one or more items (e.g. C1 listed #2 which
+    is actually a C2/C3 item), and the coverage-contract table''s second row
+    cited items.md #7 (a C1/C5 transfer item) for an outcome that items.md''s
+    own tags place on #2/#5/#6/#8 instead; corrected all cells to match
+    items.md''s tags exactly, and fixed a heading-citation typo ("clinic
+    patient portal" -> "clinic patient-portal", matching lessons/07-transfer.md''s
+    actual heading). Read the lab adversarially per this pass''s own
+    instructions and found the 2026-09-22 entry''s "8 tests" lab was not
+    bug-free after all: test_forbidden_outcome_session_cookie_missing_httponly
+    and test_secure_attribute_is_also_present read the raw Set-Cookie header
+    with a substring search ("httponly" in set_cookie.lower()), so
+    response.set_cookie("sc_session", "tok-HttpOnly-Secure") -- a call that
+    sets neither flag -- passed both tests; verified this empirically by
+    constructing that exact fake and running it against the prior tests.
+    Fixed by parsing the header into its `;`-delimited attribute tokens
+    before checking, and added test_anti_fake_httponly_text_inside_the_cookie_value_does_not_count
+    to pin the parsing down; the lab now carries 9 tests (6 fail on
+    --impl vulnerable, 9 pass on --impl fixed), updated everywhere the prior
+    "8 tests"/"6 of 8"/"8 of 8" counts appeared (both lesson files,
+    items.md, rubric.md, the isolated key, and the lab README). Independently
+    re-verified, by actually constructing and running it, that the
+    already-documented origin.endswith("securecollab.example") fake fix
+    passes exactly 6 of the (now 9) tests and fails only the boundary and
+    anti-fake tests, confirming that claim rather than trusting it. Live-fetched
+    the ASVS 5.0.0 v5.0.0-tag JSON and confirmed the exact requirement text
+    for v5.0.0-3.3.1/3.3.2/3.3.4/3.4.2/3.4.3/3.4.6 matches what this module
+    and its lessons claim; confirmed owasp.org/projects/asvs,
+    w3.org/TR/CSP3/, and w3.org/TR/trusted-types/ each resolve 200 and that
+    CSP3/Trusted Types remain Working Drafts as of 2026-09-23. Found that
+    content/standards/pins.yaml''s shared owasp-asvs-5.0.0 pin still carried
+    the dead www-project-application-security-verification-standard URL this
+    module''s own 2026-09-22 entry had already found and replaced locally;
+    updated the shared pin to owasp.org/projects/asvs and appended a note
+    recording this module''s verification, so other modules citing that pin
+    are not left pointing at a 404. Confirmed estimatedMinutes (330) matches
+    the metadata-honesty.mdc formula recomputed against the current lesson
+    word counts, lab tier, item count, and transfer task. This pass does not
+    and may not set depth, quality, reviewer beyond the pending line above,
+    lastReviewedAt, nextReviewAt, or status: published; independent quality
+    and lab-safety review is requested next.'

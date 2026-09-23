@@ -15,7 +15,7 @@ Eight module-specific items live in [`items.md`](items.md): two discrimination, 
 - [ ] Browser policy matrix for `/login`/`/notes` (Lesson 02), naming browser vs server enforcement per row
 - [ ] Local reflected-origin and script-readable-cookie annotation (Lesson 03), naming both causes separately, not as one restated defect
 - [ ] Lab `labs/2.3/2.3-browser-policy`: forbidden outcomes named as **a script-readable session cookie** and **an arbitrary origin granted Access-Control-Allow-Credentials: true**
-- [ ] `vulnerable/` tests: 6 of 8 fail for the stated security reasons; `fixed/` tests: 8 of 8 pass (authorized local `TestClient` fixture only)
+- [ ] `vulnerable/` tests: 6 of 9 fail for the stated security reasons; `fixed/` tests: 9 of 9 pass (authorized local `TestClient` fixture only)
 - [ ] Transfer task (items.md #7): clinic portal / WebView bridge scenario, naming which of C1–C5 change and which do not
 - [ ] Seeded review checklist answers (Lesson 08) — do not look at the key first
 - [ ] Operate signal (items.md #8) that carries no cookie value and no note body

@@ -93,6 +93,6 @@ Write the log line your system would emit when a staging scan finds `/notes` gra
 - [ ] Browser policy matrix for `/login`/`/notes` (Lesson 02), naming browser vs server enforcement per row
 - [ ] Local reflected-origin and script-readable-cookie annotation (Lesson 03), naming both causes separately
 - [ ] Lab `labs/2.3/2.3-browser-policy`: forbidden outcomes named as **a script-readable session cookie** and **an arbitrary origin granted Access-Control-Allow-Credentials: true**
-- [ ] `vulnerable/` tests show 6 of 8 failing for the stated security reasons; `fixed/` tests show 8 of 8 passing
+- [ ] `vulnerable/` tests show 6 of 9 failing for the stated security reasons; `fixed/` tests show 9 of 9 passing
 - [ ] Transfer answer (item 7) naming which claims change for the WebView bridge and which do not
 - [ ] Operate signal (item 8) that carries no cookie value and no note body
