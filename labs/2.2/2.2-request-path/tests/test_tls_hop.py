@@ -9,6 +9,8 @@ fixture, not as a bare function call.
 
 from __future__ import annotations
 
+import pytest
+
 
 def _relay(client, expected: str, presented: str, trusted_ca, version: str):
     return client.post(
@@ -229,4 +231,66 @@ def test_anti_fake_hostname_suffix_without_boundary_is_rejected(client) -> None:
         "a presented hostname that merely ends with the expected hostname, "
         "with no boundary character separating them, is not the same "
         "hostname and is not a legitimate subdomain of it"
+    )
+
+
+# The four anti-fake tests above each isolate one specific, historically
+# real alternate implementation of the version check (a lexicographic
+# bound, a hand-written wider allow-list, a numeric-range parse, a
+# whitespace strip) -- one per independent review round that found it.
+# That pattern is itself evidence the check needed broader coverage than
+# "one narrow test per gap someone happens to construct next": four
+# structurally distinct near-misses in the same two-line check, each
+# missed by every test that existed before it was found, means the next
+# near-miss shape is more likely than not to exist too. Rather than wait
+# for a fifth review round to find it by hand, this single parametrized
+# test asserts rejection across a broad, systematically-chosen set of
+# near-miss version strings in one pass -- covering whitespace in more
+# positions than the one already-isolated case, leading/trailing zeros,
+# an extra version segment, a sign prefix, exponential notation, and a
+# version-like substring embedded in a longer string. It does not replace
+# the four tests above, each of which documents a specific historical
+# finding by name; it exists to catch the NEXT shape before another
+# review round has to isolate it one at a time.
+_VERSION_NEAR_MISSES = [
+    " 1.2",
+    "1.2 ",
+    "\t1.2",
+    "1.3\t",
+    "1.2\r\n",
+    "01.2",
+    "1.02",
+    "1.20",
+    "1.2.0",
+    "+1.3",
+    "1.2e0",
+    "1.23",
+    "1.234",
+    "TLSv1.2",
+    "v1.3",
+    "1.2 or 1.3",
+]
+
+
+@pytest.mark.parametrize("near_miss_version", _VERSION_NEAR_MISSES)
+def test_anti_fake_version_near_miss_sweep_is_rejected(client, near_miss_version: str) -> None:
+    """Anti-fake, a broad sweep rather than one more hand-picked shape.
+    None of these strings is "1.2" or "1.3" -- each is a plausible way an
+    alternate, incorrect implementation might still treat it as one of
+    them: incidental whitespace in a position the dedicated whitespace
+    test does not cover, a leading or trailing zero a numeric parse would
+    normalize away, an extra version segment, a sign character a numeric
+    parse would accept, exponential notation, or an accepted-looking
+    substring embedded in a longer string a regex or substring check
+    might match. Hostname and trust are both otherwise valid here,
+    isolating exactly this one signal, repeated across many inputs at
+    once: the accepted set is exactly the two canonical strings "1.2" and
+    "1.3", not any string a plausible normalization or partial match
+    would treat as equivalent to one of them."""
+    r = _relay(client, "a.securecollab.internal", "a.securecollab.internal", True, near_miss_version)
+    assert r.status_code == 502, (
+        f"tls_version={near_miss_version!r} is not the string \"1.2\" or "
+        f"\"1.3\" and must be rejected, regardless of how close a "
+        f"plausible normalization or partial match would place it to one "
+        f"of the two accepted strings"
     )
