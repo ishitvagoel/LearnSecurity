@@ -156,3 +156,28 @@ def test_anti_fake_forward_compatible_allow_list_still_rejects_an_unaccepted_ver
         "a version not present in _ACCEPTED_TLS_VERSIONS must be rejected "
         "even if it looks like a plausible next version to allow"
     )
+
+
+def test_anti_fake_hostname_suffix_without_boundary_is_rejected(client) -> None:
+    """Anti-fake, a third shape for the hostname check. The prefix fake
+    above places the expected name at the START of an attacker string,
+    and the substring-anywhere fake places it in the MIDDLE; this places
+    it at the END, with no separator -- `presented_hostname.endswith(
+    expected_hostname)` in place of exact equality. Neither of the other
+    two hostname anti-fake tests catches this: the prefix fake's
+    presented hostname does not end with the expected one, and the
+    substring-anywhere fake's presented hostname is chosen so the
+    expected name sits in the middle, not glued to the end. A presented
+    name ending in the expected name with no `.` or other boundary
+    character immediately before it is not a real subdomain relationship
+    -- "evil-origin.internal" is not a subdomain of "origin.internal",
+    it merely happens to share a trailing character run with it -- so
+    accepting it on an endswith check is the same category of mistake
+    the prefix and substring tests already name, one boundary
+    position over."""
+    r = _relay(client, "origin.internal", "evil-origin.internal", True, "1.3")
+    assert r.status_code == 502, (
+        "a presented hostname that merely ends with the expected hostname, "
+        "with no boundary character separating them, is not the same "
+        "hostname and is not a legitimate subdomain of it"
+    )

@@ -325,3 +325,57 @@ changelog:
     recorded, not assumed. This pass may not and does not set depth or
     quality; requesting the re-review the blocking re-review itself
     expected.'
+- date: '2026-09-23'
+  note: 'Closed the third finding from the third independent review round at
+    content/progress/reviews/2.2-2026-09-23.md: presented_hostname.endswith(
+    expected_hostname) in place of exact equality passed the entire 16-test
+    suite, because neither existing hostname anti-fake test (a prefix fake,
+    a substring-anywhere fake) constructs a presented hostname that ends
+    with the expected one without a boundary character before it. Added
+    test_anti_fake_hostname_suffix_without_boundary_is_rejected
+    (expected="origin.internal", presented="evil-origin.internal") to
+    tests/test_tls_hop.py; confirmed it fails on that fake alone (16 of 16
+    existing tests still pass) and passes on both vulnerable and the real
+    fixed implementation, bringing the suite to 17 tests (vulnerable fails
+    11/17, fixed passes 17/17). Re-derived every one of the seven
+    pre-existing fakes'' pass/fail counts against the new 17-test suite
+    from scratch rather than incrementing the prior entries'' numbers, since
+    a new test can change which OTHER fakes it incidentally also catches --
+    this surfaced two previously undiscovered cross-failures rather than
+    only the one gap the review named. The in-substring hostname fake
+    (expected_hostname in presented_hostname) now fails all three hostname
+    anti-fake tests, not two: "origin.internal" is a substring of
+    "evil-origin.internal" exactly as it is a substring of a prefix or
+    middle-placed attacker string, so a check that only asks "does the
+    expected name appear anywhere" cannot tell any of the three shapes
+    apart (14 of 17 pass, not 15). The lexicographic-version fake
+    (tls_version < "1.2") now fails both version anti-fake tests, not one:
+    "1.4" < "1.2" is also False in Python ("4" > "2" character-by-character),
+    so the same fake that wrongly accepts "1.9" for sorting above "1.2"
+    also wrongly accepts "1.4" for the identical reason (15 of 17 pass, not
+    16). The other five fakes (cache-only, header-only, startswith,
+    is-None trust-state, forward-compatible-allow-list) were confirmed
+    unaffected once their denominators were updated to 17. Updated
+    spec.md''s C3 coverage-contract row (four anti-fake tests -> five:
+    hostname prefix, hostname substring-anywhere, hostname
+    suffix-without-boundary, version-string-sorts-high,
+    forward-compatible-allow-list), items.md and rubric.md (11 of 17
+    failing, 17 of 17 passing), the lab README''s pytest comment lines,
+    test-inventory sentence, and full fake-enumeration paragraph (now
+    eight fakes against the 17-test suite, with the in-substring and
+    lexicographic-version fakes'' corrected counts and explanations),
+    lessons/05-verify.md''s coverage table (added the new anti-fake test
+    and the two pre-existing version anti-fake tests the table had never
+    listed for C3), Mermaid diagram ("6 of 16"/"16 of 16" -> "6 of
+    17"/"17 of 17"), "ten that should fail" ("ten" -> "eleven"), "eight
+    tests that fail" ("eight" -> "eleven"), and its fake-enumeration
+    paragraph (seven fakes -> eight, with the same two corrected counts),
+    and content/assessment/keys/2.2.md''s lab section (11 of 17 failing,
+    17 of 17 passing; the "six other fakes" paragraph rewritten as an
+    eight-fake accounting narrating all three rounds'' findings in order).
+    Verified: lint clean (0/0), lab matrix as above, all eight fakes
+    reconstructed and re-run against the current 17-test suite with exact
+    failing-test names recorded, not assumed. This pass may not and does
+    not set depth or quality; requesting a fourth independent review,
+    given this module''s pattern of three consecutive rounds each finding
+    a genuinely new, previously-uncaught adversarial gap.'
