@@ -281,3 +281,41 @@ changelog:
     baseline findings fell from 2215 to 2184 (31 stale findings resolved,
     none added). Independent quality and lab-safety review still required
     before any depth, quality, reviewer, or review-date field is set.
+- date: '2026-09-23'
+  note: 'Closed both blockers from the independent review at
+    content/progress/reviews/2.4-2026-09-23.md. (1) The reviewer
+    constructed a correctly module-level-shared threading.Lock() (built
+    once, genuinely contended by every request in the process, unlike
+    review/candidate_fix.py''s per-call lock) wrapping check-then-act
+    with no database UNIQUE constraint, and it passed all 7 tests
+    including the concurrency test -- because that test spawns eight
+    threads inside one Python process, which structurally cannot
+    distinguish "atomic because the database enforces it" from "atomic
+    because a correctly-shared in-process lock enforces it." Standing up
+    real cross-process concurrency (two OS processes against one on-disk
+    database) was judged out of scope for this Tier-2 fixture, so per the
+    review''s own offered alternative, honestly narrowed the claim instead:
+    05-verify.md now states plainly that the lab''s concurrency test
+    verifies atomicity within one process only, and that the cross-process
+    half of C4 (a shared lock does nothing for a second uvicorn worker) is
+    verified by argument, not by this suite -- the same pattern C5 already
+    used correctly. spec.md''s C4 coverage-contract row states the same
+    limit. (2) Re-derived every cell of the teaching-claims and
+    coverage-contract tables mechanically against items.md''s own Claim
+    tags rather than by eye: the teaching-claims C5 row dropped an
+    unsupported #7 (item #7 is tagged C1,C3,C4 -- no C5); the
+    coverage-contract''s Row 1 dropped an unsupported #4; Row 2 and Row 5
+    were rewritten as honestly non-item-tested, since no item in the
+    eight-item bank tests either outcome at all (the same pattern this
+    module already used correctly for C5''s Explanation cells); Row 3
+    gained #3, which was available and closes the row''s previously-uncited
+    C1/C2 claims; the Transfer row''s Claim column was narrowed from
+    C1-C5 to C1,C3,C4 to match what lessons/07-transfer.md actually
+    argues (checked directly: 07-transfer.md never mentions C2 or C5 at
+    all). Verified every row has zero unsupported claims with a script
+    against items.md''s real tags, not by re-reading prose. Lab and lesson
+    content untouched; no test file or app.py file changed in this entry.
+    Verified: lint clean (0/0), lab matrix unchanged (vulnerable fails,
+    fixed passes, since no code changed), lint baseline unchanged. This
+    pass may not and does not set depth or quality; requesting the
+    re-review the blocking review itself expected.'
