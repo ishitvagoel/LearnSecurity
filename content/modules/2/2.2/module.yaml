@@ -728,3 +728,95 @@ changelog:
     was restored. This pass may not and does not set depth or quality.
     Requesting an eighth independent review -- explicitly informed that
     the seventh review''s own finding is already closed by this pass.'
+- date: '2026-09-23'
+  note: 'Closed the finding from the eighth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md, and recorded a human
+    scope decision to stop expanding this check''s Unicode-normalization
+    coverage one category at a time.
+    The review found a seventh distinct version-check fake, and a third
+    technique affecting the hostname check: stripping every Unicode
+    category-Cf (format, zero-width, bidi-control) character before
+    comparing -- the same class of mitigation standard guidance
+    recommends against invisible-character-smuggling ("trojan source")
+    attacks, and a DIFFERENT technique from the sixth review''s NFKC
+    fix: neither NFKC nor NFKD normalization removes or folds
+    category-Cf characters at all, so a fix closing the NFKC gap does
+    nothing against this one, and vice versa. Passed the entire 37-test
+    suite, since none of its cases used a category-Cf character. Added
+    "1.2​" (a trailing U+200B ZERO WIDTH SPACE) as a nineteenth
+    sweep case, and a new dedicated test,
+    test_anti_fake_hostname_zero_width_character_is_rejected, sending a
+    presented_hostname equal to the expected one with a U+200B spliced
+    into the middle. The combined fake (stripping category-Cf from both
+    checks, as a reviewer would plausibly write it) fails exactly these
+    two tests and none of the other (now ten) dedicated anti-fake tests
+    (two failures; 37 of 39 pass); isolated to either check alone, it
+    fails only that check''s own new test. Also fixed a cosmetic,
+    non-functional inaccuracy the review flagged: the sweep''s docstring
+    comment had claimed the fullwidth version case''s period was itself
+    a fullwidth Unicode character; it is a plain ASCII period, and no
+    test''s behavior was ever affected either way. Brought the suite
+    from 37 to 39 tests (vulnerable now fails 33/39, fixed passes
+    39/39).
+    Re-derived every one of the twelve pre-existing fakes'' pass/fail
+    counts against the new 39-test suite from scratch. This surfaced one
+    further cross-failure: the lexicographic-lower-bound fake now fails
+    thirteen sweep cases, not twelve -- it also wrongly accepts the new
+    zero-width case, since a string that only extends "1.2" by adding a
+    character is never lexicographically smaller than it, the same
+    reason it already wrongly accepted "1.2\n" two rounds earlier
+    (seventeen failures; 22 of 39 pass). The .isdigit()-guarded
+    integer-tuple fake, the numeric-range fake, and the
+    whitespace-stripping fake were each confirmed NOT additionally
+    affected -- a zero-width character is not a digit, float() raises
+    on it rather than accepting it, and .strip() leaves it untouched.
+    **Human scope decision, not a finding:** two structurally distinct,
+    non-overlapping Unicode-normalization-adjacent techniques (canonical
+    normalization, closed round 7; category-Cf stripping, closed round
+    8) found in two consecutive rounds, each closing a gap the other''s
+    fix leaves completely open, is the same signal the ASCII near-miss
+    space gave after its own fourth distinct fake -- the signal that
+    justified building the sweep test in the first place. Rather than
+    repeat that one-category-per-round cycle indefinitely for
+    Unicode-adjacent techniques specifically, updated spec.md''s "Known
+    residuals" section to name any further not-yet-constructed technique
+    in this class (a third normalization form, a different
+    invisible-character category, etc.) as an explicit, accepted
+    non-goal rather than an open search, and to ask the next independent
+    reviewer to prefer C1, C2, the CA-trust check, or documentation
+    clarity over a further Unicode variant of hop_is_trustworthy''s
+    hostname/version checks, absent a genuinely new angle distinct from
+    both classes already covered. This decision sets no depth/quality/
+    reviewer field and does not itself close a gap; it bounds where
+    further adversarial effort on this specific check should go.
+    Updated items.md and rubric.md (33 of 39 failing, 39 of 39 passing),
+    the lab README''s pytest comment lines, test-inventory sentence
+    (thirty-seven -> thirty-nine, four hostname anti-fakes -> five,
+    seventeen-case -> nineteen-case sweep), and fake-enumeration section
+    (twelve fakes -> thirteen, adding the Cf-stripping fake''s own
+    paragraph, correcting the lexicographic fake''s count, and fixing an
+    arithmetic slip found while updating it), lessons/05-verify.md''s
+    coverage table (added the new hostname test to C3''s row), Mermaid
+    diagram, "thirty-one"/"thirty-one tests" (-> "thirty-three"), its
+    fake-enumeration paragraphs (mirroring README''s updates), and its
+    closing paragraph (naming the fifth, sixth, and seventh undedicated
+    version-check fakes and the scope-cap decision explicitly), spec.md''s
+    C3 coverage-contract row (nine anti-fake tests -> ten) and residuals
+    bullet (rewritten to name the scope-cap decision), and
+    content/assessment/keys/2.2.md''s lab section (33 of 39 failing, 39
+    of 39 passing; added bullets narrating the lexicographic
+    cross-failure, the eighth review''s finding, and the scope decision,
+    and rewrote the final fake accounting as a thirteen-fake, 39-test-
+    suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all fifteen fakes
+    (thirteen reviewer-found plus the two constructed only to
+    demonstrate the sweep''s generality) reconstructed and re-run
+    against the current 39-test suite with exact failing-test names
+    recorded, not assumed; fixed/app.py confirmed byte-identical to its
+    pre-edit state (md5sum ebdf983ea6753464cffd6dee0a669513) after every
+    scratch fake was restored. This pass may not and does not set depth
+    or quality. Requesting a ninth independent review -- explicitly
+    informed that the eighth review''s own finding is already closed by
+    this pass, and that this module''s recorded scope now treats further
+    Unicode-normalization hunting on hop_is_trustworthy as an accepted
+    non-goal rather than an assignment.'

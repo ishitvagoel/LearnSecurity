@@ -254,15 +254,31 @@ def test_anti_fake_hostname_suffix_without_boundary_is_rejected(client) -> None:
 # finding by name; it exists to catch the NEXT shape before another
 # review round has to isolate it one at a time.
 #
-# "１.２" (rendered "1.2" but each character is a FULLWIDTH
-# Unicode code point, U+FF11/U+FF0E/U+FF12, not ASCII) was added after a
-# review round found that a Unicode-normalizing comparison --
+# "１.２" (rendered "1.2" but the two digits are the FULLWIDTH
+# Unicode code points U+FF11 and U+FF12, not ASCII digits -- the period
+# between them is a plain ASCII "." (U+002E)) was added after a review
+# round found that a Unicode-normalizing comparison --
 # unicodedata.normalize("NFKC", tls_version) before checking membership,
 # a defensive habit standard Unicode security guidance actively
 # recommends for untrusted strings -- passed every ASCII-only case above,
 # because NFKC normalization is a no-op on all of them. The accepted set
 # is the two specific ASCII strings "1.2" and "1.3", not any string that
 # normalizes to one of them under NFKC or any other Unicode equivalence.
+#
+# "1.2​" (a trailing U+200B ZERO WIDTH SPACE, Unicode category Cf
+# "Format") was added after a further review round found that NFKC/NFKD
+# normalization does not remove or fold zero-width/format characters at
+# all, so a DIFFERENT defensive habit -- stripping every character in
+# category Cf before comparing, the same class of mitigation recommended
+# against invisible-character-smuggling ("trojan source") attacks on
+# untrusted strings -- passed every case above, NFKC/NFKD-confusable
+# case included. This is the module's own recorded stopping point for
+# this specific class of near-miss: `spec.md`'s "Known residuals"
+# section names, as an explicit, accepted non-goal rather than an open
+# search, any further not-yet-constructed Unicode-normalization-adjacent
+# technique beyond the ASCII near-miss class and the two Unicode classes
+# (canonical normalization; Cf/zero-width stripping) this sweep now
+# covers -- see that section before adding a ninth near-miss shape here.
 _VERSION_NEAR_MISSES = [
     " 1.2",
     "1.2 ",
@@ -281,6 +297,7 @@ _VERSION_NEAR_MISSES = [
     "v1.3",
     "1.2 or 1.3",
     "１.２",
+    "1.2​",
 ]
 
 
@@ -294,13 +311,19 @@ def test_anti_fake_version_near_miss_sweep_is_rejected(client, near_miss_version
     normalize away, an extra version segment, a sign character a numeric
     parse would accept, exponential notation, an accepted-looking
     substring embedded in a longer string a regex or substring check
-    might match, or a non-ASCII digit a Unicode-normalizing comparison
-    would fold onto an accepted string. Hostname and trust are both
+    might match, a non-ASCII digit a Unicode-normalizing comparison would
+    fold onto an accepted string, or a zero-width/format character a
+    "strip invisible characters before comparing" habit would remove
+    without touching the surrounding digits. Hostname and trust are both
     otherwise valid here, isolating exactly this one signal, repeated
     across many inputs at once: the accepted set is exactly the two
     canonical ASCII strings "1.2" and "1.3", not any string a plausible
-    normalization or partial match -- Unicode normalization included --
-    would treat as equivalent to one of them."""
+    normalization, cleaning step, or partial match -- Unicode
+    normalization and invisible-character stripping included -- would
+    treat as equivalent to one of them. This sweep's own docstring
+    comment above names the two Unicode classes it now covers and points
+    to `spec.md`'s residuals section as this module's recorded stopping
+    point for the class, not an invitation to add a ninth shape here."""
     r = _relay(client, "a.securecollab.internal", "a.securecollab.internal", True, near_miss_version)
     assert r.status_code == 502, (
         f"tls_version={near_miss_version!r} is not the string \"1.2\" or "
@@ -339,4 +362,35 @@ def test_anti_fake_hostname_unicode_confusable_is_rejected(client) -> None:
         "Unicode-normalizes to the expected hostname is not the same "
         "sequence of code points as the expected hostname, and is not "
         "the same claim as the two hostnames being equal"
+    )
+
+
+def test_anti_fake_hostname_zero_width_character_is_rejected(client) -> None:
+    """Anti-fake, a fifth shape for the hostname check and the same
+    class as the version sweep's zero-width case above. A plausible fake
+    fix strips every Unicode category-Cf ("Format", zero-width and
+    bidi-control characters) code point before comparing --
+    "".join(ch for ch in s if unicodedata.category(ch) != "Cf") applied
+    to both hostnames before `==` -- the same defensive habit recommended
+    against invisible-character-smuggling ("trojan source") attacks on
+    untrusted strings in general, and a DIFFERENT technique from the
+    NFKC-normalizing fake the test above closes: NFKC does not remove or
+    fold category-Cf characters at all, so a fix that closes the NFKC gap
+    does nothing against this one, and vice versa. The presented hostname
+    below is the expected hostname with a single U+200B ZERO WIDTH SPACE
+    spliced into the middle -- it renders visually identical to the
+    expected name (the character has no visible glyph), is not equal to
+    it as a string, and becomes equal to it only after Cf-stripping,
+    which is exactly what a fake performing that cleaning step would
+    fold over. Trust and version are both otherwise valid here, isolating
+    exactly this one signal: the presented hostname must be the same
+    sequence of code points as the expected one, not a sequence that
+    removing invisible/format characters would reduce to it."""
+    presented = "a.sec​urecollab.internal"
+    r = _relay(client, "a.securecollab.internal", presented, True, "1.3")
+    assert r.status_code == 502, (
+        "a presented hostname that differs from the expected hostname "
+        "only by an invisible zero-width or format character is not the "
+        "same sequence of code points as the expected hostname, and is "
+        "not the same claim as the two hostnames being equal"
     )
