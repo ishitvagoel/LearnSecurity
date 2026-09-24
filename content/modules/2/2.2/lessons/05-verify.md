@@ -46,7 +46,7 @@ path
 assert 404 == <Response [200 OK]>.status_code
 ```
 
-The `assert 404 == 200` line, on its own, is compatible with dozens of unrelated bugs — a missing route, a wrong status code convention, an unhandled exception FastAPI happened to translate into a 200. The assertion message, and the test's own docstring, are what tie this specific failure back to the specific claim: company B received a 200 with a body, when the property demands a 404, because the cache handed back company A's cached entry. A reviewer who reads only "8 failed" without reading which eight, and why, has not verified anything — they have counted.
+The `assert 404 == 200` line, on its own, is compatible with dozens of unrelated bugs — a missing route, a wrong status code convention, an unhandled exception FastAPI happened to translate into a 200. The assertion message, and the test's own docstring, are what tie this specific failure back to the specific claim: company B received a 200 with a body, when the property demands a 404, because the cache handed back company A's cached entry. A reviewer who reads only "33 failed" without reading which thirty-three, and why, has not verified anything — they have counted.
 
 ## What would falsify a claim of "fixed"
 

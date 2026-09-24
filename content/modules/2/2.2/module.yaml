@@ -988,3 +988,31 @@ changelog:
     no test file. Verified: lint clean (0/0), lab matrix as above. This
     pass may not and does not set depth or quality. Requesting a
     twelfth independent review.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the twelfth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md. Neither the conftest.py
+    fixture-isolation angle nor the vulnerable/app.py-drift angle this
+    round pursued found a new code gap; the sole finding was a second,
+    structurally distinct stale count: lessons/05-verify.md''s worked-
+    example section (the paragraph illustrating why a bare pass/fail
+    number is not evidence) still quoted "8 failed" as its example of
+    an uninformative count -- unchanged since the lab''s original
+    14-test commit, when vulnerable genuinely failed 8/14. The live
+    suite fails 33, not 8. This survived every numeral-pattern sweep
+    across eleven prior rounds, and round 11''s own spelled-out-number
+    sweep, because "8" is not a number that is wrong on its face here:
+    it is also, correctly, the count of vulnerable''s currently-PASSING
+    tests one paragraph earlier in the same file (line 35, "8 passed").
+    No sweep for "any number that is not 41" would have flagged this
+    without also flagging that correct, adjacent, different quantity.
+    Fixed: "8 failed" -> "33 failed" (and "which eight" -> "which
+    thirty-three" in the same sentence) at the one location. Grepped
+    the whole module tree, the lab README, and keys/2.2.md for the
+    same rhetorical device (a quoted "N failed"/"N passed" count used
+    as a worked example rather than a live claim): only the
+    already-fixed line and the already-correct "8 passed" one paragraph
+    above it match anywhere. Re-ran the full suite myself: unchanged
+    (vulnerable 33 failed/8 passed, fixed 41/41) -- prose-only fix, no
+    test file touched. Verified: lint clean (0/0), lab matrix as above.
+    This pass may not and does not set depth or quality. Requesting a
+    thirteenth independent review.'
