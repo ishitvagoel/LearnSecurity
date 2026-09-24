@@ -744,7 +744,7 @@ changelog:
     category-Cf characters at all, so a fix closing the NFKC gap does
     nothing against this one, and vice versa. Passed the entire 37-test
     suite, since none of its cases used a category-Cf character. Added
-    "1.2​" (a trailing U+200B ZERO WIDTH SPACE) as a nineteenth
+    "1.2​" (a trailing U+200B ZERO WIDTH SPACE) as an eighteenth
     sweep case, and a new dedicated test,
     test_anti_fake_hostname_zero_width_character_is_rejected, sending a
     presented_hostname equal to the expected one with a U+200B spliced
@@ -793,7 +793,7 @@ changelog:
     Updated items.md and rubric.md (33 of 39 failing, 39 of 39 passing),
     the lab README''s pytest comment lines, test-inventory sentence
     (thirty-seven -> thirty-nine, four hostname anti-fakes -> five,
-    seventeen-case -> nineteen-case sweep), and fake-enumeration section
+    seventeen-case -> eighteen-case sweep), and fake-enumeration section
     (twelve fakes -> thirteen, adding the Cf-stripping fake''s own
     paragraph, correcting the lexicographic fake''s count, and fixing an
     arithmetic slip found while updating it), lessons/05-verify.md''s
@@ -1044,3 +1044,56 @@ changelog:
     independent review, both dates null). This pass may not and does
     not set depth or quality. Requesting a fourteenth independent
     review.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the fourteenth independent review round
+    at content/progress/reviews/2.2-2026-09-23.md. Round 13''s fix was
+    re-confirmed genuinely closed; the new finding was a miscounted
+    sweep size, not a stale one: the "near-miss version sweep"
+    (_VERSION_NEAR_MISSES in tests/test_tls_hop.py) has eighteen
+    entries -- confirmed by the reviewer via both a manual count and
+    pytest --collect-only, and reconfirmed here the same two ways --
+    but four live, current-tense files all called it "nineteen": this
+    module''s own spec.md (C3 coverage-contract row), lessons/
+    05-verify.md (twice: the coverage table and the Practice section),
+    the lab README, and content/assessment/keys/2.2.md. Traced the
+    error to its origin: round 8''s own closure commit (both this
+    file''s changelog and keys/2.2.md''s matching bullet) labeled the
+    zero-width case "a nineteenth sweep case" when 17 (correct as of
+    round 7) + 1 = 18, not 19 -- an arithmetic slip at write time, not
+    later staleness, that every subsequent round''s numeric sweeps
+    (spelled-out-word greps, "N failed/passed" greps) had no reason to
+    catch, since none of them recounted a parametrized test''s own
+    source-list entries against the code.
+    Fixed all six live instances: spec.md''s coverage-contract row
+    ("nineteen-case" -> "eighteen-case"); lessons/05-verify.md''s
+    coverage table ("19 parametrized cases" -> "18") and Practice
+    section ("nineteen parametrized ... nineteen ways ... nineteen
+    independent" -> "eighteen" x3); the lab README''s test-inventory
+    sentence ("nineteen-case" -> "eighteen-case"); keys/2.2.md''s lab
+    section ("nineteen-case" -> "eighteen-case") and its round-8
+    historical bullet ("a nineteenth sweep case" -> "an eighteenth
+    sweep case", correcting the bullet''s own arithmetic the same way
+    round 11 treated a historical-sounding bullet''s numbers as
+    something to get right, not sacred record). Also fixed this same
+    file''s own round-8 changelog entry, where the identical slip
+    originated ("a nineteenth" -> "an eighteenth" sweep case; "->
+    nineteen-case sweep" -> "-> eighteen-case sweep"), since it is the
+    traced root cause and left uncorrected would keep reading as
+    confirming evidence for the wrong number.
+    Verified no other "nineteen" instance in this module''s tree refers
+    to the sweep''s own case count: the four remaining live instances
+    (module.yaml lines describing the 19-test suite that existed
+    before the sweep grew it to 34, and the "nineteen dedicated tests"
+    phrase describing the suite''s non-sweep test count, which is
+    correctly 19 = 34 - 15 at that point) all describe total suite
+    size or dedicated-test count, not the sweep''s item count, and are
+    correct as written.
+    Re-ran the full suite myself: unchanged (vulnerable 33 failed/8
+    passed, fixed 41/41) -- prose-only fix, no test file touched;
+    fixed/app.py md5sum unchanged (ebdf983ea6753464cffb6dee0a669513).
+    Verified: lint clean (0/0), lab matrix as above. Confirmed
+    depth/quality (in content/progress/STATUS.yaml, not this file, as
+    the fourteenth review correctly pointed out) and reviewer/
+    lastReviewedAt/nextReviewAt (in this file) remain untouched. This
+    pass may not and does not set depth or quality. Requesting a
+    fifteenth independent review.'
