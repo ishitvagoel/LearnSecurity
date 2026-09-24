@@ -18,6 +18,7 @@ outcomes:
 - Given SecureCollab's Phase 2 request-path fixture, identify every point where a
   shared cache or a forwarded-identity header could substitute a wrong company for
   the caller's own bound identity, and justify why each point does or does not
+  actually let a wrong company through in the code as written
 - State precisely what a successful TLS 1.3 handshake does and does not prove about
   a hop's peer, and name the additional checks (hostname match, trust state,
   accepted version) a deployment must add beyond "TLS is enabled"
@@ -1016,3 +1017,30 @@ changelog:
     test file touched. Verified: lint clean (0/0), lab matrix as above.
     This pass may not and does not set depth or quality. Requesting a
     thirteenth independent review.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the thirteenth independent review round
+    at content/progress/reviews/2.2-2026-09-23.md. This one was not a
+    code gap or a stale count: this file''s first outcome ended mid-
+    clause at "...and justify why each point does or does not", with
+    no object. Traced via git log -S to a rate-limited WIP commit
+    (6c49552) that no subsequent remediation pass had reason to
+    revisit, since every later round was hunting in spec.md, the lab,
+    or the lessons, never in this file''s own outcomes list.
+    Completed it: "...actually let a wrong company through in the
+    code as written", chosen after cross-referencing spec.md''s
+    coverage-contract row for the same claim (C1, C2), which carries
+    no "justify why" clause -- this outcome was always meant as a
+    richer version of the same claim, asking the learner to separate
+    a candidate point that merely looks suspicious from one that
+    actually lets a wrong company through, the same distinction this
+    module''s own PUT-vs-GET analysis has drawn throughout. Checked
+    this module''s other three outcomes, and briefly 2.3''s and
+    2.4''s, for the same kind of incompleteness: none found anywhere.
+    Re-ran the full suite myself: unchanged (vulnerable 33 failed/8
+    passed, fixed 41/41) -- this is a metadata-prose-only fix
+    touching no test file. Verified: lint clean (0/0), lab matrix as
+    above. Confirmed depth/quality/reviewer/lastReviewedAt/
+    nextReviewAt remain untouched (status: draft, reviewer: pending
+    independent review, both dates null). This pass may not and does
+    not set depth or quality. Requesting a fourteenth independent
+    review.'
