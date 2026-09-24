@@ -67,7 +67,7 @@ The complete forensic account of all fifteen fakes — exact pass/fail counts, w
 ## What these checks do not prove
 
 - A real TLS handshake, a real certificate authority, or a real DNS answer — `hop_is_trustworthy` is exercised through `POST /internal/relay` with values the test constructs directly, never a negotiated connection.
-- Web cache deception (ASVS `v5.0.0-14.2.5`, Level 3 advanced): this fixture's failure is two authenticated companies sharing a slot, not an unauthenticated request tricking a cache into storing dynamic content under a static-looking path. Treating this module's Level 2 cache-key property as if it already covered Level 3 web cache deception would overstate what fourteen passing tests actually checked.
+- Web cache deception (ASVS `v5.0.0-14.2.5`, Level 3 advanced): this fixture's failure is two authenticated companies sharing a slot, not an unauthenticated request tricking a cache into storing dynamic content under a static-looking path. Treating this module's Level 2 cache-key property as if it already covered Level 3 web cache deception would overstate what forty-one passing tests actually checked.
 - Behavior of a real CDN, load balancer, or reverse proxy product — every claim here is verified against a local, single-process fixture.
 
 Record these as residuals, the way `spec.md`'s "Known residuals" section already does, rather than as silent passes a reviewer might mistake for coverage. A residual named in prose and a gap covered by a passing test read identically in a status report that only counts green checkmarks; the difference only shows up to a reviewer willing to open `spec.md` and ask, for each named residual, whether any test in this suite could possibly have exercised it at all.

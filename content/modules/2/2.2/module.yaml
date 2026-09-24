@@ -962,3 +962,29 @@ changelog:
     depth or quality -- the readability trim is a content-quality
     action, not a finding closure, and does not itself argue for a
     grant. Requesting an eleventh independent review.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the eleventh independent review round at
+    content/progress/reviews/2.2-2026-09-23.md. Round 10''s C2 fix and the
+    readability trim were both re-confirmed genuinely correct; the sole
+    new finding was a stale spelled-out number: lessons/05-verify.md''s
+    residuals section still read "fourteen passing tests" (a leftover
+    from the module''s 14-test-suite era) where the live suite has 41.
+    Every stale-count grep across all ten prior rounds searched only
+    numeral patterns ("of 14", "6 of 14"); none searched for the
+    spelled-out word itself, so this single line survived ten rounds of
+    otherwise-thorough auditing.
+    Fixed: "fourteen passing tests" -> "forty-one passing tests" at the
+    one location. Then ran a dedicated sweep for the exact defect class
+    the review named -- every spelled-out number word (seven through
+    twenty) adjacent to "tests"/"passing"/"failing"/"fakes"/"pass"/"fail"
+    -- across all of spec.md, every lessons/*.md, items.md, rubric.md,
+    the lab README, and content/assessment/keys/2.2.md. No other live
+    (non-historical) instance found: keys/2.2.md''s own hits are
+    per-fake failure counts inside bullets that correctly narrate past
+    rounds'' findings in the past tense, exactly like every other
+    historical bullet in that file, not stale current-state claims.
+    Re-ran the full suite myself: vulnerable 33 failed/8 passed, fixed
+    41/41 passed -- unchanged, since this was a prose-only fix touching
+    no test file. Verified: lint clean (0/0), lab matrix as above. This
+    pass may not and does not set depth or quality. Requesting a
+    twelfth independent review.'
