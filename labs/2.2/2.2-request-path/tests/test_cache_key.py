@@ -91,6 +91,34 @@ def test_unregistered_api_key_with_a_company_header_is_denied(client) -> None:
     assert got.status_code == 401
 
 
+def test_anti_fake_credential_shaped_like_a_valid_key_is_still_denied(client) -> None:
+    """Anti-fake, C2, a different signal from every case above. Every
+    other case in this file sends either one of the four registered
+    credentials (key-A, key-B, key-Z, key-Q) or the single unregistered
+    literal "key-does-not-exist" -- a string that also fails on shape
+    (it is far longer than five characters). A plausible fake repair
+    could resolve company by pattern-matching the credential string's
+    shape instead of actually looking it up -- for example treating any
+    string of the form "key-" plus one character as valid and deriving
+    the company from that one character -- which would agree with every
+    registered credential this file sends and correctly reject the
+    existing malformed case, while accepting a credential the origin
+    never issued at all, as long as it happens to be five characters
+    long and start with "key-". "key-D" is exactly that shape and was
+    never written to API_KEYS anywhere in this fixture; no X-Company
+    header is sent, so this isolates identity resolution from the
+    header-override defect entirely. A caller holding a credential the
+    origin never issued is not evidence of any company, no matter how
+    closely the credential's shape resembles a real one."""
+    got = client.get("/notes/n1", headers=_auth("key-D"))
+    assert got.status_code == 401, (
+        "a credential that merely looks like a valid key -- the right "
+        "length, the right prefix -- is not the same claim as a "
+        "credential the origin actually issued and can verify against "
+        "its own credential table"
+    )
+
+
 def test_cross_company_lookup_is_scoped_even_before_any_cache_entry_exists(client) -> None:
     """Boundary case. Company Z asks for a note company Q stored, using
     its own valid credential and no forged header, for a note that was

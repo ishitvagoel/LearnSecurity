@@ -885,3 +885,80 @@ changelog:
     pre-edit state (md5sum ebdf983ea6753464cffd6dee0a669513) after
     every scratch fake was restored. This pass may not and does not
     set depth or quality. Requesting a tenth independent review.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the tenth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md -- the second blocker
+    found outside hop_is_trustworthy, this time in C2 (_resolve_company
+    itself), and also acted on the same round''s readability judgment
+    about this module''s accumulated fake-enumeration prose.
+    Asked to apply round 9''s own question ("does the suite check the
+    mechanism or only the outcome?") to C2, the review found that every
+    test in test_cache_key.py sends either a registered credential
+    (key-A/B/Z/Q) or the single unregistered literal
+    "key-does-not-exist", which also fails on length alone -- no test
+    ever sends a credential that is *shaped like* a registered key but
+    was never actually issued. A fake that authenticates by
+    pattern-matching the credential string''s shape -- if not
+    api_key.startswith("key-") or len(api_key) != 5: return None;
+    return "company" + api_key[-1].upper() -- never consults
+    API_KEYS at all, yet agrees with every registered literal this
+    suite sends and correctly rejects the existing malformed case. It
+    passed the entire 40-test suite. Demonstrated directly: a
+    credential the origin never issued, "key-D", was accepted and
+    minted a full company identity with read/write access (PUT with
+    Authorization: Bearer key-D returned 200; the real fixed code
+    returns 401 for the identical request) -- a structurally worse
+    failure than the header-override defect C2 was originally named
+    for, since an attacker needs no real credential at all.
+    Added test_anti_fake_credential_shaped_like_a_valid_key_is_still_denied,
+    sending "key-D" with no X-Company header (isolating identity
+    resolution from the header-override defect entirely) and asserting
+    401. The fake now fails exactly this one test (one failure; 40 of
+    41 pass). Re-ran the full fakes matrix (all fourteen pre-existing
+    fakes plus the two demonstration-only fakes) against the new
+    41-test suite: none is additionally affected, confirmed by
+    reconstruction. Brought the suite from 40 to 41 tests (vulnerable
+    still fails 33/41, since vulnerable/app.py''s own credential lookup
+    is a real, unmodified API_KEYS lookup -- fixed passes 41/41).
+    **Also acted on this round''s explicit, non-blocking readability
+    judgment: the fake-enumeration prose in labs/2.2/2.2-request-path/
+    README.md and lessons/05-verify.md''s "Anti-fake tests are not
+    decoration" section had become, in the review''s own words, "review-
+    log sediment, not learner-serving content" -- ten rounds of
+    round-by-round forensic narration ("The eleventh fake, found in a
+    sixth independent review round...") aimed at proving exhaustiveness
+    to the next reviewer, not at teaching the next learner what an
+    anti-fake test is for.** Trimmed both sections drastically: each now
+    states the fifteen-fakes headline count, walks through three
+    representative shapes (an approximate string match, a mechanism
+    that never fires behind a hidden safety net, an identity check that
+    verifies shape instead of provenance) as the general pattern, and
+    points to content/assessment/keys/2.2.md -- which already carries
+    the complete, unabridged forensic account of every fake, every
+    round, and every exact count -- rather than growing the
+    learner-facing count by one paragraph per round indefinitely. No
+    factual content was removed, only relocated to the file already
+    positioned to hold it; keys/2.2.md itself was not shortened.
+    Updated spec.md''s C2 coverage-contract row (one anti-fake test ->
+    two, naming the new credential-shape test), items.md and rubric.md
+    (33 of 41 failing, 41 of 41 passing), the lab README''s pytest
+    comment lines and test-inventory sentence (now naming the
+    credential-shape anti-fake alongside the cache-source one),
+    lessons/05-verify.md''s coverage table (added the new test to C2''s
+    row), Mermaid diagram ("7 of 40"/"40 of 40" -> "8 of 41"/"41 of
+    41"), its vulnerable-pass-count prose ("seven passed" -> "eight
+    passed", naming why the new credential-shape test also passes on
+    vulnerable), and content/assessment/keys/2.2.md''s lab section (33
+    of 41 failing, 41 of 41 passing; added a bullet narrating the tenth
+    review''s finding and rewrote the final fake accounting as a
+    fifteen-fake, 41-test-suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all seventeen
+    fakes (fifteen reviewer-found plus the two constructed only to
+    demonstrate the sweep''s generality) reconstructed and re-run
+    against the current 41-test suite with exact failing-test names
+    recorded, not assumed; fixed/app.py confirmed byte-identical to its
+    pre-edit state (md5sum ebdf983ea6753464cffd6dee0a669513) after
+    every scratch fake was restored. This pass may not and does not set
+    depth or quality -- the readability trim is a content-quality
+    action, not a finding closure, and does not itself argue for a
+    grant. Requesting an eleventh independent review.'
