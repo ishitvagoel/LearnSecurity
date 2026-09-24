@@ -18,13 +18,34 @@ def _auth(key: str) -> dict[str, str]:
 def test_same_company_reads_its_own_note_after_caching(client) -> None:
     """Normal case. Company A stores a note, reads it once (priming
     whatever cache the origin keeps), then reads it again. Both reads
-    must return company A's own body."""
+    must return company A's own body -- and the second read's own
+    "source" field must say "cache", not merely the same body a
+    correctly-scoped origin store would also have returned. A body
+    assertion alone cannot tell "the cache served this" from "the
+    cache never fires and every read falls through to the origin
+    store," because this fixture's origin store is already correctly
+    scoped by (note_id, company) on its own -- see the boundary case
+    below. Asserting the source field is what actually exercises the
+    cache mechanism this module is named for, not just the property
+    the origin store would satisfy by itself."""
     client.put("/notes/n1", json={"body": "alice-n1"}, headers=_auth("key-A"))
     first = client.get("/notes/n1", headers=_auth("key-A"))
     second = client.get("/notes/n1", headers=_auth("key-A"))
     assert first.status_code == 200
     assert first.json()["body"] == "alice-n1"
+    assert first.json()["source"] == "origin", (
+        "the first read, before anything has been cached, must come from "
+        "the origin store, not a cache that already had an entry"
+    )
     assert second.json()["body"] == "alice-n1"
+    assert second.json()["source"] == "cache", (
+        "the second read must actually be served by the cache the first "
+        "read primed -- a fix that returns the right body without the "
+        "cache ever firing (or that populates the cache but can never "
+        "read it back, e.g. a write/read key-type mismatch) is not the "
+        "mechanism this module teaches, even though it would look correct "
+        "to every assertion that checks only the body"
+    )
 
 
 def test_other_company_does_not_receive_cached_body(client) -> None:
@@ -110,4 +131,36 @@ def test_anti_fake_forwarded_header_with_fresh_never_elsewhere_used_values(clien
         "every client-supplied company header must be ignored for "
         "authorization, not only the one value this file's other case "
         "happens to send"
+    )
+
+
+def test_anti_fake_cache_actually_serves_the_second_read(client) -> None:
+    """Anti-fake, C1, a different signal from the forbidden-outcome and
+    cross-company anti-fake tests above. Those two both isolate whether
+    the cache key includes company; this one isolates whether the cache
+    mechanism participates at all. A fake repair could disable caching
+    entirely (never populate _CACHE, or populate it under a key its own
+    read path can never look up again, such as a write/read key-type
+    mismatch) and still pass every C1/C2 assertion elsewhere in this
+    file, because this fixture's _ORIGIN_STORE is already correctly
+    scoped by (note_id, company) on its own -- every "wrong company
+    denied" and "right company allowed" case this suite checks is also
+    satisfied when every read falls straight through to the origin
+    store and the cache never fires. Uses a note id and company never
+    written anywhere else in this file, so a fix that special-cased the
+    literals the other cases happen to use cannot pass by memorizing
+    them. Checks the "source" field specifically, not just the body,
+    since the body alone is exactly what a cache-disabling fake would
+    also get right."""
+    client.put("/notes/n6", json={"body": "bob-n6"}, headers=_auth("key-B"))
+    first = client.get("/notes/n6", headers=_auth("key-B"))
+    second = client.get("/notes/n6", headers=_auth("key-B"))
+    assert first.json()["source"] == "origin"
+    assert second.json()["source"] == "cache", (
+        "a second read of the same note by the same company must be "
+        "served by the cache the first read primed -- a fix that never "
+        "populates the cache, or that populates it under a key its own "
+        "read path can never look up again, is not the mechanism this "
+        "module teaches, even though the origin store's own scoping "
+        "would make every response body still correct"
     )

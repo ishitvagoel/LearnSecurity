@@ -820,3 +820,68 @@ changelog:
     this pass, and that this module''s recorded scope now treats further
     Unicode-normalization hunting on hop_is_trustworthy as an accepted
     non-goal rather than an assignment.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the ninth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md -- the first blocker
+    found outside hop_is_trustworthy''s hostname/version checks across
+    all nine review rounds, in C1 (the cache key) itself.
+    Asked to give fresh adversarial effort to C1/C2 specifically, since
+    eight rounds'' total attention went exclusively to
+    hop_is_trustworthy, the review found that no test in
+    tests/test_cache_key.py ever asserted the response''s own "source"
+    field ("cache" vs "origin"), only its body and status code.
+    Removing the cache-population line from fixed/app.py''s get_note
+    entirely (the cache dict stays permanently empty; every request
+    falls through to _ORIGIN_STORE) passed the entire 39-test suite,
+    because _ORIGIN_STORE is already correctly scoped by
+    (note_id, company) on its own, so every C1/C2 assertion the suite
+    made was satisfied whether or not the cache mechanism ever fired. A
+    second, independently-plausible variant (a write/read key-type
+    mismatch: writing under a plain note_id string while the read path
+    still looks up the (note_id, company) tuple) produced the identical
+    result for the identical reason.
+    Strengthened test_same_company_reads_its_own_note_after_caching to
+    assert "source": "origin" on the priming read and "source": "cache"
+    on the second, and added a new dedicated anti-fake test,
+    test_anti_fake_cache_actually_serves_the_second_read, using a
+    company and note id never written elsewhere in the file, asserting
+    the same thing. Both fake variants now fail exactly these two tests
+    and none of the other C1/C2 assertions (two failures; 38 of 40
+    pass) -- the body alone was always correct under either fake, which
+    is exactly why a body-only assertion could never have caught this.
+    Re-ran the full fakes matrix (all thirteen pre-existing fakes plus
+    the two demonstration-only fakes) against the new 40-test suite:
+    none is additionally affected by the new tests, since none of them
+    touches _CACHE or _resolve_company -- confirmed by reconstruction,
+    not assumed, per this module''s established discipline.
+    Brought the suite from 39 to 40 tests (vulnerable still fails
+    33/40, since vulnerable/app.py''s own cache mechanism does fire
+    correctly for a single company''s own repeated reads -- its bug is
+    cross-company leakage, not a disabled cache -- fixed passes 40/40).
+    Updated spec.md''s C1 coverage-contract row (one anti-fake test ->
+    two, naming the new cache-actually-fires test), items.md and
+    rubric.md (33 of 40 failing, 40 of 40 passing), the lab README''s
+    pytest comment lines, test-inventory sentence (naming the new
+    source-field assertions), and fake-enumeration section (thirteen
+    fakes -> fourteen, adding the cache-disabling fake''s own paragraph
+    and correcting every denominator from 39 to 40, including seven
+    arithmetic slips a blanket find-and-replace introduced and a
+    fresh audit against the real pytest output caught),
+    lessons/05-verify.md''s coverage table (added the new anti-fake test
+    to C1''s row), Mermaid diagram ("6 of 39"/"39 of 39" -> "7 of
+    40"/"40 of 40"), its vulnerable-pass-count prose ("six passed" ->
+    "seven passed", naming why the new cache test also passes on
+    vulnerable), its fake-enumeration paragraphs (mirroring README''s
+    updates), and its closing paragraph (naming the fourteenth fake''s
+    different kind of gap explicitly), and content/assessment/keys/
+    2.2.md''s lab section (33 of 40 failing, 40 of 40 passing; added a
+    bullet narrating the ninth review''s finding and rewrote the final
+    fake accounting as a fourteen-fake, 40-test-suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all sixteen fakes
+    (fourteen reviewer-found plus the two constructed only to
+    demonstrate the sweep''s generality) reconstructed and re-run
+    against the current 40-test suite with exact failing-test names
+    recorded, not assumed; fixed/app.py confirmed byte-identical to its
+    pre-edit state (md5sum ebdf983ea6753464cffd6dee0a669513) after
+    every scratch fake was restored. This pass may not and does not
+    set depth or quality. Requesting a tenth independent review.'
