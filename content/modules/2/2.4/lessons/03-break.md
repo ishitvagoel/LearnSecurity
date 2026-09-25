@@ -1,77 +1,40 @@
-# Practice: a retry creates a second share
+# Local fixture: a retry duplicates a share on a real request cycle
 
 **Kind:** mechanism-lab
 **Loop step:** 3 Break
 
-## Try it
+## Starting from the handler, not from a bug name
 
-The practice is not a website you attack. `share_note` does not open a browser, talk to a payment network, or race a public API. Every call appends a row and ignores the key, so two calls are two grants.
+Open `vulnerable/app.py` and read the single route it defines before reading anything below this paragraph, because the point of this lesson is to derive the failure from the code rather than to be handed a label and asked to confirm it. The handler accepts a note id in the URL path and an optional `Idempotency-Key` header, opens a connection to a SQLite file, and runs one statement: `INSERT INTO shares (note_id, idempotency_key) VALUES (?, ?)`. Nothing about that statement, or anything around it, ever reads the `shares` table before writing to it. There is no `SELECT`, no lookup, no branch on whether the incoming key has been seen. The precondition for the module's forbidden outcome is therefore not some exotic timing window at all — it is satisfied by the simplest possible sequence: one request, followed by a second request carrying the identical `Idempotency-Key` value.
 
-> Two `share_note` calls with the same idempotency key must produce one share. A retry is a second attempt, not a second grant.
+Trace what happens to that second request. It arrives at the same route, with the same note id and the same header value as the first. The handler does not know, and cannot know from anything in its own code, that this request is "the same attempt" rather than "the fourth of ten independent shares this owner happens to be making today." It runs the identical `INSERT`, a second row is appended, and the response reports `accepted: true` exactly as the first response did — from the client's point of view, both requests look equally successful, and nothing in either response reveals that the share table now disagrees with the client's intention.
 
-## Where you may practice
+## Where authority actually goes wrong
 
-Stay inside `labs/2.4/2.4-state-time`. Restore the broken and repaired folders from git when you are done. Fake note ids only.
+The share table is what the who-may-read-this-note check consults later, whenever a company or a note viewer asks "who has this been shared with." A second row for `n1` is not a cosmetic bookkeeping error; it is a second entry in the answer to that authority question, meaning a second recipient — if this fixture modeled a distinct recipient per share rather than a bare count — would gain read access nobody on the owner's side ever separately decided to grant. The blast radius of this specific defect is bounded by how many times a client, a proxy, or a redelivering worker actually resends the same key, which in a real deployment is bounded by retry-policy configuration rather than by anything the handler itself limits; a load balancer configured to retry a POST up to three times on a 504 could, against this handler, turn one intended share into three recorded ones, each indistinguishable from a distinct, deliberate grant to whoever later reads the `shares` table.
 
-Do not load-test third-party APIs. Do not run clock tricks against NTP. Do not point this exercise at a live clinic booking page, a classmate’s FastAPI, or an employer checkout.
+## What the failing test tells you, and what it does not
 
-Two `share_note("n1", idempotency_key="k1")` calls leaving `share_count() == 2` is the retry minting a second share.
+Run this only inside `labs/2.4/2.4-state-time/`; the note ids and keys below are fixture labels, not real content.
 
-Picture a **retrying client** that can call `share_note` twice with the same key — a 504, a double-click, a load balancer that retries POST, or a later worker that delivers at least once — not The handler treats `k1` as “this attempt already landed.” FastAPI, Next.js `fetch` retries, HTTP retry logic, or “the user will not click twice”.
-
-## Picture: every call is a new row
-
-```mermaid
-flowchart TD
-  First["share_note n1 k1"] --> Row1["Count 1"]
-  Second["share_note n1 k1 again"] --> Row2["Count 2"]
-```
-
-The share side effect is not bound to the key — not a live race. Two calls with the same key; the handler appends `note_id` every time and ignores `idempotency_key`. A 504 is modeled by the second call — you do not need a real timeout, a sleep, or a second process.
-
-HTTP does not make POST happen once. HTTP 201 twice is still two rows. An awareness list that names “something went wrong” is not the failing check.
-
-## What to look at: the cause, not a hunt
-
-In `vulnerable/share.py`, `share_note` appends `note_id` to `_SHARES` on every call. The parameter `idempotency_key` is accepted and discarded. Checks:
-
-- `test_single_share` — one call still creates one share (honest happy path)
-- `test_retry_does_not_duplicate_side_effect` — two calls with `k1` must leave `share_count() == 1`
-
-## Why it happens, what it costs, how you stop it, how you notice, how you recover
-
-| Slice | This practice |
-|---|---|
-| The rule | Two `share_note` calls with the same key produce one share |
-| Why it happens | A side effect that is not bound to the key, plus a retry; the key does not mediate the append |
-| What's already wrong | Note `n1`; key `k1`; the handler inserts on every POST |
-| Trigger | Second `share_note("n1", idempotency_key="k1")` |
-| What it costs | Who is allowed to read the note changes over time; an extra share nobody meant |
-| How you stop it | Persist key → first share; the second POST returns the first outcome |
-| How you notice | Hits on a key you already saw; `share_count` versus unique keys |
-| How you recover | Take extra shares back; tell the owner; never fail open if the key store is down |
-| Not the lesson | An awareness-list name, “the user double-clicked wrong,” disable-on-submit, or a scanner name |
-
-## What the framework does vs what you still have to check
-
-A FastAPI route, Next.js disable-on-submit, and “PostgreSQL will unique-constrain it” do not remember the first share outcome. A unique constraint on `(note_id)` would block **any** second share, including a legitimate new key — wrong check. Two calls with `k1`, `share_count() == 1`.
-
-## Practice
-
-```text
+```bash
 python3 -m pytest labs/2.4/2.4-state-time/tests --impl vulnerable
 ```
 
-Record the failing test `test_retry_does_not_duplicate_side_effect`. Do not weaken the check to “HTTP 200 once.” An environment or import error is not security evidence.
+Four of the seven tests fail against this file: `test_retry_with_the_same_key_does_not_duplicate`, `test_store_unreachable_is_denied_not_accepted`, `test_concurrent_first_requests_with_a_never_seen_key_still_produce_one_share`, and `test_a_never_elsewhere_used_key_is_still_deduplicated`. The first failure is the direct consequence of the missing `SELECT`, described above. The second and third fail for a different, additional reason worth naming precisely rather than lumping in as "more of the same bug": `vulnerable/app.py` also wraps its insert in a broad exception handler that reports `accepted: true` even when the database connection itself cannot be opened, which is a second, independent decision — fail open on any storage problem — layered on top of the first. A single test failing tells you one check is missing; four tests failing for two distinct, nameable reasons tells you the handler was never designed around the property at all, which is the more useful and more honest diagnosis. The fourth failing test is the anti-fake pair's dedup half, and it fails for the identical reason as the first — it exists to confirm that a fix cannot pass by memorizing the specific note id and key string the other tests happen to use, not to test a different mechanism.
+
+## Why this is the smallest fixture, not a simplified one
+
+A representative failure earns that description by leaving out everything that does not change *why* the bug occurs, and this fixture leaves out a great deal on purpose. It has no authentication, because who is allowed to call this endpoint is a separate question from whether the endpoint remembers a key it has already seen; adding a login flow would not change the missing `SELECT`. It has no note content beyond an id string, because the defect is about row count, not about what a note contains; a fixture that stored real paragraph text would test the exact same INSERT-on-every-call defect while adding nothing to the reasoning and everything to the risk of accidentally treating fixture strings as sensitive data. It uses a real FastAPI request cycle and a real SQLite file specifically because a bare Python function call — the shape this lab used before this pass — cannot exhibit the concurrency failure at all: a pure function has no connection object, no write-serialization, and nothing a database engine could enforce atomically, so a fixture that stayed at that level could only ever test the sequential-retry half of this module's property and would have to leave the race half as an unverified assertion in prose.
+
+## Practice
+
+Run the vulnerable variant, read the failure output for all four failing tests, and for each one write one sentence connecting the assertion that failed to the specific line in `vulnerable/app.py` that makes it fail — not to the test's name, and not to a general description of "duplicate shares." Then read [`04-build.md`](04-build.md), which derives the fix from the same trace this lesson just walked through, rather than presenting it as a finished answer.
 
 ## Use it somewhere new
 
-Payment capture and invite tokens. Predict, without leaving this directory, whether a second POST with the same capture key must still leave one capture. A clinic last slot is the same fork, different object: locking so a limited quantity cannot be booked twice.
-
-## Can people still use it
-
-Disable-on-submit is not the rule. An accessible “still working” status must not mint a **new** key on each announcement.
+The identical trace applies to a payment capture endpoint that never checks whether a capture id has already been processed, and to a clinic booking endpoint that never checks whether a slot has already been taken — in both cases, the precondition is "one request, followed by a second request an application-level check never looked at," and the blast radius is bounded by how many times the client or its infrastructure resends the request. [`07-transfer.md`](07-transfer.md) develops one of these in more depth.
 
 ## What this page is not doing
 
-No live-target steps. Fake note ids only. No NTP or payment-network walkthroughs. Do not “fix” the practice by deleting the check.
+This fixture is not a payment system, a booking system, or a demonstration against any service outside `labs/2.4/2.4-state-time/`. Do not point retry logic, load-testing tools, or scripted double-submits at any system other than this local fixture, and do not treat the note ids and key strings used here as anything other than disposable labels.
