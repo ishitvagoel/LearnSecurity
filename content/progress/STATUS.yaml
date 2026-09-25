@@ -943,11 +943,19 @@ modules:
   phase: 2
   track: core
   pass: E
-  quality: developing
-  notes: Authoring pass 2026-09-06 thickened lessons 03-08 for sc_session HttpOnly
-    cause, limits, and WebView transfer; independent quality and lab-safety review
-    still required before publishable
-  depth: map-complete
+  quality: competent
+  notes: 'Depth remediation passed independent quality review across two rounds on
+    2026-09-23 (initial review withheld both gates over two blockers -- wrong
+    arithmetic in a repeated fake-fix verification claim (claimed 6 of 9 tests
+    pass; actually 7 of 9), and coverage-contract table citations that did not
+    match items.md''s own Claim-assessed tags in three of four rows; a same-day
+    re-review verified both fixes by independent construction (rebuilding the
+    exact fake and re-deriving the citations from scratch) and closed them at
+    dd8c774), and passed independent lab-safety review on 2026-09-23 with no
+    findings; see progress/reviews/2.3-2026-09-23.md (main section plus the
+    addendum). transfer-ready is withheld because it needs learner evidence this
+    module does not have yet.'
+  depth: publishable
 - id: '2.4'
   title: State, time, concurrency, and distributed failure
   phase: 2
@@ -1498,7 +1506,6 @@ revision:
   auditedAt: '2026-08-25'
   remaining:
   - '2.2'
-  - '2.3'
   - '2.4'
   - '3.1'
   - '3.2'

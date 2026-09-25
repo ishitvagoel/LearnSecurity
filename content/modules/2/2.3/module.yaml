@@ -4,8 +4,8 @@ title: Browser security model
 phase: 2
 track: core
 difficulty: foundation
-status: draft
-estimatedMinutes: 300
+status: published
+estimatedMinutes: 330
 prerequisites:
 - 2.1 Pass A
 - 2.2 Pass A
@@ -17,29 +17,47 @@ routeTags:
 - web-api
 releaseMilestone: M0
 outcomes:
-- Produce a browser policy matrix covering origin vs site, cookies, storage, frames,
-  CORS, CSP, Trusted Types, SRI, and browser vs server enforcement
-- Show a local fixture where a browser control is not an application guarantee
-- Label CSP3 and Trusted Types as Working Drafts
-- Transfer after adding a third-party script or iframe
+- Given the vulnerable and fixed variants of labs/2.3/2.3-browser-policy, identify
+  by exact response-header name and value which of Set-Cookie, Access-Control-Allow-Origin,
+  Access-Control-Allow-Credentials, and Content-Security-Policy (or -Report-Only)
+  a browser treats as an enforceable guarantee versus a detection-only signal, and
+  justify each answer against OWASP ASVS 5.0.0 V3
+- Produce a browser policy matrix for SecureCollab's /login and /notes surface --
+  origin vs site, cookie flags, CORS, CSP, frame-ancestors -- that names, for every
+  row, whether the browser or the server enforces it and what happens when the row
+  is absent
+- Given a caller's Origin header and SecureCollab's exact-origin allow-list, determine
+  whether that caller is the same origin, the same site, or neither, and predict
+  the exact Access-Control-Allow-Origin and Access-Control-Allow-Credentials response
+  each variant of the lab would produce
+- Given a new reader of sc_session (a third-party iframe or a WebView cookie bridge),
+  rebuild this module's policy rows for that reader without assuming any row from
+  the first-party page carries over unchanged
 reviewTriggers:
 - New cookie policy
 - Third-party script or iframe
+- CORS allow-list change
 - CSP/Trusted Types deployment change
 invariants:
 - Browser-enforced controls are not treated as application guarantees
+- 'Access-Control-Allow-Credentials: true never pairs with an Access-Control-Allow-Origin
+  that was not validated against a fixed allow-list'
 - Draft standards are labeled draft
 - No instructions to attack third-party sites via CORS or CSRF
 threatModelPrompts:
 - Who has DOM authority after navigation or postMessage?
 - Which cookie is readable to script, and on which site vs origin?
+- Which caller's Origin header would this allow-list accept, and is that caller
+  who it claims to be?
 - If CSP is bypassed, what server control remains?
 concepts:
 - origin
 - site
 - cors
+- credentialed-cors
 - cookies
 - csp
+- frame-ancestors
 - trusted-types
 - sri
 - fetch-metadata
@@ -47,27 +65,27 @@ concepts:
 learningObjects:
 - id: 2.3-LO-01
   kind: concept-model
-  title: HttpOnly is a browser cell, not an XSS guarantee
+  title: The browser enforces some rules; the server enforces the rest
   path: lessons/01-property.md
 - id: 2.3-LO-02
   kind: design-exercise
-  title: Browser policy matrix a second engineer can test
+  title: A browser policy matrix a second engineer can test
   path: lessons/02-model.md
 - id: 2.3-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: script reads the HttpOnly session cookie'
+  title: 'Local fixture: a reflected origin and a script-readable session cookie'
   path: lessons/03-break.md
 - id: 2.3-LO-04
   kind: design-exercise
-  title: Honor HttpOnly; do not claim XSS is finished
+  title: An exact allow-list, HttpOnly, and an enforcing CSP -- not three slogans
   path: lessons/04-build.md
 - id: 2.3-LO-05
   kind: verification-lab
-  title: Fail-on-vulnerable then pass-on-fixed for HttpOnly
+  title: What a header test can and cannot prove about a browser
   path: lessons/05-verify.md
 - id: 2.3-LO-06
   kind: operations-exercise
-  title: Detect session cookies without HttpOnly; never log the value
+  title: Notice a missing flag or a reflected origin; never log the value
   path: lessons/06-operate.md
 - id: 2.3-LO-07
   kind: transfer-challenge
@@ -75,30 +93,33 @@ learningObjects:
   path: lessons/07-transfer.md
 - id: 2.3-LO-08
   kind: code-review
-  title: Seeded review of script-readable sessions
+  title: Seeded review of a SECURITY.md that mistakes tools for the property
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only; no public or
-    third-party targets
+  authorizedScope: Local course fixture reached through fastapi.testclient.TestClient
+    only; no public or third-party targets
   slug: 2.3-browser-policy
-  summary: Script reads the HttpOnly session cookie
+  summary: A script-readable session cookie and a reflected-origin CORS grant on
+    SecureCollab's /login and /notes surface
   forbiddenOutcomes:
   - Script reads the HttpOnly session cookie
+  - An arbitrary origin receives Access-Control-Allow-Credentials 'true'
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
 - Browser policy matrix
-- Header/cookie test list
-- Draft-status labels on CSP/TT
+- Header/cookie/CORS test list
+- Draft-status labels on CSP3/Trusted Types
 assessmentBlueprint:
   explain: Origin vs site; browser vs server enforcement
   design: Policy matrix
   build: Deferred; header and cookie policy
-  break: Local cookie or CORS confusion annotation
-  verify: Header and cookie tests
-  operate: CSP report-only versus enforce
-  communicate: Why CSP is not a complete XSS guarantee
+  break: Local reflected-origin and script-readable-cookie annotation
+  verify: Header, cookie, and CORS tests
+  operate: CSP report-only versus enforce; reflected-origin detection
+  communicate: Why CSP is not a complete XSS guarantee, and why a reflected Origin
+    is not a validated one
 masteryGate: '2'
 standardsRefs:
 - source: OWASP Application Security Verification Standard
@@ -108,7 +129,10 @@ standardsRefs:
   - v5.0.0-3.3.4
   - v5.0.0-3.3.1
   - v5.0.0-3.3.2
-  url: https://owasp.org/www-project-application-security-verification-standard/
+  - v5.0.0-3.4.2
+  - v5.0.0-3.4.3
+  - v5.0.0-3.4.6
+  url: https://owasp.org/projects/asvs
 - source: W3C Content Security Policy Level 3
   version: Level 3
   status: draft
@@ -125,13 +149,24 @@ misconceptions:
 - HttpOnly is XSS defense
 - SameSite is CSRF complete
 - localStorage is safer than cookies
+- Access-Control-Allow-Origin can be validated by checking the hostname or domain
+  instead of the full scheme+host+port origin
+- Content-Security-Policy-Report-Only is "CSP is on"
 operationalConsiderations:
 - Set-Cookie without HttpOnly in staging scans.
+- Access-Control-Allow-Origin reflecting the request's Origin together with Access-Control-Allow-Credentials
+  'true' in staging scans.
 - Browser extensions; physical access.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review
+  across two rounds -- initial review on 2026-09-23 withheld both gates over two
+  blockers (wrong fake-fix arithmetic; coverage-contract citation mismatches), a
+  same-day re-review verified both fixes by independent construction and granted
+  both gates at dd8c774; lab-safety confirmed clean, no findings, in the initial
+  round and not re-litigated in the re-review; see
+  content/progress/reviews/2.3-2026-09-23.md, main section plus the addendum)
+lastReviewedAt: '2026-09-23'
+nextReviewAt: '2027-03-23'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -153,3 +188,132 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with SecureCollab sc_session cause tables, mechanism
     limits, and WebView transfer; independent review still required
+- date: '2026-09-22'
+  note: 'Deepen (D1-D14 remediation): found and fixed the same D12 review-date bug
+    already caught on 1.4/2.1/4.3/0.1/0.2/1.1 -- reviewer said "pending independent
+    quality and lab-safety review" while lastReviewedAt (2026-08-24) and nextReviewAt
+    (2027-02-24) were both set with no review artifact under content/progress/reviews/;
+    reverted both to null per metadata-honesty.mdc. Named five falsifiable teaching
+    claims (C1-C5) and a coverage contract in spec.md; the module previously taught
+    only C1 (HttpOnly) across all eight lessons despite a title and objective
+    hierarchy promising CORS, CSP, Trusted Types, and origin/site as first-class
+    content. Rewrote all eight lessons to clear the 900-word floor with derivation,
+    a worked example, and a counterexample each, added Standards lines to
+    01-property.md and 05-verify.md, and replaced the fragment/negation-list prose
+    style throughout. Upgraded the lab from Tier 1 (a two-function pure model over
+    plain dicts) to Tier 2: a real FastAPI app with /login and /notes, tested
+    through fastapi.testclient.TestClient against actual Set-Cookie,
+    Access-Control-Allow-Origin/-Credentials, and Content-Security-Policy response
+    headers. Reading the existing Tier-1 fixture adversarially before trusting it
+    (per this pass''s own instructions) found it asserted only C1 with two tests
+    and had no representation of CORS or CSP at all, despite both being named in
+    the objective hierarchy and the misconceptions list since Pass A; the rebuilt
+    lab now carries 8 tests covering C1, C2, C3, and C4, including an
+    origin-vs-site boundary case and an anti-fake case verified against a
+    constructed fake fix (an unanchored `origin.endswith("securecollab.example")`
+    allow-list check, which passes 6 of 8 tests but fails exactly the anti-fake
+    and boundary tests because it also trusts an unrelated lookalike domain and an
+    unauthorized sibling subdomain). Verified every ASVS and W3C citation against
+    the live canonical sources (ASVS 5.0.0 JSON at the v5.0.0 tag; w3.org/TR pages
+    for CSP3 and Trusted Types, both still Working Draft) rather than trusting the
+    prior standardsRefs; found the prior OWASP project URL
+    (owasp.org/www-project-application-security-verification-standard/) now 404s
+    after its redirect chain and replaced it with the live
+    owasp.org/projects/asvs, and added v5.0.0-3.4.2 (CORS
+    Access-Control-Allow-Origin), v5.0.0-3.4.3 (CSP), and v5.0.0-3.4.6
+    (frame-ancestors), none of which this module cited before despite teaching
+    all three. Rewrote outcomes as observable behaviors (removing the
+    "Demonstrate: <title>" template-fill shape), authored an 8-item
+    content/modules/2/2.3/assessment/items.md (none existed; only a rubric did),
+    and rewrote the isolated key and rubric to match, deleting the "session
+    worksheet" reference. Recomputed estimatedMinutes from the metadata-honesty.mdc
+    formula. This pass does not and may not set depth, quality, reviewer beyond
+    the pending line above, lastReviewedAt, nextReviewAt, or status: published;
+    independent quality and lab-safety review is requested next.'
+- date: '2026-09-23'
+  note: 'Deepen continuation after a rate-limit interruption: performed the
+    validation and cross-checks the 2026-09-22 entry above named as not yet
+    done. Cross-checked spec.md''s teaching-claims and coverage-contract
+    tables cell by cell against items.md''s own "Claim assessed"/"Outcome"
+    tags and found both tables wrong: the teaching-claims table''s C1/C2/C3/C4/C5
+    -> item mappings were each off by one or more items (e.g. C1 listed #2 which
+    is actually a C2/C3 item), and the coverage-contract table''s second row
+    cited items.md #7 (a C1/C5 transfer item) for an outcome that items.md''s
+    own tags place on #2/#5/#6/#8 instead; corrected all cells to match
+    items.md''s tags exactly, and fixed a heading-citation typo ("clinic
+    patient portal" -> "clinic patient-portal", matching lessons/07-transfer.md''s
+    actual heading). Read the lab adversarially per this pass''s own
+    instructions and found the 2026-09-22 entry''s "8 tests" lab was not
+    bug-free after all: test_forbidden_outcome_session_cookie_missing_httponly
+    and test_secure_attribute_is_also_present read the raw Set-Cookie header
+    with a substring search ("httponly" in set_cookie.lower()), so
+    response.set_cookie("sc_session", "tok-HttpOnly-Secure") -- a call that
+    sets neither flag -- passed both tests; verified this empirically by
+    constructing that exact fake and running it against the prior tests.
+    Fixed by parsing the header into its `;`-delimited attribute tokens
+    before checking, and added test_anti_fake_httponly_text_inside_the_cookie_value_does_not_count
+    to pin the parsing down; the lab now carries 9 tests (6 fail on
+    --impl vulnerable, 9 pass on --impl fixed), updated everywhere the prior
+    "8 tests"/"6 of 8"/"8 of 8" counts appeared (both lesson files,
+    items.md, rubric.md, the isolated key, and the lab README). Independently
+    re-verified, by actually constructing and running it, that the
+    already-documented origin.endswith("securecollab.example") fake fix
+    passes exactly 7 of the (now 9) tests and fails only the boundary and
+    anti-fake tests -- this pass''s own re-verification of that number was
+    itself wrong (arithmetic error, not a re-run of a different fake); the
+    independent review at content/progress/reviews/2.3-2026-09-23.md caught
+    it by constructing and running the fake again, and this entry corrects
+    it. Live-fetched
+    the ASVS 5.0.0 v5.0.0-tag JSON and confirmed the exact requirement text
+    for v5.0.0-3.3.1/3.3.2/3.3.4/3.4.2/3.4.3/3.4.6 matches what this module
+    and its lessons claim; confirmed owasp.org/projects/asvs,
+    w3.org/TR/CSP3/, and w3.org/TR/trusted-types/ each resolve 200 and that
+    CSP3/Trusted Types remain Working Drafts as of 2026-09-23. Found that
+    content/standards/pins.yaml''s shared owasp-asvs-5.0.0 pin still carried
+    the dead www-project-application-security-verification-standard URL this
+    module''s own 2026-09-22 entry had already found and replaced locally;
+    updated the shared pin to owasp.org/projects/asvs and appended a note
+    recording this module''s verification, so other modules citing that pin
+    are not left pointing at a 404. Confirmed estimatedMinutes (330) matches
+    the metadata-honesty.mdc formula recomputed against the current lesson
+    word counts, lab tier, item count, and transfer task. This pass does not
+    and may not set depth, quality, reviewer beyond the pending line above,
+    lastReviewedAt, nextReviewAt, or status: published; independent quality
+    and lab-safety review is requested next.'
+- date: '2026-09-23'
+  note: 'Closed both blockers from the independent review at
+    content/progress/reviews/2.3-2026-09-23.md. (1) The prior entry''s own
+    re-verification of the origin.endswith("securecollab.example") fake fix
+    was itself arithmetically wrong: constructed and ran the exact fake
+    myself and got 7 of 9 tests passing, not 6 -- fixed the same wrong
+    number everywhere it appeared (this file''s changelog, the lab README,
+    content/assessment/keys/2.3.md). (2) Re-derived the coverage-contract
+    table''s Claim column mechanically from items.md''s own tags rather than
+    by eye: row 2 wrongly listed C1 (unsupported by any cited item) and
+    omitted C3 (carried by two of its four cited items); row 3 wrongly
+    listed C3 (its one cited item is tagged C2 only); row 4 omitted C1
+    (its cited item is tagged C1, C5, not just C5). Corrected all three to
+    match exactly what their cited items actually test; the teaching-claims
+    table was already clean and untouched. Verified: lint clean (0/0), lab
+    matrix unchanged (6/9 fail vulnerable, 9/9 pass fixed), every
+    coverage-contract row now has zero unsupported or omitted claims when
+    checked mechanically against items.md. This pass may not and does not
+    set depth or quality; requesting the re-review the blocking review
+    itself expected.'
+- date: '2026-09-23'
+  note: 'Independent re-review closed both blockers from
+    content/progress/reviews/2.3-2026-09-23.md, verified by construction: (1)
+    rebuilt the exact origin.endswith("securecollab.example") fake myself and
+    ran the real 9-test suite against it, getting 7 of 9 passing (the exact two
+    named tests failing, the other seven passing), confirming "7 of 9" is now
+    correct everywhere it appears (this file, the lab README,
+    content/assessment/keys/2.3.md) and restoring fixed/app.py to its exact
+    original text afterward (git status clean); (2) re-derived items.md''s own
+    Claim-assessed tags from scratch and checked all four coverage-contract rows
+    cell by cell, finding zero unsupported or omitted claims in any row,
+    including row 1 which the original review already found correct. Reran the
+    lab matrix (6/9 fail vulnerable, 9/9 pass fixed, unchanged) and the
+    mechanical gates (lint 0/0; site build compiles, 643/643 static pages).
+    Found nothing else substantive wrong. Both quality and lab-safety gates are
+    granted at this commit; see the addendum to
+    content/progress/reviews/2.3-2026-09-23.md for the full verification.'

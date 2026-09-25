@@ -6,25 +6,30 @@
 
 Browser security model
 
+## Items
+
+Eight module-specific items live in [`items.md`](items.md): two discrimination, two diagnosis, two design, one transfer, and one operate item, covering all five of this module's teaching claims (C1–C5, see `spec.md` §Teaching claims). Answers, distractor rationales, and four-state banding are in the isolated key at `content/assessment/keys/2.3.md` — do not open it before attempting the items.
+
 ## Evidence checklist
 
-- [ ] Browser policy matrix and cookie tests
-- [ ] Transfer task (Clinic patient portal session cookie.)
-- [ ] Lab `labs/2.3/2.3-browser-policy`: what must not happen: **Script reads the HttpOnly session cookie**
-- [ ] `vulnerable/` tests fail, `fixed/` tests pass (authorized local practice files only)
-- [ ] Seeded review notes (LO-08) — do not look at keys
-- [ ] Operate signal without note bodies / secrets: Set-Cookie without HttpOnly in staging scans.
+- [ ] Browser policy matrix for `/login`/`/notes` (Lesson 02), naming browser vs server enforcement per row
+- [ ] Local reflected-origin and script-readable-cookie annotation (Lesson 03), naming both causes separately, not as one restated defect
+- [ ] Lab `labs/2.3/2.3-browser-policy`: forbidden outcomes named as **a script-readable session cookie** and **an arbitrary origin granted Access-Control-Allow-Credentials: true**
+- [ ] `vulnerable/` tests: 6 of 9 fail for the stated security reasons; `fixed/` tests: 9 of 9 pass (authorized local `TestClient` fixture only)
+- [ ] Transfer task (items.md #7): clinic portal / WebView bridge scenario, naming which of C1–C5 change and which do not
+- [ ] Seeded review checklist answers (Lesson 08) — do not look at the key first
+- [ ] Operate signal (items.md #8) that carries no cookie value and no note body
 
 ## Rubric
 
 | Result | Meaning |
 |---|---|
-| Developing | Tools listed; missing attacker/trust; tool slogans |
-| Competent | System-specific rule; lab mapped; operate present |
-| Transfer-ready | LO-07 done without Top 10/scanner language as the definition of security |
+| Developing | Tools or header names listed instead of a named enforcement mechanism; missing distinction between origin and site; a check that reflects a caller's own claim but is asserted as an allow-list |
+| Competent | System-specific rule stated and checked against the lab; lab result correctly mapped to a row in the policy matrix; operate signal present and free of raw cookie or note content |
+| Transfer-ready | Item 7 done: the WebView bridge's own policy row derived independently, rather than assumed to inherit the browser tab's `HttpOnly` row by association |
 
-Knowledge check (retryable): distinguish property vs mechanism for **2.3**. Items live in the session worksheet, not here.
+Knowledge-check items (retryable) are items 1–4 in `items.md` (discrimination and diagnosis); design, transfer, and operate items (5–8) require satisfactory evidence, not a retry-to-80% threshold — a critical gap here (for example, a CORS fix that only handles the one attacker origin the test file happens to show) is not compensated by strong answers elsewhere.
 
 ## Seeded review
 
-Use the local `vulnerable/` artifact. Intended findings live only in `content/assessment/keys/2.3.md`.
+Apply the falsifiability question in `lessons/08-review.md` §Picture: what would falsify each claim to `vulnerable/SECURITY.md` yourself before reading that lesson's worked example. Intended findings live only in `content/assessment/keys/2.3.md`.
