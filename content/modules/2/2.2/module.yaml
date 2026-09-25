@@ -15,22 +15,33 @@ routeTags:
 - web-api
 releaseMilestone: M0
 outcomes:
-- Trace a request end to end and mark where identity, scheme, host, headers, body,
-  and cache keys can be transformed or trusted incorrectly
-- State TLS 1.3 deployment responsibilities without treating HTTPS-on as the property
-- Produce a request-path diagram and hardened local edge configuration notes
-- Transfer after adding a CDN or reverse proxy
+- Given SecureCollab's Phase 2 request-path fixture, identify every point where a
+  shared cache or a forwarded-identity header could substitute a wrong company for
+  the caller's own bound identity, and justify why each point does or does not
+  actually let a wrong company through in the code as written
+- State precisely what a successful TLS 1.3 handshake does and does not prove about
+  a hop's peer, and name the additional checks (hostname match, trust state,
+  accepted version) a deployment must add beyond "TLS is enabled"
+- Produce a request-path diagram for SecureCollab's browser-edge-origin path that
+  names, for each hop, which identity or name was authenticated and which was not,
+  and states the cache-key policy that must hold at the shared store
+- Given a new CDN or reverse proxy added to the path, predict which cache-key and
+  forwarded-identity assumptions from this module change, and design the detection
+  and recovery response if that boundary silently reverts them
 reviewTriggers:
 - New edge, CDN, HTTP/2-3, or mTLS
 - Change to forwarded-identity trust
 invariants:
 - Origin does not treat unauthenticated forwarded headers as identity
 - Cache keys are explicit and in the threat model
+- A hop-authentication check requires a trusted CA, a matching hostname, and an
+  accepted protocol version together, and fails closed on an unknown input
 - No attacks against real CDNs or third-party sites
 threatModelPrompts:
 - Who authenticated the name, and to which hop?
 - What is the cache key, and can an attacker influence it?
 - After TLS termination, what identity is still bound to the request?
+- Does a passing TLS handshake at one hop say anything about a hop after it?
 concepts:
 - dns
 - tls-1.3
@@ -41,27 +52,27 @@ concepts:
 learningObjects:
 - id: 2.2-LO-01
   kind: concept-model
-  title: TLS authenticates a hop; the cache key decides who reads
+  title: A hop's certificate is not a company; a cache key is not a header
   path: lessons/01-property.md
 - id: 2.2-LO-02
   kind: design-exercise
-  title: Request-path map a second engineer can key
+  title: Annotate every hop with what it authenticated, not what it encrypted
   path: lessons/02-model.md
 - id: 2.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: shared cache returns Tenant A body to Tenant B'
+  title: 'Local fixture: a shared cache and a forwarded header both grant the wrong company'
   path: lessons/03-break.md
 - id: 2.2-LO-04
   kind: design-exercise
-  title: Put the bound tenant in the key, or do not store
+  title: Bind the cache key, ignore the header, check the whole certificate
   path: lessons/04-build.md
 - id: 2.2-LO-05
   kind: verification-lab
-  title: Fail-on-vulnerable then pass-on-fixed for cache keys
+  title: Fail-on-vulnerable then pass-on-fixed for cache keys, headers, and hop trust
   path: lessons/05-verify.md
 - id: 2.2-LO-06
   kind: operations-exercise
-  title: Detect mismatched hits; purge without logging the body
+  title: Detect a mismatched hit or a mismatched hop; purge and rotate without logging bodies
   path: lessons/06-operate.md
 - id: 2.2-LO-07
   kind: transfer-challenge
@@ -69,30 +80,41 @@ learningObjects:
   path: lessons/07-transfer.md
 - id: 2.2-LO-08
   kind: code-review
-  title: Seeded review of path-only cache keys
+  title: Seeded review of a cache, a header, and a hop check that all stop too early
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only; no public or
-    third-party targets
+  authorizedScope: Local course fixture (FastAPI + TestClient) only; no public or
+    third-party targets, no real TLS handshake, no DNS resolution
   slug: 2.2-request-path
-  summary: Shared cache returns tenant A's body to tenant B
+  summary: Shared cache returns company A's body to company B; a client-supplied
+    X-Company header overrides the caller's own bound company; a hop-authentication
+    check accepts a CA-trusted certificate for the wrong hostname
   forbiddenOutcomes:
-  - Shared cache returns tenant A's body to tenant B
+  - Shared cache returns company A's body to company B
+  - A client-supplied forwarded-identity header changes which company's notes a
+    caller may read
+  - A hop-authentication check accepts a certificate whose hostname does not match
+    the intended peer
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Request-path diagram
-- Hardened local edge notes
-- Origin verification tests list
+- Request-path diagram naming, per hop, what was authenticated
+- Hardened local edge notes distinguishing cache-key policy from forwarded-identity
+  policy
+- Origin verification tests list, including the anti-fake pair for each claim
 assessmentBlueprint:
-  explain: Hops and what TLS does and does not guarantee after termination
-  design: Request-path diagram with cache keys
-  build: Deferred; origin verification of forwarded identity
-  break: Local Host or cache-key rewrite annotation
-  verify: Origin rejects unauthenticated forwarded identity
-  operate: Certificate failure drill notes
-  communicate: Residual trust after TLS termination
+  explain: Hops and what a TLS handshake does and does not guarantee about a peer,
+    after termination
+  design: Request-path diagram with cache keys and per-hop authentication notes
+  build: Origin resolves company only from the caller's own credential; cache keys
+    bind that company; hop checks bind hostname, CA trust, and version together
+  break: Local cache-key and forwarded-header rewrite annotated to the claim it
+    breaks
+  verify: Origin rejects unauthenticated forwarded identity and a mismatched hop
+    certificate
+  operate: Cache-mismatch and hop-rejection signals, and a certificate failure drill
+  communicate: Residual trust after TLS termination and after adding a CDN
 masteryGate: '2'
 standardsRefs:
 - source: OWASP Application Security Verification Standard
@@ -100,11 +122,15 @@ standardsRefs:
   status: final
   requirementIds:
   - v5.0.0-4.1.3
+  - v5.0.0-12.1.1
   - v5.0.0-12.2.1
+  - v5.0.0-12.2.2
+  - v5.0.0-12.3.2
   - v5.0.0-14.2.2
   - v5.0.0-14.3.2
   - v5.0.0-14.2.5
-  url: https://owasp.org/www-project-application-security-verification-standard/
+  - v5.0.0-16.3.4
+  url: https://owasp.org/projects/asvs
 - source: IETF RFC 9110 HTTP Semantics
   version: RFC 9110
   status: final
@@ -122,13 +148,19 @@ misconceptions:
 - HTTPS means no cache bugs
 - CDNs are only a performance layer
 - 'Vary: Cookie is enough forever'
+- A certificate that chains to a trusted CA proves the hop reached the intended
+  host, without checking the certificate's hostname
+- Once TLS has terminated at the edge, a client-supplied X-Forwarded-* or
+  X-Company header is safe for the origin to trust as identity
 operationalConsiderations:
-- cdn_hit_tenant_mismatch; purge playbook.
-- Operational error at the CDN remains; monitor.
+- cdn_hit_company_mismatch; purge playbook.
+- hop_rejected reason=hostname_mismatch|version|untrusted; certificate failure
+  drill, never logging the body or the private key.
+- Operational error at the CDN or edge remains; monitor.
 author: choreograph-curriculum / author-module-spec
 reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification
@@ -153,3 +185,915 @@ changelog:
 - date: '2026-09-06'
   note: Bumped remaining later lessons to the 360-word bar with cache-key limits;
     independent review still required
+- date: '2026-09-22'
+  note: >-
+    Deepen pass (D1, D2, D3, D8, D9, D11, D12). Metadata bug fixed first:
+    reviewer said pending but lastReviewedAt/nextReviewAt were dated
+    2026-08-24/2027-02-24 -- the same review-date-with-no-review defect found and
+    fixed on 1.4/2.1/4.3/0.1/0.2/1.1; both reverted to null. Wrote five falsifiable
+    teaching claims (C1-C5) replacing the single cache-key predicate the module
+    taught across all eight lessons (D3): C1 cache-key binding (unchanged
+    property, now named), C2 forwarded-identity trust (a client-supplied
+    X-Forwarded-* or X-Company value must never override the bound company),
+    C3 TLS hop-authentication (hostname plus CA trust plus accepted version
+    together, not merely a certificate that validated), C4 TLS proves one hop at
+    a time (design/model claim, not lab-code-tested), C5 an origin fix does not
+    survive a CDN/edge config change on its own (operate claim, not
+    lab-code-tested). Rewrote all eight lessons to the 900-word/derivation bar
+    (D1, D2), each with a titled cross-reference, a trust-boundary, sequence,
+    state-machine, or data-flow diagram, and Standards lines on 01 and 05.
+    Upgraded the lab from Tier 1 (a two-line dict, two tests) to Tier 2 (D8): a
+    FastAPI app exercised through TestClient, 13 tests across two files
+    covering C1, C2, and C3, with two dedicated anti-fake tests per claim pair;
+    verified against four constructed half-fixed fakes (cache fixed with the
+    header override left open, header fixed with the cache still keyed on path
+    alone, a hostname-prefix match, a hostname-substring-anywhere match) before
+    trusting the suite. Found and fixed a dead standardsRefs url: the prior
+    www-project-application-security-verification-standard page 404s after its
+    own redirect; corrected to the live owasp.org/projects/asvs, the same
+    class of defect 0.1 caught for WSTG. Rewrote outcomes as observable
+    behaviours and recomputed estimatedMinutes from the metadata-honesty
+    formula (D12). Session rate-limited mid-pass here: items.md not yet
+    authored, standards citations not yet independently verified beyond the
+    one dead-URL fix, no changelog entry yet -- continued below.
+- date: '2026-09-23'
+  note: >-
+    Deepen pass continued (D9, remainder of D2/D3). Authored
+    content/modules/2/2.2/assessment/items.md: 8 items (2 discrimination, 3
+    diagnosis, 1 design, 1 transfer, 1 operate) plus content/assessment/keys/2.2.md
+    (answers, distractor rationales, four-state banding) and a rewritten,
+    module-specific assessment/rubric.md replacing the "session worksheet"
+    placeholder. Cross-checked spec.md's coverage-contract and teaching-claims
+    tables cell by cell against items.md's own Claim-assessed/Outcome tags, the
+    same check 1.4/2.1/4.3/0.1/0.2/1.1 each required for their independent
+    review to pass; found a mismatch, same as every one of those modules did --
+    spec.md's item-number citations were placeholders written before items.md
+    existed and did not match the item bank actually authored (e.g. C1 cited
+    "#1, #3, #6" when the items actually tagging C1 are #1, #4, #6, #7, #8);
+    corrected both tables' Assessment item columns cell by cell against
+    items.md's real tags. Read fixed/app.py, vulnerable/app.py, and both test
+    files adversarially and constructed five fake repairs, not the four the
+    prior session had verified: keying the cache correctly while leaving the
+    X-Company override open (12 of 14 pass, fails exactly C2's forbidden-
+    outcome test and its anti-fake pair); the symmetric cache-only fake (12 of
+    14, fails C1's pair); a hostname prefix match (13 of 14); a hostname
+    substring-anywhere match (12 of 14); and a genuine latent gap found by
+    hand, not by re-running the first four: `hop_is_trustworthy` fails closed
+    on an *unknown* trust state (`cert_trusted_ca is None`) but no test had
+    ever isolated an *explicitly resolved untrusted* state
+    (`cert_trusted_ca is False`) from the unknown one, so a fake that read
+    "fails closed on an unrecognized trust state" as "checks only for None" --
+    `if cert_trusted_ca is None: return False` in place of
+    `if cert_trusted_ca is not True: return False` -- passed all 13 tests that
+    existed before this pass (13 of 13). Added
+    test_explicitly_untrusted_ca_is_rejected_even_with_matching_hostname_and_version
+    to tests/test_tls_hop.py; confirmed it fails on that fake (13 of 14) and
+    passes on both vulnerable and the genuine fixed implementation, bringing
+    the suite to 14 tests (vulnerable 6/14, fixed 14/14). Updated README.md,
+    spec.md's C3 coverage-contract row, and lessons/05-verify.md's test-count
+    prose and anti-fake-fake accounting to match. Checked pins.yaml's own note
+    before re-verifying standards from scratch: it already records the prior
+    session's 2026-09-22 live fetch of the full v5.0.0 requirements JSON
+    confirming all nine of this module's requirementIds (v5.0.0-4.1.3, 12.1.1,
+    12.2.1, 12.2.2, 12.3.2, 14.2.2, 14.3.2, 14.2.5, 16.3.4) by exact text,
+    plus the dead-URL fix and both RFC re-fetches (9846, 9110) confirming 200
+    with no redirect -- nothing in this module's standardsRefs was left
+    unverified, so no further standards work was needed this session. No
+    depth, quality, reviewer (beyond
+    the standing "pending independent quality and lab-safety review"),
+    lastReviewedAt, or nextReviewAt field touched by this pass; independent
+    review still required.
+- date: '2026-09-23'
+  note: 'Closed the blocker from the independent review at
+    content/progress/reviews/2.2-2026-09-23.md: constructed the reviewer''s
+    own adversarial fake (tls_version < "1.2" in place of exact membership
+    in _ACCEPTED_TLS_VERSIONS) and confirmed it passed all 14 existing
+    tests, including every anti-fake test, because no test ever sent a
+    tls_version that both fails set membership and sorts lexicographically
+    above "1.2" (e.g. "1.9"). Added
+    test_anti_fake_version_string_that_sorts_high_is_still_rejected to
+    tests/test_tls_hop.py; verified it fails on that fake alone and passes
+    on the real fixed and vulnerable implementations. Lab is 15 tests now,
+    not 14 (vulnerable fails 9/15, fixed passes 15/15). Updated every
+    "14 tests"/"6 of 14"/"14 of 14" live claim to match: spec.md''s C3
+    coverage-contract row, lessons/05-verify.md''s six-fake accounting (a
+    sixth fake, not five), items.md, rubric.md, the lab README''s test
+    count and fake-verification paragraph, and content/assessment/keys/2.2.md.
+    Recomputed every one of the five pre-existing fakes'' actual pass counts
+    against the new 15-test suite by re-running each rather than
+    incrementing the old numbers by one, since a new test can change which
+    tests a given fake fails, not only the denominator -- this caught that
+    the cache-only fake was previously undercounted by one failure
+    (test_unregistered_api_key_with_a_company_header_is_denied) that the
+    old "forbidden-outcome + anti-fake pair" framing had missed even before
+    this pass. Removed vulnerable/cache.py and fixed/cache.py, unreferenced
+    Tier-1 leftovers from before this module''s Tier-2 rewrite that the
+    review flagged as stale. Verified: lint clean (0/0), lab matrix as
+    above, all six fakes (five pre-existing plus the new one) independently
+    re-run against the current suite with exact failing-test names
+    recorded rather than assumed. This pass may not and does not set depth
+    or quality; requesting the re-review the blocking review itself
+    expected.'
+- date: '2026-09-23'
+  note: 'Closed both new findings from the re-review at b277893. (1) A
+    second version-check fake -- a hand-written {"1.2", "1.3", "1.4"}
+    allow-list in place of exact membership in _ACCEPTED_TLS_VERSIONS --
+    passed all 15 tests including the test the prior entry had just
+    added, because no test sent "1.4" or anything else outside
+    {"1.1","1.2","1.3","1.9"}. Added
+    test_anti_fake_forward_compatible_allow_list_still_rejects_an_unaccepted_version;
+    verified it fails on that fake alone and passes on the real
+    implementations. Lab is 16 tests now (vulnerable fails 10/16, fixed
+    passes 16/16). (2) The prior entry''s own recomputed count for the
+    cache-only fake ("12 of 15, fails 3 including the malformed-credential
+    case") was itself wrong: that reconstruction checked x_company before
+    api_key, the opposite order from vulnerable/app.py''s own
+    _resolve_company. Rebuilding the fake in vulnerable''s actual order
+    (api_key validity decided first) gives 14 of 16 passing, 2 failures --
+    the malformed-credential case genuinely passes, because the key check
+    rejects it before the header is ever read. Corrected this count, and
+    recomputed all six pre-existing fakes against the new 16-test suite
+    (not by incrementing old numbers) in lessons/05-verify.md, the lab
+    README, and content/assessment/keys/2.2.md. Also fixed five stale
+    references the re-review found: the lab README''s second pytest
+    comment line ("14 of 14" -> "16 of 16"), 05-verify.md''s Mermaid
+    diagram ("6 of 14"/"14 of 14" -> "6 of 16"/"16 of 16") and its
+    "eight that should fail" prose ("eight" -> "ten"), and
+    keys/2.2.md''s "must pass all 14" ("14" -> "16", plus the vulnerable
+    fail-count row). Verified: lint clean (0/0), lab matrix as above, all
+    seven fakes (six pre-existing plus the new one) reconstructed and
+    re-run against the current 16-test suite with exact pass/fail counts
+    recorded, not assumed. This pass may not and does not set depth or
+    quality; requesting the re-review the blocking re-review itself
+    expected.'
+- date: '2026-09-23'
+  note: 'Closed the third finding from the third independent review round at
+    content/progress/reviews/2.2-2026-09-23.md: presented_hostname.endswith(
+    expected_hostname) in place of exact equality passed the entire 16-test
+    suite, because neither existing hostname anti-fake test (a prefix fake,
+    a substring-anywhere fake) constructs a presented hostname that ends
+    with the expected one without a boundary character before it. Added
+    test_anti_fake_hostname_suffix_without_boundary_is_rejected
+    (expected="origin.internal", presented="evil-origin.internal") to
+    tests/test_tls_hop.py; confirmed it fails on that fake alone (16 of 16
+    existing tests still pass) and passes on both vulnerable and the real
+    fixed implementation, bringing the suite to 17 tests (vulnerable fails
+    11/17, fixed passes 17/17). Re-derived every one of the seven
+    pre-existing fakes'' pass/fail counts against the new 17-test suite
+    from scratch rather than incrementing the prior entries'' numbers, since
+    a new test can change which OTHER fakes it incidentally also catches --
+    this surfaced two previously undiscovered cross-failures rather than
+    only the one gap the review named. The in-substring hostname fake
+    (expected_hostname in presented_hostname) now fails all three hostname
+    anti-fake tests, not two: "origin.internal" is a substring of
+    "evil-origin.internal" exactly as it is a substring of a prefix or
+    middle-placed attacker string, so a check that only asks "does the
+    expected name appear anywhere" cannot tell any of the three shapes
+    apart (14 of 17 pass, not 15). The lexicographic-version fake
+    (tls_version < "1.2") now fails both version anti-fake tests, not one:
+    "1.4" < "1.2" is also False in Python ("4" > "2" character-by-character),
+    so the same fake that wrongly accepts "1.9" for sorting above "1.2"
+    also wrongly accepts "1.4" for the identical reason (15 of 17 pass, not
+    16). The other five fakes (cache-only, header-only, startswith,
+    is-None trust-state, forward-compatible-allow-list) were confirmed
+    unaffected once their denominators were updated to 17. Updated
+    spec.md''s C3 coverage-contract row (four anti-fake tests -> five:
+    hostname prefix, hostname substring-anywhere, hostname
+    suffix-without-boundary, version-string-sorts-high,
+    forward-compatible-allow-list), items.md and rubric.md (11 of 17
+    failing, 17 of 17 passing), the lab README''s pytest comment lines,
+    test-inventory sentence, and full fake-enumeration paragraph (now
+    eight fakes against the 17-test suite, with the in-substring and
+    lexicographic-version fakes'' corrected counts and explanations),
+    lessons/05-verify.md''s coverage table (added the new anti-fake test
+    and the two pre-existing version anti-fake tests the table had never
+    listed for C3), Mermaid diagram ("6 of 16"/"16 of 16" -> "6 of
+    17"/"17 of 17"), "ten that should fail" ("ten" -> "eleven"), "eight
+    tests that fail" ("eight" -> "eleven"), and its fake-enumeration
+    paragraph (seven fakes -> eight, with the same two corrected counts),
+    and content/assessment/keys/2.2.md''s lab section (11 of 17 failing,
+    17 of 17 passing; the "six other fakes" paragraph rewritten as an
+    eight-fake accounting narrating all three rounds'' findings in order).
+    Verified: lint clean (0/0), lab matrix as above, all eight fakes
+    reconstructed and re-run against the current 17-test suite with exact
+    failing-test names recorded, not assumed. This pass may not and does
+    not set depth or quality; requesting a fourth independent review,
+    given this module''s pattern of three consecutive rounds each finding
+    a genuinely new, previously-uncaught adversarial gap.'
+- date: '2026-09-23'
+  note: 'Closed the finding from the fourth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md: a numeric-range parse of
+    tls_version (splitting on "." and checking 1.2 <= float(version) <=
+    1.3) in place of exact membership in _ACCEPTED_TLS_VERSIONS passed the
+    entire 17-test suite, including both existing version anti-fake
+    tests, because every version string those two tests send ("1.9",
+    "1.4") happens to parse to a float outside [1.2, 1.3] too. Neither
+    test sends a version numerically inside that range but not a member
+    of the string set -- e.g. "1.30", where float("1.30") == 1.3. Added
+    test_anti_fake_version_string_that_parses_in_range_is_still_rejected
+    to tests/test_tls_hop.py; confirmed it fails on that fake alone (17 of
+    17 existing tests still pass) and passes on both vulnerable and the
+    real fixed implementation, bringing the suite to 18 tests (vulnerable
+    fails 12/18, fixed passes 18/18). This is the third distinct fake
+    found specifically in the version check, after the lexicographic-bound
+    fake and the forward-compatible-allow-list fake, both closed in the
+    second review round -- closing two gaps in one check was still not
+    evidence the check was exhausted.
+    Re-derived every one of the eight pre-existing fakes'' pass/fail counts
+    against the new 18-test suite from scratch rather than incrementing
+    the prior entries'' numbers, per this module''s now-established
+    discipline. This surfaced one further cross-failure: the
+    lexicographic-lower-bound fake (tls_version < "1.2") now fails all
+    three version anti-fake tests, not two -- "1.30" < "1.2" is also False
+    in Python, because the digit-by-digit string comparison never reaches
+    a character where the two strings differ before running out, so this
+    fake wrongly accepts "1.30" for the same underlying reason it already
+    wrongly accepted "1.9" and "1.4". The other seven fakes (cache-only,
+    header-only, startswith, in-substring, endswith, is-None trust-state,
+    forward-compatible-allow-list) were confirmed unaffected once their
+    denominators were updated to 18. Updated spec.md''s C3
+    coverage-contract row (five anti-fake tests -> six, adding
+    version-string-parses-in-range), items.md and rubric.md (12 of 18
+    failing, 18 of 18 passing), the lab README''s pytest comment lines,
+    test-inventory sentence (seventeen tests -> eighteen, two
+    version-string anti-fake tests -> three), and full fake-enumeration
+    paragraph (now nine fakes against the 18-test suite, with the
+    lexicographic-version fake''s corrected three-failure count and
+    explanation), lessons/05-verify.md''s coverage table (added the new
+    anti-fake test to C3''s row), Mermaid diagram ("6 of 17"/"17 of 17" ->
+    "6 of 18"/"18 of 18"), "eleven that should fail" and "eleven tests
+    that fail" (both -> "twelve"), and its fake-enumeration paragraph
+    (eight fakes -> nine, with the same corrected lexicographic-fake
+    count), and content/assessment/keys/2.2.md''s lab section (12 of 18
+    failing, 18 of 18 passing; added a bullet narrating this round''s
+    finding and the lexicographic cross-failure it surfaced, and rewrote
+    the fake accounting as a nine-fake, 18-test-suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all nine fakes
+    reconstructed and re-run against the current 18-test suite with exact
+    failing-test names recorded, not assumed; fixed/app.py confirmed
+    byte-identical to its pre-edit state
+    (md5sum ebdf983ea6753464cffd6dee0a669513) after every scratch fake
+    was restored. This pass may
+    not and does not set depth or quality; requesting a fifth independent
+    review, given this module''s pattern of four consecutive rounds each
+    finding a genuinely new, previously-uncaught adversarial gap -- three
+    of them now in the version check alone.'
+- date: '2026-09-23'
+  note: 'Closed the finding from the fifth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md: a defensive
+    whitespace-strip before the version-set membership check
+    (tls_version.strip() not in _ACCEPTED_TLS_VERSIONS in place of the
+    bare membership test) passed the entire 18-test suite, including all
+    three existing version anti-fake tests, because none of the six
+    version strings any test sent ("1.1", "1.2", "1.3", "1.4", "1.9",
+    "1.30") carried any whitespace, so .strip() was a no-op on every one.
+    Added test_anti_fake_version_string_with_incidental_whitespace_is_rejected
+    to tests/test_tls_hop.py, sending "1.2\n" (whose stripped form is an
+    accepted string but which is not itself one); confirmed it fails on
+    that fake alone (18 of 18 existing tests still pass) and passes on
+    both vulnerable and the real fixed implementation, bringing the suite
+    to 19 tests (vulnerable fails 13/19, fixed passes 19/19). This is the
+    fourth distinct fake found specifically in the version check, after
+    the lexicographic-bound, forward-compatible-allow-list, and
+    numeric-range fakes, closed across the second and fourth review
+    rounds -- closing three gaps in one check was still not evidence the
+    check was exhausted.
+    Re-derived every one of the nine pre-existing fakes'' pass/fail
+    counts against the new 19-test suite from scratch rather than
+    incrementing the prior entries'' numbers, per this module''s
+    now-established discipline. This surfaced two further cross-failures.
+    The lexicographic-lower-bound fake (tls_version < "1.2") now fails
+    all four version anti-fake tests, not three -- "1.2\n" < "1.2" is
+    False in Python, because a string that shares every character "1.2"
+    has and then adds more is never lexicographically smaller than "1.2"
+    itself, so this fake wrongly accepts "1.2\n" for a fourth, independent
+    reason. And the numeric-range fake (1.2 <= float(tls_version) <= 1.3)
+    now fails two tests, not one -- float("1.2\n") is also 1.2, because
+    Python''s float() strips incidental leading/trailing whitespace
+    before parsing, so this fake also wrongly accepts the same input the
+    whitespace-strip test was built to isolate, for an independent,
+    numeric reason. The other seven fakes (cache-only, header-only,
+    startswith, in-substring, endswith, is-None trust-state,
+    forward-compatible-allow-list) were confirmed unaffected once their
+    denominators were updated to 19.
+    Updated spec.md''s C3 coverage-contract row (six anti-fake tests ->
+    seven, adding version-string-incidental-whitespace), items.md and
+    rubric.md (13 of 19 failing, 19 of 19 passing), the lab README''s
+    pytest comment lines, test-inventory sentence (eighteen tests ->
+    nineteen, three version-string anti-fake tests -> four), and full
+    fake-enumeration paragraph (now ten fakes against the 19-test suite,
+    with the lexicographic and numeric-range fakes'' corrected failure
+    counts and explanations), lessons/05-verify.md''s coverage table
+    (added the new anti-fake test to C3''s row), Mermaid diagram ("6 of
+    18"/"18 of 18" -> "6 of 19"/"19 of 19"), "twelve that should fail"
+    and "twelve tests that fail" (both -> "thirteen"), and its
+    fake-enumeration paragraph (nine fakes -> ten, with the same two
+    corrected counts), and content/assessment/keys/2.2.md''s lab section
+    (13 of 19 failing, 19 of 19 passing; added two bullets narrating this
+    round''s finding and the two cross-failures it surfaced, and rewrote
+    the fake accounting as a ten-fake, 19-test-suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all ten fakes
+    reconstructed and re-run against the current 19-test suite with exact
+    failing-test names recorded, not assumed; fixed/app.py confirmed
+    byte-identical to its pre-edit state
+    (md5sum ebdf983ea6753464cffd6dee0a669513) after every scratch fake
+    was restored. This pass may not and does not set depth or quality;
+    requesting a sixth independent review, given this module''s pattern
+    of five consecutive rounds each finding a genuinely new,
+    previously-uncaught adversarial gap -- four of them now in the
+    version check alone.'
+- date: '2026-09-23'
+  note: 'Proactive strategy change, made by human decision rather than in
+    response to a sixth review finding: after four structurally distinct
+    fakes were found in the same two-line version check across four
+    independent review rounds (see the four preceding entries), a human
+    decided the one-narrow-test-per-round pattern was not converging and
+    asked for a broader test before the next review round ran, rather
+    than waiting for a fifth structurally distinct fake to be found by
+    hand.
+    Added test_anti_fake_version_near_miss_sweep_is_rejected to
+    tests/test_tls_hop.py: one test parametrized over fifteen
+    systematically-chosen near-miss version strings -- incidental
+    whitespace in positions the existing dedicated whitespace test does
+    not cover, a leading or trailing zero, an extra version segment
+    (1.2.0), a leading + sign, exponential notation (1.2e0), and an
+    accepted-looking substring embedded in a longer string (TLSv1.2,
+    1.2 or 1.3) -- each asserted to be rejected with 502. This brought
+    the suite from 19 to 34 tests (fifteen new parametrized cases;
+    vulnerable now fails 28/34, fixed passes 34/34).
+    Verified the strategy pays off directly, not merely asserted: rather
+    than trust that a broader test would generalize, reconstructed the
+    three most recently closed version fakes against the new sweep and
+    confirmed each is independently rediscovered from a different angle,
+    without having been told which fakes those were. The
+    lexicographic-lower-bound fake (tls_version < "1.2") now fails
+    eleven of the fifteen sweep cases in addition to its four dedicated
+    tests (fifteen failures total; 19 of 34 pass) -- a string sharing
+    every character "1.2" has and then adding more is never
+    lexicographically smaller than "1.2" itself. The numeric-range fake
+    (1.2 <= float(tls_version) <= 1.3) fails eleven sweep cases in
+    addition to its two dedicated tests (thirteen failures total; 21 of
+    34 pass), because float() silently accepts leading/trailing
+    whitespace, a leading +, exponential notation, and a leading zero.
+    The whitespace-stripping fake fails four sweep cases beyond its own
+    dedicated test (six failures total; 28 of 34 pass), since that
+    dedicated test covers only one whitespace position.
+    Also constructed two further fakes never found by any review round,
+    to confirm the sweep''s value is not limited to the four shapes a
+    human reviewer had already found by hand: a regex check
+    (re.search(r"1\.[23]", tls_version)) would have passed all nineteen
+    pre-sweep tests but fails all fifteen sweep cases plus two dedicated
+    tests (seventeen failures total; 17 of 34 pass), since an unanchored
+    search matches "1.23" and even "TLSv1.2" as containing the pattern.
+    An (major, minor) integer-tuple parse -- extensionally identical to
+    string membership for well-formed input -- would have passed every
+    pre-sweep test but fails eight sweep cases plus one dedicated test
+    (nine failures total; 25 of 34 pass), diverging only on a leading
+    zero or an extra segment. Neither of these two counts among the ten
+    reviewer-found fakes; they exist only to demonstrate the sweep''s
+    value generalizes beyond the four shapes already known.
+    Updated spec.md''s C3 coverage-contract row (seven anti-fake tests ->
+    eight, adding the fifteen-case near-miss sweep), items.md and
+    rubric.md (28 of 34 failing, 34 of 34 passing), the lab README''s
+    pytest comment lines, test-inventory sentence (nineteen tests ->
+    thirty-four, naming the new sweep test and its case count), and
+    fake-enumeration section (updated all ten fakes'' denominators to 34
+    and the three affected fakes'' failure counts, plus a new paragraph
+    demonstrating the regex and int-tuple fakes), lessons/05-verify.md''s
+    coverage table (added the new sweep test to C3''s row), Mermaid
+    diagram ("6 of 19"/"19 of 19" -> "6 of 34"/"34 of 34"), "thirteen
+    that should fail" and "thirteen tests that fail" (both -> "twenty-
+    eight"), and its fake-enumeration paragraph (mirroring README''s
+    updates, plus a closing sentence on why the sweep is the same lesson
+    stated a fifth way), and content/assessment/keys/2.2.md''s lab
+    section (28 of 34 failing, 34 of 34 passing; added a bullet framing
+    this as a proactive strategy change rather than a review finding, and
+    updated the ten-fake accounting''s denominators and three affected
+    counts).
+    Verified: lint clean (0/0), lab matrix as above, all twelve fakes
+    (ten reviewer-found plus the two constructed only to demonstrate the
+    sweep''s generality) reconstructed and re-run against the current
+    34-test suite with exact failing-test names recorded, not assumed;
+    fixed/app.py confirmed byte-identical to its pre-edit state
+    (md5sum ebdf983ea6753464cffd6dee0a669513) after every scratch fake
+    was restored. This pass may not and does not set depth or quality --
+    a proactive test addition does not substitute for independent
+    review. Requesting a sixth independent review, unchanged from the
+    request the fifth review''s own closure already made; that review
+    was in flight when this pass started and reviews a now-superseded
+    commit, so its verdict should be read as informative about the state
+    before this pass, not as the review this pass itself requested.'
+- date: '2026-09-23'
+  note: 'Closed the finding from the sixth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md -- the review referenced
+    in the prior entry as in flight against a superseded commit. It found
+    a fifth distinct fake in the version check: an .isdigit()-guarded
+    (major, minor) integer-tuple parse, deliberately hardened past the
+    whitespace-stripping fake (round 5), which passed all nineteen
+    dedicated tests including every named anti-fake test, because
+    int("01") and int("02") both discard a leading zero, so "01.2" and
+    "1.02" both parse to (1, 2) and are wrongly accepted, and no
+    dedicated test sends either string.
+    Unlike every prior finding, this one did not require writing a new
+    dedicated test: reconstructing the fake against the near-miss sweep
+    already added in the prior pass (fifteen cases at that point) showed
+    it already failed on "01.2" alone, since that near-miss was chosen
+    for exactly this leading-zero shape. Added "1.02" as a sixteenth
+    sweep case -- the review''s other named divergent input, zero-padding
+    the minor version instead of the major one -- so both of the
+    review''s own examples are covered, not only the one already present.
+    The completed fake now fails exactly these two sweep cases and none
+    of the eight dedicated tests (two failures; 33 of 35 pass),
+    confirming the review''s own observation that this was the first
+    fake to defeat every dedicated, hand-named test in the file while
+    still failing the broader property the sweep asserts -- the exact
+    situation the proactive sweep was added to guard against, and the
+    first version-check fake this module closed without giving it a
+    dedicated test of its own.
+    Brought the suite from 34 to 35 tests (one new parametrized case;
+    vulnerable now fails 29/35, fixed passes 35/35).
+    Updated items.md and rubric.md (29 of 35 failing, 35 of 35 passing),
+    the lab README''s pytest comment lines, test-inventory sentence
+    (thirty-four -> thirty-five, fifteen-case -> sixteen-case), and
+    fake-enumeration section (ten fakes -> eleven, adding the
+    isdigit-tuple fake''s own paragraph and updating every denominator
+    from 34 to 35), lessons/05-verify.md''s Mermaid diagram ("6 of
+    34"/"34 of 34" -> "6 of 35"/"35 of 35"), "twenty-eight" (-> "twenty-
+    nine", twice), its fake-enumeration paragraph (mirroring README''s
+    updates, plus the eleventh-fake paragraph), and its closing paragraph
+    (four dedicated version-check fakes stated four ways -> now naming
+    the fifth, undedicated fake explicitly as the reason a broader test
+    was worth adding), spec.md''s C3 coverage-contract row
+    (fifteen-case -> sixteen-case sweep), and
+    content/assessment/keys/2.2.md''s lab section (29 of 35 failing, 35
+    of 35 passing; added a bullet narrating the sixth review''s finding
+    and its closure by sweep extension, and rewrote the final fake
+    accounting as an eleven-fake, 35-test-suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all thirteen fakes
+    (eleven reviewer-found plus the two constructed only to demonstrate
+    the sweep''s generality) reconstructed and re-run against the
+    current 35-test suite with exact failing-test names recorded, not
+    assumed; fixed/app.py confirmed byte-identical to its pre-edit state
+    (md5sum ebdf983ea6753464cffd6dee0a669513) after every scratch fake
+    was restored. This pass may not and does not set depth or quality.
+    Requesting a seventh independent review -- explicitly informed that
+    the sixth review''s own finding is already closed by this pass, so
+    it should attempt genuinely new adversarial constructions rather
+    than repeat one already known to be caught.'
+- date: '2026-09-23'
+  note: 'Closed the finding from the seventh independent review round at
+    content/progress/reviews/2.2-2026-09-23.md. Asked specifically to
+    probe the sweep''s own design rather than hand-pick an eighth ASCII
+    near-miss, it found that the sweep and all eleven prior fakes vary
+    the version and hostname strings only within ASCII. A Unicode
+    canonical-compatibility normalization
+    (unicodedata.normalize("NFKC", ...)) before the version-membership
+    check and before the hostname == -- a defensive habit standard
+    Unicode security guidance actively recommends for untrusted strings
+    -- passed the entire 35-test suite, since none of its sixteen sweep
+    strings or three dedicated hostname anti-fake tests used a
+    non-ASCII character. Confirmed directly: with the fake in place,
+    tls_version="１.２" (fullwidth "1.2") returns 200 through the
+    real POST /internal/relay path; the real fixed code returns 502 for
+    the identical input. The same technique also defeats the hostname
+    check in isolation (a presented_hostname built from fullwidth
+    Unicode letters that NFKC-normalizes to the expected ASCII
+    hostname), making this the first fake found to affect both checks
+    with the same one-line change to each.
+    Added "１.２" as a seventeenth version-sweep case, and a new
+    dedicated test, test_anti_fake_hostname_unicode_confusable_is_rejected,
+    sending a fullwidth-Unicode presented_hostname that NFKC-normalizes
+    to "a.securecollab.internal" exactly (verified programmatically
+    before writing the test). The combined fake (normalizing both
+    checks) fails exactly these two tests and none of the other
+    (now nine) dedicated anti-fake tests (two failures; 35 of 37 pass);
+    isolated to the version check alone it fails only the fullwidth
+    sweep case, and isolated to the hostname check alone it fails only
+    the new dedicated test. Brought the suite from 35 to 37 tests
+    (vulnerable now fails 31/37, fixed passes 37/37).
+    Re-derived every one of the eleven pre-existing fakes'' pass/fail
+    counts against the new 37-test suite from scratch, per this
+    module''s now-established discipline, rather than trusting the
+    counts recorded when each was previously closed. This surfaced one
+    further cross-failure: the sixth review''s own .isdigit()-guarded
+    integer-tuple fake now fails a THIRD sweep case, not two -- Python''s
+    str.isdigit() returns True for fullwidth Unicode digits, not only
+    ASCII ones, and int() parses a fullwidth digit exactly as it parses
+    its ASCII counterpart, so this fake also wrongly accepts the new
+    fullwidth case for a reason distinct from the leading-zero gap it
+    was originally closed for (three failures; 34 of 37 pass). The
+    lexicographic-lower-bound and numeric-range fakes were already known
+    to be affected by non-ASCII input in a general sense but were
+    re-verified precisely: lexicographic now fails sixteen tests (four
+    dedicated plus twelve sweep cases, the fullwidth one included,
+    since a fullwidth digit sorts above ASCII by Unicode code point
+    exactly as "1.9" already did); numeric-range now fails fourteen
+    (two dedicated plus twelve sweep cases, the fullwidth one included,
+    since float() accepts fullwidth Unicode digits). The
+    whitespace-stripping fake was confirmed NOT additionally affected,
+    since a fullwidth digit is not whitespace and .strip() leaves it
+    untouched. The other six fakes (cache-only, header-only, startswith,
+    in-substring, endswith, is-None trust-state, forward-compatible-
+    allow-list) were confirmed unaffected once their denominators were
+    updated to 37.
+    Also added a spec.md "Known residuals" bullet stating this
+    predicate''s exact-code-point comparison is now verified against
+    Unicode-normalization fakes, but real IDNA/Punycode and
+    homograph-domain concerns remain out of this fixture''s scope -- the
+    secondary, non-blocking documentation gap the seventh review named.
+    Updated items.md and rubric.md (31 of 37 failing, 37 of 37 passing),
+    the lab README''s pytest comment lines, test-inventory sentence
+    (thirty-five -> thirty-seven, three hostname anti-fakes -> four,
+    sixteen-case -> seventeen-case sweep), and fake-enumeration section
+    (eleven fakes -> twelve, adding the NFKC fake''s own paragraph,
+    correcting the isdigit-tuple fake''s count to three, and updating
+    every denominator to 37), lessons/05-verify.md''s coverage table
+    (added the new hostname test to C3''s row), Mermaid diagram, "thirty-
+    one that should fail"/"thirty-one tests that fail" (from "twenty-
+    nine"), its fake-enumeration paragraphs (mirroring README''s
+    updates), and its closing paragraph (four dedicated version-check
+    fakes stated four ways -> now naming the fifth and sixth,
+    undedicated fakes explicitly), spec.md''s C3 coverage-contract row
+    (eight anti-fake tests -> nine, adding the hostname Unicode-
+    confusable test and the seventeen-case sweep), and
+    content/assessment/keys/2.2.md''s lab section (31 of 37 failing, 37
+    of 37 passing; added bullets narrating the isdigit-tuple
+    cross-failure and the seventh review''s finding, and rewrote the
+    final fake accounting as a twelve-fake, 37-test-suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all fourteen fakes
+    (twelve reviewer-found plus the two constructed only to demonstrate
+    the sweep''s generality) reconstructed and re-run against the
+    current 37-test suite with exact failing-test names recorded, not
+    assumed; fixed/app.py confirmed byte-identical to its pre-edit state
+    (md5sum ebdf983ea6753464cffd6dee0a669513) after every scratch fake
+    was restored. This pass may not and does not set depth or quality.
+    Requesting an eighth independent review -- explicitly informed that
+    the seventh review''s own finding is already closed by this pass.'
+- date: '2026-09-23'
+  note: 'Closed the finding from the eighth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md, and recorded a human
+    scope decision to stop expanding this check''s Unicode-normalization
+    coverage one category at a time.
+    The review found a seventh distinct version-check fake, and a third
+    technique affecting the hostname check: stripping every Unicode
+    category-Cf (format, zero-width, bidi-control) character before
+    comparing -- the same class of mitigation standard guidance
+    recommends against invisible-character-smuggling ("trojan source")
+    attacks, and a DIFFERENT technique from the sixth review''s NFKC
+    fix: neither NFKC nor NFKD normalization removes or folds
+    category-Cf characters at all, so a fix closing the NFKC gap does
+    nothing against this one, and vice versa. Passed the entire 37-test
+    suite, since none of its cases used a category-Cf character. Added
+    "1.2​" (a trailing U+200B ZERO WIDTH SPACE) as an eighteenth
+    sweep case, and a new dedicated test,
+    test_anti_fake_hostname_zero_width_character_is_rejected, sending a
+    presented_hostname equal to the expected one with a U+200B spliced
+    into the middle. The combined fake (stripping category-Cf from both
+    checks, as a reviewer would plausibly write it) fails exactly these
+    two tests and none of the other (now ten) dedicated anti-fake tests
+    (two failures; 37 of 39 pass); isolated to either check alone, it
+    fails only that check''s own new test. Also fixed a cosmetic,
+    non-functional inaccuracy the review flagged: the sweep''s docstring
+    comment had claimed the fullwidth version case''s period was itself
+    a fullwidth Unicode character; it is a plain ASCII period, and no
+    test''s behavior was ever affected either way. Brought the suite
+    from 37 to 39 tests (vulnerable now fails 33/39, fixed passes
+    39/39).
+    Re-derived every one of the twelve pre-existing fakes'' pass/fail
+    counts against the new 39-test suite from scratch. This surfaced one
+    further cross-failure: the lexicographic-lower-bound fake now fails
+    thirteen sweep cases, not twelve -- it also wrongly accepts the new
+    zero-width case, since a string that only extends "1.2" by adding a
+    character is never lexicographically smaller than it, the same
+    reason it already wrongly accepted "1.2\n" two rounds earlier
+    (seventeen failures; 22 of 39 pass). The .isdigit()-guarded
+    integer-tuple fake, the numeric-range fake, and the
+    whitespace-stripping fake were each confirmed NOT additionally
+    affected -- a zero-width character is not a digit, float() raises
+    on it rather than accepting it, and .strip() leaves it untouched.
+    **Human scope decision, not a finding:** two structurally distinct,
+    non-overlapping Unicode-normalization-adjacent techniques (canonical
+    normalization, closed round 7; category-Cf stripping, closed round
+    8) found in two consecutive rounds, each closing a gap the other''s
+    fix leaves completely open, is the same signal the ASCII near-miss
+    space gave after its own fourth distinct fake -- the signal that
+    justified building the sweep test in the first place. Rather than
+    repeat that one-category-per-round cycle indefinitely for
+    Unicode-adjacent techniques specifically, updated spec.md''s "Known
+    residuals" section to name any further not-yet-constructed technique
+    in this class (a third normalization form, a different
+    invisible-character category, etc.) as an explicit, accepted
+    non-goal rather than an open search, and to ask the next independent
+    reviewer to prefer C1, C2, the CA-trust check, or documentation
+    clarity over a further Unicode variant of hop_is_trustworthy''s
+    hostname/version checks, absent a genuinely new angle distinct from
+    both classes already covered. This decision sets no depth/quality/
+    reviewer field and does not itself close a gap; it bounds where
+    further adversarial effort on this specific check should go.
+    Updated items.md and rubric.md (33 of 39 failing, 39 of 39 passing),
+    the lab README''s pytest comment lines, test-inventory sentence
+    (thirty-seven -> thirty-nine, four hostname anti-fakes -> five,
+    seventeen-case -> eighteen-case sweep), and fake-enumeration section
+    (twelve fakes -> thirteen, adding the Cf-stripping fake''s own
+    paragraph, correcting the lexicographic fake''s count, and fixing an
+    arithmetic slip found while updating it), lessons/05-verify.md''s
+    coverage table (added the new hostname test to C3''s row), Mermaid
+    diagram, "thirty-one"/"thirty-one tests" (-> "thirty-three"), its
+    fake-enumeration paragraphs (mirroring README''s updates), and its
+    closing paragraph (naming the fifth, sixth, and seventh undedicated
+    version-check fakes and the scope-cap decision explicitly), spec.md''s
+    C3 coverage-contract row (nine anti-fake tests -> ten) and residuals
+    bullet (rewritten to name the scope-cap decision), and
+    content/assessment/keys/2.2.md''s lab section (33 of 39 failing, 39
+    of 39 passing; added bullets narrating the lexicographic
+    cross-failure, the eighth review''s finding, and the scope decision,
+    and rewrote the final fake accounting as a thirteen-fake, 39-test-
+    suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all fifteen fakes
+    (thirteen reviewer-found plus the two constructed only to
+    demonstrate the sweep''s generality) reconstructed and re-run
+    against the current 39-test suite with exact failing-test names
+    recorded, not assumed; fixed/app.py confirmed byte-identical to its
+    pre-edit state (md5sum ebdf983ea6753464cffd6dee0a669513) after every
+    scratch fake was restored. This pass may not and does not set depth
+    or quality. Requesting a ninth independent review -- explicitly
+    informed that the eighth review''s own finding is already closed by
+    this pass, and that this module''s recorded scope now treats further
+    Unicode-normalization hunting on hop_is_trustworthy as an accepted
+    non-goal rather than an assignment.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the ninth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md -- the first blocker
+    found outside hop_is_trustworthy''s hostname/version checks across
+    all nine review rounds, in C1 (the cache key) itself.
+    Asked to give fresh adversarial effort to C1/C2 specifically, since
+    eight rounds'' total attention went exclusively to
+    hop_is_trustworthy, the review found that no test in
+    tests/test_cache_key.py ever asserted the response''s own "source"
+    field ("cache" vs "origin"), only its body and status code.
+    Removing the cache-population line from fixed/app.py''s get_note
+    entirely (the cache dict stays permanently empty; every request
+    falls through to _ORIGIN_STORE) passed the entire 39-test suite,
+    because _ORIGIN_STORE is already correctly scoped by
+    (note_id, company) on its own, so every C1/C2 assertion the suite
+    made was satisfied whether or not the cache mechanism ever fired. A
+    second, independently-plausible variant (a write/read key-type
+    mismatch: writing under a plain note_id string while the read path
+    still looks up the (note_id, company) tuple) produced the identical
+    result for the identical reason.
+    Strengthened test_same_company_reads_its_own_note_after_caching to
+    assert "source": "origin" on the priming read and "source": "cache"
+    on the second, and added a new dedicated anti-fake test,
+    test_anti_fake_cache_actually_serves_the_second_read, using a
+    company and note id never written elsewhere in the file, asserting
+    the same thing. Both fake variants now fail exactly these two tests
+    and none of the other C1/C2 assertions (two failures; 38 of 40
+    pass) -- the body alone was always correct under either fake, which
+    is exactly why a body-only assertion could never have caught this.
+    Re-ran the full fakes matrix (all thirteen pre-existing fakes plus
+    the two demonstration-only fakes) against the new 40-test suite:
+    none is additionally affected by the new tests, since none of them
+    touches _CACHE or _resolve_company -- confirmed by reconstruction,
+    not assumed, per this module''s established discipline.
+    Brought the suite from 39 to 40 tests (vulnerable still fails
+    33/40, since vulnerable/app.py''s own cache mechanism does fire
+    correctly for a single company''s own repeated reads -- its bug is
+    cross-company leakage, not a disabled cache -- fixed passes 40/40).
+    Updated spec.md''s C1 coverage-contract row (one anti-fake test ->
+    two, naming the new cache-actually-fires test), items.md and
+    rubric.md (33 of 40 failing, 40 of 40 passing), the lab README''s
+    pytest comment lines, test-inventory sentence (naming the new
+    source-field assertions), and fake-enumeration section (thirteen
+    fakes -> fourteen, adding the cache-disabling fake''s own paragraph
+    and correcting every denominator from 39 to 40, including seven
+    arithmetic slips a blanket find-and-replace introduced and a
+    fresh audit against the real pytest output caught),
+    lessons/05-verify.md''s coverage table (added the new anti-fake test
+    to C1''s row), Mermaid diagram ("6 of 39"/"39 of 39" -> "7 of
+    40"/"40 of 40"), its vulnerable-pass-count prose ("six passed" ->
+    "seven passed", naming why the new cache test also passes on
+    vulnerable), its fake-enumeration paragraphs (mirroring README''s
+    updates), and its closing paragraph (naming the fourteenth fake''s
+    different kind of gap explicitly), and content/assessment/keys/
+    2.2.md''s lab section (33 of 40 failing, 40 of 40 passing; added a
+    bullet narrating the ninth review''s finding and rewrote the final
+    fake accounting as a fourteen-fake, 40-test-suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all sixteen fakes
+    (fourteen reviewer-found plus the two constructed only to
+    demonstrate the sweep''s generality) reconstructed and re-run
+    against the current 40-test suite with exact failing-test names
+    recorded, not assumed; fixed/app.py confirmed byte-identical to its
+    pre-edit state (md5sum ebdf983ea6753464cffd6dee0a669513) after
+    every scratch fake was restored. This pass may not and does not
+    set depth or quality. Requesting a tenth independent review.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the tenth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md -- the second blocker
+    found outside hop_is_trustworthy, this time in C2 (_resolve_company
+    itself), and also acted on the same round''s readability judgment
+    about this module''s accumulated fake-enumeration prose.
+    Asked to apply round 9''s own question ("does the suite check the
+    mechanism or only the outcome?") to C2, the review found that every
+    test in test_cache_key.py sends either a registered credential
+    (key-A/B/Z/Q) or the single unregistered literal
+    "key-does-not-exist", which also fails on length alone -- no test
+    ever sends a credential that is *shaped like* a registered key but
+    was never actually issued. A fake that authenticates by
+    pattern-matching the credential string''s shape -- if not
+    api_key.startswith("key-") or len(api_key) != 5: return None;
+    return "company" + api_key[-1].upper() -- never consults
+    API_KEYS at all, yet agrees with every registered literal this
+    suite sends and correctly rejects the existing malformed case. It
+    passed the entire 40-test suite. Demonstrated directly: a
+    credential the origin never issued, "key-D", was accepted and
+    minted a full company identity with read/write access (PUT with
+    Authorization: Bearer key-D returned 200; the real fixed code
+    returns 401 for the identical request) -- a structurally worse
+    failure than the header-override defect C2 was originally named
+    for, since an attacker needs no real credential at all.
+    Added test_anti_fake_credential_shaped_like_a_valid_key_is_still_denied,
+    sending "key-D" with no X-Company header (isolating identity
+    resolution from the header-override defect entirely) and asserting
+    401. The fake now fails exactly this one test (one failure; 40 of
+    41 pass). Re-ran the full fakes matrix (all fourteen pre-existing
+    fakes plus the two demonstration-only fakes) against the new
+    41-test suite: none is additionally affected, confirmed by
+    reconstruction. Brought the suite from 40 to 41 tests (vulnerable
+    still fails 33/41, since vulnerable/app.py''s own credential lookup
+    is a real, unmodified API_KEYS lookup -- fixed passes 41/41).
+    **Also acted on this round''s explicit, non-blocking readability
+    judgment: the fake-enumeration prose in labs/2.2/2.2-request-path/
+    README.md and lessons/05-verify.md''s "Anti-fake tests are not
+    decoration" section had become, in the review''s own words, "review-
+    log sediment, not learner-serving content" -- ten rounds of
+    round-by-round forensic narration ("The eleventh fake, found in a
+    sixth independent review round...") aimed at proving exhaustiveness
+    to the next reviewer, not at teaching the next learner what an
+    anti-fake test is for.** Trimmed both sections drastically: each now
+    states the fifteen-fakes headline count, walks through three
+    representative shapes (an approximate string match, a mechanism
+    that never fires behind a hidden safety net, an identity check that
+    verifies shape instead of provenance) as the general pattern, and
+    points to content/assessment/keys/2.2.md -- which already carries
+    the complete, unabridged forensic account of every fake, every
+    round, and every exact count -- rather than growing the
+    learner-facing count by one paragraph per round indefinitely. No
+    factual content was removed, only relocated to the file already
+    positioned to hold it; keys/2.2.md itself was not shortened.
+    Updated spec.md''s C2 coverage-contract row (one anti-fake test ->
+    two, naming the new credential-shape test), items.md and rubric.md
+    (33 of 41 failing, 41 of 41 passing), the lab README''s pytest
+    comment lines and test-inventory sentence (now naming the
+    credential-shape anti-fake alongside the cache-source one),
+    lessons/05-verify.md''s coverage table (added the new test to C2''s
+    row), Mermaid diagram ("7 of 40"/"40 of 40" -> "8 of 41"/"41 of
+    41"), its vulnerable-pass-count prose ("seven passed" -> "eight
+    passed", naming why the new credential-shape test also passes on
+    vulnerable), and content/assessment/keys/2.2.md''s lab section (33
+    of 41 failing, 41 of 41 passing; added a bullet narrating the tenth
+    review''s finding and rewrote the final fake accounting as a
+    fifteen-fake, 41-test-suite paragraph).
+    Verified: lint clean (0/0), lab matrix as above, all seventeen
+    fakes (fifteen reviewer-found plus the two constructed only to
+    demonstrate the sweep''s generality) reconstructed and re-run
+    against the current 41-test suite with exact failing-test names
+    recorded, not assumed; fixed/app.py confirmed byte-identical to its
+    pre-edit state (md5sum ebdf983ea6753464cffd6dee0a669513) after
+    every scratch fake was restored. This pass may not and does not set
+    depth or quality -- the readability trim is a content-quality
+    action, not a finding closure, and does not itself argue for a
+    grant. Requesting an eleventh independent review.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the eleventh independent review round at
+    content/progress/reviews/2.2-2026-09-23.md. Round 10''s C2 fix and the
+    readability trim were both re-confirmed genuinely correct; the sole
+    new finding was a stale spelled-out number: lessons/05-verify.md''s
+    residuals section still read "fourteen passing tests" (a leftover
+    from the module''s 14-test-suite era) where the live suite has 41.
+    Every stale-count grep across all ten prior rounds searched only
+    numeral patterns ("of 14", "6 of 14"); none searched for the
+    spelled-out word itself, so this single line survived ten rounds of
+    otherwise-thorough auditing.
+    Fixed: "fourteen passing tests" -> "forty-one passing tests" at the
+    one location. Then ran a dedicated sweep for the exact defect class
+    the review named -- every spelled-out number word (seven through
+    twenty) adjacent to "tests"/"passing"/"failing"/"fakes"/"pass"/"fail"
+    -- across all of spec.md, every lessons/*.md, items.md, rubric.md,
+    the lab README, and content/assessment/keys/2.2.md. No other live
+    (non-historical) instance found: keys/2.2.md''s own hits are
+    per-fake failure counts inside bullets that correctly narrate past
+    rounds'' findings in the past tense, exactly like every other
+    historical bullet in that file, not stale current-state claims.
+    Re-ran the full suite myself: vulnerable 33 failed/8 passed, fixed
+    41/41 passed -- unchanged, since this was a prose-only fix touching
+    no test file. Verified: lint clean (0/0), lab matrix as above. This
+    pass may not and does not set depth or quality. Requesting a
+    twelfth independent review.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the twelfth independent review round at
+    content/progress/reviews/2.2-2026-09-23.md. Neither the conftest.py
+    fixture-isolation angle nor the vulnerable/app.py-drift angle this
+    round pursued found a new code gap; the sole finding was a second,
+    structurally distinct stale count: lessons/05-verify.md''s worked-
+    example section (the paragraph illustrating why a bare pass/fail
+    number is not evidence) still quoted "8 failed" as its example of
+    an uninformative count -- unchanged since the lab''s original
+    14-test commit, when vulnerable genuinely failed 8/14. The live
+    suite fails 33, not 8. This survived every numeral-pattern sweep
+    across eleven prior rounds, and round 11''s own spelled-out-number
+    sweep, because "8" is not a number that is wrong on its face here:
+    it is also, correctly, the count of vulnerable''s currently-PASSING
+    tests one paragraph earlier in the same file (line 35, "8 passed").
+    No sweep for "any number that is not 41" would have flagged this
+    without also flagging that correct, adjacent, different quantity.
+    Fixed: "8 failed" -> "33 failed" (and "which eight" -> "which
+    thirty-three" in the same sentence) at the one location. Grepped
+    the whole module tree, the lab README, and keys/2.2.md for the
+    same rhetorical device (a quoted "N failed"/"N passed" count used
+    as a worked example rather than a live claim): only the
+    already-fixed line and the already-correct "8 passed" one paragraph
+    above it match anywhere. Re-ran the full suite myself: unchanged
+    (vulnerable 33 failed/8 passed, fixed 41/41) -- prose-only fix, no
+    test file touched. Verified: lint clean (0/0), lab matrix as above.
+    This pass may not and does not set depth or quality. Requesting a
+    thirteenth independent review.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the thirteenth independent review round
+    at content/progress/reviews/2.2-2026-09-23.md. This one was not a
+    code gap or a stale count: this file''s first outcome ended mid-
+    clause at "...and justify why each point does or does not", with
+    no object. Traced via git log -S to a rate-limited WIP commit
+    (6c49552) that no subsequent remediation pass had reason to
+    revisit, since every later round was hunting in spec.md, the lab,
+    or the lessons, never in this file''s own outcomes list.
+    Completed it: "...actually let a wrong company through in the
+    code as written", chosen after cross-referencing spec.md''s
+    coverage-contract row for the same claim (C1, C2), which carries
+    no "justify why" clause -- this outcome was always meant as a
+    richer version of the same claim, asking the learner to separate
+    a candidate point that merely looks suspicious from one that
+    actually lets a wrong company through, the same distinction this
+    module''s own PUT-vs-GET analysis has drawn throughout. Checked
+    this module''s other three outcomes, and briefly 2.3''s and
+    2.4''s, for the same kind of incompleteness: none found anywhere.
+    Re-ran the full suite myself: unchanged (vulnerable 33 failed/8
+    passed, fixed 41/41) -- this is a metadata-prose-only fix
+    touching no test file. Verified: lint clean (0/0), lab matrix as
+    above. Confirmed depth/quality/reviewer/lastReviewedAt/
+    nextReviewAt remain untouched (status: draft, reviewer: pending
+    independent review, both dates null). This pass may not and does
+    not set depth or quality. Requesting a fourteenth independent
+    review.'
+- date: '2026-09-24'
+  note: 'Closed the finding from the fourteenth independent review round
+    at content/progress/reviews/2.2-2026-09-23.md. Round 13''s fix was
+    re-confirmed genuinely closed; the new finding was a miscounted
+    sweep size, not a stale one: the "near-miss version sweep"
+    (_VERSION_NEAR_MISSES in tests/test_tls_hop.py) has eighteen
+    entries -- confirmed by the reviewer via both a manual count and
+    pytest --collect-only, and reconfirmed here the same two ways --
+    but four live, current-tense files all called it "nineteen": this
+    module''s own spec.md (C3 coverage-contract row), lessons/
+    05-verify.md (twice: the coverage table and the Practice section),
+    the lab README, and content/assessment/keys/2.2.md. Traced the
+    error to its origin: round 8''s own closure commit (both this
+    file''s changelog and keys/2.2.md''s matching bullet) labeled the
+    zero-width case "a nineteenth sweep case" when 17 (correct as of
+    round 7) + 1 = 18, not 19 -- an arithmetic slip at write time, not
+    later staleness, that every subsequent round''s numeric sweeps
+    (spelled-out-word greps, "N failed/passed" greps) had no reason to
+    catch, since none of them recounted a parametrized test''s own
+    source-list entries against the code.
+    Fixed all six live instances: spec.md''s coverage-contract row
+    ("nineteen-case" -> "eighteen-case"); lessons/05-verify.md''s
+    coverage table ("19 parametrized cases" -> "18") and Practice
+    section ("nineteen parametrized ... nineteen ways ... nineteen
+    independent" -> "eighteen" x3); the lab README''s test-inventory
+    sentence ("nineteen-case" -> "eighteen-case"); keys/2.2.md''s lab
+    section ("nineteen-case" -> "eighteen-case") and its round-8
+    historical bullet ("a nineteenth sweep case" -> "an eighteenth
+    sweep case", correcting the bullet''s own arithmetic the same way
+    round 11 treated a historical-sounding bullet''s numbers as
+    something to get right, not sacred record). Also fixed this same
+    file''s own round-8 changelog entry, where the identical slip
+    originated ("a nineteenth" -> "an eighteenth" sweep case; "->
+    nineteen-case sweep" -> "-> eighteen-case sweep"), since it is the
+    traced root cause and left uncorrected would keep reading as
+    confirming evidence for the wrong number.
+    Verified no other "nineteen" instance in this module''s tree refers
+    to the sweep''s own case count: the four remaining live instances
+    (module.yaml lines describing the 19-test suite that existed
+    before the sweep grew it to 34, and the "nineteen dedicated tests"
+    phrase describing the suite''s non-sweep test count, which is
+    correctly 19 = 34 - 15 at that point) all describe total suite
+    size or dedicated-test count, not the sweep''s item count, and are
+    correct as written.
+    Re-ran the full suite myself: unchanged (vulnerable 33 failed/8
+    passed, fixed 41/41) -- prose-only fix, no test file touched;
+    fixed/app.py md5sum unchanged (ebdf983ea6753464cffb6dee0a669513).
+    Verified: lint clean (0/0), lab matrix as above. Confirmed
+    depth/quality (in content/progress/STATUS.yaml, not this file, as
+    the fourteenth review correctly pointed out) and reviewer/
+    lastReviewedAt/nextReviewAt (in this file) remain untouched. This
+    pass may not and does not set depth or quality. Requesting a
+    fifteenth independent review.'

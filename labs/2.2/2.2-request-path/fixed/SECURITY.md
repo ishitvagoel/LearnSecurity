@@ -1,1 +1,1 @@
-local fixture
+Fixed 2.2 fixture. Local only. The cache is keyed on (path, bound company); a client-supplied X-Company header is never read for authorization. `hop_is_trustworthy` requires a trusted CA, an exact hostname match, and an accepted TLS version together, and fails closed on any missing or unrecognized input.
