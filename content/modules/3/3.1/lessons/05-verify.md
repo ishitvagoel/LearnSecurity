@@ -1,58 +1,38 @@
-# A broken log line must fail the check
+# A canned line is not redaction: forbidden-outcome and anti-fake tests
 
 **Kind:** verification-lab
 **Loop step:** 5 Verify
+**Standards:** OWASP ASVS 5.0.0 `v5.0.0-14.1.2` (final), `v5.0.0-16.2.5` (final).
 
-## Check it
+## What a green suite has to rule out, not just observe
 
-A classification spreadsheet does not keep the note body out of the log. “Logs are internal” is a trust assumption, not an observation. After `log_event("note_read", "tenant-A-secret-body")`, the line must not contain `tenant-A-secret-body` and must contain a redaction marker. Vulnerable files: the body is still in the line. Repair redacts `tenant-A-secret-body`.
+A test suite that only checks "the fixed version passes" tells you the fixed version does whatever it does — it does not tell you the suite would have caught a plausible wrong answer that also happens to pass. [`lessons/03-break.md`](03-break.md) already showed that a test asserting "the log has content" would pass on the vulnerable fixture and prove nothing. This lesson goes one step further: even a test that correctly checks for the *absence* of a specific secret can be satisfied by a fix that is wrong for a reason the test never probed. The oracle this lesson builds is not "did the expected string disappear" alone; it is "did the expected string disappear *because* a real classification mechanism ran, and not because of an accident that would also hide something the mechanism should have kept."
 
-## Picture: a broken log line must fail the check
+## Normal, negative, abuse, and failure, mapped to what each one rules out
 
-Asserting logs exist can still hide that the body is still in the line.
+The **normal case**, `test_allowed_metadata_present_after_redaction`, checks that `event`, `note_id`, and `company_id` still appear in the log line after redaction. This is not a redundant sanity check; it is the test that catches a fix which redacts *everything* rather than redacting by classification — a fix that would pass every "the secret is gone" test while also making the log useless to the operator debugging the request it was written for. Without this test, "delete the whole line" would look like a correct implementation of this module's property.
 
-```mermaid
-flowchart LR
-  V["broken files --impl vulnerable"] --> F[Must fail: body in line]
-  X["repaired files --impl fixed"] --> P[Must pass: redaction marker]
-```
+The **negative case** (the module's forbidden outcome) is `test_note_body_excluded_from_application_log` and `test_session_token_excluded_from_application_log`: after a normal, successful read, neither the body nor the token appears in the rendered line. These are the tests [`lessons/03-break.md`](03-break.md) already showed failing on the vulnerable fixture; here, they must pass, and their passing is the direct evidence that `_redact`'s allow-list actually ran on this code path.
 
-If the broken log line also passes, you never searched for the body substring.
+The **abuse case** is `test_unclassified_field_defaults_to_redacted`: a field this fixture's `CLASSIFICATION` table has never named — supplied through the `X-Debug-Hint` header, with a value generated fresh by `secrets.token_hex(16)` on every test run — must still be denied. This test is not adversarial in the sense of simulating an attacker; it is adversarial toward the *classification table's own incompleteness*, which [`lessons/01-property.md`](01-property.md) and [`lessons/04-build.md`](04-build.md) both name as the failure mode a fail-safe default exists to survive. A fresh value on every run matters specifically: a hardcoded test value could theoretically be special-cased by a bad implementation without ever building a real default, and a test that used the same literal every time would not catch that.
 
-## What the check has to show
+The **failure case** is `test_error_dump_still_diagnosable_without_secrets`: requesting a note id that does not exist routes through `write_error_dump`, a different function reached by a different branch, and the test checks both that the session token is absent *and* that `note_id` and `company_id` are still present, so an operator debugging a 404 has something to work with. A mechanism that only redacted the happy path and left the error path exposed — or, just as wrong, redacted the error path into total silence — would fail one half of this test or the other.
 
-| Mode | Must show for this topic |
-|---|---|
-| Normal | After the fix, the line still names the event (`note_read`) |
-| Wrong input | Body substring absent; redaction marker present; broken files must fail |
-| Abuse | Unsure values are not logged (leftover if not in this check) |
-| Not claimed | All places covered; production logs clean; exception middleware safe; access logs safe |
+## Two anti-fake tests, and exactly what each one defeats
 
-The test `test_note_body_is_not_logged` calls `log_event` with the synthetic body and asserts the substring is absent. A confidential field in this log has to fail that assert.
+`test_anti_fake_fresh_secret_not_a_literal_match` writes a note with a body generated by `secrets.token_hex(16)` — a value that has never appeared anywhere in this module's source, tests, or documentation before the moment the test runs — then reads it back and checks the log for that exact fresh string. This defeats a specific plausible cheat: a "fix" that special-cases the literal string `"tenant-A-secret-body"` (the fixture's own seeded value) with something like `line.replace("tenant-A-secret-body", "[redacted]")`, which would pass every other test in this suite, because every other test happens to use that same seeded value, while doing nothing at all for any note body a real user actually writes. A fix built this way is not a classification mechanism; it is a pattern match against this lab's own fixture data, and a fresh value on every run is the only way to make that distinction checkable.
 
-A Confidential label in a spreadsheet is not `log_event`. This practice never opens a production drain.
+`test_anti_fake_redaction_is_not_a_canned_line` writes and reads two different notes, `n1` and `n2`, and requires the log to still distinguish them by `note_id` while still excluding the seeded body. This defeats a different cheat: a `log_event` that, on detecting *any* Confidential field in its input, discards the whole context and appends one fixed literal line — `"redacted"`, say — regardless of what the request actually was. Such a function would pass `test_note_body_excluded_from_application_log` and `test_session_token_excluded_from_application_log` trivially, because a fixed literal line never contains any specific secret by construction. It would fail `test_allowed_metadata_present_after_redaction` on close inspection, but a reviewer skimming only the two forbidden-outcome tests might not notice that failure's significance; requiring two *distinct* notes to still be distinguishable in the output makes the canned-line cheat fail in a way that is obvious from the assertion itself, not only from a different test elsewhere in the suite.
+
+`test_unclassified_field_defaults_to_redacted` does double duty as a third anti-fake check, against a cheat this module's own lab README names explicitly: a fix that hardcodes exactly two denied field names, `"note_body"` and `"session_token"`, in an `if key in (...)` check, rather than building `_redact`'s actual table-driven, default-deny lookup. Such a hardcoded pair would pass every test above that uses only those two field names — which is most of them — and fail only this one, because the fresh `X-Debug-Hint` field is a third name the hardcoded pair never anticipated.
+
+## Verify it yourself
 
 ```text
-python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable
-python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
+python3 -m pytest labs/3.1/3.1-lab/tests --impl vulnerable   # 7 of 9 fail
+python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed         # 9 of 9 pass
 ```
 
-Map the test to the body×log row you wrote. If the broken files do not fail, the lab is miswired — fix the wiring, not the assertion. A setup error is not proof the rule holds.
+## What a green suite on the fixed fixture still does not prove
 
-## What the tests do not prove
-
-- Exception middleware
-- Access logs (a later topic)
-- Backup stores (later topics)
-- APM / full-packet capture
-- Support tickets
-- That ids in logs are acceptable (write that row separately)
-- A draft privacy-framework checklist
-
-## Use it somewhere new
-
-HTTP 200 on an appointment log is not classification evidence. Do not run a test that reads a live clinic log drain.
-
-## What this page is not doing
-
-Do not add a production drain. Do not paste `tenant-A-secret-body` into tickets. Answer keys are not on this site.
+Passing every test in this lab proves that this specific mechanism, wired into these two specific sinks, correctly denies these specific classification levels for these specific fields, against the specific cheats this module's authors thought to construct. It does not prove that every sink in a real deployment calls through this mechanism — [`lessons/04-build.md`](04-build.md) already named exception middleware and APM capture as sinks this fixture cannot reach at all. It does not prove the classification table itself is complete; a field nobody has added to `CLASSIFICATION` yet is denied by the fail-safe default, which is the correct behavior, but a field that *should* be reclassified from Internal to Confidential after some later product change will not raise an alarm on its own — that re-derivation is a human review step, not something this test suite can detect by running code. And it does not prove anything at all about cross-company authorization, retention after deletion, or encryption at rest; each is a different property, owned by a different module, and a green suite here says nothing about any of them.

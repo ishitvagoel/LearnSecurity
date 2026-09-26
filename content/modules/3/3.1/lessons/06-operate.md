@@ -1,62 +1,44 @@
-# Notice a redaction miss; purge without logging the body again
+# A fix that lives in one function: detect, purge, rotate
 
 **Kind:** operations-exercise
 **Loop step:** 6 Operate
 
-## Fixing it once is not enough
+## Why the fix from lesson four is not the end of the story
 
-A new handler, exception printer, or APM agent can put the body back after `log_event` redacts. Notice that line, contain the drain, purge it, and do not log the body again.
+[`lessons/04-build.md`](04-build.md) derived a mechanism and named its own limit honestly: `_redact` governs the two sinks it is wired into, and nothing else. A new sink added next quarter, an exception path this fixture never modeled, or a hosting platform's own request-capture agent can all reintroduce the exact failure [`lessons/03-break.md`](03-break.md) reproduced, without anyone touching `log_event` or `write_error_dump` at all. A classification requirement that stops at "and then we fixed the logger" is only true until the next code path forgets it, which is why C5 — the last of this module's five teaching claims — requires a detection signal and a recovery path alongside the sink check, not instead of it.
 
-Do not paste the matching line into Slack, a ticket, or a lesson note.
+## Designing the signal: what it carries, and the one field it must never carry
 
-## Picture: alert on the substring, then purge
-
-If redaction misses, page the omit — never the secret. Then purge the line.
-
-```mermaid
-flowchart TD
-  Line[Log line] --> Scan{"Confidential marker or known body pattern?"}
-  Scan -->|body present| Metric["log_redaction_miss += 1"]
-  Metric --> Alert["reason=confidential_in_log event=note_read no body"]
-  Alert --> Purge[Purge matching lines]
-```
-
-Shipping a log pipeline does not redact the body.
-
-## Signals that do not become a second leak
-
-| Outcome | This topic |
-|---|---|
-| Notice | `log_redaction_miss`; a CI test that the synthetic substring is absent |
-| What the line holds | Event name, request id — **never** the body |
-| Respond | Stop the printer that reintroduced the field; do not paste the matching line into chat |
-| Recover | Purge matching lines; rotate if tokens were present; re-run `test_note_body_is_not_logged` |
-| Leftover | Operators still see ids; write that row down; APM and access logs remain other places |
+A **redaction-miss signal** fires when a sink emits a field whose classification level is not in that sink's own policy — in other words, when the mechanism [`lessons/04-build.md`](04-build.md) built has itself failed to run, or has run against a sink that was never wired into it. The signal has to name enough for an operator to act on: which event was being processed (`event`), which sink emitted the miss (`sink`), and which classification level was denied (`level`). It deliberately omits the one field that would make the signal useful for debugging and simultaneously turn the signal itself into a second leak: the actual denied *value*.
 
 ```text
-log_denied reason=confidential_field event=note_read request_id=req_81aa
+log_redaction_miss reason=confidential_field event=note_read sink=application_log level=confidential
 ```
 
-Skip `tenant-A-secret-body`, a note body, a patient chart, and a card number on the sample; they reprint the secret.
+Compare this to a design that seems, at first glance, more helpful: `log_redaction_miss ... value=tenant-A-secret-body`. Carrying the value would let an operator confirm at a glance that the alert is real and not a false positive — a genuine cost of the safer design, worth naming rather than hiding. But an alert channel is itself a sink, usually reaching a different, often *wider* audience than the original log (a paging system, an incident channel, a ticket) — so a signal that carries the denied value has recreated exactly the failure it exists to report, one hop downstream, in a system this classification mechanism was never wired to protect in the first place. The signal's job is to prove a denial happened and to name where, not to reproduce what was denied.
 
-A redaction-miss line in the ticket is another copy of the secret for whoever is on call.
+## Alert threshold, false-positive cost, and who receives it
 
-## What the framework does vs what you still have to check
+A single redaction-miss event is worth investigating, not paging someone at 3 a.m. for: it can indicate a genuine new leak, but it can also indicate a deliberate, correctly-classified test — this module's own `test_unclassified_field_defaults_to_redacted` triggers exactly this signal on every run, by design, because a fresh unclassified field being denied is the *correct* behavior, not an incident. A reasonable threshold pages on-call only after a sustained rate — say, redaction misses from a single sink exceeding a small count within a short window — because a sustained rate across real traffic is much more likely to mean a new, unclassified field shipped to production than a single denied test fixture. The false-positive cost of a threshold set too low is direct and measurable: engineers stop trusting the alert, and the next genuine miss gets the same shrug the last dozen false ones got, which is a worse outcome than no alert at all, because it consumes the same on-call attention budget while teaching the team to ignore exactly the signal meant to catch this failure. The receiving audience is the team that owns the sink in question — application logging for `application_log`, whichever team owns exception handling for `error_dump` — not a generic security inbox that receives volume without owning the fix.
 
-The same access logs, exception dumps, and APM drains that bypass the logger will also bypass a “scan our app logs” detector.
+## Containment, revocation, recovery
 
-## Can people still use it
+The moment a redaction miss is confirmed as a genuine new leak rather than a test artifact, three actions follow, in order. **Contain**: identify every sink instance that emitted the denied field and stop new instances of the same miss — typically, route the offending sink through `_redact` immediately, even before root-causing why it was missed in the first place, because every additional emission while root-causing is in progress widens the exposure for no benefit. **Purge**: locate and remove the already-written records containing the denied value from whatever store holds them — the log files, the search index, any backup that already copied them — rather than leaving the exposure in place "until someone gets to it." **Rotate**: if the denied value was an authority artifact rather than mere content — a session token, in this module's fixture — the exposed value has to be invalidated, because purging where it was logged does nothing about copies that may already have been read; a session token that already left the sink and was read by even one unintended party is compromised regardless of whether the log line itself is later deleted, and only revoking the token closes that window. Purging a note body's log line, without a corresponding revocation, is a complete recovery for that leak, precisely because a note body carries no power of its own — this is the same asymmetry [`lessons/01-property.md`](01-property.md) established between content and authority artifacts, showing up again in what recovery actually requires.
 
-If operators see a redaction-miss badge, do not encode it as color only. Give it a name or text a screen reader can speak.
+One discipline binds all three: never re-emit the denied value while investigating or reporting it. A ticket, a chat message, or an incident report that quotes the leaked line in full to "show the team what happened" creates a fresh, un-redacted copy of the exact value this whole mechanism exists to contain, now sitting in a store — a ticketing system, a chat log — this module's sink rule was never wired to reach.
+
+## The human-in-the-loop path has to be usable, not just present
+
+An operator triaging a redaction-miss alert is a human-mediated control, and [blueprint §16.12](../../../../../secure-application-engineering-curriculum-blueprint.md) requires that a security-sensitive journey with a human step be tested for usability and accessibility, not merely specified. A dashboard that shows a redaction-miss badge as a colored dot alone — red for active, gray for resolved — fails an operator who cannot distinguish those colors or who is using a screen reader, exactly the class of failure the W3C's WCAG 2.2 Success Criterion 1.4.1 (Use of Color) names: color must never be the *only* means of conveying that state. The fix costs nothing structurally — a text label (`"active"`, `"resolved"`) or an icon with alt text alongside the color carries the same information to every operator, not only the ones for whom the color distinction happens to work.
+
+## Operator failure is a residual risk, not an edge case
+
+Every alert this lesson designs assumes a human reads it, and that assumption fails routinely, not exceptionally: on-call rotations lapse, alert fatigue from an earlier badly-tuned threshold causes real signals to be dismissed alongside false ones, and a redaction-miss alert routed to a channel nobody actively monitors is operationally no different from no alert at all. Naming this as residual risk — rather than treating "we have an alert" as equivalent to "this is handled" — is what keeps the operate step honest: the mechanism in [`lessons/04-build.md`](04-build.md) fails closed by default, but the detection and recovery this lesson adds fail open by default, the moment the human step in the loop does not happen. A mature backlog entry names who owns response to this specific alert and how that ownership is verified to still be true, not only what the alert says when it fires.
 
 ## Practice
 
-A usable deny line has ids and a reason, not the blob. `tenant-A-secret-body`, a note body, a patient chart, or a card number still holds the secret.
+Using the signal shape above, write the corresponding line for a redaction miss on the error-dump sink instead of the application log, and name one reason the threshold for paging on-call might reasonably differ between the two sinks — consider how often each sink fires under normal, non-incident traffic, and what that difference implies for how quickly a sustained-rate threshold would trip on each.
 
 ## Use it somewhere new
 
-Notice chart text in appointment logs; purge without pasting the chart into the ticket. Support tools: notice a paste of the body into a ticket the same way.
-
-## What this page is not doing
-
-Do not run live queries against production logs. Answer keys are not on this site.
+A clinic's booking system needs the same three-part response — contain, purge, rotate — for a chart-text redaction miss, with one difference worth predicting before [`lessons/07-transfer.md`](07-transfer.md) asks you to write it out: which of this lesson's three recovery actions changes least when the asset moves from a note body to a patient's chart text, and which changes because a clinic record, unlike a note, may carry legal retention obligations a purge has to account for.
