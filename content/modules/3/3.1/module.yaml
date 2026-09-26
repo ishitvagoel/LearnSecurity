@@ -4,7 +4,7 @@ title: Assets, data classification, and security requirements
 phase: 3
 track: core
 difficulty: intermediate
-status: draft
+status: published
 estimatedMinutes: 330
 prerequisites:
 - Blueprint §7; 1.1-2.4 authored (asset/authority/boundary models; the Phase 2 browser-edge-API-database
@@ -150,9 +150,10 @@ operationalConsiderations:
   same log line. That's a different backlog row - document it, do not treat it
   as evidence the Confidential fields are also safe.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review;
+  see content/progress/reviews/3.1-2026-09-26.md)
+lastReviewedAt: '2026-09-26'
+nextReviewAt: '2027-03-26'
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
@@ -200,3 +201,28 @@ changelog:
     correction module 2.2 made for the identical pre-existing inconsistency; this
     is a metadata-honesty fix (D12), not a review-status change, and STATUS.yaml''s
     3.1 entry (quality, depth) is untouched. Independent review still required.'
+- date: '2026-09-26'
+  note: 'Independent quality and lab-safety review (round 1) passed against
+    400b608. Re-verified every claim from scratch rather than trusting the
+    authoring pass: read all eight lessons against the 1.3 baseline; live-fetched
+    the canonical OWASP ASVS v5.0.0 requirements JSON myself and confirmed all
+    six cited clauses (14.1.1, 14.1.2, 14.2.3, 14.2.4, 16.1.1, 16.2.5) exact,
+    Level 2, final; ran the lab pair myself (vulnerable 7/9 failed for the
+    stated security reason, fixed 9/9 passed); hand-constructed two fakes
+    against fixed/app.py not tried by the authoring pass -- a hardcoded
+    sink-independent "safe key" allow-list (passed all 9 tests, a real but
+    non-blocking coverage gap since the fixture''s two sinks share an
+    identical SINK_POLICY and this fake is not insecure for any field this
+    fixture defines) and a post-hoc regex "secret shape" scrub (correctly
+    caught by 2 tests, confirming the anti-fake mechanism holds against a
+    fake distinct from the ones the author already tried) -- and restored
+    the file exactly after each, confirmed by a fresh diff. Ran the full
+    57-lab matrix, the repo-wide --no-baseline lint (0 findings inside this
+    module''s own tree), the baseline lint (0/0, baseline unchanged), the
+    site build, and the exact examiner-key-isolation grep content.yml runs,
+    all myself. No blocker found. See content/progress/reviews/3.1-2026-09-26.md
+    for full scores, evidence, and the two fakes'' exact code and results.
+    Setting quality: competent and depth: publishable in STATUS.yaml, and
+    status/reviewer/lastReviewedAt/nextReviewAt here, per this repo''s
+    governance rule that only the independent reviewer or a human may set
+    these fields.'
