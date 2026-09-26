@@ -4,7 +4,7 @@ title: DNS, transport, HTTP, TLS, proxies, CDNs, and caches
 phase: 2
 track: core
 difficulty: foundation
-status: draft
+status: published
 estimatedMinutes: 300
 prerequisites:
 - 2.1 Pass A
@@ -158,9 +158,16 @@ operationalConsiderations:
   drill, never logging the body or the private key.
 - Operational error at the CDN or edge remains; monitor.
 author: choreograph-curriculum / author-module-spec
-reviewer: pending independent quality and lab-safety review
-lastReviewedAt: null
-nextReviewAt: null
+reviewer: quality-reviewer and lab-safety-reviewer (independent read-only review
+  across fifteen rounds -- fourteen closed real gaps in the lab suite and module
+  prose; the fifteenth, on 2026-09-26, independently re-verified the eighteen-case
+  sweep count, re-ran the full 33-failed/8-passed and 41/41 suites, re-checked
+  standards pins and coverage-contract citations from scratch, traced both
+  diagnosis assessment items by hand, and found no further blocker; see
+  content/progress/reviews/2.2-2026-09-23.md, main section plus all fifteen
+  addenda)
+lastReviewedAt: '2026-09-26'
+nextReviewAt: '2027-03-26'
 changelog:
 - date: '2026-08-23'
   note: Pass A initial specification

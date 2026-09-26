@@ -17,7 +17,7 @@ defaults:
   ai_security: elective E1
   website_progress: local-first static site (site/); no accounts
 next:
-  id: '2.2'
+  id: '3.1'
   pass: revise
   skill: deepen-curriculum
   inner_skill: quality-gate
@@ -27,12 +27,13 @@ next:
     system-specific cause, limits, and transfer. Units stay developing /
     map-complete in revision.remaining until independent quality and lab-safety
     review artifacts exist under content/progress/reviews/. Do not mark depth
-    publishable in this skill. 0.1, 0.2, 1.1-1.4, 2.1, 2.3, 2.4, and 4.3 remain
-    the independently reviewed reference (the B0 pilot, B1, and part of B2
-    batches; see content/progress/content-quality-improvement-plan-2026-09-16.md).
-    2.2 remains open -- fourteen review rounds closed a series of real gaps
-    (see content/progress/reviews/2.2-2026-09-23.md), but no round has yet
-    granted it, and a fifteenth round was dispatched but did not complete.
+    publishable in this skill. 0.1, 0.2, 1.1-1.4, 2.1-2.4, and 4.3 remain the
+    independently reviewed reference (the B0 pilot, B1, and part of B2 batches;
+    see content/progress/content-quality-improvement-plan-2026-09-16.md). 2.2
+    closed on 2026-09-26 after fifteen review rounds -- fourteen closed real gaps
+    (see content/progress/reviews/2.2-2026-09-23.md), and the fifteenth found no
+    further blocker and granted quality competent / depth publishable. 3.1 is
+    next in revision.remaining.
 spiral_deltas:
 - date: '2026-09-06'
   module: E6
@@ -937,10 +938,19 @@ modules:
   phase: 2
   track: core
   pass: E
-  quality: developing
-  notes: Authoring pass 2026-09-06 thickened break/verify/review so TLS is not the
-    cache key; independent quality and lab-safety review still required before publishable
-  depth: map-complete
+  quality: competent
+  notes: 'Depth remediation passed independent quality and lab-safety review after
+    fifteen rounds on origin/main -- fourteen rounds closed a series of real gaps
+    (a cache-key/header-trust/hop-authentication anti-fake sweep in the lab suite,
+    a mislabeled sweep-case count, a broken outcome sentence, stale spelled-out
+    counts); a fifteenth round on 2026-09-26 independently re-verified the
+    eighteen-case sweep, re-ran the full 33-of-41-failed/41-of-41-passed suites,
+    re-derived the coverage-contract and standards citations from scratch, and
+    traced both diagnosis assessment items by hand, finding no further blocker.
+    See content/progress/reviews/2.2-2026-09-23.md (main section plus all fifteen
+    addenda). transfer-ready is withheld; it needs learner evidence from items.md''s
+    eight items, which does not exist yet.'
+  depth: publishable
 - id: '2.3'
   title: Browser security model
   phase: 2
@@ -1513,7 +1523,6 @@ revision:
   reference_module: '1.1'
   auditedAt: '2026-08-25'
   remaining:
-  - '2.2'
   - '3.1'
   - '3.2'
   - '3.3'
