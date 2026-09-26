@@ -5,60 +5,83 @@ phase: 3
 track: core
 difficulty: intermediate
 status: draft
-estimatedMinutes: 240
+estimatedMinutes: 330
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–3.1 Pass A complete
+- Blueprint §7; 1.1-3.1 authored (SecureCollab's authority model, trust boundaries,
+  and Phase 3 asset/classification inventory)
 routeTags:
 - complete
 - web-api
 releaseMilestone: null
 outcomes:
-- 'Demonstrate: Threat modeling'
-- 'Produce evidence: Version-controlled threat model'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- Given a submitted SecureCollab threat-model document and a scanner result, decide
+  whether the CI merge gate should pass or fail, and name which check (mandatory-id
+  presence, owner/trigger, flow coverage, priority/mitigation, or trigger re-review)
+  failed.
+- Given a data-flow diagram with one required flow missing, identify which always-name
+  threat's coverage claim becomes unchecked and explain why the threat id alone
+  was not sufficient evidence.
+- Given a prioritized threat list whose top-priority row has a placeholder mitigation,
+  explain why ranking the threats did not yet produce an actionable decision, and
+  write a real one.
+- Given a named review trigger that has fired, decide whether a specific threat
+  row's re-review record satisfies it independent of any self-reported update date,
+  and design the detection signal for a row that does not.
+- 'Transfer: rewrite the always-name set, the required-flow list, and one prioritized
+  mitigation for clinic SMS reminders, a channel no HTTP scanner enumerates, without
+  using a Top 10 or a vendor questionnaire as the definition of security.'
 reviewTriggers:
-- Material SecureCollab change in this module's concern
-- New share path, worker identity, webhook, or SMS/email channel
-- Superseding final standard
+- New share path, worker identity, webhook, SMS/email channel, or client surface
+- A change to SecureCollab's Phase 3 asset or classification inventory in 3.1
+- Superseding final standard (SP 800-154 finalized, or an ASVS revision that restores
+  or relocates architecture-documentation requirements)
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- A green scanner result cannot substitute for the versioned model's always-name
+  set, owners, and review triggers
+- A threat id present in the model is not evidence of coverage until the diagram's
+  declared flows trace the path that threat depends on
+- A priority ranking with no real mitigation on the top row has not produced a
+  decision
+- Staleness is measured by what was actually re-reviewed after a named trigger
+  fired, never by a self-reported "last updated" date
 - Labs stay in authorized local or official training scope
 - Draft standards are labeled draft
-- A green scanner is not an empty threat model
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What can go wrong for SecureCollab's Phase 3 notes, share grants, and session
+  cookies specifically, as distinct assets with distinct blast radii?
+- Which trust boundary or worker path is missing from the diagram, and what does
+  that omission let through even when every listed threat id is present?
+- What residual remains if the gate's checks all pass but the human who wrote
+  revisited_after never actually reopened the four questions?
 concepts:
 - threat
+- trust-boundary
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 3.2-LO-01
   kind: concept-model
-  title: A green scanner is not an empty threat model
+  title: A green scanner cannot stand in for the versioned model
   path: lessons/01-property.md
 - id: 3.2-LO-02
   kind: design-exercise
-  title: A model a second engineer can test
+  title: Naming assets, boundaries, and flows a second engineer can test
   path: lessons/02-model.md
 - id: 3.2-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Green scanner produces an empty SecureCollab threat model'
+  title: 'Local fixture: a green scan passes an incomplete threat model'
   path: lessons/03-break.md
 - id: 3.2-LO-04
   kind: design-exercise
-  title: Seed mandatory threats; union scanner extras
+  title: 'Seed, trace, and prioritize: building the CI gate'
   path: lessons/04-build.md
 - id: 3.2-LO-05
   kind: verification-lab
-  title: Fail-on-vulnerable then pass-on-fixed for mandatory threat ids
+  title: Proving the gate catches a missing id, an untraced flow, and a stale row
   path: lessons/05-verify.md
 - id: 3.2-LO-06
   kind: operations-exercise
-  title: Detect a missing id; recover without back-dating
+  title: Detecting a missing or stale threat without back-dating the model
   path: lessons/06-operate.md
 - id: 3.2-LO-07
   kind: transfer-challenge
@@ -66,69 +89,80 @@ learningObjects:
   path: lessons/07-transfer.md
 - id: 3.2-LO-08
   kind: code-review
-  title: Seeded review of empty-model-on-green-scan
+  title: Reviewing a candidate fix that reintroduces the scanner shortcut
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only; no public or
-    third-party targets
+  authorizedScope: Local course fixture only; no public or third-party targets
   slug: 3.2-lab
-  summary: Green scanner produces an empty SecureCollab threat model
+  summary: A stored threat-model document reaches SecureCollab's CI merge gate,
+    which reads only the scanner's green/red result and never opens the document
+    itself
   forbiddenOutcomes:
-  - Green scanner produces an empty SecureCollab threat model
+  - A green scanner result passes the gate for a model missing cross-tenant-read,
+    hostile-browser, or stolen-worker
+  - A mandatory threat id passes the gate with no owner or review trigger
+  - A required flow (worker-share-redelivery) is untraced while the gate still
+    passes
+  - The top-priority threat's mitigation is a placeholder and the gate still passes
+  - A fired review trigger's threat row is not recorded as revisited and the gate
+    still passes
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Version-controlled threat model
+- Version-controlled threat model with owners, priorities, and review triggers
 - Transfer task prompt
 - Local lab brief
 assessmentBlueprint:
-  explain: Causal model for Threat modeling
-  design: Version-controlled threat model
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Causal model for why a green scanner is coverage, not a model, and why
+    a threat id with no traced flow is a label
+  design: Version-controlled threat model with prioritized, traceable rows
+  build: A CI gate that checks presence, flow coverage, prioritized mitigation,
+    and trigger-based re-review, independent of scanner state
+  break: Authorized local reproduction of the representative failure (a gate that
+    reads only scanner_green)
+  verify: Forbidden-outcome, boundary, malformed/failure, and anti-fake tests
+  operate: Missing/stale-threat detection and non-back-dated recovery notes
+  communicate: Residual risk (facilitation quality, honest re-review) without
+    compliance theater
 masteryGate: '3'
 standardsRefs:
 - source: OWASP Application Security Verification Standard
   version: '5.0.0'
   status: final
   requirementIds:
-  - v5.0.0-15.1.3
+  - v5.0.0-13.1.4
+  - v5.0.0-15.1.4
   - v5.0.0-15.1.5
-  url: https://owasp.org/www-project-application-security-verification-standard/
+  url: https://owasp.org/projects/asvs
 - source: OWASP Threat Modeling Project
   version: maintained-project-guidance
   status: final
   requirementIds:
   - four-questions
-  url: https://owasp.org/www-project-threat-modeling/
+  url: https://owasp.org/projects/threat-modeling-project
 - source: NIST SP 800-154
   version: IPD
   status: draft
   requirementIds:
   - data-centric-threat-modeling
   url: https://csrc.nist.gov/pubs/sp/800/154/ipd
-- source: OWASP ASVS 5.0 Appendix D
-  version: '5.0.0'
-  status: awareness
-  requirementIds:
-  - appendix-d-threat-modeling
-  url: https://owasp.org/www-project-application-security-verification-standard/
 misconceptions:
 - Green scan means no threats
-- Threat models are pre-code only
+- Threat models are pre-code only and are never re-checked
+- STRIDE stickers without owners, priorities, or a falsification test are a model
+- Prioritizing threats is the same as deciding what to build
 - Awareness lists are the threat list
-- STRIDE stickers without owners are a model
 operationalConsiderations:
-- missing_mandatory_threat CI; model_age_days after a named trigger.
-- Unknown unknowns — review triggers exist for that. Do not back-date the model.
+- missing_mandatory_threat with a reason code (not_present, no_owner, no_trigger,
+  not_revisited) and the threat id; never the note body or session token.
+  model_age_days tracked after a named trigger fires.
+- Recovery adds the missing row, owner, or mitigation and records the revisit;
+  it never rewrites a "last updated" date to make a stale row look current.
 author: choreograph-curriculum / author-module-spec
 reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
@@ -146,8 +180,42 @@ changelog:
     Pass C keys isolated'
 - date: '2026-09-06'
   note: 'Depth pass: four-questions and scanner-is-coverage mental models, mermaid
-    diagrams, ASVS v5.0.0-15.1.3 / v5.0.0-15.1.5 (Level 3 labeled advanced), Appendix D
-    as awareness; independent review still required'
+    diagrams, ASVS v5.0.0-15.1.3 / v5.0.0-15.1.5 (Level 3 labeled advanced), Appendix
+    D as awareness; independent review still required'
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with green-scan cause tables, seed-then-union limits,
     and clinic SMS transfer; independent review still required
+- date: '2026-09-26'
+  note: 'Deepen (D3, D1, D2, D6, D7, D8, D9, D11, D12): replaced the single narrow
+    predicate taught across all eight lessons ("a green scan must not produce an
+    empty threat list") with four dependency-ordered teaching claims (C1-C4: the
+    always-name set surviving a scanner, flow tracing behind a threat id, prioritization
+    resolving to a real mitigation, and staleness measured by recorded re-review
+    rather than a self-reported date). Rewrote all eight lessons to the >=900-word
+    floor with derivation-before-assertion and dual-form term definitions, replacing
+    the prior fragment style ("threats = [] if scanner_green" standing alone, "Slice
+    | For this rule" tables). Upgraded the lab from Tier 1 (a 12-line pure function,
+    3 tests) to Tier 2 (a FastAPI CI-gate service with two endpoints and a stored
+    threat-model document, 9 tests including 2 anti-fake tests). Rewrote outcomes
+    above as observable behaviors (previously "Demonstrate: Threat modeling" and
+    generic template lines) and recomputed estimatedMinutes from the metadata-honesty
+    formula (240 -> 330). Wrote assessment/items.md (8 items) and rewrote assessment/rubric.md,
+    deleting the non-existent "session worksheet" reference; wrote content/assessment/keys/3.2.md
+    with distractor rationales and four-state banding. Ran standards-pin (step
+    1): live-fetched the canonical ASVS v5.0.0 requirements JSON and found the
+    module''s prior v5.0.0-15.1.3 citation was a miscitation (its actual text is
+    about time-consuming/resource-demanding functionality, not "documented security
+    decisions") and its "ASVS 5.0 Appendix D" citation does not exist anywhere
+    in the canonical source; both removed and replaced with three verified ids
+    (v5.0.0-13.1.4, v5.0.0-15.1.4, v5.0.0-15.1.5). Also fixed the OWASP Threat Modeling
+    Project pin''s dead url at the shared content/standards/pins.yaml level (same
+    class of mechanical dead-link defect 0.1/2.2/2.3/2.4 already fixed for their
+    own pins). reviewer is left exactly as this pass found it ("pending independent
+    quality and lab-safety review"); this authoring pass does not set that field
+    to any approving value. lastReviewedAt and nextReviewAt, which this pass found
+    set to stale dates (2026-08-24 / 2027-02-24) alongside a pending reviewer,
+    are corrected to null per metadata-honesty.mdc''s own rule ("if reviewer contains
+    pending, lastReviewedAt and nextReviewAt must be absent") and the same correction
+    modules 2.2 and 3.1 made for the identical pre-existing inconsistency; this
+    is a metadata-honesty fix (D12), not a review-status change, and STATUS.yaml''s
+    3.2 entry (quality, depth) is untouched. Independent review still required.'
