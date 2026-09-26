@@ -219,3 +219,33 @@ changelog:
     modules 2.2 and 3.1 made for the identical pre-existing inconsistency; this
     is a metadata-honesty fix (D12), not a review-status change, and STATUS.yaml''s
     3.2 entry (quality, depth) is untouched. Independent review still required.'
+- date: '2026-09-26'
+  note: 'Pre-review verification pass, before this module''s first independent
+    review round. Independently re-ran python3 scripts/lint_content.py content/modules/3/3.2
+    --no-baseline (0/0), bash scripts/run_labs.sh 3.2 (OK), and npm --prefix site
+    run build (clean) against the just-authored content, and live-fetched the
+    ASVS v5.0.0 requirements JSON myself to confirm the standards-pin corrections
+    (v5.0.0-15.1.3''s miscitation and the fabricated "Appendix D" citation) are
+    genuinely accurate. Found a real, previously unclaimed gap while constructing
+    my own anti-fake fixes against fixed/app.py: every existing test that gave a
+    threat a non-empty revisited_after set it to exactly the fired trigger''s own
+    name, so a fake reading "if not revisited:" in place of "if event_name not
+    in revisited:" passed the entire suite -- a stale revisit record naming a
+    different, already-fired trigger was never tried. This contradicts this
+    module''s own claimed property (fixed/app.py''s docstring: staleness is
+    measured by what was actually re-reviewed, not a date field) since a
+    leftover record from an unrelated trigger is exactly the kind of thing that
+    property claims to reject. Added test_anti_fake_revisit_must_name_the_fired_trigger_not_merely_be_nonempty
+    to labs/3.2/3.2-lab/tests/test_property.py; verified it passes on the real
+    fixed/app.py (10 of 10) and fails on the constructed fake alone (9 of 10),
+    and that vulnerable/app.py still fails it for the same root cause as every
+    other test (8 of 10 now fail on vulnerable). No code change was needed in
+    either app.py -- only the closing test. Updated every "9 tests"/"7 of 9"/"9
+    of 9" instance in spec.md''s coverage-contract row for C4, lessons/04-build.md,
+    lessons/05-verify.md (heading, both pytest comment lines, and the practice
+    prompt), assessment/rubric.md, labs/3.2/3.2-lab/README.md, and
+    content/assessment/keys/3.2.md (lab section, plus a new bullet narrating this
+    finding) to "10 tests"/"8 of 10"/"10 of 10". Re-ran full validation after
+    these edits: lint 0/0, lab matrix OK, suite counts as stated. This pass may
+    not and does not set depth, quality, reviewer, lastReviewedAt, or nextReviewAt.
+    Requesting the first independent review round.'

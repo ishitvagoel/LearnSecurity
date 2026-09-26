@@ -38,7 +38,7 @@ FastAPI, and the JSON body-parsing machinery underneath it, will happily accept 
 
 ## What comes next
 
-[`lessons/05-verify.md`](05-verify.md) proves this fix holds against nine test cases, including two that specifically target a plausible-but-wrong shortcut rather than a straightforwardly broken implementation. [`lessons/06-operate.md`](06-operate.md) designs the detection signal for the case this build lesson only named as a limit: a `revisited_after` entry that was added honestly versus one added as a rubber stamp, and what a system can and cannot tell about the difference from the outside.
+[`lessons/05-verify.md`](05-verify.md) proves this fix holds against ten test cases, including three that specifically target a plausible-but-wrong shortcut rather than a straightforwardly broken implementation. [`lessons/06-operate.md`](06-operate.md) designs the detection signal for the case this build lesson only named as a limit: a `revisited_after` entry that was added honestly versus one added as a rubber stamp, and what a system can and cannot tell about the difference from the outside.
 
 ## What this lesson is not doing
 

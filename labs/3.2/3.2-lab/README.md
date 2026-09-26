@@ -25,8 +25,8 @@ No persistent state between tests. `conftest.py` loads a fresh module and calls 
 ## Verify
 
 ```bash
-python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable   # 7 of 9 fail
-python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed         # 9 of 9 pass
+python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable   # 8 of 10 fail
+python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed         # 10 of 10 pass
 ```
 
 If `fastapi`/`httpx` are not already installed: `pip install -r labs/3.2/3.2-lab/requirements.txt`.

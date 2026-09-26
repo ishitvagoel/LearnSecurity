@@ -177,3 +177,23 @@ def test_anti_fake_revisit_is_checked_per_threat_not_globally(client) -> None:
     assert any(
         "cross-tenant-read" in reason and "not revisited" in reason for reason in result["reasons"]
     )
+
+
+def test_anti_fake_revisit_must_name_the_fired_trigger_not_merely_be_nonempty(client) -> None:
+    """Anti-fake test, a second and distinct shape for the same claim. A
+    fake fix might check only 'is revisited_after non-empty', which
+    passes as soon as a threat carries any past revisit record at all —
+    even one left over from a previous, unrelated trigger. Give
+    cross-tenant-read a non-empty revisited_after that names a DIFFERENT,
+    already-fired trigger ('new-client-surface'), fire 'new-share-path'
+    (the trigger cross-tenant-read actually declares), and require the
+    gate to still fail: a stale record of a past, different re-review is
+    not evidence this trigger was ever revisited."""
+    model = _model()
+    model["threats"][0]["revisited_after"] = ["new-client-surface"]
+    model["trigger_events"] = ["new-share-path"]
+    result = _gate(client, model, scanner_green=True)
+    assert result["gate"] == "fail"
+    assert any(
+        "cross-tenant-read" in reason and "not revisited" in reason for reason in result["reasons"]
+    )

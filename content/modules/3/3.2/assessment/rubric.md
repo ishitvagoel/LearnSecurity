@@ -10,7 +10,7 @@ Threat modeling — four teaching claims (C1–C4), named in `spec.md` §Teachin
 
 - [ ] Version-controlled threat-model document (Lesson 02) naming SecureCollab's Phase 3 actors, principals, boundaries, and flow ids, including `worker-share-redelivery` as a distinct flow from `member-note-read`
 - [ ] Local reproduction of the module's forbidden outcome (Lesson 03): a green scanner result passing a threat model missing `cross-tenant-read` entirely
-- [ ] Lab `labs/3.2/3.2-lab`: `vulnerable/` tests show 7 of 9 failing for the stated security reasons; `fixed/` tests show 9 of 9 passing
+- [ ] Lab `labs/3.2/3.2-lab`: `vulnerable/` tests show 8 of 10 failing for the stated security reasons; `fixed/` tests show 10 of 10 passing
 - [ ] Assessment items (`content/modules/3/3.2/assessment/items.md`) attempted with written reasoning, not single-word answers
 - [ ] Operate signals (Lesson 06) for a missing or stale mandatory threat, naming a reason code and a threat id, never a note body, session token, or mitigation text, with a stated alert-scoping rationale
 - [ ] Transfer task (Lesson 07) applying the always-name/flow-tracing/prioritized-mitigation/recorded-re-review structure to clinic SMS reminders, correctly rederiving new always-name threats rather than reusing `cross-tenant-read` verbatim

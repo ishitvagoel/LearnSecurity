@@ -4,7 +4,7 @@
 **Loop step:** 5 Verify
 **Standards:** OWASP ASVS 5.0.0 `v5.0.0-13.1.4` (final, Level 3, labeled advanced), `v5.0.0-15.1.4` (final, Level 3, labeled advanced), `v5.0.0-15.1.5` (final, Level 3, labeled advanced).
 
-## What nine tests have to distinguish
+## What ten tests have to distinguish
 
 A suite that only checks "does the gate return `fail` sometimes and `pass` other times" would be satisfied by a function that returns `fail` on every odd-numbered call, which is worthless. Every test in `labs/3.2/3.2-lab/tests/test_property.py` has to distinguish a pass for the *stated reason* from a pass that merely happened to occur, and the same discipline applies to failures: a test that expects `fail` must confirm the failure names the specific defect it introduced, not an unrelated one.
 
@@ -33,11 +33,11 @@ Nine green tests prove that this specific gate, against this specific fixture's 
 Run both variants and confirm the counts match what this lesson describes:
 
 ```bash
-python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable   # 7 of 9 fail
-python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed         # 9 of 9 pass
+python3 -m pytest labs/3.2/3.2-lab/tests --impl vulnerable   # 8 of 10 fail
+python3 -m pytest labs/3.2/3.2-lab/tests --impl fixed         # 10 of 10 pass
 ```
 
-Then, without editing any file, predict which of the nine tests would still pass against the vulnerable fixture if a future change made `scanner_green` default to `False` instead of `True` in every test's request payload, and explain why the property this module teaches would remain exactly as broken either way.
+Then, without editing any file, predict which of the ten tests would still pass against the vulnerable fixture if a future change made `scanner_green` default to `False` instead of `True` in every test's request payload, and explain why the property this module teaches would remain exactly as broken either way.
 
 ## What this lesson is not doing
 

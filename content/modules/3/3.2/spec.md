@@ -52,7 +52,7 @@ The module previously taught **one narrow predicate** across all eight lessons: 
 | C1 | 1 Property, 3 Break, 4 Build, 5 Verify | `test_complete_model_passes_on_green_scan` (normal), `test_green_scanner_missing_cross_tenant_read_fails` (forbidden outcome), `test_mandatory_threat_without_owner_fails` (malformed), `test_scanner_findings_are_additive_not_replacing` (normal — additive, never a substitute) | items.md #1, #2, #6 |
 | C2 | 1 Property, 2 Model, 3 Break, 5 Verify | `test_untraced_worker_flow_fails_even_with_all_ids_present` (boundary — this is the module's own representative failure, not a variant of C1's) | items.md #1, #3, #7 |
 | C3 | 2 Model, 4 Build, 5 Verify | `test_top_priority_threat_without_real_mitigation_fails`, `test_missing_priority_field_fails` (malformed) | items.md #4, #5 |
-| C4 | 6 Operate, 7 Generalize | `test_fired_trigger_without_revisit_fails` (forbidden outcome for staleness), `test_anti_fake_revisit_is_checked_per_threat_not_globally` (anti-fake) | items.md #4, #8 |
+| C4 | 6 Operate, 7 Generalize | `test_fired_trigger_without_revisit_fails` (forbidden outcome for staleness), `test_anti_fake_revisit_is_checked_per_threat_not_globally` and `test_anti_fake_revisit_must_name_the_fired_trigger_not_merely_be_nonempty` (anti-fake pair) | items.md #4, #8 |
 
 All four claims carry at least one genuine lab assertion — four of four, past the module's own ≥2 bar — because the lab fixture is a single FastAPI CI-gate service (`labs/3.2/3.2-lab`) that opens the stored threat-model document on every call, which lets every claim about "a traced flow," "a real mitigation," or "a recorded re-review" be a real request/response assertion against structured data rather than a modeled residual.
 
