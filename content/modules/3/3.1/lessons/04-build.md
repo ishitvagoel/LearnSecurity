@@ -1,76 +1,44 @@
-# Allow-list log fields; never paste the body
+# Redact at the sink: a default-deny allow-list, not a field-name patch
 
 **Kind:** design-exercise
 **Loop step:** 4 Build
 
-## The rule
+## Predicting the fix before reading it
 
-A prior log-format string is not redaction. A muted ticket does not keep the body out of the line. Labeling the spreadsheet Confidential does not fix the leftover.
+[`lessons/03-break.md`](03-break.md) located the defect at one line: `log_event` renders every field of `context` with nothing checking classification against sink policy first. Given that diagnosis, the shape of the fix should already be predictable without reading `fixed/app.py` at all: something has to sit between "the fields the caller built" and "the string that gets rendered," consult both the field's classification level and the sink's own permitted levels, and decide per field, not per call. Whatever else the fix does, it has to run *inside* the sink function — or in something every sink function unconditionally calls before rendering — because [`lessons/01-property.md`](01-property.md) already established that a classification table sitting nearby, unread, is not a control regardless of how accurate it is.
 
-Do this: `log_event` **does not include the body string**. The logging API does not accept the body as a format argument. Not a regex after the fact. Not a spreadsheet label. Not `DEBUG=false` in one environment. Not a data-loss product name.
+## Two candidates, and where the weaker one breaks
 
-A `note_read` needs this: return a redaction marker and never paste `note_body` into the line. Production should use structured fields (`event`, `note_id`, `tenant_id`) and never have a `body=` key. If you are unsure whether a value is Confidential, do not log it.
+**Candidate A: filter by field name at each call site.** Wherever a handler builds a context dictionary destined for a sink, have that handler itself strip `note_body` and `session_token` before calling `log_event`. A competent engineer under time pressure would reasonably propose this — it requires no change to `log_event` at all, and it can be shipped by editing only the handler that currently has the bug. It fails for a reason [`lessons/02-model.md`](02-model.md) already previewed: it is a fix scoped to *this* handler, not to the sink. The moment a second handler builds its own context dictionary for the same sink — a different endpoint, a different exception path, a feature added six months from now by an engineer who has never read this handler's code — that new call site starts from zero, with no strip-list of its own, and the leak reappears at a different address. Candidate A fixes an instance of the failure. It does not fix the sink.
 
-## Picture: redact at the API
+**Candidate B: an allow-list inside the sink, keyed by classification level, defaulting to deny.** Instead of trusting every caller of `log_event` to remember which fields to strip, make `log_event` itself refuse to render any field whose level is not in that sink's documented policy — and, critically, treat a field the classification table has never named as the *most* restrictive level rather than the least. This is `fixed/app.py`'s actual design:
 
-```mermaid
-flowchart TD
-  Call["log_event note_read, body"] --> API[Logging API]
-  API --> Line["note_read: [redacted-confidential]"]
-  Line --> Test{"Body substring present?"}
-  Test -->|yes| Fail[Rule false]
-  Test -->|no| Pass[Rule true]
+```python
+def _redact(context: dict, sink: str) -> dict:
+    allowed_levels = SINK_POLICY[sink]
+    out: dict = {}
+    for key, value in context.items():
+        level = CLASSIFICATION.get(key, "confidential")
+        out[key] = value if level in allowed_levels else f"[redacted-{level}]"
+    return out
 ```
 
-The repaired files return `[redacted-confidential]`. Ids in logs remain a different row — write that down; do not pretend ids are the body. Exception middleware, slow-query logs, and APM still bypass this logger. Name them as leftover, not as silent passes.
+`CLASSIFICATION.get(key, "confidential")` is the one line worth pausing on longest in this entire file. `.get(key, "confidential")` means: if this table has never heard of `key`, treat it as `"confidential"` — the same level assigned to the note body and the session token, not the level assigned to `note_id` or `event`. Contrast this with the far more natural-looking `.get(key, "internal")` or even `.get(key)` returning `None` and being silently allowed through by a buggy comparison — either of those defaults an *unknown* field toward *permissive*, which reproduces exactly the failure this module exists to prevent, just one level removed: instead of "every field leaks because nothing checks," it becomes "every field this table's author forgot to list leaks because the default assumed it was safe." A fail-safe default has to fail toward the restrictive side, every time, or it is not actually fail-safe — it is just a smaller allow-list with the same shape of gap.
 
-Naming the field is empty until each place has a deny or allow. This check is the log line only.
+Candidate B still needs one thing candidate A did not: every handler that reaches a sink has to actually call `log_event` or `write_error_dump` rather than writing to `_LOG_LINES` or a real logging backend directly. That is not a weakness unique to candidate B — it is the boundary this entire mechanism assumes, named honestly rather than hidden, in the next section.
 
-## What the repaired files must show
+## Where this mechanism itself stops working
 
-`fixed/classify.py` is the omit helper — it does not ship clinic logs.
+A per-sink allow-list only governs the sinks it is wired into. If a future feature adds a third sink — an audit export, say — and that export's code builds its own string directly from a note object instead of calling through `log_event` or `write_error_dump`, `_redact` never runs, and the export leaks exactly as the original bug did, because this fix protects two named functions, not "every place a string can end up in this codebase." Exception middleware, a slow-query logger, or a full-request-capture APM agent that FastAPI or a hosting platform installs beneath the application's own code are the concrete version of this limit: none of them call `log_event`, so none of them are touched by this fix at all. Naming this limit here is not a hedge; it is the honest boundary of what a sink-level check can promise, and it is why [`lessons/06-operate.md`](06-operate.md) pairs this fix with a detection signal rather than presenting the fix alone as sufficient.
 
-| After the fix | Must be true |
-|---|---|
-| Line | does not contain `tenant-A-secret-body` |
-| Line | contains `redacted` or `confidential` (the local marker) |
-| Event name | still present so operators can debug *that a read happened* |
+## Framework default versus application guarantee, with a concrete gap between them
 
-By default, if you are unsure, omit the value. A useful-looking dashboard does not put it in the line.
-
-## What this is not
-
-- Regex redaction of encodings (a later topic).
-- Exception middleware dumps.
-- Access logs that store query strings (a later topic).
-- A classification spreadsheet.
-- A privacy-policy URL.
-- Backup stores (later topics).
-- Support tools that paste the body into a ticket. That leftover stays.
-
-## What the tool cannot do
-
-- A sticker on the field that does not change the log API is just a sticker.
-- `DEBUG=True` in an environment that shares production data puts the body through other printers.
-- Full-packet APM and slow-query logs bypass `logger.info`.
-- Hashing the body into the line can still leak if the body is guessable. This practice uses a marker, not a hash of the secret.
-
-## Can people still use it
-
-Classification itself is not an accessibility problem. If operators see a redaction marker in a dashboard, do not encode “Confidential” as color only. Keyboard users and people who cannot rely on color still need a name or text, not a red square.
+FastAPI, and Python's standard logging module beneath most real deployments, will format whatever you hand them — a dictionary, an f-string, an object's `__repr__` — with no concept of "confidential" at all. This is not a criticism of the framework; a general-purpose logging library cannot know your application's classification scheme, and it would be actively worse if it silently applied one guess at every deployment's discretion. The concrete gap this creates: a framework's exception handler, invoked automatically when an unhandled error occurs, commonly formats the entire request object — headers, body, query parameters — into whatever error page or log entry it produces by default, because "show everything, so a developer can debug it" is a reasonable *default* for a framework that has no way to know which of your fields are Confidential. `write_error_dump` in this lab's fixture is a deliberately simplified stand-in for that exact behavior: a real deployment's default exception handler is this lesson's `write_error_dump`, before anyone has added the check `fixed/app.py` shows. The requirement — deny by classification, default to the most restrictive level — is the application's to build and to own; it is not a setting a framework ships pre-configured, because the framework was never told what your fields mean.
 
 ## Practice
 
-Name field (note body), place (application log line), and the check that must be true after the fix (substring absent). Run:
-
-```text
-python3 -m pytest labs/3.1/3.1-lab/tests --impl fixed
-```
-
-## Use it somewhere new
-
-Log appointment time; never log chart text. Two classes, two places. A booking card that logs the chart fails this sentence even if the time is Internal.
+Add a third sink to the fixed fixture in your own head, without writing code: a hypothetical `write_audit_export(context)` that a future feature might add. Using `_redact`'s existing signature, write the one line that export function would need to call to inherit this lesson's guarantee, and name the one thing that would still need deciding before that line could ship — the export sink's own `SINK_POLICY` entry, since an export may legitimately need to carry fields neither the log nor the error dump are documented to carry.
 
 ## What can still go wrong
 
-Ids in logs. How long logs live after a note is deleted. APM still capturing payloads. Exception `repr`. Query strings in access logs.
+A hand-written allow-list is only as correct as the humans who maintain `CLASSIFICATION` and `SINK_POLICY`; nothing in this mechanism catches a level that was assigned wrong in the first place. Regex-based redaction applied *after* a string is already rendered — as opposed to this lesson's field-level check applied *before* rendering — can miss an encoded, escaped, or re-serialized copy of a denied value, which is why `fixed/app.py` denies at the field, not by scanning the finished line for a pattern.

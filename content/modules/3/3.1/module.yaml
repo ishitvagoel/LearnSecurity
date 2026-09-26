@@ -5,89 +5,116 @@ phase: 3
 track: core
 difficulty: intermediate
 status: draft
-estimatedMinutes: 240
+estimatedMinutes: 330
 prerequisites:
-- Prior phase Pass A per blueprint §7; 1.1–2.4 Pass A complete
+- Blueprint §7; 1.1-2.4 authored (asset/authority/boundary models; the Phase 2 browser-edge-API-database
+  request path)
 routeTags:
 - complete
 - web-api
 releaseMilestone: null
 outcomes:
-- 'Demonstrate: Assets, data classification, and security requirements'
-- 'Produce evidence: Data inventory, classification, security requirements backlog'
-- Name attacker capabilities and trust assumptions
-- Include a local-only lab brief and a transfer challenge
-- Do not instruct live-target attacks or mix awareness lists as compliance
+- Given a field and a candidate sink, decide allow or deny for that field-sink pair
+  and name the classification level and the check that produced the decision.
+- Identify every authority artifact an inventory limited to content fields would
+  omit, and justify classifying each at least as sensitively as the content it gates.
+- Write a requirements-backlog entry for a classified field naming the sink, the
+  allow/deny decision, and the failure behavior when a field's status is unknown,
+  and explain why a level alone is insufficient.
+- Given a newly added, unclassified field, predict how each existing sink treats
+  it by default and explain why that default is a decision already made, not a
+  delay.
+- Design a detection signal and a purge/rotation response for a redaction miss,
+  and explain why a fix at one call site does not cover a second, independently-reached
+  sink.
 reviewTriggers:
-- Material SecureCollab change in this module's concern
+- A new SecureCollab field, sink, or third-party integration this inventory does
+  not yet name
+- A company boundary change that changes which parties count as untrusted for a
+  given field
 - Superseding final standard
 invariants:
-- Claims are properties of SecureCollab (or the elective system), not tool names
+- A classification level is not a control until a named sink enforces it and a test
+  proves the enforcement holds
+- An authority artifact (session token, API key) is classified at least as sensitively
+  as the content it gates
+- An unclassified field defaults to the most restrictive level, not the least
 - Labs stay in authorized local or official training scope
 - Draft standards are labeled draft
 threatModelPrompts:
-- What can go wrong for this module's assets?
-- Which trust boundary or interpreter is in play?
-- What residual remains if the primary control fails?
+- What must remain true if a brand-new field is added to the schema tomorrow and
+  nobody remembers to classify it?
+- What fails if a sink is reached by a code path other than the one that was fixed?
+- What can go wrong for the note body and the session token specifically, as two
+  distinct assets with two distinct blast radii?
 concepts:
 - assets
+- classification
+- security-requirements
 - securecollab
 - seven-step-loop
 learningObjects:
 - id: 3.1-LO-01
   kind: concept-model
-  title: Classification is a sink rule, not a spreadsheet sticker
+  title: A sink rule, not a label
   path: lessons/01-property.md
 - id: 3.1-LO-02
   kind: design-exercise
-  title: Inventory a second engineer can test
+  title: 'Two sinks, one asset class: an inventory a second engineer can test'
   path: lessons/02-model.md
 - id: 3.1-LO-03
   kind: mechanism-lab
-  title: 'Local fixture: Confidential note body appears in a log line'
+  title: 'Local fixture: a classification table nobody reads'
   path: lessons/03-break.md
 - id: 3.1-LO-04
   kind: design-exercise
-  title: Allow-list log fields; never interpolate the body
+  title: 'Redact at the sink: a default-deny allow-list, not a field-name patch'
   path: lessons/04-build.md
 - id: 3.1-LO-05
   kind: verification-lab
-  title: Fail-on-vulnerable then pass-on-fixed for log redaction
+  title: 'A canned line is not redaction: forbidden-outcome and anti-fake tests'
   path: lessons/05-verify.md
 - id: 3.1-LO-06
   kind: operations-exercise
-  title: Detect a redaction miss; purge without logging the body again
+  title: 'A fix that lives in one function: detect, purge, rotate'
   path: lessons/06-operate.md
 - id: 3.1-LO-07
   kind: transfer-challenge
-  title: 'Transfer: two classes on a clinic booking card'
+  title: 'Transfer: chart text and appointment time on one card'
   path: lessons/07-transfer.md
 - id: 3.1-LO-08
   kind: code-review
-  title: Seeded review of body-in-log
+  title: 'Seeded review: a classification table nobody wired up'
   path: lessons/08-review.md
 labSpec:
-  authorizedScope: Local course fixture or official training lab only; no public or
-    third-party targets
+  authorizedScope: Local course fixture only; no public or third-party targets
   slug: 3.1-lab
-  summary: Confidential note body appears in a log line
+  summary: A note body and a session token both reach an application log and a
+    second, independent error-dump sink, because neither sink consults the classification
+    table sitting next to it
   forbiddenOutcomes:
-  - Confidential note body appears in a log line
+  - Confidential note body appears in the application log
+  - Session token (an authority artifact) appears in the application log or the
+    error dump
+  - An unclassified field is allowed by default rather than denied by default
   - Live-target instructions
   - Real PII or production secrets
   - Awareness list used as the syllabus
 evidenceRequired:
-- Data inventory, classification, security requirements backlog
+- Data inventory, classification table, and security-requirements backlog
 - Transfer task prompt
 - Local lab brief
 assessmentBlueprint:
-  explain: Causal model for Assets, data classification, and security requirements
-  design: Data inventory, classification, security requirements backlog
-  build: Deferred to Pass B
-  break: Authorized local reproduction of the representative failure
-  verify: Forbidden-outcome tests
-  operate: Detection and recovery notes
-  communicate: Residual risk without compliance theater
+  explain: Causal model for why a classification level is not itself a control,
+    and why an inventory limited to content fields is incomplete
+  design: Data inventory, classification table, security-requirements backlog
+  build: Per-sink allow-list with a fail-safe default for unclassified fields
+  break: Authorized local reproduction of the representative failure (two independent
+    sinks, neither consulting the classification table)
+  verify: Forbidden-outcome, boundary, malformed/failure, and anti-fake tests
+  operate: Redaction-miss detection and purge/rotation recovery notes
+  communicate: Residual risk (unclassified future fields, sinks outside this mechanism)
+    without compliance theater
 masteryGate: '3'
 standardsRefs:
 - source: OWASP Application Security Verification Standard
@@ -96,8 +123,11 @@ standardsRefs:
   requirementIds:
   - v5.0.0-14.1.1
   - v5.0.0-14.1.2
+  - v5.0.0-14.2.3
+  - v5.0.0-14.2.4
+  - v5.0.0-16.1.1
   - v5.0.0-16.2.5
-  url: https://owasp.org/www-project-application-security-verification-standard/
+  url: https://owasp.org/projects/asvs
 - source: NIST Cybersecurity Framework (CSF) 2.0
   version: '2.0'
   status: final
@@ -105,16 +135,24 @@ standardsRefs:
   - Identify
   url: https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20
 misconceptions:
-- If we classified it, it is protected
-- Logs are internal so safe
-- Privacy policy equals redaction
+- A classification label (a spreadsheet cell, a Confluence tag, a privacy-policy
+  sentence) is itself a security control
+- An inventory that lists content fields is complete without also listing the authority
+  artifacts that grant broader access than the content they gate
+- A field nobody has classified yet is low-risk until proven otherwise
+- Logs are internal, so anything in them is safe
+- A privacy policy equals redaction
 operationalConsiderations:
-- log_redaction_miss alerts; purge runbook.
-- Operators still see metadata (ids). That’s a different cell — document it.
+- log_redaction_miss alerts on a sink emitting a field whose level its own policy
+  does not allow; purge matching records; rotate any token that was exposed; never
+  re-emit the value while investigating it.
+- Operators still legitimately see Internal fields (note id, company id) in the
+  same log line. That's a different backlog row - document it, do not treat it
+  as evidence the Confidential fields are also safe.
 author: choreograph-curriculum / author-module-spec
 reviewer: pending independent quality and lab-safety review
-lastReviewedAt: '2026-08-24'
-nextReviewAt: '2027-02-24'
+lastReviewedAt: null
+nextReviewAt: null
 changelog:
 - date: '2026-08-23'
   note: Pass A specification generated to complete the curriculum map
@@ -136,3 +174,29 @@ changelog:
 - date: '2026-09-06'
   note: Thickened lessons 03-08 with body-in-log cause tables, sink-API limits, and
     clinic chart-versus-time transfer; independent review still required
+- date: '2026-09-26'
+  note: 'Deepen (D3, D1, D2, D6, D7, D8, D9, D11, D12): replaced the single narrow
+    predicate taught across all eight lessons with five dependency-ordered teaching
+    claims (C1-C5: sink-rule derivation, authority-artifact inventory completeness,
+    requirement derivation from a classification level, fail-safe default for unclassified
+    fields, prevention/detection/recovery pairing). Rewrote all eight lessons to
+    the >=900-word floor with derivation-before-assertion and dual-form term definitions.
+    Upgraded the lab from Tier 1 (a two-line pure function, two tests) to Tier 2
+    (a FastAPI component with two independent sinks, nine tests including two anti-fake
+    tests). Rewrote outcomes above as observable behaviors (previously "Demonstrate:
+    <title>" and generic template lines) and recomputed estimatedMinutes from the
+    metadata-honesty formula (240 -> 330, reflecting the actual lesson word count,
+    Tier 2 lab minutes, and 8 assessment items). Rewrote assessment/items.md (8
+    items) and assessment/rubric.md, deleting the non-existent "session worksheet"
+    reference; wrote content/assessment/keys/3.1.md with distractor rationales and
+    four-state banding. Live-fetched and re-verified the ASVS 5.0.0 pin against
+    the canonical v5.0.0 tag and added three previously-uncited requirement IDs
+    (14.2.3, 14.2.4, 16.1.1) this module''s claims depend on. reviewer is left exactly
+    as this pass found it ("pending independent quality and lab-safety review");
+    this authoring pass does not set that field to any approving value. lastReviewedAt
+    and nextReviewAt, which this pass found set to stale dates alongside a pending
+    reviewer, are corrected to null per metadata-honesty.mdc''s own rule ("if reviewer
+    contains pending, lastReviewedAt and nextReviewAt must be absent") and the same
+    correction module 2.2 made for the identical pre-existing inconsistency; this
+    is a metadata-honesty fix (D12), not a review-status change, and STATUS.yaml''s
+    3.1 entry (quality, depth) is untouched. Independent review still required.'
